@@ -12,7 +12,8 @@ const { sendConfirmationEmail } = require("../libs/mailer");
         username: user.username,
         wallets: user.wallets,
         verified:user.verified
-      }
+    }
+    console.log(data)
     //send email
     await sendConfirmationEmail({ toUser: data, hash: data.id })
     
@@ -52,7 +53,7 @@ try {
   const user = await Users.findOne({ _id: pointer });
   user.verified = true;
   await user.save()
-      res.redirect(StatusCodes.TEMPORARY_REDIRECT, '/')
+      res.redirect(StatusCodes.TEMPORARY_REDIRECT, `${DOMAIN}`)
     } catch (error) {
       //throw error
       res.status(StatusCodes.BAD_REQUEST).send(error);

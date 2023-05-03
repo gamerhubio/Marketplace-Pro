@@ -7,22 +7,22 @@ const nodemailer = require("nodemailer")
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: process.env.NEXT_PUBLIC_GMAIL_USER,
-            pass: process.env.NEXT_PUBLIC_GMAIL_PWD
+            user: process.env.GMAIL_USER,
+            pass: process.env.GMAIL_PWD
         }
     })
         
         const message = {
-            from: process.env.NEXT_PUBLIC_GMAIL_USER,
+            from: process.env.GMAIL_USER,
            //production
             to: toUser.email,
             //dev
-            //to: process.env.NEXT_PUBLIC_GMAIL_USER,
-            subject: "Email verification - GAMER-HUB",
+            //to: process.env.GMAIL_USER,
+            subject: "Email confrimation - GAMER-HUB",
             html: `
                 <h3>Hello ${toUser.username}</h3>
                 <p>Welcome to the best online web3 game aggregator. Just one more step...</p>
-                <p>to verify your email, please follow this link: <a target="_" href="${process.env.NEXT_PUBLIC_BASE_URL}/users/${toUser.email}?pointer=${hash}">Activate</a></p>
+                <p>To confirm your email, please follow this link: <a target="_" href="${process.env.BASE_URL}/users/${toUser.email}?pointer=${hash}">Activate</a></p>
                 <p>Thank you.</p>
 
                 
@@ -46,17 +46,17 @@ const nodemailer = require("nodemailer")
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: process.env.NEXT_PUBLIC_GMAIL_USER,
-            pass: process.env.NEXT_PUBLIC_GMAIL_PWD
+            user: process.env.GMAIL_USER,
+            pass: process.env.GMAIL_PWD
         }
     })
         
         const message = {
-            from: process.env.NEXT_PUBLIC_GMAIL_USER,
+            from: process.env.GMAIL_USER,
            //production
             to: toUser.email,
             //dev
-            //to: process.env.NEXT_PUBLIC_GMAIL_USER,
+            //to: process.env.GMAIL_USER,
             subject: "Subscription - GAMER-HUB",
             html: `
                 <h3>Hello ${toUser.username}</h3>
