@@ -1,8 +1,31 @@
-const nodemailer = require("nodemailer")
+import nodemailer from "nodemailer"
 
-  const sendConfirmationEmail = ({ toUser, hash }) => {
-  
-  //@ts-ignore
+interface IMailer {
+
+    toUser: {
+        id:string,
+        email: string,
+        username: string,
+
+    },
+    hash:string
+
+}
+interface ISubscription {
+
+    toUser: {
+        id:string,
+        email: string,
+        username: string,
+        plan: string,
+        startDate: string,
+        endDate:string
+    }
+
+}
+export  const sendConfirmationEmail = ({ toUser, hash }:IMailer) => {
+
+  // @ts-ignore
     return new Promise(( res, rej ) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -11,13 +34,13 @@ const nodemailer = require("nodemailer")
             pass: process.env.GMAIL_PWD
         }
     })
-        
+
         const message = {
             from: process.env.GMAIL_USER,
-           //production
+           // production
             to: toUser.email,
-            //dev
-            //to: process.env.GMAIL_USER,
+            // dev
+            // to: process.env.GMAIL_USER,
             subject: "Email confrimation - GAMER-HUB",
             html: `
                 <h3>Hello ${toUser.username}</h3>
@@ -25,7 +48,7 @@ const nodemailer = require("nodemailer")
                 <p>To confirm your email, please follow this link: <a target="_" href="${process.env.BASE_URL}/users/${toUser.email}?pointer=${hash}">Activate</a></p>
                 <p>Thank you.</p>
 
-                
+
             `
         }
 
@@ -39,9 +62,9 @@ const nodemailer = require("nodemailer")
 })
 }
 
-  const sendSubscriptionMail = ({ toUser}) => {
-  
-  //@ts-ignore
+ export  const sendSubscriptionMail = ({ toUser}:ISubscription) => {
+
+  // @ts-ignore
     return new Promise(( res, rej ) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -50,13 +73,13 @@ const nodemailer = require("nodemailer")
             pass: process.env.GMAIL_PWD
         }
     })
-        
+
         const message = {
             from: process.env.GMAIL_USER,
-           //production
+           // production
             to: toUser.email,
-            //dev
-            //to: process.env.GMAIL_USER,
+            // dev
+            // to: process.env.GMAIL_USER,
             subject: "Subscription - GAMER-HUB",
             html: `
                 <h3>Hello ${toUser.username}</h3>
@@ -64,7 +87,7 @@ const nodemailer = require("nodemailer")
                 <p>Your subscription starts on ${new Date(toUser.startDate)}.</p>
                 <p>Your subscription expires on ${new Date(toUser.endDate)}.</p>
                 <p>Thank you.</p>
-                
+
             `        }
 
         transporter.sendMail(message, (err, info) => {
@@ -77,7 +100,3 @@ const nodemailer = require("nodemailer")
 })
 }
 
-module.exports = {
-    sendConfirmationEmail,
-    sendSubscriptionMail
-}

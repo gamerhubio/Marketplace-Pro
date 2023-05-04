@@ -1,5 +1,5 @@
 
-const mongoose =  require("mongoose");
+import mongoose from "mongoose";
 
 const subscriptionSchema = new mongoose.Schema({
   email: {
@@ -20,11 +20,11 @@ const subscriptionSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Please add a subscription plan"],
   },
-  
-  
+
+
 },
  { timestamps: true });
 
-//const User = mongoose.model("User", userSchema);
+// const User = mongoose.model("User", userSchema);
 
-module.exports = mongoose.model("Subscriptions", subscriptionSchema);
+export default mongoose.model("Subscriptions", subscriptionSchema);

@@ -1,16 +1,23 @@
+import express from "express";
+import { StatusCodes } from "http-status-codes"
+import Subscriptions from "../models/SubscriptionModel"
+import { sendSubscriptionMail } from "../libs/mailer";
 
-const { StatusCodes } = require("http-status-codes")
-const Subscriptions =  require("../models/SubscriptionModel")
-const { sendSubscriptionMail } = require("../libs/mailer");
-
-
-//create user
- const recordSubscription = async (req, res) => {
+interface Subscription {
+  id:string,
+  email: string,
+  username: string,
+  plan: string,
+  startDate: string,
+  endDate:string,
+}
+// create user
+export  const recordSubscription = async (req:express.Request, res:express.Response) => {
     try {
-      //get subscription
-        let subscription = await Subscriptions.findOne({ email: req.body.email });
+      // get subscription
+        let subscription:Subscription | any = await Subscriptions.findOne({ email: req.body.email });
         if (subscription) {
-            //update Subscription
+            // update Subscription
             subscription.email = req.body.email
             subscription.username = req.body.username
             subscription.plan = req.body.plan
@@ -24,12 +31,12 @@ const { sendSubscriptionMail } = require("../libs/mailer");
                 startDate: req.body.startDate,
                 endDate:req.body.endDate
             }
-             //send home
+             // send home
             await sendSubscriptionMail({ toUser: data})
-    
+
            res.redirect(StatusCodes.TEMPORARY_REDIRECT, '/')
         } else {
-             //create subscription
+             // create subscription
              subscription = await Subscriptions.create({ ...req.body });
              const data = {
                 id:subscription._id,
@@ -39,18 +46,16 @@ const { sendSubscriptionMail } = require("../libs/mailer");
                 startDate: req.body.startDate,
                 endDate:req.body.endDate
             }
-             //send email
+             // send email
             await sendSubscriptionMail({ toUser: data})
-    
-            //send home
+
+            // send home
             res.redirect(StatusCodes.TEMPORARY_REDIRECT, '/')
         }
-   
-   
+
+
   } catch (error) {
-    //throw error
+    // throw error
     res.status(StatusCodes.BAD_REQUEST).send(error);
   }
 };
-
-module.exports = {recordSubscription}
