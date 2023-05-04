@@ -1,9 +1,12 @@
 import React from "react";
 import logo from "./logo.svg";
+import '@particle-network/connect-react-ui/dist/index.css';
+import { ConnectButton } from '@particle-network/connect-react-ui';
 
 const App: React.FC = () => {
   return (
     <div className="App">
+      <ConnectButton />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
