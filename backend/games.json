@@ -1,0 +1,32 @@
+[
+    {
+        "name":"Prirates Land",
+        "chain":"Solana",
+        "image":"pirates-land.jpg",
+        "categories":{
+            "p2e":true,
+            "Action":true,
+            "metaverse":true
+        }
+    },
+    {
+        "name":"Meta Moba",
+        "chain":"Ethereum",
+        "image":"metamoba.jpg",
+        "categories":{
+            "p2e":true,
+            "Action":false,
+            "metaverse":true
+        }
+    },
+    {
+        "name":"War Hands NFT",
+        "chain":"Polygon",
+        "image":"warhand",
+        "categories":{
+            "p2e":true,
+            "Action":true,
+            "metaverse":true
+        }
+    }
+]

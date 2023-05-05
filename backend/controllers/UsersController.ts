@@ -22,7 +22,8 @@ export  const createUser = async (req:express.Request, res:express.Response) => 
         email: user.email,
         username: user.username,
         wallets: user.wallets,
-        verified:user.verified
+        verified: user.verified,
+        challenges: user.challenges
     }
     // tslint:disable-next-line:no-console
     console.log(data)
@@ -38,6 +39,7 @@ export  const createUser = async (req:express.Request, res:express.Response) => 
     res.status(StatusCodes.BAD_REQUEST).send(error);
   }
 };
+
 
 // get users
 export const getUsers = async (req:express.Request, res:express.Response) => {
@@ -55,7 +57,7 @@ export const getUsers = async (req:express.Request, res:express.Response) => {
 };
 
 // get a user
- export const getUser = async (req:express.Request, res:express.Response) => {
+export const getUser = async (req: express.Request, res: express.Response) => {
   if (req.query.pointer) {
 
 try {
@@ -73,7 +75,7 @@ try {
     }
   } else {
     try {
-    const { address } = req.query;
+    const { address } = req.params;
 
     // get user
     const user = await Users.find({
@@ -94,7 +96,7 @@ try {
 // update user
  export const updateUser = async (req:express.Request, res:express.Response) => {
   try {
-    const { address } = req.query;
+    const { address } = req.params;
 
     // update query
     const user = await Users.findOneAndUpdate({ email: address }, req.body, {});

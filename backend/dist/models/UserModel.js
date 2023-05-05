@@ -23,6 +23,22 @@ const userSchema = new mongoose_1.default.Schema({
         type: [String],
         required: [true, "Please add users wallet"],
     },
+    credit: {
+        type: Number,
+        default: 0
+    },
+    challenges: {
+        type: Map,
+        of: String,
+        default: {
+            gamePlay: 0,
+            NFTPruchase: 0,
+            ADSWatch: 0,
+            VideoStream: 0,
+            GameAssetPurchase: 0,
+            TournamentPlay: 0
+        }
+    },
     verified: {
         type: Boolean,
         default: false
