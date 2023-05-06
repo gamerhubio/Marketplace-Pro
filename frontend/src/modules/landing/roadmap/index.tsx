@@ -10,11 +10,11 @@ import { roadmapData } from "../data";
 
 export const RoadmapSection: React.FC = () => {
   return (
-    <RoadmapSectionWrapper>
+    <RoadmapSectionWrapper id="roadmap">
       <h1>Roadmap</h1>
       <RoadmapWrapper>
         {roadmapData.map((item, key) => (
-          <RoadmapItemWrapper key={key}>
+          <RoadmapItemWrapper key={key} active={[key, roadmapData.length - 1]}>
             {key % 2 !== 0 ? (
               <RoadmapDescription className="none" />
             ) : (
@@ -24,7 +24,7 @@ export const RoadmapSection: React.FC = () => {
                 ))}
               </RoadmapDescription>
             )}
-            <RoadmapDate>
+            <RoadmapDate active={key}>
               <div>
                 <span>{item.month}</span> {item.year}
               </div>

@@ -33,11 +33,31 @@ export const HomeSectionContainer = styled.div`
     margin: 0 auto;
     margin-bottom: 40px;
   }
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 46px;
+    }
+  }
 `;
 
 export const HomeBtnGroup = styled.div`
   display: flex;
   align-items: center;
+  & > :first-child {
+    margin-right: 70px;
+  }
+  @media screen and (max-width: 768px) {
+    & > :first-child {
+      margin-right: 40px;
+    }
+  }
+  @media screen and (max-width: 560px) {
+    flex-direction: column;
+    & > :first-child {
+      margin-right: 0px;
+      margin-bottom: 20px;
+    }
+  }
 `;
 
 export const HomeBtn = styled.div`
@@ -52,9 +72,6 @@ export const HomeBtn = styled.div`
   font-weight: 500;
   font-size: 15px;
   line-height: 24px;
-  &:first-child {
-    margin-right: 70px;
-  }
 `;
 
 export const HomeSocialLinks = styled.div`
@@ -74,6 +91,18 @@ export const HomeSocialLinks = styled.div`
   align-items: center;
   & > :not(:first-child) {
     margin-left: 42px;
+  }
+  @media screen and (max-width: 768px) {
+    transform: translate(50%, 0);
+    right: 50%;
+  }
+  @media screen and (max-width: 560px) {
+    position: static;
+    transform: translate(0, 0);
+    margin-top: 40px;
+    & > :not(:first-child) {
+      margin-left: 24px;
+    }
   }
 `;
 

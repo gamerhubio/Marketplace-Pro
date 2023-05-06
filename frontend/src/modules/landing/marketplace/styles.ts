@@ -31,15 +31,32 @@ export const MarketplaceWrapper = styled.div`
     margin-top: 32px;
     .gamerhub-slider-item {
       min-height: 530px;
+      @media screen and (max-width: 768px) {
+        min-height: 400px;
+      }
+      @media screen and (max-width: 600px) {
+        min-height: auto;
+      }
     }
+  }
+  @media screen and (max-width: 600px) {
+    padding: 50px 0;
   }
 `;
 
 export const SliderImgWrapper = styled.div`
-  width: 735px;
+  max-width: 735px;
+  width: 95%;
   margin: auto;
   min-height: 370px;
   display: flex;
   align-items: center;
   justify-content: center;
+  img {
+    width: 100%;
+  }
+  @media screen and (max-width: 600px) {
+    min-height: auto;
+    margin-bottom: 50px;
+  }
 `;

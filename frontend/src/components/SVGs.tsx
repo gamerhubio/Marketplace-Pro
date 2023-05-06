@@ -107,3 +107,55 @@ export const IconCoinMarketCap: React.FC<SVGAttributes> = (props) => (
     </defs>
   </svg>
 );
+
+export const IconRightMenu: React.FC<SVGAttributes> = (props) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g clipPath="url(#clip0_10_3050)">
+      <path
+        d="M21 20L3 20V18L21 18V20ZM21 13L9 13L9 11L21 11V13ZM21 6L3 6L3 4L21 4L21 6Z"
+        fill="#9EAEC7"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0_10_3050">
+        <rect
+          width="24"
+          height="24"
+          fill="white"
+          transform="matrix(-1 0 0 -1 24 24)"
+        />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
+export const IconScrollTop: React.FC<SVGAttributes> = () => (
+  <svg
+    width="25"
+    height="36"
+    viewBox="0 0 25 36"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M20.5 15.5L12.5 7.5L4.5 15.5"
+      stroke="#9EAEC7"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M20.5 26.5L12.5 18.5L4.5 26.5"
+      stroke="#9EAEC7"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);

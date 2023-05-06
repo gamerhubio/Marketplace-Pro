@@ -12,7 +12,7 @@ import { tokenomicsCardData, tokenomicsData } from "../data";
 
 export const TokenSection: React.FC = () => {
   return (
-    <TokenSectionWrapper>
+    <TokenSectionWrapper id="tokenomics">
       <h1>
         GHT TOKEN <img src="/images/landing/ght-token.png" alt="" />
       </h1>

@@ -5,4 +5,5 @@ export * from "./merch";
 export * from "./reinventing";
 export * from "./roadmap";
 export * from "./streaming";
+export * from "./team";
 export * from "./token";

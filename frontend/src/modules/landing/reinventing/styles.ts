@@ -13,6 +13,14 @@ export const ReinventingContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    padding: 100px 0;
+    align-items: center;
+  }
+  @media screen and (max-width: 425px) {
+    padding: 60px 0;
+  }
 `;
 
 export const ReinventingTextWrapper = styled.div`
@@ -31,8 +39,21 @@ export const ReinventingTextWrapper = styled.div`
     margin: 24px 0;
     color: #bec9da;
   }
+  @media screen and (max-width: 768px) {
+    max-width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const ReinventingImg = styled.div`
   max-width: 362px;
+  img {
+    width: 100%;
+  }
+  @media screen and (max-width: 768px) {
+    margin-top: 40px;
+  }
 `;

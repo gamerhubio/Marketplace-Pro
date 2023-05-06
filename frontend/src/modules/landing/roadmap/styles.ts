@@ -13,6 +13,9 @@ export const RoadmapSectionWrapper = styled.div`
     text-align: center;
     margin-bottom: 48px;
   }
+  @media screen and (max-width: 600px) {
+    padding: 50px 0;
+  }
 `;
 
 export const RoadmapWrapper = styled.div`
@@ -21,10 +24,28 @@ export const RoadmapWrapper = styled.div`
   margin: auto;
 `;
 
-export const RoadmapItemWrapper = styled.div`
+export const RoadmapItemWrapper = styled.div<{ active: Array<number> }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  &::before {
+    content: "";
+    width: 1px;
+    background: #821dd5;
+    height: ${({ active }) =>
+      active[0] === 0 || active[0] === active[1] ? "50%" : "100%"};
+    bottom: ${({ active }) => active[0] === 0 && "0"};
+    top: ${({ active }) => active[0] === active[1] && "0"};
+    position: absolute;
+    left: 50%;
+    @media screen and (max-width: 600px) {
+      left: 40px;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    padding: 10px 0;
+  }
 `;
 
 export const RoadmapDescription = styled.div`
@@ -33,10 +54,66 @@ export const RoadmapDescription = styled.div`
   }
   max-width: 267px;
   width: 100%;
+  min-height: 116px;
+  background: url("/images/landing/roadmap-item.png") no-repeat;
+  background-size: 100% 100%;
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  p {
+    font-weight: 400;
+    font-size: 14px;
+    word-break: break-all;
+    line-height: 20px;
+    &:not(:first-child) {
+      margin-top: 10px;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    order: 2;
+    max-width: 400px;
+    &.none {
+      display: none;
+    }
+  }
 `;
 
-export const RoadmapDate = styled.div`
+export const RoadmapDate = styled.div<{ active: number }>`
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    background: ${({ active }) =>
+      active % 2 === 0
+        ? "linear-gradient(270deg, rgba(130, 29, 213, 0.3) 0%, #821dd5 51.35%, rgba(130, 29, 213, 0.3) 98.6%)"
+        : "transparent"};
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
+  }
+  &::after {
+    background: ${({ active }) =>
+      active % 2 !== 0
+        ? "linear-gradient(270deg, rgba(130, 29, 213, 0.3) 0%, #821dd5 51.35%, rgba(130, 29, 213, 0.3) 98.6%)"
+        : "transparent"};
+    @media screen and (max-width: 600px) {
+      background: linear-gradient(
+        270deg,
+        rgba(130, 29, 213, 0.3) 0%,
+        #821dd5 51.35%,
+        rgba(130, 29, 213, 0.3) 98.6%
+      );
+    }
+  }
+  &::after,
+  &::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+  }
   div {
     display: flex;
     align-items: center;
@@ -53,6 +130,13 @@ export const RoadmapDate = styled.div`
     span {
       color: #ff1a9d;
       margin-right: 6px;
+      white-space: nowrap;
     }
+  }
+  @media screen and (max-width: 600px) {
+    min-width: 170px;
+  }
+  @media screen and (max-width: 425px) {
+    min-width: 130px;
   }
 `;

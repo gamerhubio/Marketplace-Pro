@@ -31,15 +31,31 @@ export const GamerHubWrapper = styled.div`
     margin-top: 32px;
     .gamerhub-slider-item {
       min-height: 500px;
+      @media screen and (max-width: 600px) {
+        min-height: 400px;
+      }
+      @media screen and (max-width: 425px) {
+        min-height: 350px;
+      }
     }
+  }
+  @media screen and (max-width: 425px) {
+    padding: 50px 0;
   }
 `;
 
-export const SliderImgWrapper = styled.div`
-  width: 735px;
+export const SliderImgWrapper = styled.div<{ width: number }>`
+  width: 95%;
+  max-width: ${({ width }) => width}px;
   margin: auto;
   min-height: 370px;
   display: flex;
   align-items: center;
   justify-content: center;
+  img {
+    width: 100%;
+  }
+  @media screen and (max-width: 425px) {
+    min-height: 300px;
+  }
 `;

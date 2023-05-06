@@ -1,8 +1,20 @@
 export const gamerhubSlider = [
-  "/images/landing/gamerhub-slider/slider1.png",
-  "/images/landing/gamerhub-slider/slider1.png",
-  "/images/landing/gamerhub-slider/slider1.png",
-  "/images/landing/gamerhub-slider/slider1.png",
+  {
+    img: "/images/landing/gamerhub-slider/slider1.png",
+    width: 765,
+  },
+  {
+    img: "/images/landing/gamerhub-slider/slider1.png",
+    width: 765,
+  },
+  {
+    img: "/images/landing/gamerhub-slider/slider1.png",
+    width: 765,
+  },
+  {
+    img: "/images/landing/gamerhub-slider/slider1.png",
+    width: 765,
+  },
 ];
 
 export const streamingSlider = [
@@ -128,5 +140,28 @@ export const roadmapData = [
     desc: ["Launch Merch Store", "GamerHub metaverse."],
     year: "2024",
     month: "Q1",
+  },
+];
+
+export const teamData = [
+  {
+    img: "/images/landing/team/victor.png",
+    name: "Victor Kaycee",
+    role: "Co-founder / CEO",
+  },
+  {
+    img: "/images/landing/team/glory.png",
+    name: "Glory Lucas",
+    role: "Co-founder / CEO",
+  },
+  {
+    img: "/images/landing/team/milan.png",
+    name: "Milan Jansen",
+    role: "Fullstack and blockchain developer",
+  },
+  {
+    img: "/images/landing/team/william.png",
+    name: "William Ikeji",
+    role: "Fullstack and blockchain developer",
   },
 ];

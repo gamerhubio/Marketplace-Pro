@@ -8,8 +8,10 @@ import {
   ReinventingSection,
   RoadmapSection,
   StreamingSection,
+  TeamSection,
   TokenSection,
 } from "../../modules";
+import { ScrollTop } from "../../components";
 
 export const LandingPage: React.FC = () => {
   return (
@@ -22,6 +24,8 @@ export const LandingPage: React.FC = () => {
       <MerchStoreSection />
       <TokenSection />
       <RoadmapSection />
+      <TeamSection />
+      <ScrollTop />
     </LandingLayout>
   );
 };

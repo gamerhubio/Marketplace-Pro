@@ -31,22 +31,32 @@ export const StreamingWrapper = styled.div`
     margin-top: 32px;
     .gamerhub-slider-item {
       min-height: 500px;
+      @media screen and (max-width: 768px) {
+        min-height: 400px;
+      }
+      @media screen and (max-width: 600px) {
+        min-height: auto;
+      }
     }
+  }
+  @media screen and (max-width: 600px) {
+    padding: 50px 0;
   }
 `;
 
 export const SliderImgWrapper = styled.div`
   position: relative;
-  max-width: 905px;
-  width: 100%;
+  max-width: 904px;
+  width: 95%;
   margin: auto;
-  min-height: 370px;
+  min-height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
 
   video {
-    width: 900px;
+    max-width: 900px;
+    width: calc(100% - 4px);
     position: relative;
     z-index: 1;
     border-radius: 10px;
@@ -61,6 +71,9 @@ export const SliderImgWrapper = styled.div`
     height: 100%;
     left: 1px;
   }
+  @media screen and (max-width: 600px) {
+    margin-bottom: 50px;
+  }
 `;
 
 export const VideoPlayBtn = styled.img`
@@ -70,6 +83,14 @@ export const VideoPlayBtn = styled.img`
   transform-origin: -50% -50%;
   z-index: 2;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    width: 80px;
+    height: 80px;
+  }
+  @media screen and (max-width: 500px) {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 export const StreamBtn = styled.img`
@@ -80,4 +101,10 @@ export const StreamBtn = styled.img`
   width: 95%;
   z-index: 2;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    max-width: 250px;
+  }
+  @media screen and (max-width: 500px) {
+    max-width: 150px;
+  }
 `;

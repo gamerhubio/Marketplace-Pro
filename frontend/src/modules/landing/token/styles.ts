@@ -40,11 +40,18 @@ export const TokenSectionWrapper = styled.div`
     line-height: 32px;
     margin: 64px 0 32px;
   }
+  @media screen and (max-width: 600px) {
+    padding: 50px 0;
+  }
 `;
 
 export const TokenButtonGroup = styled.div`
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 425px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const TokenButton = styled.div`
@@ -64,8 +71,6 @@ export const TokenButton = styled.div`
   }
   &::before {
     content: "";
-    /* width: calc(100% - 2px); */
-    /* height: calc(100% - 2px); */
     top: 1px;
     left: 1px;
     right: 1px;
@@ -85,6 +90,10 @@ export const TokenButton = styled.div`
     border-radius: 5px;
     background: linear-gradient(135deg, #d7007b 0%, #9747ff 100%);
   }
+  @media screen and (max-width: 425px) {
+    margin-left: 0;
+    margin-top: 16px;
+  }
 `;
 
 export const TokenomicsWrapper = styled.div`
@@ -92,16 +101,32 @@ export const TokenomicsWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 64px;
+  flex-wrap: wrap;
+  & > :not(:first-child) {
+    margin-left: 88px;
+  }
+  @media screen and (max-width: 1024px) {
+    justify-content: space-between;
+    & > :not(:first-child) {
+      margin-left: 0;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media screen and (max-width: 425px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 export const TokenomicsItem = styled.div`
   padding: 10px;
   text-align: left;
   text-transform: uppercase;
-  &:not(:first-child) {
-    margin-left: 88px;
-  }
+
   h4 {
+    white-space: nowrap;
     font-weight: 700;
     font-size: 18px;
     line-height: 28px;
@@ -113,6 +138,9 @@ export const TokenomicsItem = styled.div`
     line-height: 24px;
     color: #bec9da;
   }
+  @media screen and (max-width: 768px) {
+    text-align: center;
+  }
 `;
 
 export const TokenomicsCardGroupWrapper = styled.div`
@@ -122,4 +150,7 @@ export const TokenomicsCardGroupWrapper = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   gap: 64px;
+  @media screen and (max-width: 600px) {
+    gap: 20px;
+  }
 `;

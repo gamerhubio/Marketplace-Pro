@@ -7,7 +7,7 @@ import { gamerhubSlider } from "../data";
 
 export const GamerHubSection: React.FC = () => {
   return (
-    <GamerHubWrapper>
+    <GamerHubWrapper id="about">
       <h1>GamerHub</h1>
       <p>
         Aggregated crypto games, gaming guilds, metaverses and NFTs. GamerHub is
@@ -22,8 +22,8 @@ export const GamerHubSection: React.FC = () => {
       >
         {gamerhubSlider.map((item, key) => (
           <SwiperSlide className="gamerhub-slider-item" key={key}>
-            <SliderImgWrapper>
-              <img src={item} alt="" />
+            <SliderImgWrapper width={item.width}>
+              <img src={item.img} alt="" />
             </SliderImgWrapper>
           </SwiperSlide>
         ))}
