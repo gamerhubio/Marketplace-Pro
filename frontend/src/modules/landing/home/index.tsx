@@ -8,14 +8,18 @@ import {
   SocialItem,
 } from "./styles";
 import { socialLinks } from "./data";
+import { useNavigate } from "react-router-dom";
 
 export const HomeSection: React.FC = () => {
+  const router = useNavigate();
   return (
     <HomeSectionWrapper id="home">
       <HomeSectionContainer>
         <h1>Multichain Aggregator for Metaverses and games</h1>
         <HomeBtnGroup>
-          <HomeBtn>Explore marketplace</HomeBtn>
+          <HomeBtn onClick={() => router("/app/home")}>
+            Explore marketplace
+          </HomeBtn>
           <HomeBtn>Get App</HomeBtn>
         </HomeBtnGroup>
         <HomeSocialLinks>

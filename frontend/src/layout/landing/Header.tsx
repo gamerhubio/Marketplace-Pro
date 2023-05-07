@@ -30,10 +30,7 @@ export const Header: React.FC = () => {
 
   return (
     <React.Fragment>
-      <HeaderWrapper
-        id="landing-header"
-        className={headerSetting ? "fixed" : ""}
-      >
+      <HeaderWrapper className={headerSetting ? "fixed" : ""}>
         <HeaderContainer>
           <HeaderLogo>
             <img src="/images/logo.png" alt="" />

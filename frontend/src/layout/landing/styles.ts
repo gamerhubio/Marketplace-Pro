@@ -8,7 +8,7 @@ export const LandingLayoutWrapper = styled.div`
 `;
 
 export const HeaderWrapper = styled.div`
-  z-index: 1;
+  z-index: 10;
   height: 80px;
   position: fixed;
   top: 0;
@@ -30,9 +30,6 @@ export const HeaderWrapper = styled.div`
     );
   }
   &.fixed {
-    position: fixed;
-    z-index: 10;
-    top: 0;
     background: rgb(1, 9, 31);
   }
 `;

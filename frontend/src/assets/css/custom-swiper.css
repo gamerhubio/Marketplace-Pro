@@ -9,3 +9,8 @@
 .swiper-pagination-bullet.swiper-pagination-bullet-active {
   opacity: 1 !important;
 }
+
+.app-home-slider .swiper-pagination-bullet {
+  width: 20px !important;
+  height: 20px !important;
+}
