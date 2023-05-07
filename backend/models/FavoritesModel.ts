@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const favoriteSchema = new mongoose.Schema({
-  
+
   title: {
     type: String,
     required:[true, "Please provide title"]
@@ -17,7 +17,7 @@ const favoriteSchema = new mongoose.Schema({
       values: ['games', 'nfts', 'merchendise', 'events','streamed-videos'],
       message: '{VALUE} is not supported',
     },
-    
+
   },
 
 },{timestamps: true} );

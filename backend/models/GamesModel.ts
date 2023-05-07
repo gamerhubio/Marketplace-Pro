@@ -2,7 +2,7 @@
 import mongoose from "mongoose";
 
 const gameSchema = new mongoose.Schema({
- 
+
   name: {
     type: String,
     required: [true, "Please provide name"],
@@ -24,7 +24,7 @@ const gameSchema = new mongoose.Schema({
         "metaverse":true
     }
   },
- 
+
 });
 
 export default mongoose.model("Games", gameSchema);
