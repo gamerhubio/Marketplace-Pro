@@ -28,7 +28,7 @@ export  const createGame = async (req:express.Request, res:express.Response) => 
     }
     // tslint:disable-next-line:no-console
     console.log(data)
-    
+
     // send response
     res.status(StatusCodes.CREATED).json({
       user:data ,

@@ -29,9 +29,9 @@ const userSchema = new mongoose_1.default.Schema({
     },
     challenges: {
         type: Map,
-        of: String,
+        of: Number,
         default: {
-            gamePlay: 0,
+            GamePlay: 0,
             NFTPruchase: 0,
             ADSWatch: 0,
             VideoStream: 0,

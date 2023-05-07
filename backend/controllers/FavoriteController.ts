@@ -19,6 +19,8 @@ type IQuery  = {
 export  const createFavorite = async (req:express.Request, res:express.Response) => {
   try {
     // create favorite
+    // @ts-ignore
+    req.body.user = req.user.id
     const favorite:IFavorite | any = await Favorites.create({ ...req.body });
 
     const data = {
@@ -38,27 +40,31 @@ export  const createFavorite = async (req:express.Request, res:express.Response)
 };
 
 
-//get all users favorites
+// get all users favorites
 export const getUsersFavorites = async (req: express.Request, res: express.Response) => {
-    const { category, sort,userId} = req.query;
-    const queryObject: IQuery = {
-        user: '',
+  const { category, sort } = req.query;
+  // @ts-ignore
+  const queryObject: IQuery = {
+      // @ts-ignore
+        user: req.user.id,
         category: ''
     };
 
-    if (userId) {
-        queryObject.user = `${userId}`
-    }
+    // if (userId) {
+    //     queryObject.user = `${userId}`
+    // }
 
     if (category) {
         queryObject.category = `${category}`
+    } else {
+      delete queryObject.category
     }
 
     let result = Favorites.find(queryObject);
 
     // sort
     if (sort) {
-        //@ts-ignore
+        // @ts-ignore
         const sortList = sort.split(',').join(' ');
         result = result.sort(sortList);
     } else {
@@ -75,20 +81,18 @@ export const getUsersFavorites = async (req: express.Request, res: express.Respo
 
     res.status(StatusCodes.OK).json(favorites)
 }
- 
+
 
 
 export const deleteFavorite = async (req: express.Request, res: express.Response) => {
     const { id } = req.params
-    const {userId} = req.query
   const favorite = await Favorites.findByIdAndRemove({
     _id: id,
-    user: userId,
   })
-    
+
   if (!favorite) {
     res.status(StatusCodes.NOT_FOUND).json({msg: "No data found for this Id"})
     }
-    
+
   res.status(StatusCodes.OK).send()
 }
