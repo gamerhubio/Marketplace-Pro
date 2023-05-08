@@ -4,6 +4,11 @@ import { AppButtonWrapper } from "./styles";
 export const AppButton: React.FC<React.HTMLAttributes<HTMLElement>> = ({
   children,
   onClick,
+  className,
 }) => {
-  return <AppButtonWrapper onClick={onClick}>{children}</AppButtonWrapper>;
+  return (
+    <AppButtonWrapper onClick={onClick} className={className}>
+      {children}
+    </AppButtonWrapper>
+  );
 };

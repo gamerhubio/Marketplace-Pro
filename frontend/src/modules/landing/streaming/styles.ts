@@ -79,6 +79,8 @@ export const SliderImgWrapper = styled.div`
 export const VideoPlayBtn = styled.img`
   width: 120px;
   height: 120px;
+  /* top: 50%;
+  left: 50%; */
   position: absolute;
   transform-origin: -50% -50%;
   z-index: 2;

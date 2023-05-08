@@ -18,8 +18,10 @@ import {
   PlanCardWrapper,
 } from "./styles";
 import { subscriptionData } from "../data";
+import { useNavigate } from "react-router-dom";
 
 export const AppSubScriptionPage: React.FC = () => {
+  const router = useNavigate();
   const walletAddress = "0x8396Cf380b556fFA3B4025530bB03aaf09bd5C2F";
   return (
     <AppLayout
@@ -62,7 +64,12 @@ export const AppSubScriptionPage: React.FC = () => {
                   </p>
                 ))}
               </GamerPlanWrapper>
-              <Button onClick={() => {}} width={207} height={58} fSize={18}>
+              <Button
+                onClick={() => router("/dashboard/home")}
+                width={207}
+                height={58}
+                fSize={18}
+              >
                 Choose Plan
               </Button>
             </PlanCardWrapper>
