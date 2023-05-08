@@ -13,6 +13,7 @@ import  gameRouter from './routes/gamesRoute'
 import  subscriptionRouter from './routes/subscriptionRoute'
 import  favoriteRouter from './routes/favoriteRoute'
 import  confirmationRouter from './routes/confirmationRoute'
+import  blockchainRouter from './routes/blockchainRoute'
 
 import  notFoundMiddleware from './middleware/not-found';
 import  errorHandlerMiddleware from './middleware/error-handler';
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/games', gameRouter);
 app.use('/api/v1/confirm', confirmationRouter);
+app.use('/api/v1/blockchainroute', blockchainRouter);
 
 //restricted routes
 app.use('/api/v1/users',authMiddleware, userRouter);

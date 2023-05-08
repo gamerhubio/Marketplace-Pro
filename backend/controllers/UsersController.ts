@@ -46,9 +46,9 @@ export const getUser = async (req: express.Request, res: express.Response) => {
       wallets: { $elemMatch: { $eq: address } },
     });
 
-    res.status(StatusCodes.OK).json({
-      user,
-    });
+    res.status(StatusCodes.OK).json(
+      user[0],
+    );
   } catch (error) {
     // throw error
     res.status(StatusCodes.NOT_FOUND).send(error);
