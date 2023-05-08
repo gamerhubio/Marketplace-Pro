@@ -40,7 +40,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         // tslint:disable-next-line:no-console
         // console.log(myUser)
         // generate tokens
-        const accessToken = jsonwebtoken_1.default.sign(Object.assign({}, myUser), `${process.env.ACCESS_TOKEN_SECRET}`);
+        const accessToken = jsonwebtoken_1.default.sign(Object.assign({}, myUser), `${process.env.ACCESS_TOKEN_SECRET}`, { expiresIn: '15m' });
         res.status(http_status_codes_1.StatusCodes.OK).json({ accessToken });
     }
     catch (error) {
@@ -74,7 +74,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 // tslint:disable-next-line:no-console
                 // console.log(myUser)
                 // generate tokens
-                const accessToken = jsonwebtoken_1.default.sign(Object.assign({}, myUser), `${process.env.ACCESS_TOKEN_SECRET}`);
+                const accessToken = jsonwebtoken_1.default.sign(Object.assign({}, myUser), `${process.env.ACCESS_TOKEN_SECRET}`, { expiresIn: '15m' });
                 res.status(http_status_codes_1.StatusCodes.OK).json({ accessToken });
             }
         }
