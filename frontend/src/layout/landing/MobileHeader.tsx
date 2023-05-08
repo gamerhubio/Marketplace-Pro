@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  CloseButton,
   HeaderLogo,
   MobileHeaderContainer,
   MobileHeaderNavItem,
@@ -22,6 +23,7 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
   return (
     <React.Fragment>
       <MobileHeaderWrapper active={active}>
+        <CloseButton onClick={onClose}>&times;</CloseButton>
         <MobileHeaderContainer>
           <HeaderLogo>
             <img src="/images/logo.png" alt="" />

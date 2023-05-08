@@ -34,6 +34,24 @@ export const HeaderWrapper = styled.div`
   }
 `;
 
+export const CloseButton = styled.div`
+  font-size: 30px;
+  line-height: 40px;
+  right: 10px;
+  top: 10px;
+  position: absolute;
+  z-index: 10;
+  display: none;
+  height: 40px;
+  width: 40px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  @media screen and (max-width: 1024px) {
+    display: flex;
+  }
+`;
+
 export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
