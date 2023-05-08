@@ -8,7 +8,6 @@ export const SidebarWrapper = styled.div<SidebarProps>`
   background: #060d33;
   width: 264px;
   min-height: 100vh;
-  padding: 0 16px;
   transition: all 0.3s;
   &::after {
     content: "";
@@ -24,10 +23,18 @@ export const SidebarWrapper = styled.div<SidebarProps>`
       rgba(179, 0, 102, 0) 100%
     );
   }
+  & > div {
+    position: relative;
+    padding: 0 16px 30px;
+    height: 100vh;
+    overflow-y: auto;
+  }
   @media screen and (max-width: 1024px) {
-    position: fixed;
     z-index: 999;
     left: ${({ isOpen }) => (isOpen ? "0px" : "-264px")};
+    & > div {
+      padding-top: 20px;
+    }
   }
 `;
 
