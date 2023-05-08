@@ -31,7 +31,7 @@ export const confirmEmail = async (req: express.Request, res: express.Response) 
         const user: IUser | any = await Users.findOne({ _id: id });
         user.verified = true;
 
-    await user.save()
+        await user.save()
         res.redirect(StatusCodes.TEMPORARY_REDIRECT, `${process.env.DOMAIN}`)
         } catch (error) {
         // throw error

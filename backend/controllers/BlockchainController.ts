@@ -27,16 +27,32 @@ export const getUser = async (req: express.Request, res: express.Response) => {
     try {
         const { address } = req.params;
         const {amt} = req.query
-console.log(amt)
+
     // get user
     const user = await Users.find({
       wallets: { $elemMatch: { $eq: address } },
-    });
+    })
+      const currUser = user[0]
 
-    //return credit amount to block chain
-    //@ts-ignore
-    res.status(StatusCodes.OK).json({ credit: user[0].credit })
-        
+      // check amount of credit available
+      // @ts-ignore
+      if (Number(amt) > currUser.credit) {
+        // @ts-ignore
+        res.status(StatusCodes.OK).json({ toPay: 0 })
+      } else {
+        // calcuate ght equivalent
+        const ghtValue = Number(amt) / 1000
+        // update value in database
+        // @ts-ignore
+        currUser.credit = Number(currUser.credit) - Number(amt)
+        currUser.save()
+
+         // return to contract
+        res.status(StatusCodes.OK).json({ toPay: ghtValue})
+      }
+
+    
+
   } catch (error) {
     // throw error
     res.status(StatusCodes.NOT_FOUND).send(error);
