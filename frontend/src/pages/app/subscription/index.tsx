@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AppLayout } from "../../../layout";
 import {
   AppButton,
@@ -19,20 +19,40 @@ import {
 } from "./styles";
 import { subscriptionData } from "../data";
 import { useNavigate } from "react-router-dom";
+import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
 
 export const AppSubScriptionPage: React.FC = () => {
   const router = useNavigate();
-  const walletAddress = "0x8396Cf380b556fFA3B4025530bB03aaf09bd5C2F";
+  const [walletAddress, setWalletAddress] = useState<string | null>(null);
+  const address = useAccount();
+
+  useEffect(() => {
+    console.log(address);
+    if (address) setWalletAddress(address);
+  }, [address]);
+
   return (
     <AppLayout
       buttonContent={
-        <AppButton onClick={() => {}}>
-          <IconWalletConnect />
-          <span>{getFormatWalletAddress(walletAddress)}</span>
-          <IconDropdown />
-        </AppButton>
+        walletAddress ? (
+          <AppButton onClick={() => {}}>
+            <IconWalletConnect />
+            <span>{getFormatWalletAddress(walletAddress)}</span>
+            <IconDropdown />
+          </AppButton>
+        ) : (
+          <AppButton onClick={() => router("/app/wallet-connect")}>
+            <IconWalletConnect />
+            <span>Connect wallet</span>
+            <IconDropdown />
+          </AppButton>
+        )
       }
     >
+      <div style={{ display: "none" }}>
+        {" "}
+        <ConnectButton />
+      </div>
       <AppSubscriptionPageWrapper>
         <h1>
           <span>Flexible</span> Plans
