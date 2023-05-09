@@ -19,7 +19,16 @@ import  notFoundMiddleware from './middleware/not-found';
 import  errorHandlerMiddleware from './middleware/error-handler';
 import  authMiddleware from './middleware/authMiddleware';
 
+import cors from "cors"
+
 // middleware
+app.use(cors({
+ origin: [
+      "http://localhost:3000",
+      "http://127.0.0.1:3000",
+    ],
+    credentials: true,
+}))
 app.use(express.static('./public'));
 app.use(express.json());
 

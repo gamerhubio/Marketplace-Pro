@@ -41,9 +41,6 @@ const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             // return to contract
             res.status(http_status_codes_1.StatusCodes.OK).json({ toPay: ghtValue });
         }
-        // return credit amount to block chain
-        // @ts-ignore
-        res.status(http_status_codes_1.StatusCodes.OK).json({ toPay: user[0].credit });
     }
     catch (error) {
         // throw error

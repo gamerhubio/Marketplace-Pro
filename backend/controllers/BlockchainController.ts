@@ -51,7 +51,7 @@ export const getUser = async (req: express.Request, res: express.Response) => {
         res.status(StatusCodes.OK).json({ toPay: ghtValue})
       }
 
-    
+
 
   } catch (error) {
     // throw error
