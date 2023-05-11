@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { AppLayout } from "../../../layout";
 import {
   AppButton,
@@ -19,12 +19,43 @@ import {
 } from "./styles";
 import { subscriptionData } from "../data";
 import { useNavigate } from "react-router-dom";
-import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
+import {
+  ConnectButton,
+  useAccount,
+  useParticleProvider,
+} from "@particle-network/connect-react-ui";
+import { useGlobalState } from "../../../store";
+import { subscribe } from "../../../scripts/blockchainServices";
+
+interface IUser {
+  id: string;
+  email: string;
+  username: string;
+}
 
 export const AppSubScriptionPage: React.FC = () => {
   const router = useNavigate();
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const address = useAccount();
+  const [currentUser] = useGlobalState("currentUser");
+  //hooks
+  const provider = useParticleProvider();
+
+  const makeSubscription = (e: FormEvent, plan: number, amt: string) => {
+    e.preventDefault();
+    if (provider) {
+      //make subscription
+      subscribe(
+        plan,
+        amt,
+        provider,
+        //@ts-expect-error
+        currentUser.email,
+        //@ts-expect-error
+        currentUser.username
+      );
+    }
+  };
 
   useEffect(() => {
     console.log(address);
@@ -85,7 +116,7 @@ export const AppSubScriptionPage: React.FC = () => {
                 ))}
               </GamerPlanWrapper>
               <Button
-                onClick={() => router("/dashboard/home")}
+                onClick={(e) => makeSubscription(e, key, item.BNBPrice)}
                 width={207}
                 height={58}
                 fSize={18}
