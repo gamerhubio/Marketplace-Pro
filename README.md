@@ -110,7 +110,8 @@ GamerCredit serves as the in-platform currency within GamerHub, allowing users t
 
 ## Roadmap
 
-[Subscription based Aggregator for Metaverses, Games, NFTs..pdf](https://github.com/gamerhubio/bnb-hackathon-pro/files/11455818/Subscription.based.Aggregator.for.Metaverses.Games.NFTs.pdf)
+![Subscription based Aggregator for Metaverses, Games, NFTs](https://github.com/gamerhubio/bnb-hackathon-pro/assets/131058062/25533e34-88ee-4ab1-8d4b-7a41a28353f2)
+
 
 
 ## Contributing
