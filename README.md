@@ -50,6 +50,9 @@ GamerHub also helps the transition of existing web2 games to web3 by implementin
 
 
 ### Landing pages
+
+The Landing Page serves as the gateway to GamerHub, providing an engaging and informative introduction to the platform's features, benefits, and available games, enticing users to explore and join the gaming community.
+
 ![photo_2023-05-11_20-03-58](https://github.com/gamerhubio/bnb-hackathon-pro/assets/131058062/88434e0e-9fb6-4838-bb1d-137f36bdd4c0)
 ![photo_2023-05-11_20-04-04](https://github.com/gamerhubio/bnb-hackathon-pro/assets/131058062/48a5906f-50b1-4b11-99d6-628622108273)
 ![photo_2023-05-11_20-04-09](https://github.com/gamerhubio/bnb-hackathon-pro/assets/131058062/6e6f992b-3355-4b5e-a317-cc96dabf896d)
@@ -57,6 +60,9 @@ GamerHub also helps the transition of existing web2 games to web3 by implementin
 
 
 ### Wallet connection
+
+The Wallet Connection feature allows users to securely connect their digital wallets to GamerHub, enabling seamless integration with web3 gaming functionalities, such as in-game asset ownership, tokenization, and play-to-earn mechanisms, enhancing the overall gaming experience.
+
 ![photo_2023-05-11_20-06-20](https://github.com/gamerhubio/bnb-hackathon-pro/assets/131058062/6e5ba5a8-7250-4dc2-ad7d-bd0ffb9a7fbc)
 ![photo_2023-05-11_20-06-23](https://github.com/gamerhubio/bnb-hackathon-pro/assets/131058062/d3d87952-98c7-4895-ae4f-79810d10fece)
 ![photo_2023-05-11_20-06-27](https://github.com/gamerhubio/bnb-hackathon-pro/assets/131058062/b5593a1e-2c82-4146-9c18-7d29bf623565)
@@ -66,29 +72,45 @@ GamerHub also helps the transition of existing web2 games to web3 by implementin
 
 ### Sign up and Sign in systems
 
+The Sign up and Sign in systems provide a user-friendly and secure way for gamers to create accounts and log in to GamerHub, ensuring personalized access to subscribed games, user profiles, and other platform features.
+
 ![photo_2023-05-11_20-05-25](https://github.com/gamerhubio/bnb-hackathon-pro/assets/131058062/df19cc96-64f6-4c4c-ae40-0ae4270fe21d)
 ![photo_2023-05-11_20-05-28](https://github.com/gamerhubio/bnb-hackathon-pro/assets/131058062/0e78946b-3e0f-407f-8ea8-24287e28fe1d)
 
 
 ### Subscription Systems
+
+The Subscription systems in GamerHub enable users to choose from a variety of subscription plans, granting them exclusive access to a curated selection of games, metaverses, guilds, and NFTs, fostering a sense of belonging and value within the gaming community.
+
 ![photo_2023-05-11_20-08-31](https://github.com/gamerhubio/bnb-hackathon-pro/assets/131058062/42876de5-c1ef-42b1-92c9-99ea7819dbf5)
 
 
 ### User Dashboard
+The User dashboard offers a centralized hub for gamers to manage their GamerHub experience, providing a comprehensive overview of their subscriptions, in-game achievements, earned credits, and social interactions, empowering them to navigate and personalize their gaming journey.
+
 ![photo_2023-05-11_20-08-51](https://github.com/gamerhubio/bnb-hackathon-pro/assets/131058062/c90d75dd-0602-4477-9216-2a2033cf97d5)
 
 
 ### Game Dashboard
+
+The Game dashboard provides game developers with a dedicated space to showcase their games, offering detailed analytics, player feedback, and monetization options, enabling them to optimize and enhance the performance and engagement of their games within the GamerHub ecosystem.
+
 ![photo_2023-05-11_20-09-14](https://github.com/gamerhubio/bnb-hackathon-pro/assets/131058062/3c803e86-334d-4a61-a5c2-7f6bbf16eca1)
 
 
 
 ### User Profile System (GamerProfile)
 
+The GamerProfile feature allows users to create and customize their unique gaming identities, showcasing their achievements, game preferences, and social connections, fostering a sense of community and recognition among fellow gamers.
 
 ### User Reward System (GamerCredit)
 
+GamerCredit serves as the in-platform currency within GamerHub, allowing users to earn credits through gameplay, content creation, or other platform activities, which can be used for in-game purchases, NFT acquisitions, or redeemed for real-world rewards, incentivizing active participation and rewarding gamers for their contributions.
+
+
 ## Roadmap
+
+[Subscription based Aggregator for Metaverses, Games, NFTs..pdf](https://github.com/gamerhubio/bnb-hackathon-pro/files/11455818/Subscription.based.Aggregator.for.Metaverses.Games.NFTs.pdf)
 
 
 ## Contributing
