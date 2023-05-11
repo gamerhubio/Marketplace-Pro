@@ -3,6 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import { sendConfirmationEmail } from "../libs/mailer";
 import Users from "../models/UserModel";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 
 type IUserList = {
   _id: string;
@@ -28,7 +29,11 @@ export const createUser = async (
 ) => {
   try {
     // create user
-    const user: IUser | any = await Users.create({ ...req.body });
+    const user: IUser | any = await Users.create({
+      email: req.body.email,
+      username: req.body.username,
+      password: await bcrypt.hash(req.body.password, 10),
+    });
 
     const data = {
       id: user._id,
@@ -70,7 +75,44 @@ export const loginUser = async (
   // authenticate user
 
   try {
-    const { address } = req.body;
+    // get user
+    const user: IUserList | any = await Users.findOne({
+      email: req.body.email,
+    });
+    console.log(user);
+    if (user) {
+      if (await bcrypt.compare(req.body.password, user.password)) {
+        // generate tokens
+        const accessToken = jwt.sign(
+          { ...user },
+          `${process.env.ACCESS_TOKEN_SECRET}`,
+          { expiresIn: "24h" }
+        );
+        res.status(StatusCodes.OK).json({ accessToken });
+      } else {
+        res
+          .status(StatusCodes.UNAUTHORIZED)
+          .json({ msg: "Invalid credentials" });
+      }
+    } else {
+      res.status(StatusCodes.UNAUTHORIZED).json({ msg: "Invalid credentials" });
+    }
+  } catch (error) {
+    // console.log(error)
+    // throw error
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+  }
+};
+
+// check address user
+export const checkAddress = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  // authenticate user
+
+  try {
+    const { address } = req.params;
 
     // get user
     const user: IUserList | any = await Users.find({
@@ -78,33 +120,11 @@ export const loginUser = async (
     });
 
     if (user.length > 0) {
-      if (!user[0].email || !user[0].username) {
-        // return user object for account creation
-        res.status(StatusCodes.OK).json({
-          user,
-        });
-      } else {
-        const myUser = {
-          id: user[0]._id,
-          email: user[0].email,
-          username: user[0].username,
-        };
-        // tslint:disable-next-line:no-console
-        // console.log(myUser)
-
-        // generate tokens
-        const accessToken = jwt.sign(
-          { ...myUser },
-          `${process.env.ACCESS_TOKEN_SECRET}`,
-          { expiresIn: "24h" }
-        );
-        res.status(StatusCodes.OK).json({ accessToken });
-      }
+      // return true
+      res.status(StatusCodes.OK).json({ msg: true });
     } else {
-      // return user object for account creation
-      res.status(StatusCodes.OK).json({
-        user,
-      });
+      // return false
+      res.status(StatusCodes.OK).json({ msg: false });
     }
   } catch (error) {
     // console.log(error)

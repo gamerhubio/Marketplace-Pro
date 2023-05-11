@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginUser = exports.createUser = void 0;
+exports.checkAddress = exports.loginUser = exports.createUser = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const mailer_1 = require("../libs/mailer");
 const UserModel_1 = __importDefault(require("../models/UserModel"));
@@ -28,7 +28,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             username: user.username,
             wallets: user.wallets,
             verified: user.verified,
-            challenges: user.challenges
+            challenges: user.challenges,
         };
         // send email
         yield (0, mailer_1.sendConfirmationEmail)({ toUser: data, hash: data.id });
@@ -40,7 +40,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         // tslint:disable-next-line:no-console
         // console.log(myUser)
         // generate tokens
-        const accessToken = jsonwebtoken_1.default.sign(Object.assign({}, myUser), `${process.env.ACCESS_TOKEN_SECRET}`, { expiresIn: '15m' });
+        const accessToken = jsonwebtoken_1.default.sign(Object.assign({}, myUser), `${process.env.ACCESS_TOKEN_SECRET}`, { expiresIn: "24h" });
         res.status(http_status_codes_1.StatusCodes.OK).json({ accessToken });
     }
     catch (error) {
@@ -74,7 +74,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 // tslint:disable-next-line:no-console
                 // console.log(myUser)
                 // generate tokens
-                const accessToken = jsonwebtoken_1.default.sign(Object.assign({}, myUser), `${process.env.ACCESS_TOKEN_SECRET}`, { expiresIn: '15m' });
+                const accessToken = jsonwebtoken_1.default.sign(Object.assign({}, myUser), `${process.env.ACCESS_TOKEN_SECRET}`, { expiresIn: "24h" });
                 res.status(http_status_codes_1.StatusCodes.OK).json({ accessToken });
             }
         }
@@ -92,4 +92,29 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.loginUser = loginUser;
+// check address user
+const checkAddress = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // authenticate user
+    try {
+        const { address } = req.params;
+        // get user
+        const user = yield UserModel_1.default.find({
+            wallets: { $elemMatch: { $eq: address } },
+        });
+        if (user.length > 0) {
+            // return true
+            res.status(http_status_codes_1.StatusCodes.OK).json({ msg: true });
+        }
+        else {
+            // return false
+            res.status(http_status_codes_1.StatusCodes.OK).json({ msg: false });
+        }
+    }
+    catch (error) {
+        // console.log(error)
+        // throw error
+        res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+    }
+});
+exports.checkAddress = checkAddress;
 //# sourceMappingURL=AuthController.js.map

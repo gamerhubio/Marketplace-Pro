@@ -20,7 +20,9 @@ const mailer_1 = require("../libs/mailer");
 const recordSubscription = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // get subscription
-        let subscription = yield SubscriptionModel_1.default.findOne({ email: req.body.email });
+        let subscription = yield SubscriptionModel_1.default.findOne({
+            email: req.body.email,
+        });
         if (subscription) {
             // update Subscription
             subscription.email = req.body.email;
@@ -33,11 +35,11 @@ const recordSubscription = (req, res) => __awaiter(void 0, void 0, void 0, funct
                 username: subscription.username,
                 plan: subscription.plan,
                 startDate: req.body.startDate,
-                endDate: req.body.endDate
+                endDate: req.body.endDate,
             };
             // send home
             yield (0, mailer_1.sendSubscriptionMail)({ toUser: data });
-            res.redirect(http_status_codes_1.StatusCodes.TEMPORARY_REDIRECT, '/');
+            res.status(http_status_codes_1.StatusCodes.CREATED).json({ msg: "subscription recorded" });
         }
         else {
             // create subscription
@@ -48,12 +50,12 @@ const recordSubscription = (req, res) => __awaiter(void 0, void 0, void 0, funct
                 username: subscription.username,
                 plan: subscription.plan,
                 startDate: req.body.startDate,
-                endDate: req.body.endDate
+                endDate: req.body.endDate,
             };
             // send email
             yield (0, mailer_1.sendSubscriptionMail)({ toUser: data });
-            // send home
-            res.redirect(http_status_codes_1.StatusCodes.TEMPORARY_REDIRECT, '/');
+            // send dashboard
+            res.status(http_status_codes_1.StatusCodes.CREATED).json({ msg: "subscription recorded" });
         }
     }
     catch (error) {
