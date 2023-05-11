@@ -27,7 +27,7 @@ export const TabItem = styled.div<{ active: boolean }>`
     content: "";
     position: absolute;
     left: 0;
-    bottom: -2px;
+    bottom: 0px;
     background: ${({ active }) => (active ? "#d7007b" : "transparent")};
     height: 2px;
     width: 100%;

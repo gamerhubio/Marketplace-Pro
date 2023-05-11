@@ -22,6 +22,7 @@ export const GameType = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 9px;
+  flex-wrap: wrap;
 `;
 
 export const GameTypeItem = styled.div`

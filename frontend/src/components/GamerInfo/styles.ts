@@ -9,7 +9,7 @@ export const GamerAvatar = styled.div`
   padding-bottom: 12px;
 `;
 
-export const GamerInfo = styled.div`
+export const GamerInfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 40px;

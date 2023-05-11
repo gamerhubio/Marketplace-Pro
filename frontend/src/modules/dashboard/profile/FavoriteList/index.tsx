@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { FavoriteContainer, FavoriteList } from "./styles";
+import { FavoriteContainer, FavoriteListWrapper } from "./styles";
 import { TabList } from "../../../../components/TabList";
 import { favoriteTabNameList } from "./data";
 import { ListEmptyComponent } from "../../../../components";
 import { FavoriteGameListComponent } from "../../../../components/FavoriteGameList";
-export const FavoriteListComponent: React.FC = () => {
+export const FavoriteList: React.FC = () => {
   const [tab, setTab] = useState("empty");
   return (
     <FavoriteContainer>
       <TabList data={favoriteTabNameList} onTabChange={setTab} />
-      <FavoriteList>
+      <FavoriteListWrapper>
         {tab === "empty" && <ListEmptyComponent />}
         {tab === "game" && <FavoriteGameListComponent />}
-      </FavoriteList>
+      </FavoriteListWrapper>
     </FavoriteContainer>
   );
 };

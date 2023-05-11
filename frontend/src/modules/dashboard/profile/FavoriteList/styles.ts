@@ -5,7 +5,7 @@ export const FavoriteContainer = styled.div`
   flex-direction: column;
 `;
 
-export const FavoriteList = styled.div`
+export const FavoriteListWrapper = styled.div`
   margin-top: 22px;
   background: rgba(8, 13, 56, 0.1);
   border: 1px solid rgba(93, 119, 162, 0.15);

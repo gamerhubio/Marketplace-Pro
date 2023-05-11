@@ -31,6 +31,11 @@ export const RightSideBarContainer = styled.div`
   max-width: 380px;
   width: 100%;
   margin-left: 40px;
+  @media screen and (max-width: 1240px) {
+    max-width: 100%;
+    margin-left: 0;
+    margin-top: 40px;
+  }
 `;
 
 export const EditProfileSection = styled.div`
@@ -58,6 +63,9 @@ export const EditProfileSection = styled.div`
 export const DashboardWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  @media screen and (max-width: 1240px) {
+    flex-direction: column;
+  }
 `;
 
 export const FavoriteMark = styled.div`

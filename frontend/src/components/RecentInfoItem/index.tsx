@@ -30,8 +30,8 @@ export const RecentInfoItem: React.FC<RecentInfoItemProps> = ({
         </MainItemInfo>
       </RecentInfoItemWrapper>
       <ViewItem>
-        <p>View {type == "NFT" ? "NFT" : "game"}</p>
-        <img src="/images/userdashboard/right.png" />
+        <p>View {type === "NFT" ? "NFT" : "game"}</p>
+        <img src="/images/userdashboard/right.png" alt="" />
       </ViewItem>
     </RecentInfoItemContainer>
   );

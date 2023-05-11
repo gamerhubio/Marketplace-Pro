@@ -1,15 +1,13 @@
 import styled from "styled-components";
 
 export const DailyTaskCardContainer = styled.div`
-  background: #202e60;
-  opacity: 0.4;
-  border: 1px solid #3952ac;
+  background: url("/images/userdashboard/taskitem-bg.png") no-repeat;
+  background-size: 100% 100%;
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
 `;
 
-export const DailyTaskInfo = styled.div`
+export const DailyTaskInfo = styled.div<{ isOdd: boolean }>`
   h1 {
     font-weight: 500;
     font-size: 16px;
@@ -22,7 +20,7 @@ export const DailyTaskInfo = styled.div`
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
-    color: #eff1f6;
+    color: ${({ isOdd }) => (!isOdd ? "#55C388" : "#eff1f6")};
     text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.24);
   }
   padding-left: 24px;
@@ -46,9 +44,14 @@ export const TaskReward = styled.div`
   }
 `;
 
-export const StatusBtn = styled.div`
-  border: 1px solid #0b52bd;
+export const StatusBtn = styled.div<{ isOdd: boolean }>`
+  cursor: pointer;
+  border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(11, 82, 189, 0.5);
+  background: ${({ isOdd }) =>
+    !isOdd
+      ? "url('/images/userDashboard/taskmodal-btn1.png')"
+      : "url('/images/userDashboard/taskmodal-btn2.png')"};
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,25 +1,30 @@
 import styled from "styled-components";
 
-export const EditProfileDialogContainer = styled.div`
+export const EditProfileDialogContainer = styled.div<{ visible?: boolean }>`
   background: rgba(3, 6, 26, 0.6);
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  visibility: ${({ visible }) => (visible ? "visible" : "hidden")};
 `;
 
-export const EditProfileWrapper = styled.div`
+export const EditProfileWrapper = styled.div<{ visible?: boolean }>`
   padding: 24px;
   background: #0a1442;
   border-radius: 10px;
-  width: 432px;
+  max-width: 432px;
+  width: 95%;
   height: auto;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 10;
+  z-index: 11;
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  visibility: ${({ visible }) => (visible ? "visible" : "hidden")};
 `;
 export const EditProfileTitle = styled.div`
   display: flex;

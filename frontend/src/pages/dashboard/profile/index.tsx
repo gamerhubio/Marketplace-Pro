@@ -10,11 +10,13 @@ import {
   MainContentContainer,
   RightSideBarContainer,
 } from "./styles";
-import { GamerInfoComponent } from "../../../components/GamerInfo";
-import { GamerListComponent } from "../../../modules/dashboard/profile/GamerList";
-import { RecentListComponent } from "../../../modules/dashboard/profile/RecentList";
-import { FavoriteListComponent } from "../../../modules/dashboard/profile/FavoriteList";
-import EditProfileDialogComponent from "../../../modules/dashboard/profile/EditProfileDialog";
+import {
+  EditProfileDialog,
+  FavoriteList,
+  GamerList,
+  RecentList,
+} from "../../../modules/dashboard";
+import { GamerInfo } from "../../../components";
 
 export const DashboardProfilePage: React.FC = () => {
   const [showEditProfile, setShowEditProfile] = useState<boolean>(false);
@@ -27,7 +29,7 @@ export const DashboardProfilePage: React.FC = () => {
       <DashboardWrapper>
         <MainContentContainer>
           <GamerProfileWrapper>
-            <GamerInfoComponent />
+            <GamerInfo />
             <EditProfileSection
               onClick={() => {
                 setShowEditProfile(true);
@@ -45,16 +47,16 @@ export const DashboardProfilePage: React.FC = () => {
               <span>Favorites</span>
               <img src="/images/userdashboard/dropdown.png" alt="" />
             </FavoriteMark>
-            <FavoriteListComponent />
+            <FavoriteList />
           </GameListWrapper>
         </MainContentContainer>
         <RightSideBarContainer>
-          <GamerListComponent />
-          <RecentListComponent type="NFT" />
-          <RecentListComponent type="game" />
+          <GamerList />
+          <RecentList type="NFT" />
+          <RecentList type="game" />
         </RightSideBarContainer>
       </DashboardWrapper>
-      <EditProfileDialogComponent
+      <EditProfileDialog
         visible={showEditProfile}
         handleModalVisible={handleModalVisible}
       />

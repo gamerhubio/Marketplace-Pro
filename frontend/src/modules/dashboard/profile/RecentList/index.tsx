@@ -12,7 +12,7 @@ export type RecentListProps = {
   type: string;
 };
 
-export const RecentListComponent: React.FC<RecentListProps> = ({ type }) => {
+export const RecentList: React.FC<RecentListProps> = ({ type }) => {
   return (
     <RecentListContainer>
       <RecentListHeader>Recent {type}s</RecentListHeader>

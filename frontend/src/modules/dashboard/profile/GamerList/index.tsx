@@ -8,7 +8,7 @@ import {
 import { GamerListInfo } from "./data";
 import { UserInfoItem } from "../../../../components/UserInfoItem";
 
-export const GamerListComponent: React.FC = () => {
+export const GamerList: React.FC = () => {
   return (
     <GamerListContainer>
       <GamerListHeader>

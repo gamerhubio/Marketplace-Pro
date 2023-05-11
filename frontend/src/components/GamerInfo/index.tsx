@@ -4,19 +4,19 @@ import {
   Followers,
   Following,
   GamerAvatar,
-  GamerInfo,
+  GamerInfoWrapper,
   GamerLevelInfo,
   GamerMainInfo,
   InfoSection,
 } from "./styles";
 
-export const GamerInfoComponent: React.FC = () => {
+export const GamerInfo: React.FC = () => {
   return (
-    <GamerInfo>
+    <GamerInfoWrapper>
       <GamerAvatar>
         <img
           src="/images/userdashboard/GamerAvatar_big.png"
-          alt="avatar image"
+          alt="avatarImage"
         />
       </GamerAvatar>
       <InfoSection>
@@ -39,6 +39,6 @@ export const GamerInfoComponent: React.FC = () => {
           <img src="/images/userdashboard/stargroup.png" alt="" />
         </GamerLevelInfo>
       </InfoSection>
-    </GamerInfo>
+    </GamerInfoWrapper>
   );
 };

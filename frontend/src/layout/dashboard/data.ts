@@ -50,3 +50,51 @@ export const sidebarList = [
     to: "/",
   },
 ];
+
+export const taskmodalTab = [
+  {
+    key: "daily",
+    label: "Daily",
+  },
+  {
+    key: "challenges",
+    label: "Challenges",
+  },
+  {
+    key: "tournaments",
+    label: "Tournaments",
+  },
+];
+
+export const taskDailyData = [
+  {
+    title: "PLAY 5 GAMES",
+    amount: "0/5",
+    credit: 10,
+  },
+  {
+    title: "PURCHASE 1 NFT",
+    amount: "1/1",
+    credit: 5,
+  },
+  {
+    title: "WATCH ADS",
+    amount: "0/5",
+    credit: 10,
+  },
+  {
+    title: "STREAM 3 VIDEOS",
+    amount: "3/3",
+    credit: 5,
+  },
+  {
+    title: "PURCHASE IN-GAME ASSETS",
+    amount: "0/1",
+    credit: 10,
+  },
+  {
+    title: "PLAY TOURNAMENTS",
+    amount: "1/1",
+    credit: 5,
+  },
+];
