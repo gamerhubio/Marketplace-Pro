@@ -37,7 +37,7 @@ export const sidebarList = [
   {
     icon: "/images/userdashboard/play.png",
     label: "GamerPlay",
-    to: "/",
+    to: "/dashboard/profile",
   },
   {
     icon: "/images/userdashboard/merch.png",

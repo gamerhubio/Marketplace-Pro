@@ -9,6 +9,7 @@ import {
   AppWalletConnectPage,
   DashboardHomePage,
   DashboardGamePage,
+  DashboardProfilePage,
 } from "./pages";
 
 import "swiper/css/pagination";
@@ -33,6 +34,7 @@ const App: React.FC = () => {
         {/* Dashboard */}
         <Route path="/dashboard/home" element={<DashboardHomePage />} />
         <Route path="/dashboard/game" element={<DashboardGamePage />} />
+        <Route path="/dashboard/profile" element={<DashboardProfilePage />} />
       </Routes>
     </Router>
   );
