@@ -147,3 +147,4 @@ For any inquiries or assistance, please contact our support team at support@game
 
 ## Links
 
+[Medium](https://medium.com/@gamerhub_io) / [Discord](https://discord.gg/WPrVFFXgjX) / [Twitter](https://twitter.com/gamer_hub_io) / [Telegram](https://t.me/GamerHub_group) / [Linktree](https://linktr.ee/gamerhublinks) /  [Pitch Deck](https://www.canva.com/design/DAFde35m48g/XrBT7XbWeEcIgrW55F8XIg/view?utm_content=DAFde35m48g&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink) / [Whitepaper](https://gamerhub-1.gitbook.io/gamerhub-whitepaper-v1/) / [Onepager](https://www.canva.com/design/DAFdxu0ng8E/70nX4tDodin3iX4uHM4mBg/watch?utm_content=DAFdxu0ng8E&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
