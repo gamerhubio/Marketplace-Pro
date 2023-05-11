@@ -44,17 +44,20 @@ export const subscriptionData = [
     price: "9.99",
     color: "#EF7D3B",
     plan: ["Access to 15+ Games", "Access to 15+ Games", "Access to 15+ Games"],
+    BNBPrice: "0.02991913",
   },
   {
     title: "Top Gamer",
     price: "14.99",
     color: "#3B43FA",
     plan: ["Access to 15+ Games", "Access to 15+ Games", "Access to 15+ Games"],
+    BNBPrice: "0.04489368",
   },
   {
     title: "Pro Gamer",
     price: "19.99",
     color: "#D7007B",
     plan: ["Access to 15+ Games", "Access to 15+ Games", "Access to 15+ Games"],
+    BNBPrice: "0.05986822",
   },
 ];
