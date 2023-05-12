@@ -28,7 +28,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.10",
     "nodemailer": "^6.9.1",
-    "npm": "^9.6.6"
+    "npm": "^9.6.6",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7",
