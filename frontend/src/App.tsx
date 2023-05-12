@@ -18,6 +18,7 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "./assets/css/custom-swiper.css";
+import { DailyTaskModal } from "./modules/dashboard/dailytask";
 
 const App: React.FC = () => {
   return (
@@ -35,6 +36,8 @@ const App: React.FC = () => {
         <Route path="/dashboard/home" element={<DashboardHomePage />} />
         <Route path="/dashboard/game" element={<DashboardGamePage />} />
         <Route path="/dashboard/profile" element={<DashboardProfilePage />} />
+
+        <Route path="/dashboard/dailytask" element={<DailyTaskModal />} />
       </Routes>
     </Router>
   );

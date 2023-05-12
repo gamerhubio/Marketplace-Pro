@@ -6,7 +6,9 @@ import {
   DailyTaskModalWrapper,
   ModalTabList,
   ModalTitle,
+  TabButton,
 } from "./styles";
+import { DailyTaskCardComponent } from "../../../components/DailyTaskCard";
 
 export const DailyTaskModal: React.FC = () => {
   return (
@@ -14,9 +16,15 @@ export const DailyTaskModal: React.FC = () => {
       <DailyTaskModalWrapper>
         <DailyTaskModalHeader>
           <ModalTitle>EARN GAMERHUB COINS</ModalTitle>
-          <ModalTabList></ModalTabList>
+          <ModalTabList>
+            <TabButton>DAILY</TabButton>
+            <TabButton>CHALLENGES</TabButton>
+            <TabButton>TOURNAMENTS</TabButton>
+          </ModalTabList>
         </DailyTaskModalHeader>
-        <DailyTaskModalContent></DailyTaskModalContent>
+        <DailyTaskModalContent>
+          <DailyTaskCardComponent />
+        </DailyTaskModalContent>
       </DailyTaskModalWrapper>
     </DailyTaskModalBG>
   );
