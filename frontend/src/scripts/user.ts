@@ -17,7 +17,11 @@ export const getUser = async (address: string) => {
   try {
     // 👇️ const data: GetUsersResponse
     const { data } = await axios.get<GetUserResponse>(
-      `${process.env.REACT_APP_BASE_URL}/users/${address}`,
+      `${
+        process.env.NODE_ENV === "development"
+          ? process.env.REACT_APP_BASE_URL_DEV
+          : process.env.REACT_APP_BASE_URL_PROD
+      }/users/${address}`,
       {
         headers: {
           Accept: "application/json",
@@ -92,7 +96,11 @@ export async function createUser(formData: FormData) {
   try {
     // 👇️ const data: CreateUserResponse
     const { data } = await axios.post<authResponse>(
-      `${process.env.REACT_APP_BASE_URL}/auth/register`,
+      `${
+        process.env.NODE_ENV === "development"
+          ? process.env.REACT_APP_BASE_URL_DEV
+          : process.env.REACT_APP_BASE_URL_PROD
+      }/auth/register`,
       { ...formData },
       {
         headers: {
@@ -127,7 +135,11 @@ export const login = async (info: { username: string; password: string }) => {
   try {
     // 👇️ const data: GetUsersResponse
     const { data } = await axios.post<authResponse>(
-      `${process.env.REACT_APP_BASE_URL}/auth/login`,
+      `${
+        process.env.NODE_ENV === "development"
+          ? process.env.REACT_APP_BASE_URL_DEV
+          : process.env.REACT_APP_BASE_URL_PROD
+      }/auth/login`,
       { ...info },
       {
         headers: {
@@ -162,7 +174,11 @@ export const checkUser = async (address: string) => {
   try {
     // 👇️ const data: GetUsersResponse
     const { data } = await axios.get<checkerResponse>(
-      `${process.env.REACT_APP_BASE_URL}/auth/checker/${address}`,
+      `${
+        process.env.NODE_ENV === "development"
+          ? process.env.REACT_APP_BASE_URL_DEV
+          : process.env.REACT_APP_BASE_URL_PROD
+      }/auth/checker/${address}`,
       {
         headers: {
           Accept: "application/json",
@@ -196,7 +212,11 @@ export const checkSubscription = async (address: string) => {
   try {
     // 👇️ const data: GetUsersResponse
     const { data } = await axios.get<checkerResponse>(
-      `${process.env.REACT_APP_BASE_URL}/auth/subscription/expiration/${address}`,
+      `${
+        process.env.NODE_ENV === "development"
+          ? process.env.REACT_APP_BASE_URL_DEV
+          : process.env.REACT_APP_BASE_URL_PROD
+      }/auth/subscription/expiration/${address}`,
       {
         headers: {
           Accept: "application/json",
