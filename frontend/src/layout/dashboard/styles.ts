@@ -13,7 +13,7 @@ export const DashboardLayoutWrapper = styled.div`
 `;
 
 export const MainContentWrapper = styled.div`
-  padding: 10px 0;
+  padding: 0;
   width: 95%;
   margin: auto;
 `;

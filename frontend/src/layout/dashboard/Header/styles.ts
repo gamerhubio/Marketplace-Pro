@@ -33,12 +33,12 @@ export const DashboardHeaderWrapper = styled.div`
 `;
 
 export const HeaderActionsWrapper = styled.div`
+  margin-left: 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  max-width: 515px;
-  width: 100%;
   height: 100%;
+  width: 100%;
+  justify-content: flex-end;
   .mobile {
     width: fit-content;
     padding: 0 15px;
@@ -55,8 +55,14 @@ export const HeaderActionsWrapper = styled.div`
     order: 1;
     max-width: 100%;
     justify-content: flex-end;
-    & > div:first-child {
-      display: none;
+  }
+  @media screen and (max-width: 768px) {
+    & > div {
+      border: none;
+      width: fit-content;
+    }
+    & > :not(:first-child) {
+      margin-left: 12px;
     }
   }
   @media screen and (max-width: 650px) {
@@ -68,7 +74,7 @@ export const HeaderActionsWrapper = styled.div`
 
 export const MLogo = styled.div`
   display: none;
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 1024px) {
     max-width: 90px;
     width: 100%;
     display: flex;
@@ -110,15 +116,75 @@ export const SearchInputWrapper = styled.div<{ show: boolean }>`
   img {
     cursor: pointer;
   }
-  @media screen and (max-width: 900px) {
-    max-width: 100%;
-  }
-  @media screen and (max-width: 535px) {
+  @media screen and (max-width: 1024px) {
     position: ${({ show }) => (show ? "absolute" : "relative")};
     max-width: ${({ show }) => (show ? "100%" : "fit-content")};
     z-index: 2;
+    left: 0;
     input {
       display: ${({ show }) => (show ? "block" : "none")};
+    }
+  }
+`;
+
+export const HeaderRightSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+`;
+
+export const WalletButtonWrapper = styled.div`
+  max-width: 220px;
+  border-left: 1px solid rgba(93, 119, 162, 0.15);
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+`;
+
+export const AlarmWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  border-left: 1px solid rgba(93, 119, 162, 0.15);
+  height: 100%;
+  cursor: pointer;
+  justify-content: center;
+  width: 100%;
+  max-width: 72px;
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
+`;
+
+export const TaskWrapper = styled.div`
+  display: flex;
+  height: 100%;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid rgba(93, 119, 162, 0.15);
+  width: 100%;
+  max-width: 150px;
+  img {
+    margin-right: 10px;
+  }
+  span {
+    margin-right: 15px;
+    font-family: "Space Grotesk";
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 28px;
+    color: #eff1f6;
+  }
+  @media screen and (max-width: 400px) {
+    img {
+      margin-right: 5px;
+    }
+    span {
+      margin-right: 5px;
     }
   }
 `;
