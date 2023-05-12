@@ -27,8 +27,8 @@ export const createUser = async (
   req: express.Request,
   res: express.Response
 ) => {
-  //tslint:disable-next-line:no-console
-  //console.log(req.body);
+  // tslint:disable-next-line:no-console
+  // console.log(req.body);
   try {
     // create user
     const user: IUser | any = await Users.create({
@@ -54,7 +54,7 @@ export const createUser = async (
       email: user.email,
       username: user.username,
     };
-    //tslint:disable-next-line:no-console
+    // tslint:disable-next-line:no-console
     console.log(myUser);
 
     // generate tokens

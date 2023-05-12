@@ -65,7 +65,7 @@ export const subscribe = async (
       };
 
       try {
-        // 👇️ const data: CreateUserResponse
+        // const data: CreateUserResponse
         const { data, status } = await axios.post<CreateUserResponse>(
           `${
             process.env.NODE_ENV == "development"

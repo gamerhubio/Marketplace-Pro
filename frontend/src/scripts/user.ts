@@ -308,7 +308,7 @@ export const checkUser = async (address: string) => {
 };
 
 //get user subscription state
-export const checkSubscription = async (address: string) => {
+export const checkSubscription = async (id: string) => {
   try {
     // 👇️ const data: GetUsersResponse
     const { data } = await axios.get<checkerResponse>(
@@ -316,7 +316,7 @@ export const checkSubscription = async (address: string) => {
         process.env.NODE_ENV === "development"
           ? process.env.REACT_APP_BASE_URL_DEV
           : process.env.REACT_APP_BASE_URL_PROD
-      }/auth/subscription/expiration/${address}`,
+      }/auth/subscription/expiration/${id}`,
       {
         headers: {
           Accept: "application/json",

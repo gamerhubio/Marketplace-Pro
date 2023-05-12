@@ -16,24 +16,25 @@ export const recordSubscription = async (
   req: express.Request,
   res: express.Response
 ) => {
+  // @ts-ignore
+  req.body.user = req.user.id;
   try {
     // get subscription
     let subscription: ISubscription | any = await Subscriptions.findOne({
-      email: req.body.email,
+      user: req.body.user,
     });
-    //console.log(subscription);
+    // console.log(subscription);
     if (subscription) {
       // update Subscription
-      subscription.email = req.body.email;
-      subscription.username = req.body.username;
       subscription.plan = req.body.plan;
       subscription.endDate = req.body.endDate;
       await subscription.save();
 
+      // develop data for mail
       const data = {
         id: subscription._id,
-        email: subscription.email,
-        username: subscription.username,
+        email: req.body.email,
+        username: req.body.username,
         plan: subscription.plan,
         startDate: req.body.startDate,
         endDate: req.body.endDate,
@@ -45,10 +46,11 @@ export const recordSubscription = async (
     } else {
       // create subscription
       subscription = await Subscriptions.create({ ...req.body });
+      // data for mail
       const data = {
         id: subscription._id,
-        email: subscription.email,
-        username: subscription.username,
+        email: req.body.email,
+        username: req.body.username,
         plan: subscription.plan,
         startDate: req.body.startDate,
         endDate: req.body.endDate,
@@ -76,11 +78,11 @@ export const checkExpiry = async (
   res: express.Response
 ) => {
   try {
-    const { address } = req.params;
+    const { id } = req.params;
 
     // get user
     const subscription: ISub | any = await Subscriptions.findOne({
-      email: address,
+      _id: id,
     });
     // tslint:disable-next-line:no-console
     // console.log(subscription);

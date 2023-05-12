@@ -86,13 +86,6 @@ export const updateUser = async (
     const user = await Users.findOneAndUpdate({ email: address }, req.body, {
       new: true,
     });
-    const subscription = await Subscriptions.findOneAndUpdate(
-      { email: address },
-      { email: req.body.email },
-      {
-        new: true,
-      }
-    );
 
     res.status(StatusCodes.OK).json(user);
   } catch (error) {

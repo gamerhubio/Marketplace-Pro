@@ -12,6 +12,6 @@ const SubscriptionController_1 = require("../controllers/SubscriptionController"
 router.route("/login").post(AuthController_2.loginUser);
 router.route("/register").post(AuthController_1.createUser);
 router.route("/checker/:address").get(AuthController_1.checkAddress);
-router.route("/subscription/expiration/:address").get(SubscriptionController_1.checkExpiry);
+router.route("/subscription/expiration/:id").get(SubscriptionController_1.checkExpiry);
 exports.default = router;
 //# sourceMappingURL=authRoute.js.map
