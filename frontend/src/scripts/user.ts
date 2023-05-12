@@ -49,8 +49,40 @@ export const getUser = async (address: string) => {
   }
 };
 
-//create user
+//get user
+export const getUserData = async (id: string) => {
+  const token = localStorage.getItem("accessToken");
+  try {
+    // 👇️ const data: GetUsersResponse
+    const { data } = await axios.get<GetUserResponse>(
+      `${
+        process.env.NODE_ENV === "development"
+          ? process.env.REACT_APP_BASE_URL_DEV
+          : process.env.REACT_APP_BASE_URL_PROD
+      }/users/detail/${id}`,
+      {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
+    //return JSON.stringify(data, null, 4);
+
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      return { error: error.message };
+    } else {
+      console.log("unexpected error: ", error);
+      return { error: "An unexpected error occurred" };
+    }
+  }
+};
+
+//create user
 type FormData = {
   email: string;
   username: string;
@@ -144,7 +176,7 @@ export async function updateUser(formData: UpdateFormData) {
   console.log(formData);
   const token = localStorage.getItem("accessToken");
   try {
-    // 👇️ const data: CreateUserResponse
+    //  const data: CreateUserResponse
     const { data } = await axios.patch<PatchUserResponse>(
       `${
         process.env.NODE_ENV === "development"
@@ -295,10 +327,10 @@ export const checkSubscription = async (address: string) => {
     //return JSON.stringify(data, null, 4);
     console.log(data);
     if (data.msg) {
-      return true;
+      return { msg: true };
     } else {
       // window.location.replace(`${process.env.REACT_APP_DOMAIN}/app/signup`);
-      return false;
+      return { msg: false };
     }
 
     // return data;

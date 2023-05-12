@@ -1,5 +1,6 @@
 import express from "express";
 import { StatusCodes } from "http-status-codes";
+import Subscriptions from "../models/SubscriptionModel";
 import Users from "../models/UserModel";
 
 type IUserList = {
@@ -51,6 +52,27 @@ export const getUser = async (req: express.Request, res: express.Response) => {
     res.status(StatusCodes.NOT_FOUND).send(error);
   }
 };
+// get a user
+export const getUserDetail = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const { id } = req.params;
+
+    // get user
+    const user = await Users.findOne({ _id: id });
+
+    if (user) {
+      res.status(StatusCodes.OK).json(user);
+    } else {
+      res.status(StatusCodes.NOT_FOUND).json({ msg: "user not found" });
+    }
+  } catch (error) {
+    // throw error
+    res.status(StatusCodes.NOT_FOUND).send(error);
+  }
+};
 
 // update user
 export const updateUser = async (
@@ -64,6 +86,13 @@ export const updateUser = async (
     const user = await Users.findOneAndUpdate({ email: address }, req.body, {
       new: true,
     });
+    const subscription = await Subscriptions.findOneAndUpdate(
+      { email: address },
+      { email: req.body.email },
+      {
+        new: true,
+      }
+    );
 
     res.status(StatusCodes.OK).json(user);
   } catch (error) {

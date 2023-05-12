@@ -21,16 +21,45 @@ import {
 } from "../../../components";
 import { getFormatWalletAddress } from "../../../utils";
 import { DailyTaskModal } from "../DailyTaskModal";
+import { useGlobalState } from "../../../store";
+import { getUserData } from "../../../scripts/user";
+import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
 
 type HeaderProps = {
   onSidebar: () => void;
 };
 
 export const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
-  const walletAddress = "0x8396Cf380b556fFA3B4025530bB03aaf09bd5C2F";
+  const [walletAddress, setWalletAddress] = useState("");
   const [screenWidth, setScreenWidth] = useState(0);
   const [searchShow, setSearchShow] = useState(false);
   const [visible, setVisible] = useState(false);
+  const address = useAccount();
+
+  const [currentUser] = useGlobalState("currentUser");
+
+  const [data, setData] = useState<any>({});
+
+  useEffect(() => {
+    if (address) setWalletAddress(address);
+  }, [address]);
+
+  useEffect(() => {
+    //get user info
+    //@ts-ignore
+    getUserData(currentUser.id)
+      .then((data) => {
+        //@ts-ignore
+        if (typeof data == "object" && data.error) {
+          console.log(data);
+          return;
+        }
+        console.log(data);
+        setData(data);
+      })
+      .catch((err) => console.log(err));
+  }, [currentUser]);
+
   useEffect(() => {
     window.addEventListener("resize", handleResize);
     handleResize();
@@ -50,6 +79,9 @@ export const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
 
   return (
     <React.Fragment>
+      <div style={{ display: "none" }}>
+        <ConnectButton />
+      </div>
       <DashboardHeaderWrapper>
         <div onClick={onSidebar}>
           <MMenu>
@@ -71,7 +103,7 @@ export const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
           <HeaderActionsWrapper>
             <TaskWrapper onClick={() => setVisible(true)}>
               <img src="/images/userdashboard/credit.png" alt="" />
-              <span>10K</span>
+              <span>{data.credit}</span>
               <IconAdd />
             </TaskWrapper>
             <AlarmWrapper>
