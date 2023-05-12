@@ -15,6 +15,7 @@ GamerHub also helps the transition of existing web2 games to web3 by implementin
 - [Overview](#overview)
 - [Features](#features)
 - [Hackathon](#hackathon)
+- [How-to](#how-to)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -119,6 +120,27 @@ GamerCredit serves as the in-platform currency within GamerHub, allowing users t
 
 ![photo_2023-05-12_13-34-53](https://github.com/gamerhubio/bnb-hackathon-pro/assets/131058062/c4d28abf-af0e-4f74-8d41-e1d69aa4f213)
 
+
+## How-to
+- User visits the gamerHub Website
+- User clicks on “Explore marketplace”
+- User views the landing page
+- User clicks on “Get started” 
+- User is asked to connect wallet
+- User connects wallet
+- User wallet connection is confirmed
+- User is asked to input username, email and password
+- User inputs username, email and password
+- User’s details are confirmed and email confirmation link sent
+- User is shown the subscription plans
+- User selects a subscription plan
+- Subscription Payment is initiated
+- Subscription Payment is confirmed
+- User is taken to a dashboard to view games available
+- User selects a game
+- User is taken to the game dashboard
+- User clicks on “Play Game”
+- User is taken to the game landing page
 
 
 ## Roadmap
