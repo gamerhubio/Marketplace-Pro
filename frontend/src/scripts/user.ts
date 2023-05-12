@@ -12,6 +12,12 @@ type GetUserResponse = {
   user: User[];
 };
 
+type PatchUserResponse = {
+  id: string;
+  email: string;
+  username: string;
+};
+
 //get user
 export const getUser = async (address: string) => {
   try {
@@ -49,6 +55,10 @@ type FormData = {
   email: string;
   username: string;
   wallets: string[];
+};
+type UpdateFormData = {
+  email: string;
+  username: string;
 };
 
 //decode
@@ -118,6 +128,64 @@ export async function createUser(formData: FormData) {
       // window.location.replace(`${process.env.REACT_APP_DOMAIN}/app/signup`);
       return false;
     }
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      // 👇️ error: AxiosError<any, any>
+      return { error: error.message };
+    } else {
+      console.log("unexpected error: ", error);
+      return { error: "An unexpected error occurred" };
+    }
+  }
+}
+
+export async function updateUser(formData: UpdateFormData) {
+  console.log(formData);
+  const token = localStorage.getItem("accessToken");
+  try {
+    // 👇️ const data: CreateUserResponse
+    const { data } = await axios.patch<PatchUserResponse>(
+      `${
+        process.env.NODE_ENV === "development"
+          ? process.env.REACT_APP_DOMAIN_DEV
+          : process.env.REACT_APP_DOMAIN_PROD
+      }/users/${formData.email}`,
+      { ...formData },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    // //set user object
+    // const user = {
+    //   id: data.id,
+    //   email: data.email,
+    //   username: data.username,
+    // };
+
+    // localStorage.setItem("user", JSON.stringify(user));
+    // setUser(user);
+
+    // return user;
+
+    localStorage.removeItem("user");
+    localStorage.removeItem("accessToken");
+    //@ts-ignore
+    setUser({});
+    setIsAuthenticated(false);
+    //redirect to login
+    window.location.replace(
+      `${
+        process.env.NODE_ENV === "development"
+          ? process.env.REACT_APP_BASE_URL_DEV
+          : process.env.REACT_APP_BASE_URL_PROD
+      }/app/signin`
+    );
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log("error message: ", error.message);
