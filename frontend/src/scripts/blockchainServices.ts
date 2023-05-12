@@ -1,5 +1,6 @@
 import Web3 from "web3";
 import web3data from "../artifacts/contracts/GamerhubManager.sol/GamerhubManager.json";
+import payoutdata from "../artifacts/contracts/Payout.sol/Payout.json";
 import { Provider } from "@particle-network/connect";
 import axios from "axios";
 
@@ -98,5 +99,38 @@ export const subscribe = async (
           return { error: "An unexpected error occurred" };
         }
       }
+    });
+};
+
+//request payment
+export const requestPayment = async (
+  address: string,
+  provider: Provider,
+  amt: number
+) => {
+  //@ts-ignore
+  const web3 = new Web3(provider);
+  let account = await web3.eth.getAccounts();
+
+  //@ts-ignore
+  const contract = new web3.eth.Contract(
+    //@ts-ignore
+    [...payoutdata.abi],
+    process.env.REACT_APP_PAYOUT_CONTRACT_ADDRESS
+  );
+
+  const url = `${process.env.REACT_APP_BASE_URL_PROD}/blockchainroute/${address}?amt=${amt}`;
+  contract.methods
+    .requestVolumeData(url)
+    .send({ from: account[0] })
+    .on("transactionHash", (hash: any) => {
+      console.log(hash);
+    })
+    .on("error", (error: IError) => {
+      console.log("This is error: ", error.message);
+    })
+    .then(async function () {
+      //finished
+      window.location.reload();
     });
 };

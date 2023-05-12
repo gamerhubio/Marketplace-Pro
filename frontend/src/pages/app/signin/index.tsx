@@ -23,14 +23,15 @@ export const AppSignInPage: React.FC = () => {
 
   const checkSubscriptionState = () => {
     //@ts-expect-error
+    console.log(currentUser.email);
+    //@ts-expect-error
     checkSubscription(currentUser.email)
       .then((data) => {
-        //@ts-expect-error
         if (data.error) {
           console.log(data);
         }
         //if true is returned
-        //@ts-expect-error
+
         if (data.msg) {
           //go to dashboard
           router("/dashboard/home");

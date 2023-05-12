@@ -9,6 +9,7 @@ import {
 import { IconDropdown } from "../SVGs";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../../store";
+import { ConnectButton } from "@particle-network/connect-react-ui";
 
 export const ProfileAvatar: React.FC = () => {
   const router = useNavigate();
@@ -27,39 +28,54 @@ export const ProfileAvatar: React.FC = () => {
   }, [currentUser]);
 
   return (
-    <ProfileWrapper>
-      <ProfileAvatarWrapper onClick={() => setVisible((prev) => !prev)}>
-        <img src="/images/userdashboard/GamerAvatar.png" alt="" />
-        <ProfileInfoWrapper>
-          <ProfileInfo>
-            <h2>{username}</h2>
-            <p>
-              Top Gamer <img src="/images/userdashboard/stargroup.png" alt="" />
-            </p>
-          </ProfileInfo>
-          <div>
-            <IconDropdown />
-          </div>
-        </ProfileInfoWrapper>
-      </ProfileAvatarWrapper>
-      <DropdownWrapper visible={visible}>
-        <span
-          onClick={() => {
-            setVisible(false);
-            router("/dashboard/profile");
-          }}
-        >
-          Profile
-        </span>
-        <span
-          onClick={() => {
-            setVisible(false);
-            router("/");
-          }}
-        >
-          Logout
-        </span>
-      </DropdownWrapper>
-    </ProfileWrapper>
+    <ConnectButton.Custom>
+      {({
+        account,
+        chain,
+        openAccountModal,
+        openConnectModal,
+        openChainModal,
+        accountLoading,
+      }) => {
+        return (
+          <ProfileWrapper>
+            <ProfileAvatarWrapper onClick={() => setVisible((prev) => !prev)}>
+              <img src="/images/userdashboard/GamerAvatar.png" alt="" />
+              <ProfileInfoWrapper>
+                <ProfileInfo>
+                  <h2>{username}</h2>
+                  <p>
+                    Top Gamer{" "}
+                    <img src="/images/userdashboard/stargroup.png" alt="" />
+                  </p>
+                </ProfileInfo>
+                <div>
+                  <IconDropdown />
+                </div>
+              </ProfileInfoWrapper>
+            </ProfileAvatarWrapper>
+            <DropdownWrapper visible={visible}>
+              <span
+                onClick={() => {
+                  setVisible(false);
+                  router("/dashboard/profile");
+                }}
+              >
+                Profile
+              </span>
+              <span
+                onClick={
+                  //setVisible(false);
+                  //router("/");
+                  openAccountModal
+                }
+              >
+                Logout
+              </span>
+            </DropdownWrapper>
+          </ProfileWrapper>
+        );
+      }}
+    </ConnectButton.Custom>
   );
 };
