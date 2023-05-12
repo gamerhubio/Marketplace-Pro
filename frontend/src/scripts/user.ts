@@ -17,6 +17,12 @@ type PatchUserResponse = {
   email: string;
   username: string;
 };
+type PatchUserWalletResponse = {
+  id: string;
+  email: string;
+  username: string;
+  wallets: string[];
+};
 
 //get user
 export const getUser = async (address: string) => {
@@ -114,6 +120,7 @@ const decode = (token: string) => {
     id: data.id,
     email: data.email,
     username: data.username,
+    wallet: data.wallets,
   };
 
   setUser(user);
@@ -218,6 +225,52 @@ export async function updateUser(formData: UpdateFormData) {
           : process.env.REACT_APP_BASE_URL_PROD
       }/app/signin`
     );
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      // 👇️ error: AxiosError<any, any>
+      return { error: error.message };
+    } else {
+      console.log("unexpected error: ", error);
+      return { error: "An unexpected error occurred" };
+    }
+  }
+}
+
+export async function updateUserWalletList(formData: FormData) {
+  console.log(formData);
+  const token = localStorage.getItem("accessToken");
+  try {
+    //  const data: CreateUserResponse
+    const { data } = await axios.patch<PatchUserWalletResponse>(
+      `${
+        process.env.NODE_ENV === "development"
+          ? process.env.REACT_APP_DOMAIN_DEV
+          : process.env.REACT_APP_DOMAIN_PROD
+      }/users/${formData.email}`,
+      { ...formData },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    //set user object
+    const user = {
+      id: data.id,
+      email: data.email,
+      username: data.username,
+      wallets: data.wallets,
+    };
+
+    localStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
+
+    // return user;
+    return { msg: true };
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log("error message: ", error.message);

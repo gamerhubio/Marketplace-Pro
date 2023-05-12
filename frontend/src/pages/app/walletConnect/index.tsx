@@ -20,7 +20,11 @@ import "@particle-network/connect-react-ui/dist/index.css";
 import { usePrevious } from "../../../hooks";
 import { login } from "../../../scripts";
 import { setIsAuthenticated, setUser, useGlobalState } from "../../../store";
-import { checkSubscription, checkUser } from "../../../scripts/user";
+import {
+  checkSubscription,
+  checkUser,
+  updateUserWalletList,
+} from "../../../scripts/user";
 
 export const AppWalletConnectPage: React.FC = () => {
   const [modalShow, setModalShow] = useState(false);
@@ -67,6 +71,32 @@ export const AppWalletConnectPage: React.FC = () => {
       .catch((err) => console.log(err));
   };
 
+  const updateWalletList = () => {
+    updateUserWalletList({
+      //@ts-ignore
+      email: currentUser.email,
+      //@ts-ignore
+      username: currentUser.username,
+      //@ts-ignore
+      wallets: [...currentUser.wallets, address],
+    })
+      .then((data) => {
+        console.log(data);
+        //@ts-ignore
+        if (typeof data == "object" && data.error) {
+          //@ts-ignore
+          console.log(data.error);
+        }
+        //if true is returned
+        //@ts-ignore
+        if (data.msg) {
+          //check if user is subscribed
+          checkSubscriptionState();
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     let user;
     if (address !== prevAddress && address) {
@@ -79,7 +109,7 @@ export const AppWalletConnectPage: React.FC = () => {
             console.log(data.error);
           }
           //if true is returned
-          if (data) {
+          if (data.msg == true) {
             if (!isAuthenticated) {
               //go to login page
               router("/app/signin");
@@ -88,7 +118,12 @@ export const AppWalletConnectPage: React.FC = () => {
               checkSubscriptionState();
             }
           } else {
-            router("/app/signup");
+            if (!isAuthenticated) {
+              router("/app/signup");
+            } else {
+              //update user wallet list
+              updateWalletList();
+            }
           }
         })
         .catch((err) => console.log(err));
