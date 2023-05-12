@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FollowSection,
   Followers,
@@ -9,8 +9,25 @@ import {
   GamerMainInfo,
   InfoSection,
 } from "./styles";
+import { useGlobalState } from "../../store";
 
+interface IUser {
+  email: string;
+  username: string;
+}
 export const GamerInfo: React.FC = () => {
+  const [currentUser] = useGlobalState("currentUser");
+
+  const [email, setEmail] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
+
+  useEffect(() => {
+    //@ts-ignore
+    setEmail(currentUser.email);
+    //@ts-ignore
+    setUsername(currentUser.username);
+  }, [currentUser]);
+
   return (
     <GamerInfoWrapper>
       <GamerAvatar>
@@ -21,8 +38,8 @@ export const GamerInfo: React.FC = () => {
       </GamerAvatar>
       <InfoSection>
         <GamerMainInfo>
-          <h1>Gamer1</h1>
-          <p>femi@gamerhub.io</p>
+          <h1>{username}</h1>
+          <p>{email}</p>
         </GamerMainInfo>
         <FollowSection>
           <Followers>
