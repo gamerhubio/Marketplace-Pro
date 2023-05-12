@@ -12,7 +12,6 @@ import {
   DashboardProfilePage,
 } from "./pages";
 
-
 import "swiper/css/pagination";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -24,6 +23,7 @@ import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
 import { usePrevious } from "./hooks";
 import { getUser, login } from "./scripts";
 import { setGlobalState, useGlobalState } from "./store";
+import ProtectedRoute from "./ProtectedRoute";
 
 const App: React.FC = () => {
   const address = useAccount();
@@ -64,7 +64,6 @@ const App: React.FC = () => {
   // }, [address]);
 
   return (
-
     <>
       <div style={{ display: "none" }}>
         <ConnectButton />
@@ -83,13 +82,33 @@ const App: React.FC = () => {
             element={<AppWalletConnectPage />}
           />
           {/* Dashboard */}
-          <Route path="/dashboard/home" element={<DashboardHomePage />} />
-          <Route path="/dashboard/game" element={<DashboardGamePage />} />
-          <Route path="/dashboard/profile" element={<DashboardProfilePage />} />
+          <Route
+            path="/dashboard/home"
+            element={
+              <ProtectedRoute>
+                <DashboardHomePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/game"
+            element={
+              <ProtectedRoute>
+                <DashboardGamePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/profile"
+            element={
+              <ProtectedRoute>
+                <DashboardProfilePage />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </Router>
     </>
-
   );
 };
 

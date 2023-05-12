@@ -53,6 +53,7 @@ export const createUser = async (
       id: user._id,
       email: user.email,
       username: user.username,
+      wallets: user.wallets,
     };
     // tslint:disable-next-line:no-console
     console.log(myUser);
@@ -89,6 +90,7 @@ export const loginUser = async (
           id: user._id,
           email: user.email,
           username: user.username,
+          wallets: user.wallets,
         };
         // generate tokens
         const accessToken = jwt.sign(
