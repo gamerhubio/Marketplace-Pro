@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.recordSubscription = void 0;
+exports.checkExpiry = exports.recordSubscription = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const SubscriptionModel_1 = __importDefault(require("../models/SubscriptionModel"));
 const mailer_1 = require("../libs/mailer");
@@ -28,6 +28,7 @@ const recordSubscription = (req, res) => __awaiter(void 0, void 0, void 0, funct
             subscription.email = req.body.email;
             subscription.username = req.body.username;
             subscription.plan = req.body.plan;
+            subscription.endDate = req.body.endDate;
             yield subscription.save();
             const data = {
                 id: subscription._id,
@@ -64,4 +65,40 @@ const recordSubscription = (req, res) => __awaiter(void 0, void 0, void 0, funct
     }
 });
 exports.recordSubscription = recordSubscription;
+// check for any active subscription
+const checkExpiry = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { address } = req.params;
+        // get user
+        const subscription = yield SubscriptionModel_1.default.findOne({
+            email: address,
+        });
+        // tslint:disable-next-line:no-console
+        // console.log(subscription);
+        if (!subscription) {
+            // return false
+            res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({ msg: false });
+        }
+        else {
+            // calculate date difference
+            const date1 = new Date(subscription.endDate);
+            const date2 = Date.now();
+            const diffTime = Date.now() - subscription.endDate;
+            if (diffTime > 0) {
+                // return false
+                res.status(http_status_codes_1.StatusCodes.OK).json({ msg: false });
+            }
+            else {
+                // return true
+                res.status(http_status_codes_1.StatusCodes.OK).json({ msg: true });
+            }
+        }
+    }
+    catch (error) {
+        // console.log(error)
+        // throw error
+        res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+    }
+});
+exports.checkExpiry = checkExpiry;
 //# sourceMappingURL=SubscriptionController.js.map

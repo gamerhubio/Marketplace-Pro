@@ -27,12 +27,15 @@ export const createUser = async (
   req: express.Request,
   res: express.Response
 ) => {
+  //tslint:disable-next-line:no-console
+  //console.log(req.body);
   try {
     // create user
     const user: IUser | any = await Users.create({
       email: req.body.email,
       username: req.body.username,
       password: await bcrypt.hash(req.body.password, 10),
+      wallets: req.body.wallets,
     });
 
     const data = {
@@ -51,8 +54,8 @@ export const createUser = async (
       email: user.email,
       username: user.username,
     };
-    // tslint:disable-next-line:no-console
-    // console.log(myUser)
+    //tslint:disable-next-line:no-console
+    console.log(myUser);
 
     // generate tokens
     const accessToken = jwt.sign(
@@ -77,14 +80,19 @@ export const loginUser = async (
   try {
     // get user
     const user: IUserList | any = await Users.findOne({
-      email: req.body.email,
+      username: req.body.username,
     });
-    console.log(user);
+
     if (user) {
       if (await bcrypt.compare(req.body.password, user.password)) {
+        const myUser = {
+          id: user._id,
+          email: user.email,
+          username: user.username,
+        };
         // generate tokens
         const accessToken = jwt.sign(
-          { ...user },
+          { ...myUser },
           `${process.env.ACCESS_TOKEN_SECRET}`,
           { expiresIn: "24h" }
         );

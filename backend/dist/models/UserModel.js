@@ -26,6 +26,7 @@ const userSchema = new mongoose_1.default.Schema({
     wallets: {
         type: [String],
         required: [true, "Please add users wallet"],
+        default: [],
     },
     credit: {
         type: Number,
