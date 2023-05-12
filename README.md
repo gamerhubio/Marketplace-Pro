@@ -12,7 +12,9 @@ GamerHub also helps the transition of existing web2 games to web3 by implementin
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Overview](#overview)
 - [Features](#features)
+- [Hackathon](#hackathon)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -31,6 +33,10 @@ GamerHub also helps the transition of existing web2 games to web3 by implementin
 1. Run the development server: `npm run dev`
 2. Access GamerHub in your web browser: `http://localhost:3000`
 
+
+## Overview
+GamerHub is a gaming platform that brings together web2 and web3 games in one place. It allows gamers to access and play a wide range of games, metaverses, guilds, and NFTs. With a focus on ownership and profitability, GamerHub enables players to earn rewards while playing games. It provides a user-friendly interface with features like user and game dashboards, gamer profiles, and subscription systems. GamerHub aims to create a seamless and immersive gaming experience for gamers of all kinds. The platform can be accessed through the web, a mobile application or a PC launcher with flexible subscrition plans for users with multiple devices.
+
 ## Features
 
 - Game aggregation from web2 and web3 industries
@@ -41,7 +47,9 @@ GamerHub also helps the transition of existing web2 games to web3 by implementin
 - In-game asset marketplace and merchandise store
 - Decentralized governance and decision-making
 
-## What we built durring the hackathon
+## Hackathon
+For the hackthon, we built the MVP for GamerHub. this includes the website, landing pages, wallet connection using particle network,sign-up and sign-in systems, subscription systems, user dashboard, game dashboard, user profile and user reward systems. We also worked on the Pitch deck, Tokenomics, Go-to-market strategy, product pricing, token economy/usecase, market size/oppourtuity, competitive analysis and advantage among others.
+
 ### Website
 ![photo_2023-05-11_20-01-07](https://github.com/gamerhubio/bnb-hackathon-pro/assets/131058062/1bf83e74-aefd-47cc-8298-cdbd81825e37)
 
@@ -103,9 +111,14 @@ The Game dashboard provides game developers with a dedicated space to showcase t
 
 The GamerProfile feature allows users to create and customize their unique gaming identities, showcasing their achievements, game preferences, and social connections, fostering a sense of community and recognition among fellow gamers.
 
+![photo_2023-05-12_13-34-59](https://github.com/gamerhubio/bnb-hackathon-pro/assets/131058062/53e8de19-a72a-461d-b3ae-5a7e2fb041de)
+
 ### User Reward System (GamerCredit)
 
 GamerCredit serves as the in-platform currency within GamerHub, allowing users to earn credits through gameplay, content creation, or other platform activities, which can be used for in-game purchases, NFT acquisitions, or redeemed for real-world rewards, incentivizing active participation and rewarding gamers for their contributions.
+
+![photo_2023-05-12_13-34-53](https://github.com/gamerhubio/bnb-hackathon-pro/assets/131058062/c4d28abf-af0e-4f74-8d41-e1d69aa4f213)
+
 
 
 ## Roadmap
@@ -137,12 +150,12 @@ GamerHub is released under the [MIT License](https://opensource.org/licenses/MIT
 
 We would like to thank the following individuals and organizations for their contributions to GamerHub:
 
-- OpenAI for their language model used in the development of GamerHub.
+- GamerHub Engineering Manager Caleb Lucas for his support and encouragement
 - Our dedicated community of gamers and developers for their valuable feedback and support.
 
 ## Support
 
-For any inquiries or assistance, please contact our support team at support@gamerhub.com or visit our [website](https://www.gamerhub.com).
+For any inquiries or assistance, please contact our support team at info@gamer-hub.io or visit our [website](https://bnb-hackathon-pro.vercel.app/).
 
 
 ## Links
