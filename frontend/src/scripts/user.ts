@@ -83,8 +83,12 @@ type authResponse = {
   user: string[];
   accessToken: string;
 };
+type checkerResponse = {
+  msg: boolean;
+};
 
 export async function createUser(formData: FormData) {
+  console.log(formData);
   try {
     // 👇️ const data: CreateUserResponse
     const { data } = await axios.post<authResponse>(
@@ -119,12 +123,12 @@ export async function createUser(formData: FormData) {
 }
 
 //get user
-export const login = async (address: string) => {
+export const login = async (info: { username: string; password: string }) => {
   try {
     // 👇️ const data: GetUsersResponse
     const { data } = await axios.post<authResponse>(
       `${process.env.REACT_APP_BASE_URL}/auth/login`,
-      { address },
+      { ...info },
       {
         headers: {
           Accept: "application/json",
@@ -136,6 +140,74 @@ export const login = async (address: string) => {
     console.log(data);
     if (data.accessToken) {
       return decode(data.accessToken);
+    } else {
+      // window.location.replace(`${process.env.REACT_APP_DOMAIN}/app/signup`);
+      return false;
+    }
+
+    // return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      return { error: error.message };
+    } else {
+      console.log("unexpected error: ", error);
+      return { error: "An unexpected error occurred" };
+    }
+  }
+};
+
+//get user
+export const checkUser = async (address: string) => {
+  try {
+    // 👇️ const data: GetUsersResponse
+    const { data } = await axios.get<checkerResponse>(
+      `${process.env.REACT_APP_BASE_URL}/auth/checker/${address}`,
+      {
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+
+    //return JSON.stringify(data, null, 4);
+    console.log(data);
+    if (data.msg) {
+      return { msg: true };
+    } else {
+      // window.location.replace(`${process.env.REACT_APP_DOMAIN}/app/signup`);
+      return { msg: false };
+    }
+
+    // return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      return { error: error.message };
+    } else {
+      console.log("unexpected error: ", error);
+      return { error: "An unexpected error occurred" };
+    }
+  }
+};
+
+//get user subscription state
+export const checkSubscription = async (address: string) => {
+  try {
+    // 👇️ const data: GetUsersResponse
+    const { data } = await axios.get<checkerResponse>(
+      `${process.env.REACT_APP_BASE_URL}/auth/subscription/expiration/${address}`,
+      {
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+
+    //return JSON.stringify(data, null, 4);
+    console.log(data);
+    if (data.msg) {
+      return true;
     } else {
       // window.location.replace(`${process.env.REACT_APP_DOMAIN}/app/signup`);
       return false;

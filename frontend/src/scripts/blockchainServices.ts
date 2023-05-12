@@ -40,7 +40,6 @@ export const subscribe = async (
   );
   //const myp = await contract.methods.getPackage(0).call()
   const token = localStorage.getItem("accessToken");
-  console.log(token);
   const dateInMillisecs = Date.now();
   const dateInSecs = Math.round(dateInMillisecs / 1000);
   const endDate = dateInMillisecs + 2629800000;
@@ -80,7 +79,9 @@ export const subscribe = async (
 
         //console.log(JSON.stringify(data, null, 4));
 
-        window.location.replace(`http://localhost:3000/dashboard/home`);
+        window.location.replace(
+          `${process.env.REACT_APP_DOMAIN}/dashboard/home`
+        );
 
         return data;
       } catch (error) {

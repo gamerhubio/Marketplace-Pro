@@ -20,12 +20,14 @@ import "@particle-network/connect-react-ui/dist/index.css";
 import { usePrevious } from "../../../hooks";
 import { login } from "../../../scripts";
 import { setIsAuthenticated, setUser, useGlobalState } from "../../../store";
+import { checkSubscription, checkUser } from "../../../scripts/user";
 
 export const AppWalletConnectPage: React.FC = () => {
   const [modalShow, setModalShow] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
   const [isAuthenticated] = useGlobalState("isAuthenticated");
+  const [currentUser] = useGlobalState("currentUser");
   const address = useAccount();
 
   //set custom hook
@@ -43,10 +45,32 @@ export const AppWalletConnectPage: React.FC = () => {
     setModalShow(false);
   };
 
+  const checkSubscriptionState = () => {
+    //@ts-expect-error
+    checkSubscription(currentUser.email)
+      .then((data) => {
+        console.log(data);
+        //@ts-ignore
+        if (typeof data == "object" && data.error) {
+          //@ts-ignore
+          console.log(data.error);
+        }
+        //if true is returned
+        //@ts-ignore
+        if (data.msg) {
+          //go to dashboard
+          router("/dashboard/home");
+        } else {
+          router("/app/subscription");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     let user;
     if (address !== prevAddress && address) {
-      login(address)
+      checkUser(address)
         .then((data) => {
           console.log(data);
           //@ts-ignore
@@ -54,9 +78,15 @@ export const AppWalletConnectPage: React.FC = () => {
             //@ts-ignore
             console.log(data.error);
           }
+          //if true is returned
           if (data) {
-            //go to subscription page
-            router("/app/subscription");
+            if (!isAuthenticated) {
+              //go to login page
+              router("/app/signin");
+            } else {
+              //check if user is subscribed
+              checkSubscriptionState();
+            }
           } else {
             router("/app/signup");
           }

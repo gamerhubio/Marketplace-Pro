@@ -21,26 +21,45 @@ import "./assets/css/custom-swiper.css";
 import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
 import { usePrevious } from "./hooks";
 import { getUser, login } from "./scripts";
+import { setGlobalState, useGlobalState } from "./store";
 
 const App: React.FC = () => {
   const address = useAccount();
+  const [currentUser] = useGlobalState("currentUser");
 
-  //set custom hook
-  const prevAddress = usePrevious(address);
-  useMemo(() => {
-    if (address !== prevAddress && address) {
-      login(address)
-        .then((data) => {
-          console.log(data);
-          //@ts-ignore
-          if (data.error) {
-            //@ts-ignore
-            console.log(data.error);
-          }
-        })
-        .catch((err) => console.log(err));
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      setGlobalState("isAuthenticated", true);
+      //set user object
+      const user = {
+        //@ts-expect-error
+        id: JSON.parse(window.localStorage.getItem("user")).id,
+        //@ts-expect-error
+        email: JSON.parse(window.localStorage.getItem("user")).email,
+        //@ts-expect-error
+        username: JSON.parse(window.localStorage.getItem("user")).username,
+      };
+      setGlobalState("currentUser", user);
     }
-  }, [address]);
+
+    console.log(currentUser);
+  }, []);
+  // //set custom hook
+  // const prevAddress = usePrevious(address);
+  // useMemo(() => {
+  //   if (address !== prevAddress && address) {
+  //     login(address)
+  //       .then((data) => {
+  //         console.log(data);
+  //         //@ts-ignore
+  //         if (data.error) {
+  //           //@ts-ignore
+  //           console.log(data.error);
+  //         }
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // }, [address]);
 
   return (
     <>

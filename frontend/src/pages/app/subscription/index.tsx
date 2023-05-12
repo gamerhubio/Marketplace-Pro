@@ -50,9 +50,11 @@ export const AppSubScriptionPage: React.FC = () => {
         amt,
         provider,
         //@ts-expect-error
-        currentUser.email,
+        currentUser.email || JSON.parse(localStorage.getItem("user")).email,
         //@ts-expect-error
-        currentUser.username
+        currentUser.username ||
+          //@ts-expect-error
+          JSON.parse(localStorage.getItem("user")).username
       );
     }
   };
