@@ -9,6 +9,6 @@ import { checkExpiry } from "../controllers/SubscriptionController";
 router.route("/login").post(loginUser);
 router.route("/register").post(createUser);
 router.route("/checker/:address").get(checkAddress);
-router.route("/subscription/expiration/:address").get(checkExpiry);
+router.route("/subscription/expiration/:id").get(checkExpiry);
 
 export default router;

@@ -18,18 +18,21 @@ const SubscriptionModel_1 = __importDefault(require("../models/SubscriptionModel
 const mailer_1 = require("../libs/mailer");
 // create user
 const recordSubscription = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // @ts-ignore
+    req.body.user = req.user.id;
     try {
         // get subscription
         let subscription = yield SubscriptionModel_1.default.findOne({
-            email: req.body.email,
+            _id: req.body.user,
         });
+        // console.log(subscription);
         if (subscription) {
             // update Subscription
-            subscription.email = req.body.email;
-            subscription.username = req.body.username;
+            subscription.user = req.body.user;
             subscription.plan = req.body.plan;
             subscription.endDate = req.body.endDate;
             yield subscription.save();
+            // develop data for mail
             const data = {
                 id: subscription._id,
                 email: subscription.email,
@@ -45,6 +48,7 @@ const recordSubscription = (req, res) => __awaiter(void 0, void 0, void 0, funct
         else {
             // create subscription
             subscription = yield SubscriptionModel_1.default.create(Object.assign({}, req.body));
+            // data for mail
             const data = {
                 id: subscription._id,
                 email: subscription.email,
@@ -68,10 +72,10 @@ exports.recordSubscription = recordSubscription;
 // check for any active subscription
 const checkExpiry = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { address } = req.params;
+        const { id } = req.params;
         // get user
         const subscription = yield SubscriptionModel_1.default.findOne({
-            email: address,
+            _id: id,
         });
         // tslint:disable-next-line:no-console
         // console.log(subscription);

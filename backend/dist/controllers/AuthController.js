@@ -20,12 +20,15 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 // create user
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // tslint:disable-next-line:no-console
+    // console.log(req.body);
     try {
         // create user
         const user = yield UserModel_1.default.create({
             email: req.body.email,
             username: req.body.username,
             password: yield bcryptjs_1.default.hash(req.body.password, 10),
+            wallets: req.body.wallets,
         });
         const data = {
             id: user._id,
@@ -43,7 +46,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             username: user.username,
         };
         // tslint:disable-next-line:no-console
-        // console.log(myUser)
+        console.log(myUser);
         // generate tokens
         const accessToken = jsonwebtoken_1.default.sign(Object.assign({}, myUser), `${process.env.ACCESS_TOKEN_SECRET}`, { expiresIn: "24h" });
         res.status(http_status_codes_1.StatusCodes.OK).json({ accessToken });
@@ -60,12 +63,17 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // get user
         const user = yield UserModel_1.default.findOne({
-            email: req.body.email,
+            username: req.body.username,
         });
         if (user) {
             if (yield bcryptjs_1.default.compare(req.body.password, user.password)) {
+                const myUser = {
+                    id: user._id,
+                    email: user.email,
+                    username: user.username,
+                };
                 // generate tokens
-                const accessToken = jsonwebtoken_1.default.sign(Object.assign({}, user), `${process.env.ACCESS_TOKEN_SECRET}`, { expiresIn: "24h" });
+                const accessToken = jsonwebtoken_1.default.sign(Object.assign({}, myUser), `${process.env.ACCESS_TOKEN_SECRET}`, { expiresIn: "24h" });
                 res.status(http_status_codes_1.StatusCodes.OK).json({ accessToken });
             }
             else {

@@ -30,7 +30,7 @@ const userSchema = new mongoose_1.default.Schema({
     },
     credit: {
         type: Number,
-        default: 0,
+        default: 15,
     },
     challenges: {
         type: Map,
