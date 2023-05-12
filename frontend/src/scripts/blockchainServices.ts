@@ -66,7 +66,11 @@ export const subscribe = async (
       try {
         // 👇️ const data: CreateUserResponse
         const { data, status } = await axios.post<CreateUserResponse>(
-          `${process.env.REACT_APP_BASE_URL}/subscription`,
+          `${
+            process.env.NODE_ENV == "development"
+              ? process.env.REACT_APP_BASE_URL_DEV
+              : process.env.REACT_APP_BASE_URL_PROD
+          }/subscription`,
           { ...formData },
           {
             headers: {

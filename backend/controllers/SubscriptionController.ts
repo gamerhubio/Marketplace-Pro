@@ -21,7 +21,7 @@ export const recordSubscription = async (
     let subscription: ISubscription | any = await Subscriptions.findOne({
       email: req.body.email,
     });
-    console.log(subscription);
+    //console.log(subscription);
     if (subscription) {
       // update Subscription
       subscription.email = req.body.email;
