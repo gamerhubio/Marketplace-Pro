@@ -10,24 +10,29 @@ import {
   MainContentContainer,
   RightSideBarContainer,
 } from "./styles";
-
 import { GamerInfoComponent } from "../../../components/GamerInfo";
 import { GamerListComponent } from "../../../modules/dashboard/profile/GamerList";
 import { RecentListComponent } from "../../../modules/dashboard/profile/RecentList";
 import { FavoriteListComponent } from "../../../modules/dashboard/profile/FavoriteList";
-import { EditProfileDialogComponent } from "../../../modules/dashboard/profile/EditProfileDialog";
+import EditProfileDialogComponent from "../../../modules/dashboard/profile/EditProfileDialog";
 
 export const DashboardProfilePage: React.FC = () => {
-  const [showEditProfile, setShowEditProfile] = useState(false);
+  const [showEditProfile, setShowEditProfile] = useState<boolean>(false);
 
+  const handleModalVisible = () => {
+    setShowEditProfile(false);
+  };
   return (
     <DashboardLayout>
-      <EditProfileDialogComponent />
       <DashboardWrapper>
         <MainContentContainer>
           <GamerProfileWrapper>
             <GamerInfoComponent />
-            <EditProfileSection onClick={() => setShowEditProfile(true)}>
+            <EditProfileSection
+              onClick={() => {
+                setShowEditProfile(true);
+              }}
+            >
               <p>Edit Profile</p>
               <img
                 src="/images/userdashboard/fluent_edit-16-filled.png"
@@ -49,6 +54,10 @@ export const DashboardProfilePage: React.FC = () => {
           <RecentListComponent type="game" />
         </RightSideBarContainer>
       </DashboardWrapper>
+      <EditProfileDialogComponent
+        visible={showEditProfile}
+        handleModalVisible={handleModalVisible}
+      />
     </DashboardLayout>
   );
 };

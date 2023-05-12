@@ -1,8 +1,8 @@
 import React from "react";
 import {
-  CloseBtn,
   EditProfileDialogContainer,
   EditProfileHeader,
+  EditProfileTitle,
   EditProfileWrapper,
   ProfileAvatar,
   ProfileEmail,
@@ -11,32 +11,65 @@ import {
   ResetData,
   SaveBtn,
 } from "./styles";
+import { Input } from "../../../../components";
 
-export const EditProfileDialogComponent: React.FC = () => {
+interface iEditModal {
+  visible?: boolean;
+  handleModalVisible?: Function | undefined;
+}
+
+const EditProfileDialogComponent: React.FC<iEditModal> = ({
+  visible,
+  handleModalVisible,
+}) => {
+  const handleBgVisible = () => {
+    if (typeof handleModalVisible === "function") {
+      handleModalVisible();
+    }
+  };
   return (
-    <EditProfileDialogContainer>
-      <EditProfileWrapper>
-        <EditProfileHeader>
-          <CloseBtn>*</CloseBtn>
-          <p>Edit Profile</p>
-          <SaveBtn>Save</SaveBtn>
-        </EditProfileHeader>
-        <ProfileAvatar>
-          <img src="" alt="" />
-          <p>Change avatar</p>
-        </ProfileAvatar>
-        <ProfileForm>
-          <ProfileName>
-            <p>Profile Name</p>
-          </ProfileName>
-          <ProfileEmail>
-            <p>Email Address</p>
-          </ProfileEmail>
-          <ResetData>
-            <p>Reset Data</p>
-          </ResetData>
-        </ProfileForm>
-      </EditProfileWrapper>
-    </EditProfileDialogContainer>
+    <>
+      {visible && (
+        <>
+          <EditProfileDialogContainer onClick={handleBgVisible} />
+          <EditProfileWrapper>
+            <EditProfileHeader>
+              <EditProfileTitle>
+                <img
+                  src="/images/userdashboard/editprofile/cancel.png"
+                  alt=""
+                  onClick={handleBgVisible}
+                />
+                <p>Edit Profile</p>
+              </EditProfileTitle>
+              <SaveBtn>Save</SaveBtn>
+            </EditProfileHeader>
+            <ProfileAvatar>
+              <img
+                src="/images/userdashboard/editprofile/editavatar.png"
+                alt=""
+              />
+              <p>Change avatar</p>
+            </ProfileAvatar>
+            <ProfileForm>
+              <ProfileName>
+                <p>Profile Name</p>
+                <Input placeholder="Gamer 1" />
+              </ProfileName>
+              <ProfileEmail>
+                <p>Email Address</p>
+                <Input placeholder="Femi@gamer-hub.io" />
+              </ProfileEmail>
+              <ResetData>
+                <p>Reset Data</p>
+                <img src="/images/userdashboard/editprofile/reset.png" alt="" />
+              </ResetData>
+            </ProfileForm>
+          </EditProfileWrapper>
+        </>
+      )}
+    </>
   );
 };
+
+export default EditProfileDialogComponent;
