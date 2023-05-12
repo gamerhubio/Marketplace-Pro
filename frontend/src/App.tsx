@@ -42,7 +42,7 @@ const App: React.FC = () => {
       setGlobalState("currentUser", user);
     }
 
-    console.log(currentUser);
+    console.log(process.env.NODE_ENV);
   }, []);
   // //set custom hook
   // const prevAddress = usePrevious(address);
