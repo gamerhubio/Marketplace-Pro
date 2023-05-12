@@ -38,9 +38,7 @@ const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const user = yield UserModel_1.default.find({
             wallets: { $elemMatch: { $eq: address } },
         });
-        res.status(http_status_codes_1.StatusCodes.OK).json({
-            user,
-        });
+        res.status(http_status_codes_1.StatusCodes.OK).json(user[0]);
     }
     catch (error) {
         // throw error
