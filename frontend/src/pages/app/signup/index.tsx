@@ -17,6 +17,7 @@ export const AppSignUpPage: React.FC = () => {
   const router = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [username, setUsername] = useState<string>("");
+  const [pwd, setPwd] = useState<string>("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -25,6 +26,7 @@ export const AppSignUpPage: React.FC = () => {
         email,
         username,
         wallets: [address],
+        password: pwd,
       };
 
       createUser(data)
@@ -32,7 +34,6 @@ export const AppSignUpPage: React.FC = () => {
           //@ts-ignore
           if (!data.error && data) {
             setGlobalState("isAuthenticated", true);
-            setGlobalState("currentUser", data);
             router("/app/subscription");
           }
         })
@@ -71,7 +72,13 @@ export const AppSignUpPage: React.FC = () => {
               //@ts-expect-error
               onChange={(e) => setEmail(e.target.value)}
             />
-            {/* <Input placeholder="Password" type="password" /> */}
+            <Input
+              placeholder="Password"
+              type="password"
+              value={pwd}
+              //@ts-expect-error
+              onChange={(e) => setPwd(e.target.value)}
+            />
           </FormInputWrapper>
           <Button onClick={handleSubmit}>Create Account</Button>
           <CheckboxWrapper htmlFor="checkbox">

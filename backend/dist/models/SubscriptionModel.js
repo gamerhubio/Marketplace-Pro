@@ -23,6 +23,10 @@ const subscriptionSchema = new mongoose_1.default.Schema({
         type: Number,
         required: [true, "Please add a subscription plan"],
     },
+    endDate: {
+        type: Number,
+        required: [true, "Please add date"],
+    },
 }, { timestamps: true });
 // const User = mongoose.model("User", userSchema);
 exports.default = mongoose_1.default.model("Subscriptions", subscriptionSchema);

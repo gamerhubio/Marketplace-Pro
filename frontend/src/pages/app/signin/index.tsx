@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "../../../layout";
 import { AppButton, Button, Input } from "../../../components";
@@ -8,9 +8,64 @@ import {
   FormInputWrapper,
   SignUpFormWrapper,
 } from "../signup/styles";
+import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
+import { login } from "../../../scripts";
+import { setGlobalState, useGlobalState } from "../../../store";
+import { checkSubscription } from "../../../scripts/user";
 
 export const AppSignInPage: React.FC = () => {
   const router = useNavigate();
+  const [username, setUsername] = useState<string>("");
+  const [pwd, setPwd] = useState<string>("");
+  const [currentUser] = useGlobalState("currentUser");
+
+  const address = useAccount();
+
+  const checkSubscriptionState = () => {
+    //@ts-expect-error
+    checkSubscription(currentUser.email)
+      .then((data) => {
+        //@ts-expect-error
+        if (data.error) {
+          console.log(data);
+        }
+        //if true is returned
+        //@ts-expect-error
+        if (data.msg) {
+          //go to dashboard
+          router("/dashboard/home");
+        } else {
+          router("/app/subscription");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const data = {
+      username,
+      password: pwd,
+    };
+    login(data)
+      .then((data) => {
+        //@ts-ignore
+        if (!data.error && data) {
+          setGlobalState("isAuthenticated", true);
+          if (!address) {
+            router("/app/wallet-connect");
+          } else {
+            //check if user is subscribed
+            checkSubscriptionState();
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <AppLayout
       buttonContent={
@@ -19,14 +74,28 @@ export const AppSignInPage: React.FC = () => {
         </AppButton>
       }
     >
+      <div style={{ display: "none" }}>
+        <ConnectButton />
+      </div>
       <AppSignUpPageWrapper>
         <h1>Sign In to Gamerhub</h1>
         <SignUpFormWrapper>
           <FormInputWrapper>
-            <Input placeholder="Username" />
-            <Input placeholder="Password" type="password" />
+            <Input
+              placeholder="Username"
+              value={username}
+              //@ts-expect-error
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <Input
+              placeholder="Password"
+              type="password"
+              value={pwd}
+              //@ts-expect-error
+              onChange={(e) => setPwd(e.target.value)}
+            />
           </FormInputWrapper>
-          <Button onClick={() => router("/app/wallet-connect")}>Sign In</Button>
+          <Button onClick={handleSubmit}>Sign In</Button>
           <CheckboxWrapper>
             <p>
               {"Don't have an account "}
