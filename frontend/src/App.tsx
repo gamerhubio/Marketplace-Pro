@@ -30,7 +30,7 @@ const App: React.FC = () => {
   const [currentUser] = useGlobalState("currentUser");
 
   useEffect(() => {
-    if (localStorage.getItem("accessToken")) {
+    if (localStorage.getItem("accessToken") && localStorage.getItem("user")) {
       setGlobalState("isAuthenticated", true);
       //set user object
       const user = {
