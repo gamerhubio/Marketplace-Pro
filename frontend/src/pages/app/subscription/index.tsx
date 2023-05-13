@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { AppLayout } from "../../../layout";
 import {
   AppButton,
@@ -19,20 +19,73 @@ import {
 } from "./styles";
 import { subscriptionData } from "../data";
 import { useNavigate } from "react-router-dom";
+import {
+  ConnectButton,
+  useAccount,
+  useParticleProvider,
+} from "@particle-network/connect-react-ui";
+import { useGlobalState } from "../../../store";
+import { subscribe } from "../../../scripts/blockchainServices";
+
+interface IUser {
+  id: string;
+  email: string;
+  username: string;
+}
 
 export const AppSubScriptionPage: React.FC = () => {
   const router = useNavigate();
-  const walletAddress = "0x8396Cf380b556fFA3B4025530bB03aaf09bd5C2F";
+  const [walletAddress, setWalletAddress] = useState<string | null>(null);
+  const address = useAccount();
+  const [currentUser] = useGlobalState("currentUser");
+  //hooks
+  const provider = useParticleProvider();
+
+  const makeSubscription = (e: FormEvent, plan: number, amt: string) => {
+    e.preventDefault();
+    if (provider) {
+      //make subscription
+      subscribe(
+        plan,
+        amt,
+        provider,
+        //@ts-expect-error
+        currentUser.email || JSON.parse(localStorage.getItem("user")).email,
+        //@ts-expect-error
+        currentUser.username ||
+          //@ts-expect-error
+          JSON.parse(localStorage.getItem("user")).username
+      );
+    }
+  };
+
+  useEffect(() => {
+    console.log(address);
+    if (address) setWalletAddress(address);
+  }, [address]);
+
   return (
     <AppLayout
       buttonContent={
-        <AppButton onClick={() => {}}>
-          <IconWalletConnect />
-          <span>{getFormatWalletAddress(walletAddress)}</span>
-          <IconDropdown />
-        </AppButton>
+        walletAddress ? (
+          <AppButton onClick={() => {}}>
+            <IconWalletConnect />
+            <span>{getFormatWalletAddress(walletAddress)}</span>
+            <IconDropdown />
+          </AppButton>
+        ) : (
+          <AppButton onClick={() => router("/app/wallet-connect")}>
+            <IconWalletConnect />
+            <span>Connect wallet</span>
+            <IconDropdown />
+          </AppButton>
+        )
       }
     >
+      <div style={{ display: "none" }}>
+        {" "}
+        <ConnectButton />
+      </div>
       <AppSubscriptionPageWrapper>
         <h1>
           <span>Flexible</span> Plans
@@ -65,7 +118,7 @@ export const AppSubScriptionPage: React.FC = () => {
                 ))}
               </GamerPlanWrapper>
               <Button
-                onClick={() => router("/dashboard/home")}
+                onClick={(e) => makeSubscription(e, key, item.BNBPrice)}
                 width={207}
                 height={58}
                 fSize={18}

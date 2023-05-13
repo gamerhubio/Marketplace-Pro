@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent, useState } from "react";
 import {
   AppSignUpPageWrapper,
   CheckboxWrapper,
@@ -8,9 +8,43 @@ import {
 import { AppLayout } from "../../../layout";
 import { AppButton, Button, Input } from "../../../components";
 import { useNavigate } from "react-router-dom";
+import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
+import { createUser } from "../../../scripts";
+import { setGlobalState } from "../../../store";
 
 export const AppSignUpPage: React.FC = () => {
+  const address = useAccount();
   const router = useNavigate();
+  const [email, setEmail] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
+  const [pwd, setPwd] = useState<string>("");
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (address) {
+      const data = {
+        email,
+        username,
+        wallets: [address],
+        password: pwd,
+      };
+
+      createUser(data)
+        .then((data) => {
+          //@ts-ignore
+          if (!data.error && data) {
+            setGlobalState("isAuthenticated", true);
+            router("/app/subscription");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      router("/app/wallet-connect");
+    }
+  };
+
   return (
     <AppLayout
       buttonContent={
@@ -19,15 +53,34 @@ export const AppSignUpPage: React.FC = () => {
         </AppButton>
       }
     >
+      <div style={{ display: "none" }}>
+        <ConnectButton />
+      </div>
       <AppSignUpPageWrapper>
         <h1>Create a Gamerhub account</h1>
         <SignUpFormWrapper>
           <FormInputWrapper>
-            <Input placeholder="Username" />
-            <Input placeholder="Email" />
-            <Input placeholder="Password" type="password" />
+            <Input
+              placeholder="Username"
+              value={username}
+              //@ts-expect-error
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <Input
+              placeholder="Email"
+              value={email}
+              //@ts-expect-error
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              placeholder="Password"
+              type="password"
+              value={pwd}
+              //@ts-expect-error
+              onChange={(e) => setPwd(e.target.value)}
+            />
           </FormInputWrapper>
-          <Button onClick={() => router("/app/signin")}>Create Account</Button>
+          <Button onClick={handleSubmit}>Create Account</Button>
           <CheckboxWrapper htmlFor="checkbox">
             <input type="checkbox" id="checkbox" />
             <p>
