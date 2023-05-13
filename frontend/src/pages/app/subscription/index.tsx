@@ -60,7 +60,6 @@ export const AppSubScriptionPage: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log(address);
     if (address) setWalletAddress(address);
   }, [address]);
 
