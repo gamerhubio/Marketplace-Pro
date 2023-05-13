@@ -23,20 +23,19 @@ const recordSubscription = (req, res) => __awaiter(void 0, void 0, void 0, funct
     try {
         // get subscription
         let subscription = yield SubscriptionModel_1.default.findOne({
-            _id: req.body.user,
+            user: req.body.user,
         });
         // console.log(subscription);
         if (subscription) {
             // update Subscription
-            subscription.user = req.body.user;
             subscription.plan = req.body.plan;
             subscription.endDate = req.body.endDate;
             yield subscription.save();
             // develop data for mail
             const data = {
                 id: subscription._id,
-                email: subscription.email,
-                username: subscription.username,
+                email: req.body.email,
+                username: req.body.username,
                 plan: subscription.plan,
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
@@ -51,8 +50,8 @@ const recordSubscription = (req, res) => __awaiter(void 0, void 0, void 0, funct
             // data for mail
             const data = {
                 id: subscription._id,
-                email: subscription.email,
-                username: subscription.username,
+                email: req.body.email,
+                username: req.body.username,
                 plan: subscription.plan,
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,

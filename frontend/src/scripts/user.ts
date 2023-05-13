@@ -340,7 +340,6 @@ export const checkUser = async (address: string) => {
     );
 
     //return JSON.stringify(data, null, 4);
-    console.log(data);
     if (data.msg) {
       return { msg: true };
     } else {

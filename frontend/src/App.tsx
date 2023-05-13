@@ -40,11 +40,11 @@ const App: React.FC = () => {
         email: JSON.parse(window.localStorage.getItem("user")).email,
         //@ts-expect-error
         username: JSON.parse(window.localStorage.getItem("user")).username,
+        //@ts-expect-error
+        wallets: JSON.parse(window.localStorage.getItem("user")).wallets,
       };
       setGlobalState("currentUser", user);
     }
-
-    console.log(process.env.NODE_ENV);
   }, []);
   // //set custom hook
   // const prevAddress = usePrevious(address);

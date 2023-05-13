@@ -24,8 +24,11 @@ export const AppSignInPage: React.FC = () => {
   const checkSubscriptionState = () => {
     //@ts-expect-error
     console.log(currentUser.email);
-    //@ts-expect-error
-    checkSubscription(currentUser.id)
+
+    checkSubscription(
+      //@ts-expect-error
+      currentUser.id || JSON.parse(window.localStorage.getItem("user")).id
+    )
       .then((data) => {
         if (data.error) {
           console.log(data);

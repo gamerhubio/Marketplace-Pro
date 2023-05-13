@@ -9,7 +9,11 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   let location = useLocation();
 
   //if not authenticated or no address connected
-  if (!isAuthenticated || !address) {
+  if (
+    //@ts-ignore
+    (!isAuthenticated && JSON.parse(window.localStorage.getItem("user"))) ||
+    !address
+  ) {
     return (
       <Navigate to="/app/wallet-connect" state={{ from: location }} replace />
     );

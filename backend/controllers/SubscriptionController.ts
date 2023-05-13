@@ -82,7 +82,7 @@ export const checkExpiry = async (
 
     // get user
     const subscription: ISub | any = await Subscriptions.findOne({
-      _id: id,
+      user: id,
     });
     // tslint:disable-next-line:no-console
     // console.log(subscription);
