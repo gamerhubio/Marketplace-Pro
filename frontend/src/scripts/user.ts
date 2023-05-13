@@ -13,12 +13,12 @@ type GetUserResponse = {
 };
 
 type PatchUserResponse = {
-  id: string;
+  _id: string;
   email: string;
   username: string;
 };
 type PatchUserWalletResponse = {
-  id: string;
+  _id: string;
   email: string;
   username: string;
   wallets: string[];
@@ -120,7 +120,7 @@ const decode = (token: string) => {
     id: data.id,
     email: data.email,
     username: data.username,
-    wallet: data.wallets,
+    wallets: data.wallets,
   };
 
   setUser(user);
@@ -245,8 +245,8 @@ export async function updateUserWalletList(formData: FormData) {
     const { data } = await axios.patch<PatchUserWalletResponse>(
       `${
         process.env.NODE_ENV === "development"
-          ? process.env.REACT_APP_DOMAIN_DEV
-          : process.env.REACT_APP_DOMAIN_PROD
+          ? process.env.REACT_APP_BASE_URL_DEV
+          : process.env.REACT_APP_BASE_URL_PROD
       }/users/${formData.email}`,
       { ...formData },
       {
@@ -260,7 +260,7 @@ export async function updateUserWalletList(formData: FormData) {
 
     //set user object
     const user = {
-      id: data.id,
+      id: data._id,
       email: data.email,
       username: data.username,
       wallets: data.wallets,
