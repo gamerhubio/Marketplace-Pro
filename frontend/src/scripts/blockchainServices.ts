@@ -37,7 +37,7 @@ export const subscribe = async (
   const contract = new web3.eth.Contract(
     //@ts-ignore
     [...web3data.abi],
-    process.env.REACT_APP_CONTRACT_ADDRESS
+    `${process.env.REACT_APP_CONTRACT_ADDRESS}`
   );
   //const myp = await contract.methods.getPackage(0).call()
   const token = localStorage.getItem("accessToken");
