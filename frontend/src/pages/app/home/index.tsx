@@ -49,7 +49,12 @@ export const AppHomePage: React.FC = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-          <Button width={322} height={79} fSize={20}>
+          <Button
+            width={322}
+            height={79}
+            fSize={20}
+            onClick={() => router("/app/wallet-connect")}
+          >
             Get Started
           </Button>
         </HomeContainer>
