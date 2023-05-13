@@ -54,7 +54,7 @@ export const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
           console.log(data);
           return;
         }
-        console.log(data);
+
         setData(data);
       })
       .catch((err) => console.log(err));

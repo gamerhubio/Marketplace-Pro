@@ -46,11 +46,13 @@ app.use("/api/v1/users", authMiddleware, userRouter);
 app.use("/api/v1/favorites", authMiddleware, favoriteRouter);
 app.use("/api/v1/subscription", authMiddleware, subscriptionRouter);
 
+//error middlewares
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 3000;
 
+//start server
 const start = async () => {
   try {
     await connectDB(`${process.env.MONGO_URI}`);

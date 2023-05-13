@@ -377,7 +377,6 @@ export const checkSubscription = async (id: string) => {
     );
 
     //return JSON.stringify(data, null, 4);
-    console.log(data);
     if (data.msg) {
       return { msg: true };
     } else {

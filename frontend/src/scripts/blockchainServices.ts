@@ -46,8 +46,11 @@ export const subscribe = async (
   const endDate = dateInMillisecs + 2629800000;
   contract.methods
     .subscribe(plan, dateInSecs)
-
-    .send({ value: web3.utils.toWei(amt, "ether"), from: account[0] })
+    .send({
+      value: web3.utils.toWei(amt, "ether"),
+      from: account[0],
+      gas: web3.utils.toHex(50000),
+    })
     .on("transactionHash", (hash: any) => {
       console.log(hash);
     })
