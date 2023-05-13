@@ -85,7 +85,11 @@ export const subscribe = async (
         //console.log(JSON.stringify(data, null, 4));
 
         window.location.replace(
-          `${process.env.REACT_APP_DOMAIN}/dashboard/home`
+          `${
+            process.env.NODE_ENV == "development"
+              ? process.env.REACT_APP_DOMAIN_DEV
+              : process.env.REACT_APP_DOMAIN_PROD
+          }/dashboard/home`
         );
 
         return data;

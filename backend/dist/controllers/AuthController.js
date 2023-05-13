@@ -44,6 +44,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             id: user._id,
             email: user.email,
             username: user.username,
+            wallets: user.wallets,
         };
         // tslint:disable-next-line:no-console
         console.log(myUser);
@@ -71,6 +72,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     id: user._id,
                     email: user.email,
                     username: user.username,
+                    wallets: user.wallets,
                 };
                 // generate tokens
                 const accessToken = jsonwebtoken_1.default.sign(Object.assign({}, myUser), `${process.env.ACCESS_TOKEN_SECRET}`, { expiresIn: "24h" });

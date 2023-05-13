@@ -50,8 +50,10 @@ export const AppWalletConnectPage: React.FC = () => {
   };
 
   const checkSubscriptionState = () => {
-    //@ts-expect-error
-    checkSubscription(currentUser.email)
+    checkSubscription(
+      //@ts-expect-error
+      currentUser.id || JSON.parse(window.localStorage.getItem("user")).id
+    )
       .then((data) => {
         console.log(data);
         //@ts-ignore
@@ -72,13 +74,26 @@ export const AppWalletConnectPage: React.FC = () => {
   };
 
   const updateWalletList = () => {
+    const walletList =
+      //@ts-ignore
+      currentUser.wallets ||
+      //@ts-ignore
+      JSON.parse(window.localStorage.getItem("user")).wallets;
+
     updateUserWalletList({
+      email:
+        //@ts-ignore
+        currentUser.email ||
+        //@ts-ignore
+        JSON.parse(window.localStorage.getItem("user")).email,
+
+      username:
+        //@ts-ignore
+        currentUser.username ||
+        //@ts-ignore
+        JSON.parse(window.localStorage.getItem("user")).username,
       //@ts-ignore
-      email: currentUser.email,
-      //@ts-ignore
-      username: currentUser.username,
-      //@ts-ignore
-      wallets: [...currentUser.wallets, address],
+      wallets: [...walletList, address],
     })
       .then((data) => {
         console.log(data);
@@ -99,7 +114,7 @@ export const AppWalletConnectPage: React.FC = () => {
 
   useEffect(() => {
     let user;
-    if (address !== prevAddress && address) {
+    if (address) {
       checkUser(address)
         .then((data) => {
           console.log(data);
@@ -110,7 +125,11 @@ export const AppWalletConnectPage: React.FC = () => {
           }
           //if true is returned
           if (data.msg == true) {
-            if (!isAuthenticated) {
+            if (
+              !isAuthenticated &&
+              //@ts-ignore
+              !JSON.parse(window.localStorage.getItem("accessToken"))
+            ) {
               //go to login page
               router("/app/signin");
             } else {
@@ -118,7 +137,11 @@ export const AppWalletConnectPage: React.FC = () => {
               checkSubscriptionState();
             }
           } else {
-            if (!isAuthenticated) {
+            if (
+              !isAuthenticated &&
+              //@ts-ignore
+              !JSON.parse(window.localStorage.getItem("accessToken"))
+            ) {
               router("/app/signup");
             } else {
               //update user wallet list
@@ -127,21 +150,22 @@ export const AppWalletConnectPage: React.FC = () => {
           }
         })
         .catch((err) => console.log(err));
-    } else {
-      //clear user details
-      localStorage.removeItem("user");
-      localStorage.removeItem("accessToken");
-      //@ts-expect-error
-      setUser({});
-      setIsAuthenticated(false);
     }
+    //else {
+    //   //clear user details
+    //   localStorage.removeItem("user");
+    //   localStorage.removeItem("accessToken");
+    //   //@ts-expect-error
+    //   setUser({});
+    //   setIsAuthenticated(false);
+    // }
   }, [address]);
 
-  useEffect(() => {
-    if (isAuthenticated || localStorage.getItem("user")) {
-      router("/app/subscription");
-    }
-  }, [isAuthenticated]);
+  // useEffect(() => {
+  //   if (isAuthenticated || localStorage.getItem("user")) {
+  //     router("/app/subscription");
+  //   }
+  // }, [isAuthenticated]);
 
   return (
     <ConnectButton.Custom>
