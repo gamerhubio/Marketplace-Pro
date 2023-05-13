@@ -49,7 +49,7 @@ export const subscribe = async (
     .send({
       value: web3.utils.toWei(amt, "ether"),
       from: account[0],
-      gas: web3.utils.toHex(50000),
+      gas: web3.utils.toHex(80000),
     })
     .on("transactionHash", (hash: any) => {
       console.log(hash);

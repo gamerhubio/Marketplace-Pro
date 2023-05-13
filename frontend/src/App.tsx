@@ -82,30 +82,9 @@ const App: React.FC = () => {
             element={<AppWalletConnectPage />}
           />
           {/* Dashboard */}
-          <Route
-            path="/dashboard/home"
-            element={
-              <ProtectedRoute>
-                <DashboardHomePage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/dashboard/game"
-            element={
-              <ProtectedRoute>
-                <DashboardGamePage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/dashboard/profile"
-            element={
-              <ProtectedRoute>
-                <DashboardProfilePage />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/dashboard/home" element={<DashboardHomePage />} />
+          <Route path="/dashboard/game" element={<DashboardGamePage />} />
+          <Route path="/dashboard/profile" element={<DashboardProfilePage />} />
         </Routes>
       </Router>
     </>
