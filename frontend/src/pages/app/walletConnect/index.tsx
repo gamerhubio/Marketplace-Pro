@@ -55,7 +55,6 @@ export const AppWalletConnectPage: React.FC = () => {
       currentUser.id || JSON.parse(window.localStorage.getItem("user")).id
     )
       .then((data) => {
-        console.log(data);
         //@ts-ignore
         if (typeof data == "object" && data.error) {
           //@ts-ignore

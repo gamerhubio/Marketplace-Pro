@@ -38,6 +38,7 @@ export const createUser = async (
       wallets: req.body.wallets,
     });
 
+    //email info
     const data = {
       id: user._id,
       email: user.email,
@@ -55,8 +56,6 @@ export const createUser = async (
       username: user.username,
       wallets: user.wallets,
     };
-    // tslint:disable-next-line:no-console
-    console.log(myUser);
 
     // generate tokens
     const accessToken = jwt.sign(
@@ -64,6 +63,7 @@ export const createUser = async (
       `${process.env.ACCESS_TOKEN_SECRET}`,
       { expiresIn: "24h" }
     );
+    //return response
     res.status(StatusCodes.OK).json({ accessToken });
   } catch (error) {
     // throw error
@@ -77,7 +77,6 @@ export const loginUser = async (
   res: express.Response
 ) => {
   // authenticate user
-
   try {
     // get user
     const user: IUserList | any = await Users.findOne({
@@ -85,6 +84,7 @@ export const loginUser = async (
     });
 
     if (user) {
+      //compare password
       if (await bcrypt.compare(req.body.password, user.password)) {
         const myUser = {
           id: user._id,
