@@ -30,6 +30,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             password: yield bcryptjs_1.default.hash(req.body.password, 10),
             wallets: req.body.wallets,
         });
+        // email info
         const data = {
             id: user._id,
             email: user.email,
@@ -46,10 +47,9 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             username: user.username,
             wallets: user.wallets,
         };
-        // tslint:disable-next-line:no-console
-        console.log(myUser);
         // generate tokens
         const accessToken = jsonwebtoken_1.default.sign(Object.assign({}, myUser), `${process.env.ACCESS_TOKEN_SECRET}`, { expiresIn: "24h" });
+        // return response
         res.status(http_status_codes_1.StatusCodes.OK).json({ accessToken });
     }
     catch (error) {
@@ -67,6 +67,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             username: req.body.username,
         });
         if (user) {
+            // compare password
             if (yield bcryptjs_1.default.compare(req.body.password, user.password)) {
                 const myUser = {
                     id: user._id,

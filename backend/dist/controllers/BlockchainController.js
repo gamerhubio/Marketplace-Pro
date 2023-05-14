@@ -17,6 +17,7 @@ const http_status_codes_1 = require("http-status-codes");
 const UserModel_1 = __importDefault(require("../models/UserModel"));
 // get a user
 const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // extract info from url
     try {
         const { address } = req.params;
         const { amt } = req.query;

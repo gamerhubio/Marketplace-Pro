@@ -338,7 +338,7 @@ export const checkUser = async (address: string) => {
         },
       }
     );
-
+    console.log(data);
     //return JSON.stringify(data, null, 4);
     if (data.msg) {
       return { msg: true };
