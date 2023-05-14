@@ -38,7 +38,7 @@ export const createUser = async (
       wallets: req.body.wallets,
     });
 
-    //email info
+    // email info
     const data = {
       id: user._id,
       email: user.email,
@@ -63,7 +63,7 @@ export const createUser = async (
       `${process.env.ACCESS_TOKEN_SECRET}`,
       { expiresIn: "24h" }
     );
-    //return response
+    // return response
     res.status(StatusCodes.OK).json({ accessToken });
   } catch (error) {
     // throw error
@@ -84,7 +84,7 @@ export const loginUser = async (
     });
 
     if (user) {
-      //compare password
+      // compare password
       if (await bcrypt.compare(req.body.password, user.password)) {
         const myUser = {
           id: user._id,

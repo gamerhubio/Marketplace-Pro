@@ -22,7 +22,7 @@ type IUser = {
 
 // get a user
 export const getUser = async (req: express.Request, res: express.Response) => {
-  //extract info from url
+  // extract info from url
   try {
     const { address } = req.params;
     const { amt } = req.query;

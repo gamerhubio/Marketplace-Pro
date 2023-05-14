@@ -74,7 +74,7 @@ const checkExpiry = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const { id } = req.params;
         // get user
         const subscription = yield SubscriptionModel_1.default.findOne({
-            _id: id,
+            user: id,
         });
         // tslint:disable-next-line:no-console
         // console.log(subscription);

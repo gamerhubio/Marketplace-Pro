@@ -122,8 +122,10 @@ export const AppWalletConnectPage: React.FC = () => {
             //@ts-ignore
             console.log(data.error);
           } else {
+            console.log(data);
             //if no server error
             if (data.msg === true) {
+              console.log(data.msg);
               if (
                 //not authenticated
                 //@ts-ignore
@@ -136,6 +138,7 @@ export const AppWalletConnectPage: React.FC = () => {
                 checkSubscriptionState();
               }
             } else {
+              console.log("no");
               if (
                 //not authenticated
                 //@ts-ignore

@@ -50,7 +50,7 @@ app.use("/api/v1/subscription", authMiddleware, subscriptionRouter);
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 10000;
 
 //start server
 const start = async () => {
