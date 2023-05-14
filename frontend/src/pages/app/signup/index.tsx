@@ -18,9 +18,11 @@ export const AppSignUpPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [pwd, setPwd] = useState<string>("");
+  const [agreement, setAgreement] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
     if (address) {
       const data = {
         email,
@@ -28,6 +30,7 @@ export const AppSignUpPage: React.FC = () => {
         wallets: [address],
         password: pwd,
       };
+      console.log(agreement);
 
       createUser(data)
         .then((data) => {
@@ -44,6 +47,10 @@ export const AppSignUpPage: React.FC = () => {
       router("/app/wallet-connect");
     }
   };
+
+  function handleChecked(e: React.ChangeEvent<HTMLInputElement>): void {
+    setAgreement(e.target.checked);
+  }
 
   return (
     <AppLayout
@@ -80,9 +87,20 @@ export const AppSignUpPage: React.FC = () => {
               onChange={(e) => setPwd(e.target.value)}
             />
           </FormInputWrapper>
-          <Button onClick={handleSubmit}>Create Account</Button>
+          {(!email || !username || !agreement || !pwd) && (
+            <Button disabled>Create Account</Button>
+          )}
+
+          {email && username && agreement && pwd && (
+            <Button onClick={handleSubmit}>Create Account</Button>
+          )}
+
           <CheckboxWrapper htmlFor="checkbox">
-            <input type="checkbox" id="checkbox" />
+            <input
+              type="checkbox"
+              id="checkbox"
+              onChange={(e) => handleChecked(e)}
+            />
             <p>
               {"I agree to Gamerhub’s "}
               <span>Terms and Conditions</span> & <span>Privacy Policy</span>
