@@ -112,7 +112,7 @@ export const AppWalletConnectPage: React.FC = () => {
   };
 
   useEffect(() => {
-    let user;
+    console.log(address);
     if (address) {
       checkUser(address)
         .then((data) => {
@@ -127,7 +127,7 @@ export const AppWalletConnectPage: React.FC = () => {
               if (
                 //not authenticated
                 //@ts-ignore
-                !JSON.parse(window.localStorage.getItem("accessToken"))
+                !window.localStorage.getItem("accessToken")
               ) {
                 //go to login page
                 router("/app/signin");
@@ -139,7 +139,7 @@ export const AppWalletConnectPage: React.FC = () => {
               if (
                 //not authenticated
                 //@ts-ignore
-                !JSON.parse(window.localStorage.getItem("accessToken"))
+                !window.localStorage.getItem("accessToken")
               ) {
                 router("/app/signup");
               } else {
