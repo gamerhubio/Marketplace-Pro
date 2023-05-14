@@ -22,9 +22,6 @@ export const AppSignInPage: React.FC = () => {
   const address = useAccount();
 
   const checkSubscriptionState = () => {
-    //@ts-expect-error
-    console.log(currentUser.email);
-
     checkSubscription(
       //@ts-expect-error
       currentUser.id || JSON.parse(window.localStorage.getItem("user")).id
