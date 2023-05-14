@@ -121,32 +121,34 @@ export const AppWalletConnectPage: React.FC = () => {
           if (typeof data == "object" && data.error) {
             //@ts-ignore
             console.log(data.error);
+          } else {
+            //if no server error
+            if (data.msg === true) {
+              if (
+                //not authenticated
+                //@ts-ignore
+                !JSON.parse(window.localStorage.getItem("accessToken"))
+              ) {
+                //go to login page
+                router("/app/signin");
+              } else {
+                //check if user is subscribed
+                checkSubscriptionState();
+              }
+            } else {
+              if (
+                //not authenticated
+                //@ts-ignore
+                !JSON.parse(window.localStorage.getItem("accessToken"))
+              ) {
+                router("/app/signup");
+              } else {
+                //update user wallet list
+                updateWalletList();
+              }
+            }
           }
           //if true is returned
-          if (data.msg == true) {
-            if (
-              !isAuthenticated &&
-              //@ts-ignore
-              !JSON.parse(window.localStorage.getItem("accessToken"))
-            ) {
-              //go to login page
-              router("/app/signin");
-            } else {
-              //check if user is subscribed
-              checkSubscriptionState();
-            }
-          } else {
-            if (
-              !isAuthenticated &&
-              //@ts-ignore
-              !JSON.parse(window.localStorage.getItem("accessToken"))
-            ) {
-              router("/app/signup");
-            } else {
-              //update user wallet list
-              updateWalletList();
-            }
-          }
         })
         .catch((err) => console.log(err));
     }
@@ -159,12 +161,6 @@ export const AppWalletConnectPage: React.FC = () => {
     //   setIsAuthenticated(false);
     // }
   }, [address]);
-
-  // useEffect(() => {
-  //   if (isAuthenticated || localStorage.getItem("user")) {
-  //     router("/app/subscription");
-  //   }
-  // }, [isAuthenticated]);
 
   return (
     <ConnectButton.Custom>
