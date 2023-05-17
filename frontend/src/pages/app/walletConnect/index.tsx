@@ -112,7 +112,6 @@ export const AppWalletConnectPage: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log(address);
     if (address) {
       checkUser(address)
         .then((data) => {
