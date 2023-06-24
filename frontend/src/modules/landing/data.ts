@@ -156,7 +156,7 @@ export const teamData = [
   },
   {
     img: "/images/landing/team/milan.png",
-    name: "Joshua Lee",
+    name: "Milan Jansen",
     role: "Fullstack and blockchain developer",
   },
   {
