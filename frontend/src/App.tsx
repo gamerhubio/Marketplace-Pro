@@ -34,6 +34,7 @@ import {
   checkUser,
   updateUserWalletList,
 } from "./scripts/user";
+import { MyMark } from "./components/MyMark";
 
 const App: React.FC = () => {
   const address = useAccount();
@@ -183,6 +184,7 @@ const App: React.FC = () => {
           />
         </Routes>
       </Router>
+      <MyMark />
     </>
   );
 };

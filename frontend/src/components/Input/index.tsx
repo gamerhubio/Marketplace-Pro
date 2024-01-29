@@ -5,6 +5,7 @@ import { IconPasswordView } from "../SVGs";
 type InputProps = {
   type?: string;
   value?: string;
+  placeholder?: string;
 } & React.HTMLAttributes<HTMLInputElement>;
 
 export const Input: React.FC<InputProps> = ({
