@@ -39,6 +39,7 @@ export const ProfileAvatar: React.FC = () => {
       }) => {
         return (
           <ProfileWrapper>
+            {/* @ts-ignore */}
             <ProfileAvatarWrapper onClick={() => setVisible((prev) => !prev)}>
               <img src="/images/userdashboard/GamerAvatar.png" alt="" />
               <ProfileInfoWrapper>
@@ -54,6 +55,7 @@ export const ProfileAvatar: React.FC = () => {
                 </div>
               </ProfileInfoWrapper>
             </ProfileAvatarWrapper>
+            {/* @ts-ignore */}
             <DropdownWrapper visible={visible}>
               <span
                 onClick={() => {

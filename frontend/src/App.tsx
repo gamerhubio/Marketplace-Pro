@@ -45,13 +45,13 @@ const App: React.FC = () => {
       setGlobalState("isAuthenticated", true);
       //set user object
       const user = {
-        //@ts-expect-error
+
         id: JSON.parse(window.localStorage.getItem("user")).id,
-        //@ts-expect-error
+
         email: JSON.parse(window.localStorage.getItem("user")).email,
-        //@ts-expect-error
+
         username: JSON.parse(window.localStorage.getItem("user")).username,
-        //@ts-expect-error
+
         wallets: JSON.parse(window.localStorage.getItem("user")).wallets,
       };
       setGlobalState("currentUser", user);

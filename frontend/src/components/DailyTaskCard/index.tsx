@@ -47,6 +47,7 @@ export const DailyTaskCard: React.FC<CardProps> = ({
       }) => {
         return (
           <DailyTaskCardContainer>
+            {/* @ts-ignore */}
             <DailyTaskInfo isOdd={isOdd}>
               <h1>{title}</h1>
               <h2>{amount}</h2>
@@ -56,6 +57,7 @@ export const DailyTaskCard: React.FC<CardProps> = ({
                 <img src="/images/userdashboard/credit.png" alt="credit" />
                 <p>{credit}</p>
               </TaskReward>
+              {/* @ts-ignore */}
               <StatusBtn
                 isOdd={isOdd}
                 onClick={() => {

@@ -20,6 +20,7 @@ export const ScrollTop: React.FC = () => {
   };
 
   return (
+    // @ts-ignore
     <ScrollTopWrapper visible={visible} onClick={handleClick}>
       <IconScrollTop />
     </ScrollTopWrapper>

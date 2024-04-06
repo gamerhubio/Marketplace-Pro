@@ -53,8 +53,8 @@ export const AppSubScriptionPage: React.FC = () => {
         currentUser.email || JSON.parse(localStorage.getItem("user")).email,
         //@ts-expect-error
         currentUser.username ||
-          //@ts-expect-error
-          JSON.parse(localStorage.getItem("user")).username
+
+        JSON.parse(localStorage.getItem("user")).username
       );
     }
   };
@@ -67,7 +67,7 @@ export const AppSubScriptionPage: React.FC = () => {
     <AppLayout
       buttonContent={
         walletAddress ? (
-          <AppButton onClick={() => {}}>
+          <AppButton onClick={() => { }}>
             <IconWalletConnect />
             <span>{getFormatWalletAddress(walletAddress)}</span>
             <IconDropdown />
