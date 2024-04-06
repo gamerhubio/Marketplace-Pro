@@ -1,0 +1,57 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "DM Sans", "Space Grotesk", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #fff;
+}
+
+* {
+  box-sizing: border-box;
+  transition: all 0.3s;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: linear-gradient(
+    171.58deg,
+    rgb(0, 17, 60) 7.81%,
+    rgb(38, 0, 51) 152.33%
+  );
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    rgba(179, 0, 102, 0) 0%,
+    rgb(179, 0, 102) 21.35%,
+    rgb(179, 0, 102) 75%,
+    rgba(179, 0, 102, 0) 100%
+  );
+}

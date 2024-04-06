@@ -19,13 +19,18 @@ const userSchema = new mongoose_1.default.Schema({
         required: [true, "Please provide username"],
         unique: true,
     },
+    password: {
+        type: String,
+        required: [true, "Please provide password"],
+    },
     wallets: {
         type: [String],
         required: [true, "Please add users wallet"],
+        default: [],
     },
     credit: {
         type: Number,
-        default: 0
+        default: 15,
     },
     challenges: {
         type: Map,
@@ -36,13 +41,13 @@ const userSchema = new mongoose_1.default.Schema({
             ADSWatch: 0,
             VideoStream: 0,
             GameAssetPurchase: 0,
-            TournamentPlay: 0
-        }
+            TournamentPlay: 0,
+        },
     },
     verified: {
         type: Boolean,
-        default: false
-    }
+        default: false,
+    },
 });
 // const User = mongoose.model("User", userSchema);
 exports.default = mongoose_1.default.model("Users", userSchema);

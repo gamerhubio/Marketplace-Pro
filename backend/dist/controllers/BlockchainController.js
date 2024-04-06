@@ -17,6 +17,7 @@ const http_status_codes_1 = require("http-status-codes");
 const UserModel_1 = __importDefault(require("../models/UserModel"));
 // get a user
 const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // extract info from url
     try {
         const { address } = req.params;
         const { amt } = req.query;
@@ -41,9 +42,6 @@ const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             // return to contract
             res.status(http_status_codes_1.StatusCodes.OK).json({ toPay: ghtValue });
         }
-        // return credit amount to block chain
-        // @ts-ignore
-        res.status(http_status_codes_1.StatusCodes.OK).json({ toPay: user[0].credit });
     }
     catch (error) {
         // throw error

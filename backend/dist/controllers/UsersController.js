@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUser = exports.getUser = exports.getUsers = void 0;
+exports.updateUser = exports.getUserDetail = exports.getUser = exports.getUsers = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const UserModel_1 = __importDefault(require("../models/UserModel"));
 // get users
@@ -46,15 +46,34 @@ const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getUser = getUser;
+// get a user
+const getUserDetail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        // get user
+        const user = yield UserModel_1.default.findOne({ _id: id });
+        if (user) {
+            res.status(http_status_codes_1.StatusCodes.OK).json(user);
+        }
+        else {
+            res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({ msg: "user not found" });
+        }
+    }
+    catch (error) {
+        // throw error
+        res.status(http_status_codes_1.StatusCodes.NOT_FOUND).send(error);
+    }
+});
+exports.getUserDetail = getUserDetail;
 // update user
 const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { address } = req.params;
         // update query
-        const user = yield UserModel_1.default.findOneAndUpdate({ email: address }, req.body, {});
-        res.status(http_status_codes_1.StatusCodes.OK).json({
-            user,
+        const user = yield UserModel_1.default.findOneAndUpdate({ email: address }, req.body, {
+            new: true,
         });
+        res.status(http_status_codes_1.StatusCodes.OK).json(user);
     }
     catch (error) {
         // throw error
