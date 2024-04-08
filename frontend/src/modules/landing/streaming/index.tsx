@@ -13,11 +13,11 @@ import { streamingSlider } from "../data";
 export const StreamingSection: React.FC = () => {
   return (
     <StreamingWrapper>
-      <h1>GamerHub</h1>
+      <h1>GameGPT</h1>
       <p>
-        Aggregated crypto games, gaming guilds, metaverses and NFTs. GamerHub is
-        an ecosystem for gamers to Play, Earn and Thrive through aggregated
-        gameplay, enhanced rewards, and decentralized governance.
+        Meet GameGPT, your AI-powered in-game companion! From
+        offering helpful hints and tips to engaging in meaningful conversations,
+        GameGPT brings virtual worlds to life with its adaptive and responsive capabilities.
       </p>
       <Swiper
         pagination={true}

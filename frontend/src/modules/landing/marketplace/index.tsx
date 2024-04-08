@@ -8,12 +8,11 @@ import { marketplaceSlider } from "../data";
 export const MarketplaceSection: React.FC = () => {
   return (
     <MarketplaceWrapper>
-      <h1>P2P Marketplace</h1>
+      <h1>
+        AI Anti-Cheat System</h1>
       <p>
-        The in-game asset marketplace allows players to buy, sell, and trade
-        in-game items and other digital assets. This feature will provide
-        players with a new way to monetize their gaming activities and to build
-        a collection of valuable in-game items.
+        Leveraging advanced AI detection mechanisms, our anti-cheat system actively monitors gameplay
+        for suspicious behavior and swiftly identifies and addresses cheating attempts.
       </p>
       <Swiper
         pagination={true}

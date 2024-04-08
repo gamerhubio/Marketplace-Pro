@@ -10,9 +10,9 @@ export const GamerHubSection: React.FC = () => {
     <GamerHubWrapper id="about">
       <h1>GamerHub</h1>
       <p>
-        Aggregated crypto games, gaming guilds, metaverses and NFTs. GamerHub is
-        an ecosystem for gamers to Play, Earn and Thrive through aggregated
-        gameplay, enhanced rewards, and decentralized governance.
+        Our adaptive in-game difficulty system utilizes AI algorithms
+        to dynamically adjust game difficulty in
+        real-time, offering personalized challenges for players of all skill levels.
       </p>
       <Swiper
         pagination={true}

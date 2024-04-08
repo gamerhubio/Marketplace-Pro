@@ -12,12 +12,12 @@ export const ReinventingSection: React.FC = () => {
     <ReinventingWrapper>
       <ReinventingContainer>
         <ReinventingTextWrapper>
-          <h1>Reinventing The P2E Gaming Experience</h1>
+          <h1>
+            Empowering games with AI technology</h1>
           <p>
-            Access to explore, buy and play games from multiple blockchains
-            GamerHub gives users true digital ownership and control over their
-            games, user data and in-game assets. The game aggregator framework
-            is backed and governed by the gaming community.
+            At GamerHub, we're revolutionizing the gaming industry by providing
+            cutting-edge AI infrastructure tailored for game developers. Our platform offers a suite of powerful
+            features designed to enhance gameplay experiences and streamline game development processes.
           </p>
           <Button width={231}>Open app</Button>
         </ReinventingTextWrapper>

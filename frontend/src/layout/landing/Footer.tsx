@@ -18,9 +18,8 @@ export const Footer: React.FC = () => {
             <img src="/images/logo.png" alt="" />
           </FooterLogo>
           <p>
-            GamerHub is introducing a multichain subscription-based gaming
-            aggregator that will give gamers unprecedented optionality in the
-            field of play-to-earn.
+            At GamerHub, we're revolutionizing the gaming industry by providing
+            cutting-edge AI infrastructure tailored for game developers.
           </p>
           <h6>Connect with the community</h6>
           <FooterSocialNavbar>

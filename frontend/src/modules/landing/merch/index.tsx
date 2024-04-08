@@ -8,13 +8,11 @@ import { merchSlider } from "../data";
 export const MerchStoreSection: React.FC = () => {
   return (
     <MerchStoreWrapper>
-      <h1>Merch Store</h1>
+      <h1>
+        Gamer Merch</h1>
       <p>
-        e-commerce platform that allows players to purchase a wide range of
-        gaming-related merchandise, including clothing, accessories,
-        collectibles, and other items. This feature will provide players with a
-        way to express their love for their favorite games and to connect with
-        the gaming community.
+        Express your love for your favorite games and gamers. Users can create custom merchandise inspired by
+        their favorite gaming titles and personalities. Let your gaming passion shine with Gamer Merch.
       </p>
       <Swiper
         pagination={true}

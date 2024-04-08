@@ -18,8 +18,9 @@ export const TokenSection: React.FC = () => {
       </h1>
       <p>
         The GHT token is a Multichain token that will be created on blockchains
-        like Solana, BSC, Ethereum, NEAR, IOTEX to give the whole gaming
-        ecosystem an easy access to participate in the gaming revolution.
+        like Solana, BSC, Ethereum, to give the whole gaming ecosystem an
+        easy access to participate in the gaming revolution
+
       </p>
       <TokenButtonGroup>
         <Button width={231}>View Contract Address</Button>

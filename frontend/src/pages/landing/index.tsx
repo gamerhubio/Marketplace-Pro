@@ -23,8 +23,8 @@ export const LandingPage: React.FC = () => {
       <MarketplaceSection />
       <MerchStoreSection />
       <TokenSection />
-      <RoadmapSection />
-      <TeamSection />
+      {/* <RoadmapSection /> */}
+      {/* <TeamSection /> */}
       <ScrollTop />
     </LandingLayout>
   );
