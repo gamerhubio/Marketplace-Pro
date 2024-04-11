@@ -57,15 +57,15 @@ export const merchSlider = [
 export const tokenomicsData = [
   {
     title: "Seed Sale Price",
-    value: "1 GHT = $0.014",
+    value: "1 GHT = $0.005",
   },
   {
     title: "Private Sale Price",
-    value: "1 GHT = $0.016",
+    value: "1 GHT = $0.01",
   },
   {
     title: "Public Sale Price",
-    value: "1 GHT = $0.018",
+    value: "1 GHT = $0.15",
   },
   {
     title: "Total Supply",
