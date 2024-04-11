@@ -26,7 +26,7 @@ export const navLinkData = [
   },
   {
     label: "Whitepaper",
-    to: "#whitepaper",
+    to: "https://gamerhub-2.gitbook.io/gamerhub-whitepaper-v1/",
   },
 ];
 
