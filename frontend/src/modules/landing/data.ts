@@ -65,7 +65,7 @@ export const tokenomicsData = [
   },
   {
     title: "Public Sale Price",
-    value: "1 GHT = $0.15",
+    value: "1 GHT = $0.015",
   },
   {
     title: "Total Supply",
