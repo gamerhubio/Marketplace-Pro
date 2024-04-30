@@ -24,7 +24,7 @@ export const LandingPage: React.FC = () => {
       <MerchStoreSection />
       <TokenSection />
       {/* <RoadmapSection /> */}
-      {/* <TeamSection /> */}
+      <TeamSection />
       <ScrollTop />
     </LandingLayout>
   );

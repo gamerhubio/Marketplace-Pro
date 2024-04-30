@@ -154,14 +154,30 @@ export const teamData = [
     name: "Glory Lucas",
     role: "Co-founder / CEO",
   },
+
   {
-    img: "/images/landing/team/milan.png",
-    name: "Milan Jansen",
-    role: "Fullstack and blockchain developer",
+    img: "/images/landing/team/jeffery.png",
+    name: "Jeffery Pan",
+    role: "Institutional Advisor",
   },
   {
-    img: "/images/landing/team/william.png",
-    name: "William Ikeji",
-    role: "Fullstack and blockchain developer",
+    img: "/images/landing/team/robbie.png",
+    name: "Robbie Joe",
+    role: "Tokenomics Advisor",
+  },
+  {
+    img: "/images/landing/team/sam.png",
+    name: "Sam Vukmirica",
+    role: "Gaming Advisor",
+  },
+  {
+    img: "/images/landing/team/anita.png",
+    name: "Anita Kalergis",
+    role: "Institutional Advisor",
+  },
+  {
+    img: "/images/landing/team/pekka.png",
+    name: "Pekka Kelkka",
+    role: "Institutional Advisor",
   },
 ];
