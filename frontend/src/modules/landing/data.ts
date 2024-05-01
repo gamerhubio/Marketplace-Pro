@@ -147,12 +147,18 @@ export const teamData = [
   {
     img: "/images/landing/team/victor.png",
     name: "Victor Kaycee",
-    role: "Co-founder / CEO",
+    role: "Core Contributor",
   },
   {
     img: "/images/landing/team/glory.png",
     name: "Glory Lucas",
-    role: "Co-founder / CEO",
+    role: "Core Contributor",
+  },
+
+  {
+    img: "/images/landing/team/caleb.png",
+    name: "Caleb Lucas",
+    role: "Core Contributor",
   },
 
   {
