@@ -20,7 +20,7 @@ export const HomeSection: React.FC = () => {
           <HomeBtn onClick={() => router("/app/home")}>
             Explore marketplace
           </HomeBtn>
-          <HomeBtn>Get App</HomeBtn>
+          {/* <HomeBtn>Get App</HomeBtn> */}
         </HomeBtnGroup>
         <HomeSocialLinks>
           {socialLinks.map((item, key) => (

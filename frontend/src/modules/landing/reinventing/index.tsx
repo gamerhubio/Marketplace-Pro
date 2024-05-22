@@ -15,11 +15,12 @@ export const ReinventingSection: React.FC = () => {
           <h1>
             Empowering games with AI technology</h1>
           <p>
-            At GamerHub, we're revolutionizing the gaming industry by providing
-            cutting-edge AI infrastructure tailored for game developers. Our platform offers a suite of powerful
+            At GamerHub, we're revolutionizing the gaming industry by providing cutting-edge AI infrastructure tailored
+            for game developers thereby improving the general experience for Gamers. Our platform offers a suite of powerful
             features designed to enhance gameplay experiences and streamline game development processes.
+
           </p>
-          <Button width={231}>Open app</Button>
+          <Button width={231}>Open Marketplace</Button>
         </ReinventingTextWrapper>
         <ReinventingImg>
           <img src="/images/landing/reinventing.png" alt="" />
