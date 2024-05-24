@@ -7,6 +7,8 @@
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
     "prestart": "npm run build",
+    "predev": "npm run build",
+    "dev": "nodemon app.ts",
     "start": "nodemon app.ts"
   },
   "keywords": [],
@@ -29,7 +31,8 @@
     "mongoose": "^5.11.10",
     "nodemailer": "^6.9.1",
     "npm": "^9.6.6",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "tslint": "^6.1.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.7",

@@ -108,7 +108,7 @@ export const loginUser = async (
       res.status(StatusCodes.UNAUTHORIZED).json({ msg: "Invalid credentials" });
     }
   } catch (error) {
-    // console.log(error)
+    // console.log(erro
     // throw error
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
   }

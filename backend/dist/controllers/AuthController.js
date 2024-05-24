@@ -90,7 +90,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
     }
     catch (error) {
-        // console.log(error)
+        // console.log(erro
         // throw error
         res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).send(error);
     }
