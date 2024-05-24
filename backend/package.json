@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/app.js",
     "build": "tsc",
-    "prestart": "npm run build",
+    "prebuild": "npm install",
     "dev": "nodemon app.ts",
     "serve": "ts-node app.ts",
     "lint": "eslint . --ext .ts"
