@@ -42,6 +42,8 @@ export const AppSubScriptionPage: React.FC = () => {
   const provider = useParticleProvider();
 
   const makeSubscription = (e: FormEvent, plan: number, amt: string) => {
+    console.log("ok");
+    return;
     e.preventDefault();
     if (provider) {
       //make subscription
@@ -53,8 +55,7 @@ export const AppSubScriptionPage: React.FC = () => {
         currentUser.email || JSON.parse(localStorage.getItem("user")).email,
         //@ts-expect-error
         currentUser.username ||
-
-        JSON.parse(localStorage.getItem("user")).username
+          JSON.parse(localStorage.getItem("user")).username
       );
     }
   };
@@ -67,7 +68,7 @@ export const AppSubScriptionPage: React.FC = () => {
     <AppLayout
       buttonContent={
         walletAddress ? (
-          <AppButton onClick={() => { }}>
+          <AppButton onClick={() => {}}>
             <IconWalletConnect />
             <span>{getFormatWalletAddress(walletAddress)}</span>
             <IconDropdown />
@@ -108,12 +109,12 @@ export const AppSubScriptionPage: React.FC = () => {
               </CardHeader>
               <GamerPlanWrapper>
                 {item.plan.map((pItem, pKey) => (
-                  <p key={pKey}>
+                  <div key={pKey}>
                     <div>
                       <IconCheck />
                     </div>
                     {pItem}
-                  </p>
+                  </div>
                 ))}
               </GamerPlanWrapper>
               <Button
