@@ -2,14 +2,14 @@
   "name": "jobs",
   "version": "1.0.0",
   "description": "",
-  "main": "app",
+  "main": "dist/app.js",
   "scripts": {
-    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "start": "node dist/app.js",
     "build": "tsc",
     "prestart": "npm run build",
-    "predev": "npm run build",
     "dev": "nodemon app.ts",
-    "start": "nodemon app.ts"
+    "serve": "ts-node app.ts",
+    "lint": "eslint . --ext .ts"
   },
   "keywords": [],
   "author": "",
