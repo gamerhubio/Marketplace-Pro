@@ -39,7 +39,7 @@ export const sendConfirmationEmail = ({ toUser, hash }: IMailer) => {
       html: `
                 <h3>Hello ${toUser.username}</h3>
                 <p>Welcome to the best online web3 game aggregator. Just one more step...</p>
-                <p>To confirm your email, please follow this link: <a target="_" href="${process.env.REACT_APP_BASE_URL_PROD}/confirm/email/${toUser.id}">Activate</a></p>
+                <p>To confirm your email, please follow this link: <a target="_" href="${process.env.DOMAIN}/confirm/email/${toUser.id}">Activate</a></p>
                 <p>Thank you.</p>
 
 
