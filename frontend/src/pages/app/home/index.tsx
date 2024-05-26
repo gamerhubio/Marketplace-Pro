@@ -53,7 +53,7 @@ export const AppHomePage: React.FC = () => {
             width={322}
             height={79}
             fSize={20}
-            onClick={() => router("/app/wallet-connect")}
+            onClick={() => router("/dashboard/home")}
           >
             Get Started
           </Button>

@@ -53,13 +53,15 @@ export const AppSignInPage: React.FC = () => {
       .then((data) => {
         //@ts-ignore
         if (!data.error && data) {
+          console.log("🚀 ~ .then ~ data:", data);
           setGlobalState("isAuthenticated", true);
-          if (!address) {
-            router("/app/wallet-connect");
-          } else {
-            //check if user is subscribed
-            checkSubscriptionState();
-          }
+          // if (!address) {
+          //   router("/app/wallet-connect");
+          // } else {
+          //   //check if user is subscribed
+          //   checkSubscriptionState();
+          // }
+          router("/dashboard/home");
         }
       })
       .catch((err) => {

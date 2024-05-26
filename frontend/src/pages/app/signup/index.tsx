@@ -37,7 +37,7 @@ export const AppSignUpPage: React.FC = () => {
         //@ts-ignore
         if (!data.error && data) {
           setGlobalState("isAuthenticated", true);
-          router("/app/subscription");
+          router("/dashboard/home");
         }
       })
       .catch((err) => {

@@ -42,8 +42,6 @@ export const AppSubScriptionPage: React.FC = () => {
   const provider = useParticleProvider();
 
   const makeSubscription = (e: FormEvent, plan: number, amt: string) => {
-    console.log("ok");
-    return;
     e.preventDefault();
     if (provider) {
       //make subscription
