@@ -45,7 +45,6 @@ const App: React.FC = () => {
       setGlobalState("isAuthenticated", true);
       //set user object
       const user = {
-
         id: JSON.parse(window.localStorage.getItem("user")).id,
 
         email: JSON.parse(window.localStorage.getItem("user")).email,
@@ -101,7 +100,6 @@ const App: React.FC = () => {
 
   //watch for wallet address switches
   useEffect(() => {
-    console.log(address);
     if (address) {
       checkUser(address)
         .then((data) => {

@@ -12,11 +12,9 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   if (
     //@ts-ignore
     !isAuthenticated &&
-    JSON.parse(window.localStorage.getItem("user"))
+    !JSON.parse(window.localStorage.getItem("user"))
   ) {
-    return (
-      <Navigate to="/app/wallet-connect" state={{ from: location }} replace />
-    );
+    return <Navigate to="/app/signin" state={{ from: location }} replace />;
   }
   return (
     <>

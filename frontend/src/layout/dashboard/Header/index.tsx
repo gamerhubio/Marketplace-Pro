@@ -46,6 +46,7 @@ export const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
 
   useEffect(() => {
     //get user info
+    if (Object.keys(currentUser).length === 0) return;
     //@ts-ignore
     getUserData(currentUser.id)
       .then((data) => {

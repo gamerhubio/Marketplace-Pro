@@ -55,9 +55,7 @@ export const AppSignUpPage: React.FC = () => {
   return (
     <AppLayout
       buttonContent={
-        <AppButton onClick={() => router("/app/signup")}>
-          Create account
-        </AppButton>
+        <AppButton onClick={() => router("/app/signin")}>Sign In</AppButton>
       }
     >
       <div style={{ display: "none" }}>
