@@ -141,7 +141,6 @@ type checkerResponse = {
 };
 
 export async function createUser(formData: FormData) {
-  console.log(formData);
   try {
     // 👇️ const data: CreateUserResponse
     const { data } = await axios.post<authResponse>(

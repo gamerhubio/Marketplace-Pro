@@ -22,32 +22,33 @@ export const sendConfirmationEmail = ({ toUser, hash }: IMailer) => {
   // @ts-ignore
   return new Promise((res, rej) => {
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "mail.privateemail.com",
+      secure: true,
+
+      port: 465,
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PWD,
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PWD,
       },
     });
 
     const message = {
-      from: process.env.GMAIL_USER,
-      // production
+      from: process.env.MAIL_USER,
       to: toUser.email,
-      // dev
-      // to: process.env.GMAIL_USER,
-      subject: "Email confrimation - GAMER-HUB",
+      subject: "Welcome to GamerHub!",
       html: `
                 <h3>Hello ${toUser.username}</h3>
-                <p>Welcome to the best online web3 game aggregator. Just one more step...</p>
-                <p>To confirm your email, please follow this link: <a target="_" href="${process.env.DOMAIN}/confirm/email/${toUser.id}">Activate</a></p>
+                <p>Welcome to Gamerhub</p>
+                <p>You just made the most important decision in your Gaming journey.</p>
+                <p>Keep in touch with us on all our socials to stay updated with all our latest releases.</p>
                 <p>Thank you.</p>
-
-
             `,
     };
 
     transporter.sendMail(message, (err, info) => {
       if (err) {
+        console.log("🚀 ~ transporter.sendMail ~ err:", err);
+
         rej(err);
       } else {
         res(info);
@@ -60,19 +61,19 @@ export const sendSubscriptionMail = ({ toUser }: ISubscription) => {
   // @ts-ignore
   return new Promise((res, rej) => {
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      service: "privateemail",
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PWD,
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PWD,
       },
     });
 
     const message = {
-      from: process.env.GMAIL_USER,
+      from: process.env.MAIL_USER,
       // production
       to: toUser.email,
       // dev
-      // to: process.env.GMAIL_USER,
+      // to: process.env.MAIL_USER,
       subject: "Subscription - GAMER-HUB",
       html: `
                 <h3>Hello ${toUser.username}</h3>
