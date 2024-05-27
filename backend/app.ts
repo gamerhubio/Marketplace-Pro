@@ -26,8 +26,7 @@ app.use(
     origin: [
       "http://localhost:3000",
       "http://127.0.0.1:3000",
-      "https://mygamerhub.netlify.app",
-      "https://bnb-hackathon-pro.vercel.app",
+      "https://www.gamer-hub.io",
     ],
     credentials: true,
   })
