@@ -146,29 +146,28 @@ export const teamData = [
   {
     img: "/images/landing/team/victor.png",
     name: "Victor Kaycee",
-    role: "Co-founder CEO",
+    role: "Core Contributor",
   },
   {
     img: "/images/landing/team/glory.png",
     name: "Glory Lucas",
-    role: "Co-founder CMO",
+    role: "Core Contributor",
   },
 
   {
     img: "/images/landing/team/caleb.png",
     name: "Caleb Lucas",
-    role: "Engineering Manager",
-  },
-
-  {
-    img: "/images/landing/team/jeffery.png",
-    name: "Jeffery Pan",
-    role: "Institutional Advisor from SoftBank",
+    role: "Core Contributor",
   },
   {
     img: "/images/landing/team/ken.png",
     name: "Ken Suzuki",
-    role: "Fullstack Developer",
+    role: "Core Contributor",
+  },
+  {
+    img: "/images/landing/team/jeffery.png",
+    name: "Jeffery Pan",
+    role: "Institutional Advisor from SoftBank",
   },
   {
     img: "/images/landing/team/pekka.png",
