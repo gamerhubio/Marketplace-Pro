@@ -14,7 +14,7 @@ export const TokenSection: React.FC = () => {
   return (
     <TokenSectionWrapper id="tokenomics">
       <h1>
-        <strong>GHT </strong> TOKEN <img src="/images/landing/ght-token.png" alt="" />
+        <strong> GHT </strong> TOKEN <img src="/images/landing/ght-token.png" alt="" />
       </h1>
       <p>
         The GHT token is a Multichain token that will be created on blockchains

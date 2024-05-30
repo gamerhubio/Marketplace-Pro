@@ -7,6 +7,9 @@ export const HomeSectionWrapper = styled.div`
   background: url("/images/landing/home-bg.png") no-repeat;
   background-size: cover;
   background-position: center;
+  strong {
+    color: #CE0076;
+  }
 `;
 
 export const HomeSectionContainer = styled.div`
@@ -23,9 +26,7 @@ export const HomeSectionContainer = styled.div`
   h1 {
     max-width: 704px;
     width: 100%;
-    background: linear-gradient(92.04deg, #ffffff 0%, #d1adff 105.11%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: linear-gradient(92.04deg, #ffffff 0%, #d1adff 105.11%);
     background-clip: text;
     font-weight: 700;
     font-size: 56px;
@@ -37,7 +38,6 @@ export const HomeSectionContainer = styled.div`
   }
   strong {
     color: #CE0076;
-    background: transparent;
   }
   @media screen and (max-width: 1300px) {
     padding: 30px;
