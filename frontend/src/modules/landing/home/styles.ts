@@ -69,7 +69,7 @@ export const HomeBtn = styled.div`
 
 export const HomeSocialLinks = styled.div`
   margin-top: 10px;
-  padding: 24px;
+  padding: 24px 34px;
   background: linear-gradient(
     99.21deg,
     rgba(255, 255, 255, 0.128) -2.23%,
@@ -79,7 +79,7 @@ export const HomeSocialLinks = styled.div`
   backdrop-filter: blur(8px);
   border-radius: 10px;
   display: flex;
-  width: 340px;
+  width: 240px;
   align-items: center;
   & > :not(:first-child) {
     margin-left: 42px;
