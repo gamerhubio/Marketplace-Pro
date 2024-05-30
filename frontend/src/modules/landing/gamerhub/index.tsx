@@ -8,11 +8,9 @@ import { gamerhubSlider } from "../data";
 export const GamerHubSection: React.FC = () => {
   return (
     <GamerHubWrapper id="about">
-      <h1>GamerHub</h1>
+      <h1> <strong> Why </strong> GamerHub</h1>
       <p>
-        Our adaptive in-game difficulty system utilizes AI algorithms
-        to dynamically adjust game difficulty in
-        real-time, offering personalized challenges for players of all skill levels.
+        In the landscape of game development, integrating artificial intelligence (AI) has become a cornerstone for creating immersive and engaging gaming experiences. GamerHub stands at the forefront of this evolution, offering developers a robust platform equipped with powerful tools and resources to seamlessly integrate AI into their games.
       </p>
       <Swiper
         pagination={true}

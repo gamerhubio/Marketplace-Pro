@@ -108,37 +108,36 @@ export const tokenomicsCardData = [
 
 export const roadmapData = [
   {
-    desc: ["Project Initiation", "Team Creation"],
+    desc: ["Beta Testing", "Token Utility Design"],
     year: "2023",
-    month: "April",
+    month: "Q4",
   },
   {
-    desc: ["MVP Development", "Launch Of GamerHub MVP"],
-    year: "2023",
-    month: "Map",
+    desc: ["Feature Enhancements", "MVP Beta Testing"],
+    year: "2024",
+    month: "Q1",
   },
   {
-    desc: ["Game Integrations", "zkNFT Marketplace/Bridge"],
-    year: "2023",
-    month: "June",
+    desc: ["Public Round Launch", "Token Listing", "Staking and Liquidity Lock"],
+    year: "2024",
+    month: "Q2",
   },
   {
     desc: [
+      "Platform Integrations",
       "Launch GamerHub Mobile App and PC Launcher",
-      "Public sales/IDO",
-      "Token Listing",
     ],
     year: "2023",
     month: "Q3",
   },
   {
     desc: ["Launch in-game asset marketplace", "Launch Game Streaming"],
-    year: "2023",
-    month: "Q3-Q4",
+    year: "2024",
+    month: "Q4",
   },
   {
-    desc: ["Launch Merch Store", "GamerHub metaverse."],
-    year: "2024",
+    desc: ["User acquisition campaigns", "Platform expansion"],
+    year: "2025",
     month: "Q1",
   },
 ];
@@ -147,29 +146,34 @@ export const teamData = [
   {
     img: "/images/landing/team/victor.png",
     name: "Victor Kaycee",
-    role: "Core Contributor",
+    role: "Co-founder CEO",
   },
   {
     img: "/images/landing/team/glory.png",
     name: "Glory Lucas",
-    role: "Core Contributor",
+    role: "Co-founder CMO",
   },
 
   {
     img: "/images/landing/team/caleb.png",
     name: "Caleb Lucas",
-    role: "Core Contributor",
+    role: "Engineering Manager",
   },
 
   {
     img: "/images/landing/team/jeffery.png",
     name: "Jeffery Pan",
-    role: "Institutional Advisor",
+    role: "Institutional Advisor from SoftBank",
   },
   {
-    img: "/images/landing/team/robbie.png",
-    name: "Robbie Joe",
-    role: "Tokenomics Advisor",
+    img: "/images/landing/team/ken.png",
+    name: "Ken Suzuki",
+    role: "Fullstack Developer",
+  },
+  {
+    img: "/images/landing/team/pekka.png",
+    name: "Pekka Kelkka",
+    role: "Institutional Advisor",
   },
   {
     img: "/images/landing/team/sam.png",
@@ -177,13 +181,8 @@ export const teamData = [
     role: "Gaming Advisor",
   },
   {
-    img: "/images/landing/team/anita.png",
-    name: "Anita Kalergis",
-    role: "Institutional Advisor",
-  },
-  {
-    img: "/images/landing/team/pekka.png",
-    name: "Pekka Kelkka",
-    role: "Institutional Advisor",
+    img: "/images/landing/team/robbie.png",
+    name: "Robbie Joe",
+    role: "Polygon Advisor",
   },
 ];

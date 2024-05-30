@@ -8,7 +8,9 @@ export const TokenSectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  strong {
+    color: #CE0076;
+  }
   & > * {
     width: 95%;
     text-align: center;

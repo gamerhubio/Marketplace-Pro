@@ -31,6 +31,9 @@ export const ReinventingTextWrapper = styled.div`
     font-size: 42px;
     line-height: 52px;
     font-family: "Space Grotesk";
+    strong {
+      color: #CE0076;
+    }
   }
   p {
     font-weight: 400;

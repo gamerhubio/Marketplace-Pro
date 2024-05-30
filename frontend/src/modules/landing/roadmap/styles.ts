@@ -12,6 +12,9 @@ export const RoadmapSectionWrapper = styled.div`
     font-family: "Space Grotesk";
     text-align: center;
     margin-bottom: 48px;
+    strong {
+      color: #CE0076;
+    }
   }
   @media screen and (max-width: 600px) {
     padding: 50px 0;

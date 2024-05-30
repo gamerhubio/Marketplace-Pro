@@ -6,7 +6,7 @@ import { TeamMemberCard } from "../../../components";
 export const TeamSection: React.FC = () => {
   return (
     <TeamSectionWrapper>
-      <h1>Meet The Team</h1>
+      <h1> <strong> Meet </strong> The Team</h1>
       <p>
         The executive and development team experience spans the gaming,
         blockchain, IT, and finance industries. Each team member is highly

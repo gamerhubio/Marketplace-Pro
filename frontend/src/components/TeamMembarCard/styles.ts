@@ -48,7 +48,7 @@ export const InfoWrapper = styled.div`
   }
   p {
     font-weight: 400;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 20px;
     color: #bec9da;
     margin-bottom: 0px !important;

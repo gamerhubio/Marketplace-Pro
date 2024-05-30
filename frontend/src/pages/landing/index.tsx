@@ -3,15 +3,16 @@ import { LandingLayout } from "../../layout";
 import {
   GamerHubSection,
   HomeSection,
-  MarketplaceSection,
-  MerchStoreSection,
   ReinventingSection,
   RoadmapSection,
-  StreamingSection,
   TeamSection,
   TokenSection,
 } from "../../modules";
 import { ScrollTop } from "../../components";
+import "./styles.css"
+import { FeatureSection } from "../../modules/landing/feature";
+import { EcosystemSection } from "../../modules/landing/ecosystem";
+import { PartnersSection } from "../../modules/landing/partners";
 
 export const LandingPage: React.FC = () => {
   return (
@@ -19,11 +20,14 @@ export const LandingPage: React.FC = () => {
       <HomeSection />
       <ReinventingSection />
       <GamerHubSection />
-      <StreamingSection />
-      <MarketplaceSection />
-      <MerchStoreSection />
+      <FeatureSection />
+      {/* <StreamingSection /> */}
+      {/* <MarketplaceSection /> */}
+      {/* <MerchStoreSection /> */}
+      <EcosystemSection />
       <TokenSection />
-      {/* <RoadmapSection /> */}
+      <RoadmapSection />
+      <PartnersSection />
       <TeamSection />
       <ScrollTop />
     </LandingLayout>
