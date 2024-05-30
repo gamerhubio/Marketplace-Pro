@@ -20,10 +20,10 @@ export const navLinkData = [
     label: "Tokenomics",
     to: "#tokenomics",
   },
-  // {
-  //   label: "Roadmap",
-  //   to: "#roadmap",
-  // },
+  {
+    label: "Roadmap",
+    to: "#roadmap",
+  },
   {
     label: "Whitepaper",
     to: "https://gamerhub-2.gitbook.io/gamerhub-whitepaper-v1/",

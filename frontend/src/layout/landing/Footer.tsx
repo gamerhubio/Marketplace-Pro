@@ -18,8 +18,7 @@ export const Footer: React.FC = () => {
             <img src="/images/logo.png" alt="" />
           </FooterLogo>
           <p>
-            At GamerHub, we're revolutionizing the gaming industry by providing
-            cutting-edge AI infrastructure tailored for game developers.
+          GamerHub is an AI infrastructure platform empowering gaming studios and developers with turnkey and custom solutions to seamlessly integrate advanced AI technologies into their games and metaverses.
           </p>
           <h6>Connect with the community</h6>
           <FooterSocialNavbar>

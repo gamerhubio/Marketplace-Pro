@@ -13,7 +13,7 @@ export const ReinventingSection: React.FC = () => {
       <ReinventingContainer>
         <ReinventingTextWrapper>
           <h1>
-            Empowering games with AI technology</h1>
+            <strong>Empowering</strong>games with AI technology</h1>
           <p>
             At GamerHub, we're revolutionizing the gaming industry by providing cutting-edge AI infrastructure tailored
             for game developers thereby improving the general experience for Gamers. Our platform offers a suite of powerful

@@ -14,6 +14,9 @@ export const TeamSectionWrapper = styled.div`
     line-height: 52px;
     font-family: "Space Grotesk";
     margin-bottom: 16px;
+    strong {
+      color: #CE0076;
+    }
   }
   p {
     max-width: 620px;

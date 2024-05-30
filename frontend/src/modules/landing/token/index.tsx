@@ -14,7 +14,7 @@ export const TokenSection: React.FC = () => {
   return (
     <TokenSectionWrapper id="tokenomics">
       <h1>
-        GHT TOKEN <img src="/images/landing/ght-token.png" alt="" />
+        <strong> GHT </strong> TOKEN <img src="/images/landing/ght-token.png" alt="" />
       </h1>
       <p>
         The GHT token is a Multichain token that will be created on blockchains
@@ -24,9 +24,9 @@ export const TokenSection: React.FC = () => {
       </p>
       <TokenButtonGroup>
         <Button width={231}>View Contract Address</Button>
-        <TokenButton>
+        {/* <TokenButton>
           <span>Copy Contract Address</span>
-        </TokenButton>
+        </TokenButton> */}
       </TokenButtonGroup>
       <h3>TOKENOMICS</h3>
       <TokenomicsWrapper>

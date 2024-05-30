@@ -134,7 +134,7 @@ const App: React.FC = () => {
     //   setUser({});
     //   setIsAuthenticated(false);
     // }
-  }, [address]);
+  }, [address]); 
 
   return (
     <>
