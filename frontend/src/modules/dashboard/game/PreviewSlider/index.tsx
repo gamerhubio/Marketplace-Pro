@@ -2,15 +2,19 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { PreviewSliderWrapper, VideoPlayBtn } from "./styles";
 import { sliderData } from "../data";
+import useGame from "../../../../hooks/useGame";
 
-export const PreviewSlider: React.FC = () => {
+export const PreviewSlider = ({video} : {video: string}) => {
+
+  const game = useGame()
+
   return (
     <PreviewSliderWrapper>
       <Swiper loop={true} spaceBetween={10} className="preview-slider">
         {sliderData.map((item, key) => (
           <SwiperSlide key={key}>
-            <video poster={item.img} muted>
-              <source src={item.video} type="video/mp4" />
+            <video  muted>
+              <source src={video}  />
             </video>
             <VideoPlayBtn src="/images/landing/streaming-play-btn.png" alt="" />
           </SwiperSlide>
@@ -22,9 +26,9 @@ export const PreviewSlider: React.FC = () => {
         slidesPerView={4}
         className="preview-thumb-slider"
       >
-        {sliderData.map((item, key) => (
+        {game.inGamePictures.map((item, key) => (
           <SwiperSlide key={key}>
-            <img src={item.img} alt="" />
+            <img src={item} alt="" />
           </SwiperSlide>
         ))}
       </Swiper>

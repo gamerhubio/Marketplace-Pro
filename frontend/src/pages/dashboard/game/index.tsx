@@ -13,9 +13,14 @@ import {
   PreviewDetails,
   PreviewSlider,
 } from "../../../modules/dashboard";
+import useGame from "../../../hooks/useGame";
 
 export const DashboardGamePage: React.FC = () => {
+  
   const router = useNavigate();
+  
+  const game = useGame()
+
   return (
     <DashboardLayout>
       <GamePageWrapper>
@@ -23,13 +28,13 @@ export const DashboardGamePage: React.FC = () => {
           <IconBack /> <span>Back</span>
         </BackWrapper>
         <PreviewImageWrapper>
-          <img src="/images/userdashboard/images/twighlightbanner.png" alt="" />
+          <img src={game.banner} alt="" />
         </PreviewImageWrapper>
         <PreviewDetailsWrapper>
-          <PreviewSlider />
+          <PreviewSlider video={game.demoVideo} />
           <PreviewDetails />
         </PreviewDetailsWrapper>
-        <GameDescription />
+        <GameDescription game={game} />
       </GamePageWrapper>
     </DashboardLayout>
   );

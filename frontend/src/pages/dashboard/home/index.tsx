@@ -8,7 +8,7 @@ import {
   WelcomeRecentAddedWrapper,
 } from "./styles";
 import { GameListGrid } from "../../../components";
-import { allGameList, metaverseList, nftList } from "../data";
+import { gameList, metaverseList, nftList } from "../data";
 import { ConnectButton } from "@particle-network/connect-react-ui";
 
 export const DashboardHomePage: React.FC = () => {
@@ -42,7 +42,7 @@ export const DashboardHomePage: React.FC = () => {
               </WelcomeRecentAddedWrapper>
             </WelcomeContainer>
             <GridGroupWraper>
-              <GameListGrid title="All games" list={allGameList} />
+              <GameListGrid title="All games" list={gameList} />
               <GameListGrid title="Metaverse" list={metaverseList} />
               <GameListGrid title="NFT Marketplace" list={nftList} />
             </GridGroupWraper>

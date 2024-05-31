@@ -8,6 +8,7 @@ export type ButtonProps = {
   fSize?: number;
   rounded?: number;
   disabled?: boolean;
+  loading?: boolean;
 } & React.HTMLAttributes<HTMLElement>;
 
 export const Button: React.FC<ButtonProps> = ({
@@ -19,6 +20,7 @@ export const Button: React.FC<ButtonProps> = ({
   className,
   rounded,
   fSize,
+  loading,
   onClick,
 }) => {
   return (
@@ -31,8 +33,9 @@ export const Button: React.FC<ButtonProps> = ({
       fSize={fSize}
       onClick={disabled ? () => {} : onClick}
       disabled={disabled}
+      loading={loading}
     >
-      {children}
+      {loading ? <p>Please Wait...</p> : children}
     </ButtonWrapper>
   );
 };

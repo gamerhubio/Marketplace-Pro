@@ -59,14 +59,14 @@ export const descTabs = [
     label: "About",
     key: "about",
   },
-  {
-    label: "Tokenomics",
-    key: "tokenomics",
-  },
-  {
-    label: "Team",
-    key: "team",
-  },
+  // {
+  //   label: "Tokenomics",
+  //   key: "tokenomics",
+  // },
+  // {
+  //   label: "Team",
+  //   key: "team",
+  // },
 ];
 
 export const aboutDesc = [

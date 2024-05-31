@@ -102,7 +102,7 @@ export const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
             <img src="/images/userdashboard/btn_search.png" alt="" />
           </SearchInputWrapper>
           <HeaderActionsWrapper>
-            <TaskWrapper onClick={() => setVisible(true)}>
+          {/* <TaskWrapper onClick={() => setVisible(true)}>
               <img src="/images/userdashboard/credit.png" alt="" />
               <span>{data.credit}</span>
               <IconAdd />
@@ -121,7 +121,7 @@ export const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
                 )}
                 {screenWidth > 1240 && <IconDropdown />}
               </AppButton>
-            </WalletButtonWrapper>
+            </WalletButtonWrapper> */}
             <ProfileAvatar />
           </HeaderActionsWrapper>
         </HeaderRightSection>
