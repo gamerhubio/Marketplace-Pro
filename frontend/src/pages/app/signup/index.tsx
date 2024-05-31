@@ -19,6 +19,7 @@ export const AppSignUpPage: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [pwd, setPwd] = useState<string>("");
   const [agreement, setAgreement] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

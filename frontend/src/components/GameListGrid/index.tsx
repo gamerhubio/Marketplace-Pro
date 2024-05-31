@@ -32,7 +32,7 @@ export const GameListGrid: React.FC<GameListGridProps> = ({ title, list }) => {
             src={item.image}
             alt=""
             key={key}
-            onClick={() => router("/dashboard/game")}
+            onClick={() => router("/dashboard/game/" + (Number(key) + 1))}
           />
         ))}
       </ImageGrid>

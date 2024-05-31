@@ -17,15 +17,23 @@ export const InputWrapper = styled.div`
     padding: 0;
     flex: 1;
     height: 100%;
-    background-color: transparent;
+    background-color: #0a1f5c !important;
     border: none;
     outline: none;
-    color: #fff;
+    color: white !important;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
+    -webkit-box-shadow: 0 0 0 30px #0a1f5c inset !important;
+    -webkit-color: white !important;
     &::placeholder {
       color: #9eaec7aa;
     }
+  }
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #0a1f5c inset !important;
+    -webkit-color: white !important;
   }
 `;

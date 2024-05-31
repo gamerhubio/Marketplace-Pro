@@ -6,16 +6,21 @@ import {
   ContentTitle,
   TabContent,
 } from "./styles";
-import { aboutDesc } from "../data";
 
-export const AboutContent: React.FC = () => {
+interface IProps {
+  description: string
+}
+
+export const AboutContent = ({ description }: IProps) => {
   return (
     <TabContent>
+
       <ContentTitle>About</ContentTitle>
+
       <div>
-        {aboutDesc.map((item, key) => (
-          <ContentText key={key}>{item}</ContentText>
-        ))}
+      
+        <ContentText>{description}</ContentText>
+     
         <AboutButtonGroup>
           <AboutButton>Action</AboutButton>
           <AboutButton>P2E</AboutButton>

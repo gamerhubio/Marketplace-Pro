@@ -34,6 +34,10 @@ import {
   checkUser,
   updateUserWalletList,
 } from "./scripts/user";
+import { DashboardGameOnlyPage } from "./pages/dashboard/home/game";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const App: React.FC = () => {
   const address = useAccount();
@@ -167,6 +171,14 @@ const App: React.FC = () => {
             path="/dashboard/game"
             element={
               <ProtectedRoute>
+                <DashboardGameOnlyPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/game/:id"
+            element={
+              <ProtectedRoute>
                 <DashboardGamePage />
               </ProtectedRoute>
             }
@@ -181,6 +193,7 @@ const App: React.FC = () => {
           />
         </Routes>
       </Router>
+      <ToastContainer />
     </>
   );
 };

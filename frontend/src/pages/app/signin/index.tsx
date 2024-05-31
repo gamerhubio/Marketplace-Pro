@@ -12,12 +12,14 @@ import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
 import { login } from "../../../scripts";
 import { setGlobalState, useGlobalState } from "../../../store";
 import { checkSubscription } from "../../../scripts/user";
+import { toast } from "react-toastify";
 
 export const AppSignInPage: React.FC = () => {
   const router = useNavigate();
   const [username, setUsername] = useState<string>("");
   const [pwd, setPwd] = useState<string>("");
   const [currentUser] = useGlobalState("currentUser");
+  const [loading, setLoading] = useState(false)
 
   const address = useAccount();
 
@@ -45,6 +47,8 @@ export const AppSignInPage: React.FC = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
+    setLoading(true)
+
     const data = {
       username,
       password: pwd,
@@ -61,11 +65,14 @@ export const AppSignInPage: React.FC = () => {
           //   //check if user is subscribed
           //   checkSubscriptionState();
           // }
+          setLoading(false)
           router("/dashboard/home");
         }
       })
       .catch((err) => {
-        console.log(err);
+        setLoading(false)
+        toast.error(err.response.data.msg)
+        console.error(err);
       });
   };
 
@@ -98,7 +105,7 @@ export const AppSignInPage: React.FC = () => {
               onChange={(e) => setPwd(e.target.value)}
             />
           </FormInputWrapper>
-          <Button onClick={handleSubmit}>Sign In</Button>
+          <Button loading={loading} onClick={handleSubmit}>Sign In</Button>
           <CheckboxWrapper>
             <p>
               {"Don't have an account "}
@@ -112,3 +119,5 @@ export const AppSignInPage: React.FC = () => {
     </AppLayout>
   );
 };
+
+

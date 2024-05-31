@@ -10,25 +10,49 @@ import {
 } from "./styles";
 import { detailsData1, detailsData2, socialData } from "../data";
 import { IconFavourite } from "../../../../components";
+import useGame from "../../../../hooks/useGame";
 
 export const PreviewDetails: React.FC = () => {
+
+  const game = useGame()
+  
   return (
     <PreviewDetailsContainer>
-      {detailsData1.map((item, key) => (
-        <PreviewDetailsItem key={key}>
-          <span>{item.label}</span>
-          <span>{item.value}</span>
-        </PreviewDetailsItem>
-      ))}
+
+      <PreviewDetailsItem> 
+        <span>Release status</span>
+        <span> {game.status} </span>  
+      </PreviewDetailsItem>
+
+      <PreviewDetailsItem> 
+        <span> ICO Price </span>
+        <span> ${game.tokenPrice} </span>  
+      </PreviewDetailsItem>
+
+      <PreviewDetailsItem> 
+        <span>Chain</span>
+        <span> {game.blockchains?.[0]} </span>  
+      </PreviewDetailsItem>
+
+      <PreviewDetailsItem> 
+        <span>Token</span>
+        <span> {game.tokenTicker} </span>  
+      </PreviewDetailsItem>
+
       <DetailsDivider>
         <img src="/images/userdashboard/games.png" alt="" />
       </DetailsDivider>
-      {detailsData2.map((item, key) => (
-        <PreviewDetailsItem key={key}>
-          <span>{item.label}</span>
-          <span>{item.value}</span>
-        </PreviewDetailsItem>
-      ))}
+
+      <PreviewDetailsItem> 
+        <span> Language </span>
+        <span> {game.language} </span>  
+      </PreviewDetailsItem>
+
+      <PreviewDetailsItem> 
+        <span> Developer </span>
+        <span> {game.developers} </span>  
+      </PreviewDetailsItem>
+
       <PreviewDetailsItem>
         <span>Community</span>
         <SocialWrapper>
