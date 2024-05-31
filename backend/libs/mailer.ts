@@ -33,7 +33,7 @@ export const sendConfirmationEmail = ({ toUser, hash }: IMailer) => {
     });
 
     const message = {
-      from: process.env.MAIL_USER,
+      from: `"GamerHub " <${process.env.MAIL_USER}>`,
       to: toUser.email,
       subject: "Welcome to GamerHub!",
       html: `
