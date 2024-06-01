@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
 import { createUser } from "../../../scripts";
 import { setGlobalState } from "../../../store";
+import { toast } from "react-toastify";
 
 export const AppSignUpPage: React.FC = () => {
   const address = useAccount();
@@ -32,17 +33,24 @@ export const AppSignUpPage: React.FC = () => {
       password: pwd,
     };
     console.log(agreement);
+    setLoading(true)
 
     createUser(data)
       .then((data) => {
         //@ts-ignore
-        if (!data.error && data) {
+        setLoading(false)
+        if (data && !(data as any).error) {
           setGlobalState("isAuthenticated", true);
           router("/dashboard/home");
+        } else {
+          toast.error(data?.error)
         }
+
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err);
+        toast.error("Error occured")
       });
     // } else {
     //   router("/app/wallet-connect");
@@ -91,7 +99,7 @@ export const AppSignUpPage: React.FC = () => {
           )}
 
           {email && username && agreement && pwd && (
-            <Button onClick={handleSubmit}>Create Account</Button>
+            <Button loading={loading} onClick={handleSubmit}>Create Account</Button>
           )}
 
           <CheckboxWrapper htmlFor="checkbox">

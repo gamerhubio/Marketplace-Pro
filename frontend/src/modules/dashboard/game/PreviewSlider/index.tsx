@@ -3,23 +3,39 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { PreviewSliderWrapper, VideoPlayBtn } from "./styles";
 import { sliderData } from "../data";
 import useGame from "../../../../hooks/useGame";
+import YouTube from 'react-youtube';
+
 
 export const PreviewSlider = ({video} : {video: string}) => {
 
   const game = useGame()
 
+  const opts = {
+    height: '280',
+    width: '100%',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
+  };
+
+  function ready(event) {
+    // access to player in all event handlers via event.target
+    event.target.pauseVideo();
+  }
+
+
   return (
     <PreviewSliderWrapper>
-      <Swiper loop={true} spaceBetween={10} className="preview-slider">
-        {sliderData.map((item, key) => (
-          <SwiperSlide key={key}>
-            <video  muted>
-              <source src={video}  />
-            </video>
-            <VideoPlayBtn src="/images/landing/streaming-play-btn.png" alt="" />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+
+      <YouTube 
+        videoId={game.youtubeId} 
+        opts={opts} 
+        onReady={ready}
+        loading={"lazy"}
+        style={{background: "black", marginBottom: "20px"}}
+        />
+
       <Swiper
         loop={true}
         spaceBetween={10}

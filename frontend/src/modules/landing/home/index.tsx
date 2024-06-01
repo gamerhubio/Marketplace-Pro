@@ -25,7 +25,7 @@ export const HomeSection: React.FC = () => {
             <strong>AI</strong> Infrastructure for Metaverses and Games
           </h1>
     
-          <HomeBtn onClick={() => router("/app/home")}>
+          <HomeBtn onClick={() => router("/dashboard/home")}>
             Explore marketplace
           </HomeBtn>
     
@@ -58,6 +58,7 @@ export const HomeSection: React.FC = () => {
         </HeroLeftSection>
 
       </HomeSectionContainer>
+      
     </HomeSectionWrapper>
   );
 };

@@ -1,5 +1,5 @@
 type NA = "NA"
-type Chain = "Polygon" | "BNB Chain" | NA
+type Chain = "Polygon" | "BNB Chain" | "Mainnet" |NA
 
 const imgPath = "/images/games/"
 
@@ -8,7 +8,7 @@ const generateImage = (image: string) => {
 }
 
 const generateBanner = (image: string) => {
-  return  imgPath + "banners/" + image
+  return imgPath + "banners/" + image
 }
 
 const generateSC = (game: string, image: string) => {
@@ -24,6 +24,7 @@ export interface IGameData {
   description: string | NA;
   status: "Live" | NA;
   demoVideo: string | NA;
+  youtubeId: string | NA;
   inGamePictures: string[];
   demoLive: string | NA;
   developers: string | NA;
@@ -48,6 +49,7 @@ export const gameList : IGameData[] = [
     description: "MetaShooter is a real-world simulation-based FPS hunting game. It brings together millions of gamers from all over the world to form a community in which they may engage in realistic hunting in open world environments.",
     status: "Live",
     demoVideo: "https://youtu.be/L1g57sjRqp4",
+    youtubeId: "L1g57sjRqp4",
     inGamePictures: [
       generateSC("metashooter", "Gameplay 2.jpg"),
       generateSC("metashooter", "Gameplay 3.jpg"),
@@ -76,6 +78,7 @@ export const gameList : IGameData[] = [
     description: "Our game was inspired by the movie \"Twilight\". Out of respect, we named the game after \"TWILIGHT\". Twilight Game is a blockchain-based Play to Earn game that runs on the Binance Smart Chain, which has a native BEP-20 token called TWI for the entire internal economy.",
     status: "Live",
     demoVideo: "https://youtu.be/3-_qqQRuFiE",
+    youtubeId: "3-_qqQRuFiE",
     inGamePictures: [
       generateSC("twilight", "IMG_2465.JPG"),
       generateSC("twilight", "IMG_2467.JPG"),
@@ -103,6 +106,7 @@ export const gameList : IGameData[] = [
     description: "AbeatsHero is a gaming world where heroes grow and fight.  The player's goal is to fight, breed, collect, train and build their own clan for their heroes. Players can enjoy the fun of the game and work towards the goal of earning more income while obtaining the real monetary value of the economic system through the play-to-earn mechanism.",
     status: "Live",
     demoVideo: "https://youtu.be/cm7lMYf87z4",
+    youtubeId: "cm7lMYf87z4",
     inGamePictures: [
       generateSC("abeat", "IMG_2450.JPG"),
       generateSC("abeat", "IMG_2451.JPG"),
@@ -131,6 +135,7 @@ export const gameList : IGameData[] = [
     description: "Axie Infinity is a universe filled with fierce, collectible creatures called Axies. Axie features a player-owned economy where players have complete ownership of their digital assets and can buy, sell, and trade them just like physical trading cards and collectibles. ",
     status: "NA",
     demoVideo: "https://youtu.be/X2z_YIeettE",
+    youtubeId: "X2z_YIeettE",
     inGamePictures: [],
     demoLive: "NA",
     developers: "Axie Infinity",
@@ -153,6 +158,7 @@ export const gameList : IGameData[] = [
     description: "The Sandbox is a virtual world where players can build, own, and monetize their gaming experiences in the Ethereum blockchain using SAND, the platform's utility token.",
     status: "NA",
     demoVideo: "https://youtu.be/3-_qqQRuFiE",
+    youtubeId: "3-_qqQRuFiE",
     inGamePictures: [],
     demoLive: "NA",
     developers: "Sandbox",
@@ -175,6 +181,7 @@ export const gameList : IGameData[] = [
     description: "Decentraland is a virtual social world, the first decentralized metaverse, and the only one that is open source. Within the Decentraland platform, which can run on a browser or desktop client, users can create, experience, and monetize content and applications as well as socialize and attend a wide range of daily, community-driven events.",
     status: "NA",
     demoVideo: "NA",
+    youtubeId: "NA",
     inGamePictures: [],
     demoLive: "NA",
     developers: "Decentraland",
@@ -192,144 +199,196 @@ export const gameList : IGameData[] = [
     banner: generateBanner("twilightbanner.png")
   },
   {
-    name: "Twilight",
-    title: "A game with stable income not affected by token price.",
-    description: "Our game was inspired by the movie \"Twilight\". Out of respect, we named the game after \"TWILIGHT\". Twilight Game is a blockchain-based Play to Earn game that runs on the Binance Smart Chain, which has a native BEP-20 token called TWI for the entire internal economy.",
-    status: "Live",
-    demoVideo: "https://youtu.be/3-_qqQRuFiE",
-    inGamePictures: [
-      generateSC("twilight", "IMG_2465.JPG"),
-      generateSC("twilight", "IMG_2467.JPG"),
-      generateSC("twilight", "IMG_2468.JPG"),
-      generateSC("twilight", "IMG_2470.PNG"),
-    ],
+    name: "Meta Apes",
+    title: "Become part of the strongest Clan",
+    description: "Meta Apes is a free-to-play, play-and-earn MMO strategy game. It is set in a post-apocalyptic world, in which humanity has ended and a new era ruled by Apes has begun. Next on the agenda is space domination. Each pri-mate (yes, you) will have to work closely with their Gang to become the strongest Clan and win the ultimate race to space.",
+    status: "NA",
+    demoVideo: "NA",
+    youtubeId: "NA",
+    inGamePictures: [],
     demoLive: "NA",
-    developers: "Twilight",
+    developers: "Meta Ape",
     language: "English",
-    gameToken: "Metashooter Token",
-    tokenTicker: "TWI",
+    gameToken: "Meta Ape token",
+    tokenTicker: "PEEL",
     blockchains: ["BNB Chain"],
-    contractAddress: "0x5936480923dB2183f8A9cCf609A133f432b0dD48",
+    contractAddress: "0x734548a9e43d2D564600b1B2ed5bE9C2b911c6aB",
     tokenPrice: 0.17,
-    website: "https://twilightgame.io/",
+    website: "https://metaapesgame.com/",
     socials: {
 
     },
-    image: generateImage("twilight.png"),
-    banner: generateBanner("twilightbanner.png")
+    image: generateImage("metaapes.png"),
+    banner: generateBanner("metaapes.png")
+  },
+  
+  
+  {
+    name: "Prospector",
+    title: "Massive Multiplayer Online Real Time Economic Strategy",
+    description: "Prospectors is the first of its kind MMO dapp, economic strategy, and crypto game, where you can find own way and reach your goals. This blockchain dapp will let you try yourself in business development during the Gold Rush Epoque and building your social network.",
+    status: "NA",
+    demoVideo: "https://youtu.be/sZKLUxQtj7A?si=Tq_oz2wfKEdKu6bS",
+    youtubeId: "Tq_oz2wfKEdKu6bS",
+    inGamePictures: [],
+    demoLive: "NA",
+    developers: "Prospector",
+    language: "English",
+    gameToken: "Prospectors Gold",
+    tokenTicker: "PGL",
+    blockchains: ["NA"],
+    contractAddress: "NA",
+    tokenPrice: 0.17,
+    website: "https://prospectors.io/",
+    socials: {
+
+    },
+    image: generateImage("prospectors.png"),
+    banner: generateBanner("prospectors.png")
   },
   {
-    name: "Twilight",
-    title: "A game with stable income not affected by token price.",
-    description: "Our game was inspired by the movie \"Twilight\". Out of respect, we named the game after \"TWILIGHT\". Twilight Game is a blockchain-based Play to Earn game that runs on the Binance Smart Chain, which has a native BEP-20 token called TWI for the entire internal economy.",
-    status: "Live",
-    demoVideo: "https://youtu.be/3-_qqQRuFiE",
-    inGamePictures: [
-      generateSC("twilight", "IMG_2465.JPG"),
-      generateSC("twilight", "IMG_2467.JPG"),
-      generateSC("twilight", "IMG_2468.JPG"),
-      generateSC("twilight", "IMG_2470.PNG"),
-    ],
-    demoLive: "NA",
-    developers: "Twilight",
+    name: "Arc8",
+    title: "NA",
+    description: "Arc8 is a top mobile gaming platform created by GAMEE, a subsidiary of Animoca Brands. It features a variety of thrilling games, including three newly introduced Moca-themed games: 8 Ball Moca, Moca Mania and Into the Mocaverse, alongside sports games, card games, action games and puzzles.",
+    status: "NA",
+    demoVideo: "NA",
+    youtubeId: "NA",
+    inGamePictures: [],
+    demoLive: "https://www.arc8.com/",
+    developers: "Arc8",
     language: "English",
-    gameToken: "Metashooter Token",
-    tokenTicker: "TWI",
+    gameToken: "NA",
+    tokenTicker: "GMEE",
     blockchains: ["BNB Chain"],
-    contractAddress: "0x5936480923dB2183f8A9cCf609A133f432b0dD48",
+    contractAddress: "0x84e9a6f9d240fdd33801f7135908bfa16866939a",
     tokenPrice: 0.17,
-    website: "https://twilightgame.io/",
+    website: "https://www.arc8.com/",
     socials: {
 
     },
-    image: generateImage("twilight.png"),
-    banner: generateBanner("twilightbanner.png")
+    image: generateImage("arc.png"),
+    banner: generateBanner("arc.png")
   },
   {
-    name: "Twilight",
-    title: "A game with stable income not affected by token price.",
-    description: "Our game was inspired by the movie \"Twilight\". Out of respect, we named the game after \"TWILIGHT\". Twilight Game is a blockchain-based Play to Earn game that runs on the Binance Smart Chain, which has a native BEP-20 token called TWI for the entire internal economy.",
-    status: "Live",
-    demoVideo: "https://youtu.be/3-_qqQRuFiE",
-    inGamePictures: [
-      generateSC("twilight", "IMG_2465.JPG"),
-      generateSC("twilight", "IMG_2467.JPG"),
-      generateSC("twilight", "IMG_2468.JPG"),
-      generateSC("twilight", "IMG_2470.PNG"),
-    ],
+    name: "Alien Worlds",
+    title: "REDEFINING STORYTELLING IN LIGHTNINGWORKS' ALIEN WORLDS COMIC",
+    description: "NA",
+    status: "NA",
+    demoVideo: "NA",
+    youtubeId: "NA",
+    inGamePictures: [],
     demoLive: "NA",
-    developers: "Twilight",
+    developers: "Alien Worlds",
     language: "English",
-    gameToken: "Metashooter Token",
-    tokenTicker: "TWI",
-    blockchains: ["BNB Chain"],
-    contractAddress: "0x5936480923dB2183f8A9cCf609A133f432b0dD48",
+    gameToken: "NA",
+    tokenTicker: "NA",
+    blockchains: ["NA"],
+    contractAddress: "NA",
     tokenPrice: 0.17,
-    website: "https://twilightgame.io/",
+    website: "https://alienworlds.io/",
     socials: {
 
     },
-    image: generateImage("twilight.png"),
-    banner: generateBanner("twilightbanner.png")
+    image: generateImage("alien.png"),
+    banner: generateBanner(null)
   },
   {
-    name: "Twilight",
-    title: "A game with stable income not affected by token price.",
-    description: "Our game was inspired by the movie \"Twilight\". Out of respect, we named the game after \"TWILIGHT\". Twilight Game is a blockchain-based Play to Earn game that runs on the Binance Smart Chain, which has a native BEP-20 token called TWI for the entire internal economy.",
-    status: "Live",
-    demoVideo: "https://youtu.be/3-_qqQRuFiE",
-    inGamePictures: [
-      generateSC("twilight", "IMG_2465.JPG"),
-      generateSC("twilight", "IMG_2467.JPG"),
-      generateSC("twilight", "IMG_2468.JPG"),
-      generateSC("twilight", "IMG_2470.PNG"),
-    ],
+    name: "Tap Fantasy",
+    title: "BUILDING NEW STABLE PROFITS OF GAME ASSETS",
+    description: "Tap Fantasy is a MMORPG blockchain game. Players can interact with Tap Fantasy directly on the web page or wallet, and they can start playing immediately.",
+    status: "NA",
+    demoVideo: "https://youtu.be/PV8FCkfjp4s",
+    youtubeId: "PV8FCkfjp4s",
+    inGamePictures: [],
     demoLive: "NA",
-    developers: "Twilight",
+    developers: "Tap Fantasy",
     language: "English",
-    gameToken: "Metashooter Token",
-    tokenTicker: "TWI",
-    blockchains: ["BNB Chain"],
-    contractAddress: "0x5936480923dB2183f8A9cCf609A133f432b0dD48",
+    gameToken: "NA",
+    tokenTicker: "NA",
+    blockchains: ["NA"],
+    contractAddress: "NA",
     tokenPrice: 0.17,
-    website: "https://twilightgame.io/",
+    website: "https://tapfantasy.io/",
     socials: {
 
     },
-    image: generateImage("twilight.png"),
-    banner: generateBanner("twilightbanner.png")
+    image: generateImage("tap.png"),
+    banner: generateBanner(null)
   },
+
   {
-    name: "Twilight",
-    title: "A game with stable income not affected by token price.",
-    description: "Our game was inspired by the movie \"Twilight\". Out of respect, we named the game after \"TWILIGHT\". Twilight Game is a blockchain-based Play to Earn game that runs on the Binance Smart Chain, which has a native BEP-20 token called TWI for the entire internal economy.",
-    status: "Live",
-    demoVideo: "https://youtu.be/3-_qqQRuFiE",
-    inGamePictures: [
-      generateSC("twilight", "IMG_2465.JPG"),
-      generateSC("twilight", "IMG_2467.JPG"),
-      generateSC("twilight", "IMG_2468.JPG"),
-      generateSC("twilight", "IMG_2470.PNG"),
-    ],
+    name: "Illuvium",
+    title: "NA",
+    description: "Illuvium is an enthralling series of fully decentralised RPG and collection games set in a fragmented world of beauty and wonder. Explore the vast landscape, hunt dangerous creatures, and capture them for battles in the Arenas or trade on the exchange. The interconnected games allow your assets to be utilised in various ways across the series. \n Illuvium is built as a fully decentralised protocol and offers players a triple-A blockchain gaming experience. Stakers can vote on various aspects of the game and its tokenomics, giving them the power to shape the project's future. Additionally, they receive regular yields and distributions of the game’s revenue.",
+    status: "NA",
+    demoVideo: "NA",
+    youtubeId: "NA",
+    inGamePictures: [],
     demoLive: "NA",
-    developers: "Twilight",
+    developers: "Illuvium",
     language: "English",
-    gameToken: "Metashooter Token",
-    tokenTicker: "TWI",
-    blockchains: ["BNB Chain"],
-    contractAddress: "0x5936480923dB2183f8A9cCf609A133f432b0dD48",
+    gameToken: "Illuvium Token",
+    tokenTicker: "ILV",
+    blockchains: ["Mainnet"],
+    contractAddress: "0x767fe9edc9e0df98e07454847909b5e959d7ca0e",
     tokenPrice: 0.17,
-    website: "https://twilightgame.io/",
+    website: "https://illuvium.io/",
     socials: {
 
     },
-    image: generateImage("twilight.png"),
-    banner: generateBanner("twilightbanner.png")
+    image: generateImage("ilv.png"),
+    banner: generateBanner("ilv.png")
   },
+
+  {
+    name: "Yield Guild Games",
+    title: "Build Guilds, Forge Friendships and win with YGG",
+    description: "NA",
+    status: "NA",
+    demoVideo: "NA",
+    youtubeId: "NA",
+    inGamePictures: [],
+    demoLive: "NA",
+    developers: "Yield Guild Games",
+    language: "English",
+    gameToken: "NA",
+    tokenTicker: "NA",
+    blockchains: ["NA"],
+    contractAddress: "NA",
+    tokenPrice: 0.17,
+    website: "https://www.yieldguild.io/",
+    socials: {
+
+    },
+    image: generateImage(null),
+    banner: generateBanner(null)
+  },
+
+  {
+    name: "Pixels",
+    title: "Make your home in a world of unlimited adventure.",
+    description: "Pixels is a captivating, open-ended world of farming and exploration, built one pixel at a time. Gathering resources, advancing skills, and building relationships while exploring the story and quests woven throughout the Pixels Universe, you’ll be submerged in a mesmerizing blend of managing, creating, and exploring in a world that marries blockchain ownership with your progression and accomplishments.",
+    status: "NA",
+    demoVideo: "NA",
+    youtubeId: "NA",
+    inGamePictures: [],
+    demoLive: "NA",
+    developers: "Pixels",
+    language: "English",
+    gameToken: "Pixel Token",
+    tokenTicker: "PIXEL",
+    blockchains: ["Mainnet"],
+    contractAddress: "0x3429d03c6F7521AeC737a0BBF2E5ddcef2C3Ae31",
+    tokenPrice: 0.17,
+    website: "https://www.pixels.xyz/",
+    socials: {
+
+    },
+    image: generateImage("pixel.png"),
+    banner: generateBanner("pixel.png")
+  },
+ 
 ]
-
-//
-
 
 
 
