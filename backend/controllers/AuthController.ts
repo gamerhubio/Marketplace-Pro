@@ -4,6 +4,7 @@ import { sendConfirmationEmail } from "../libs/mailer";
 import Users from "../models/UserModel";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+const CustomError = require("../errors");
 
 type IUserList = {
   _id: string;
@@ -29,61 +30,78 @@ export const createUser = async (
 ) => {
   // tslint:disable-next-line:no-console
   // console.log(req.body);
-  try {
-    // create user
-    const user: IUser | any = await Users.create({
-      email: req.body.email,
-      username: req.body.username,
-      password: await bcrypt.hash(req.body.password, 10),
-      wallets: req.body.wallets,
-    });
+  // try {
+  const usernameAlreadyExists = await Users.findOne({
+    username: req.body.username,
+  });
 
-    // email info
-    const data = {
-      id: user._id,
-      email: user.email,
-      username: user.username,
-      wallets: user.wallets,
-      verified: user.verified,
-      challenges: user.challenges,
-    };
-
-    // send email
-    await sendConfirmationEmail({ toUser: data, hash: data.id });
-    const myUser = {
-      id: user._id,
-      email: user.email,
-      username: user.username,
-      wallets: user.wallets,
-    };
-
-    // generate tokens
-    const accessToken = jwt.sign(
-      { ...myUser },
-      `${process.env.ACCESS_TOKEN_SECRET}`,
-      { expiresIn: "24h" }
-    );
-    // return response
-    res.status(StatusCodes.OK).json({ accessToken });
-  } catch (error) {
-    // Log error
-    console.error("Error creating user:", error);
-
-    // Determine error type and send appropriate response
-    if (error.name === "ValidationError") {
-      res
-        .status(StatusCodes.BAD_REQUEST)
-        .send({ message: "Validation error", details: error.errors });
-    } else if (error.name === "MongoError" && error.code === 11000) {
-      res
-        .status(StatusCodes.CONFLICT)
-        .send({ message: "Duplicate key error", details: error.keyValue });
-    } else {
-      res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .send({ message: "Internal server error", details: error.message });
-    }
+  if (usernameAlreadyExists) {
+    throw new CustomError.BadRequestError("Username already exists");
   }
+
+  const emailAlreadyExists = await Users.findOne({ email: req.body.email });
+  if (emailAlreadyExists) {
+    throw new CustomError.BadRequestError("Email already exists");
+  }
+
+  // create user
+  const user: IUser | any = await Users.create({
+    email: req.body.email,
+    username: req.body.username,
+    password: await bcrypt.hash(req.body.password, 10),
+    wallets: req.body.wallets,
+  });
+
+  // email info
+  const data = {
+    id: user._id,
+    email: user.email,
+    username: user.username,
+    wallets: user.wallets,
+    verified: user.verified,
+    challenges: user.challenges,
+  };
+
+  // send email
+  await sendConfirmationEmail({ toUser: data, hash: data.id });
+  const myUser = {
+    id: user._id,
+    email: user.email,
+    username: user.username,
+    wallets: user.wallets,
+  };
+
+  // generate tokens
+  const accessToken = jwt.sign(
+    { ...myUser },
+    `${process.env.ACCESS_TOKEN_SECRET}`,
+    { expiresIn: "24h" }
+  );
+  // return response
+  res.status(StatusCodes.OK).json({ accessToken });
+  // } catch (error) {
+  //   // Log error
+  //   // console.error("Error creating user:", error);
+
+  //   // Determine error type and send appropriate response
+  //   if (error.name === "ValidationError") {
+  //     // res
+  //     //   .status(StatusCodes.BAD_REQUEST)
+  //     //   .send({ message: "Validation error", details: error.errors });
+  //     throw new CustomError.BadRequestError("Validation error");
+  //   } else if (error.name === "MongoError" && error.code === 11000) {
+  //     // res
+  //     //   .status(StatusCodes.CONFLICT)
+  //     //   .send({ message: "Duplicate key error", details: error.keyValue });
+  //     throw new CustomError.BadRequestError("Duplicate key error");
+  //   } else {
+  //     // res
+  //     //   .status(StatusCodes.INTERNAL_SERVER_ERROR)
+  //     //   .send({ message: "Internal server error", details: error.message });
+
+  //     throw new CustomError.BadRequestError("Internal server error");
+  //   }
+  // }
 };
 
 // login user
@@ -92,42 +110,45 @@ export const loginUser = async (
   res: express.Response
 ) => {
   // authenticate user
-  try {
-    // get user
-    const user: IUserList | any = await Users.findOne({
-      username: req.body.username,
-    });
+  // try {
+  // get user
+  const user: IUserList | any = await Users.findOne({
+    username: req.body.username,
+  });
 
-    if (user) {
-      // compare password
-      if (await bcrypt.compare(req.body.password, user.password)) {
-        const myUser = {
-          id: user._id,
-          email: user.email,
-          username: user.username,
-          wallets: user.wallets,
-        };
-        // generate tokens
-        const accessToken = jwt.sign(
-          { ...myUser },
-          `${process.env.ACCESS_TOKEN_SECRET}`,
-          { expiresIn: "24h" }
-        );
-        res.status(StatusCodes.OK).json({ accessToken });
-      } else {
-        res
-          .status(StatusCodes.UNAUTHORIZED)
-          .json({ msg: "Invalid credentials" });
-      }
+  if (user) {
+    // compare password
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      const myUser = {
+        id: user._id,
+        email: user.email,
+        username: user.username,
+        wallets: user.wallets,
+      };
+      // generate tokens
+      const accessToken = jwt.sign(
+        { ...myUser },
+        `${process.env.ACCESS_TOKEN_SECRET}`,
+        { expiresIn: "24h" }
+      );
+      res.status(StatusCodes.OK).json({ accessToken });
     } else {
-      res.status(StatusCodes.UNAUTHORIZED).json({ msg: "Invalid credentials" });
+      // res
+      //   .status(StatusCodes.UNAUTHORIZED)
+      //   .json({ msg: "Invalid credentials" });
+      throw new CustomError.UnauthenticatedError("Invalid Credentials");
     }
-  } catch (error) {
-    // Send an internal server error response
-    return res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ msg: "Internal server error", details: error.message });
+  } else {
+    // res.status(StatusCodes.UNAUTHORIZED).json({ msg: "Invalid credentials" });
+    throw new CustomError.UnauthenticatedError("Invalid Credentials");
   }
+  // } catch (error) {
+  //   // Send an internal server error response
+  //   // return res
+  //   //   .status(StatusCodes.INTERNAL_SERVER_ERROR)
+  //   //   .json({ msg: "Internal server error", details: error.message });
+  //   throw new CustomError.BadRequestError("Internal server error");
+  // }
 };
 
 // check address user

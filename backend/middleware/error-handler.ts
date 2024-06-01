@@ -1,10 +1,40 @@
-import express from "express"
-import CustomAPIError from '../errors/custom-error'
-const errorHandlerMiddleware = (err: { statusCode: number; message: any }, req:express.Request, res:express.Response, next:express.NextFunction) => {
-  if (err instanceof CustomAPIError) {
-    return res.status(err.statusCode).json({ msg: err.message })
-  }
-  return res.status(500).send('Something went wrong try again later')
-}
+import { Request, Response, NextFunction } from "express";
+import { StatusCodes } from "http-status-codes";
 
-export default errorHandlerMiddleware
+const errorHandlerMiddleware = (
+  err: any,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  console.error(err); // Log the error for debugging
+
+  let customError: { statusCode: number; msg: string } = {
+    // set default
+    statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
+    msg: err.message || "Something went wrong, try again later",
+  };
+
+  if (err.name === "ValidationError") {
+    customError.msg = Object.values(err.errors)
+      .map((item: any) => item.message)
+      .join(",");
+    customError.statusCode = 400;
+  }
+
+  if (err.code && err.code === 11000) {
+    customError.msg = `Duplicate value entered for ${Object.keys(
+      err.keyValue
+    )} field, please choose another value`;
+    customError.statusCode = 400;
+  }
+
+  if (err.name === "CastError") {
+    customError.msg = `No item found with id : ${err.value}`;
+    customError.statusCode = 404;
+  }
+
+  return res.status(customError.statusCode).json({ msg: customError.msg });
+};
+
+export default errorHandlerMiddleware;
