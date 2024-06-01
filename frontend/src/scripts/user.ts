@@ -284,7 +284,7 @@ export async function updateUserWalletList(formData: FormData) {
 
 //get user
 export const login = async (info: { username: string; password: string }) => {
-  //try {
+  try {
     // 👇️ const data: GetUsersResponse
     const { data } = await axios.post<authResponse>(
       `${
@@ -310,15 +310,15 @@ export const login = async (info: { username: string; password: string }) => {
     }
 
     // return data;
-  // } catch (error) {
-  //   if (axios.isAxiosError(error)) {
-  //     console.log("error message: ", error.message);
-  //     return { error: error.message };
-  //   } else {
-  //     console.log("unexpected error: ", error);
-  //     return { error: "An unexpected error occurred" };
-  //   }
-  // }
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      return { error: error.message };
+    } else {
+      console.log("unexpected error: ", error);
+      return { error: "An unexpected error occurred" };
+    }
+  }
 };
 
 //get user

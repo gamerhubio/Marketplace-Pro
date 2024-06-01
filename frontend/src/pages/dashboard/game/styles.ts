@@ -6,6 +6,7 @@ export const BackWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 16px;
+  cursor: pointer;
   span {
     margin-left: 8px;
     font-weight: 500;

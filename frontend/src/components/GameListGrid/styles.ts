@@ -9,8 +9,8 @@ export const ImageGrid = styled.div`
   img {
     width: 100%;
     border-radius: 8px;
-
     object-fit: cover;
+    cursor: pointer;
   }
   @media screen and (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
