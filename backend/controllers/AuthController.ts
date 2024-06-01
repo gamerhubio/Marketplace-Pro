@@ -66,8 +66,23 @@ export const createUser = async (
     // return response
     res.status(StatusCodes.OK).json({ accessToken });
   } catch (error) {
-    // throw error
-    res.status(StatusCodes.BAD_REQUEST).send(error);
+    // Log error
+    console.error("Error creating user:", error);
+
+    // Determine error type and send appropriate response
+    if (error.name === "ValidationError") {
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .send({ message: "Validation error", details: error.errors });
+    } else if (error.name === "MongoError" && error.code === 11000) {
+      res
+        .status(StatusCodes.CONFLICT)
+        .send({ message: "Duplicate key error", details: error.keyValue });
+    } else {
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .send({ message: "Internal server error", details: error.message });
+    }
   }
 };
 
@@ -108,9 +123,10 @@ export const loginUser = async (
       res.status(StatusCodes.UNAUTHORIZED).json({ msg: "Invalid credentials" });
     }
   } catch (error) {
-    // console.log(erro
-    // throw error
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+    // Send an internal server error response
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ msg: "Internal server error", details: error.message });
   }
 };
 
