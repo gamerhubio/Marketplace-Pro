@@ -19,7 +19,7 @@ export const HomeSection: React.FC = () => {
   return (
     <HomeSectionWrapper id="home">
       <HomeSectionContainer>
-        <div>
+        <div className="right">
 
           <h1>
             <strong>AI</strong> Infrastructure for Metaverses and Games
@@ -58,7 +58,7 @@ export const HomeSection: React.FC = () => {
         </HeroLeftSection>
 
       </HomeSectionContainer>
-      
+
     </HomeSectionWrapper>
   );
 };

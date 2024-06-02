@@ -22,8 +22,11 @@ export const FeatureSectionContainer = styled.div`
     padding-top: 100px;
   }
   @media screen and (max-width: 768px) {
+    padding: 8px;
+    padding-top: 50px;
+    height: 1000px;
     h1 {
-      font-size: 46px;
+      font-size: 36px;
     }
   }
 `;

@@ -141,7 +141,7 @@ type checkerResponse = {
 };
 
 export async function createUser(formData: FormData) {
-  try {
+  //try {
     // 👇️ const data: CreateUserResponse
     const { data } = await axios.post<authResponse>(
       `${
@@ -166,16 +166,16 @@ export async function createUser(formData: FormData) {
       // window.location.replace(`${process.env.REACT_APP_DOMAIN}/app/signup`);
       return false;
     }
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.log("error message: ", error.message);
-      // 👇️ error: AxiosError<any, any>
-      return { error: error.message };
-    } else {
-      console.log("unexpected error: ", error);
-      return { error: "An unexpected error occurred" };
-    }
-  }
+  // } catch (error) {
+  //   if (axios.isAxiosError(error)) {
+  //     console.log("error message: ", error.message);
+  //     // 👇️ error: AxiosError<any, any>
+  //     return { error: error.message };
+  //   } else {
+  //     console.log("unexpected error: ", error);
+  //     return { error: "An unexpected error occurred" };
+  //   }
+  // }
 }
 
 export async function updateUser(formData: UpdateFormData) {
@@ -284,7 +284,7 @@ export async function updateUserWalletList(formData: FormData) {
 
 //get user
 export const login = async (info: { username: string; password: string }) => {
-  try {
+//  try {
     // 👇️ const data: GetUsersResponse
     const { data } = await axios.post<authResponse>(
       `${
@@ -310,15 +310,15 @@ export const login = async (info: { username: string; password: string }) => {
     }
 
     // return data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.log("error message: ", error.message);
-      return { error: error.message };
-    } else {
-      console.log("unexpected error: ", error);
-      return { error: "An unexpected error occurred" };
-    }
-  }
+  // } catch (error) {
+  //   if (axios.isAxiosError(error)) {
+  //     console.log("error message: ", error.message);
+  //     return { error: error.message };
+  //   } else {
+  //     console.log("unexpected error: ", error);
+  //     return { error: "An unexpected error occurred" };
+  //   }
+  // }
 };
 
 //get user

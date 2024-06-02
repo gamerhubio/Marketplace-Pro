@@ -44,8 +44,17 @@ export const HomeSectionContainer = styled.div`
     padding-top: 100px;
   }
   @media screen and (max-width: 768px) {
+    padding: 8px;
+    padding-top: 40px;
+    flex-wrap: wrap;
     h1 {
-      font-size: 46px;
+      font-size: 32px;
+      text-align: center;
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
 `;
@@ -62,6 +71,7 @@ export const HomeBtn = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  justify-self: center;
   font-weight: 500;
   font-size: 15px;
   line-height: 24px;
@@ -87,6 +97,8 @@ export const HomeSocialLinks = styled.div`
   @media screen and (max-width: 768px) {
     transform: translate(50%, 0);
     right: 50%;
+    width: 180px;
+    padding: 20px 30px;
   }
   @media screen and (max-width: 560px) {
     position: static;
@@ -113,16 +125,7 @@ export const HeroLeftSection = styled.div`
   flex-direction: column;
   gap: 18px;
   @media screen and (max-width: 768px) {
-    transform: translate(50%, 0);
-    right: 50%;
-  }
-  @media screen and (max-width: 560px) {
-    position: static;
-    transform: translate(0, 0);
-    margin-top: 40px;
-    & > :not(:first-child) {
-      margin-left: 24px;
-    }
+    flex-basis: 100%;
   }
 `;
 
