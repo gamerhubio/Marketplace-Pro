@@ -42,15 +42,11 @@ export const AppSignUpPage: React.FC = () => {
         if (data && !(data as any).error) {
           setGlobalState("isAuthenticated", true);
           router("/dashboard/home");
-        } else {
-          toast.error(data?.error)
         }
-
       })
       .catch((err) => {
         setLoading(false)
-        console.log(err);
-        toast.error("Error occured")
+        toast.error(err.response.data.msg)
       });
     // } else {
     //   router("/app/wallet-connect");
@@ -83,6 +79,7 @@ export const AppSignUpPage: React.FC = () => {
             <Input
               placeholder="Email"
               value={email}
+              type="email"
               //@ts-expect-error
               onChange={(e) => setEmail(e.target.value)}
             />

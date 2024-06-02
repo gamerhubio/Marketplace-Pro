@@ -26,6 +26,17 @@ export const FeatureCardStyle = styled.div`
         text-align: left;
         color: #B4B6BB;
     }
+    @media screen and (max-width: 768px) {
+        h3 {
+          font-size: 20px;
+          line-height: 28px;
+        }
+        p {
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+
 `
 
 interface IProps {

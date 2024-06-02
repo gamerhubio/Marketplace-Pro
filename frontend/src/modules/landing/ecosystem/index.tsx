@@ -47,6 +47,7 @@ export const EcosystemSection: React.FC = () => {
           </EcosystemCard>
 
         </div>
+        
       </EcosystemWrapper>
     </EcosystemSectionWrapper>
   );

@@ -32,6 +32,19 @@ export const EcosystemWrapper = styled.div`
   .more {
     justify-content: center;
   }
+  @media screen and (max-width: 768px) {
+    > div {
+      flex-wrap: wrap;
+      .img-margin {
+        margin-top: 24px;
+      }
+    }
+    .more {
+      .img-margin {
+        width: 100%;
+      }
+    }
+  }
 `;
 
 

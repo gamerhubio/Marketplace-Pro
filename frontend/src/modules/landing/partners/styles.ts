@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const PartnerSectionWrapper = styled.div`
   display: flex;
   justify-content: center;
+  
 `;
 
 
@@ -32,6 +33,9 @@ export const PartnersWrapper = styled.div`
       min-width: 100px;
     }
   }
+  @media screen and (max-width: 768px) {
+    padding: 60px 8px;
+  }
 `;
 
 
@@ -54,62 +58,9 @@ export const PartnersCardWrapper = styled.div`
     .img-margin {
       margin-top: 24px;
     }
+    @media screen and (max-width: 768px) {
+      flex-wrap: wrap;
+    }
   }
-`;
 
-export const StreamingWrapper = styled.div`
-  p {
-    font-size: 12px;
-    height: 80px;
-  }
-  
-`
-
-export const StreamingImgWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  img {
-    width: 100%;
-    align-self: end;
-  }
-  @media screen and (max-width: 425px) {
-    min-height: 250px;
-  }
-`;
-
-
-export const VideoPlayBtn = styled.img`
-  width: 120px;
-  height: 120px;
-  /* top: 50%;
-  left: 50%; */
-  position: absolute;
-  transform-origin: -50% -50%;
-  z-index: 2;
-  cursor: pointer;
-  @media screen and (max-width: 768px) {
-    width: 80px;
-    height: 80px;
-  }
-  @media screen and (max-width: 500px) {
-    width: 50px;
-    height: 50px;
-  }
-`;
-
-export const StreamBtn = styled.img`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  max-width: 342px;
-  width: 95%;
-  z-index: 2;
-  cursor: pointer;
-  @media screen and (max-width: 768px) {
-    max-width: 250px;
-  }
-  @media screen and (max-width: 500px) {
-    max-width: 150px;
-  }
 `;
