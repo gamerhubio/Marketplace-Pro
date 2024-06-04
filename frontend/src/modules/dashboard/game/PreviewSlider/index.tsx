@@ -29,7 +29,7 @@ export const PreviewSlider = ({video} : {video: string}) => {
     <PreviewSliderWrapper>
 
       <YouTube 
-        videoId={game.youtubeId} 
+        videoId={game.youtubeId === "NA" ? "T2mqtwFCHF0" : game.youtubeId } 
         opts={opts} 
         onReady={ready}
         loading={"lazy"}

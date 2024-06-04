@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import {
   DetailsDivider,
   PlayButton,
@@ -9,12 +9,40 @@ import {
   SocialWrapper,
 } from "./styles";
 import { detailsData1, detailsData2, socialData } from "../data";
-import { IconFavourite } from "../../../../components";
+import { IconFavourite, IconDiscord, IconTelegram, IconTwitter, IconWebsite } from "../../../../components";
 import useGame from "../../../../hooks/useGame";
 
 export const PreviewDetails: React.FC = () => {
 
   const game = useGame()
+
+  const getSocials = () => {
+    const accounts = game.socials
+    const socials = []
+
+    if (accounts.discord) {
+      socials.push({
+        icon: <IconDiscord fill="#7D92B5" />,
+        to: accounts.discord
+      })
+    }
+
+    if (accounts.telegram) {
+      socials.push({
+        icon: <IconTelegram fill="#7D92B5" />,
+        to: accounts.telegram
+      })
+    }
+
+    if (accounts.twitter) {
+      socials.push({
+        icon: <IconTwitter fill="#7D92B5" />,
+        to: accounts.twitter
+      })
+    }
+ 
+    return socials
+  }
   
   return (
     <PreviewDetailsContainer>
@@ -24,10 +52,10 @@ export const PreviewDetails: React.FC = () => {
         <span> {game.status} </span>  
       </PreviewDetailsItem>
 
-      <PreviewDetailsItem> 
+      {/* <PreviewDetailsItem> 
         <span> ICO Price </span>
         <span> ${game.tokenPrice} </span>  
-      </PreviewDetailsItem>
+      </PreviewDetailsItem> */}
 
       <PreviewDetailsItem> 
         <span>Chain</span>
@@ -56,7 +84,7 @@ export const PreviewDetails: React.FC = () => {
       <PreviewDetailsItem>
         <span>Community</span>
         <SocialWrapper>
-          {socialData.map((item, key) => (
+          {getSocials().map((item, key) => (
             <a href={item.to} key={key} target="_blank" rel="noreferrer">
               {item.icon}
             </a>

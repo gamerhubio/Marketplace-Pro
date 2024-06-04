@@ -10,8 +10,12 @@ import {
 import { GameListGrid } from "../../../components";
 import { gameList, metaverseList, nftList } from "../data";
 import { ConnectButton } from "@particle-network/connect-react-ui";
+import { useNavigate } from "react-router-dom";
 
 export const DashboardHomePage: React.FC = () => {
+
+  const router =  useNavigate();
+
   return (
     <ConnectButton.Custom>
       {({
@@ -33,8 +37,9 @@ export const DashboardHomePage: React.FC = () => {
                     in one place.
                   </p>
                   {!account && (
-                    <ConnectWalletButton>Connect Wallet</ConnectWalletButton>
+                    <ConnectWalletButton onClick={() => router("/app/signin")}>Sign In</ConnectWalletButton>
                   )}
+                  
                 </div>
               </WelcomeImageWrapper>
               <WelcomeRecentAddedWrapper>
