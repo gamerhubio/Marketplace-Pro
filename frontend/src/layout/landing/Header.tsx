@@ -41,7 +41,7 @@ export const Header: React.FC = () => {
                 {item.label}
               </HeaderNavItem>
             ))}
-            <SignInBtn href="/app/signup">Sign in</SignInBtn> 
+            {/* <SignInBtn href="/app/signup">Sign in</SignInBtn>  */}
           </HeaderNavbar>
           <HeaderMenuIcon onClick={() => setMenu(true)}>
             <IconRightMenu />
