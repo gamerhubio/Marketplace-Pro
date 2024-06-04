@@ -39,6 +39,8 @@ export const ProfileAvatar: React.FC = () => {
     router("/app/signin");
   };
 
+  if (!username) return
+
   return (
     // <ConnectButton.Custom>
     //   {({

@@ -162,25 +162,25 @@ const App: React.FC = () => {
           <Route
             path="/dashboard/home"
             element={
-              <ProtectedRoute>
+              // <ProtectedRoute>
                 <DashboardHomePage />
-              </ProtectedRoute>
+              // </ProtectedRoute>
             }
           />
           <Route
             path="/dashboard/game"
             element={
-              <ProtectedRoute>
+              // <ProtectedRoute>
                 <DashboardGameOnlyPage />
-              </ProtectedRoute>
+              // </ProtectedRoute>
             }
           />
           <Route
             path="/dashboard/game/:id"
             element={
-              <ProtectedRoute>
+              // <ProtectedRoute>
                 <DashboardGamePage />
-              </ProtectedRoute>
+              // </ProtectedRoute>
             }
           />
           <Route
