@@ -8,6 +8,7 @@ export const PartnerSectionWrapper = styled.div`
 
 
 export const PartnersWrapper = styled.div`
+  overflow-x: hidden;
   padding: 80px 72px;
   max-width: 1440px;
   width: 100%;
@@ -55,11 +56,19 @@ export const PartnersCardWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     .img-margin {
       margin-top: 24px;
     }
+    img {
+      max-width: 100px;
+      background: red;
+      padding: 20px;
+      width: 100%;
+    }
     @media screen and (max-width: 768px) {
       flex-wrap: wrap;
+
     }
   }
 

@@ -16,4 +16,10 @@ export const ScrollTopWrapper = styled.div<{ visible: boolean }>`
   border-radius: 100%;
   transform: ${({ visible }) => (visible ? "scale(1)" : "scale(0)")};
   visibility: ${({ visible }) => (visible ? "visible" : "hidden")};
+  @media screen and (max-width: 768px) {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+  }
 `;

@@ -146,18 +146,18 @@ export const teamData = [
   {
     img: "/images/landing/team/victor.png",
     name: "Victor Kaycee",
-    role: "Core Contributor",
+    role: "Co-founder / CEO",
   },
   {
     img: "/images/landing/team/glory.png",
     name: "Glory Lucas",
-    role: "Core Contributor",
+    role: "Co-founder / CMO",
   },
 
   {
     img: "/images/landing/team/caleb.png",
     name: "Caleb Lucas",
-    role: "Core Contributor",
+    role: "Engineering Manager",
   },
   {
     img: "/images/landing/team/ken.png",
@@ -182,6 +182,6 @@ export const teamData = [
   {
     img: "/images/landing/team/robbie.png",
     name: "Robbie Joe",
-    role: "Polygon Advisor",
+    role: "Polygon Advisor / CEO Kommunitas",
   },
 ];
