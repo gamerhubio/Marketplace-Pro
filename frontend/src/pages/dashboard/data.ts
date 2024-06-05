@@ -129,7 +129,7 @@ export const gameList : IGameData[] = [
     banner: generateBanner("sand.png")
   },
   {
-    name: "Decentrland",
+    name: "Decentraland",
     title: "Make new friends, explore diverse events, and spark your creativity in a virtual world built and owned by its community.",
     description: "Decentraland is a virtual social world, the first decentralized metaverse, and the only one that is open source. Within the Decentraland platform, which can run on a browser or desktop client, users can create, experience, and monetize content and applications as well as socialize and attend a wide range of daily, community-driven events.",
     status: "NA",
@@ -149,8 +149,8 @@ export const gameList : IGameData[] = [
       twitter: "https://twitter.com/decentraland",
       discord: "https://dcl.gg/discord"
     },
-    image: generateImage("twilight.png"),
-    banner: generateBanner("twilightbanner.png")
+    image: generateImage("decentraland.png"),
+    banner: generateBanner("decentraland.png")
   },
   {
     name: "Meta Apes",
