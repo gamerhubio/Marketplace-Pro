@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ModalWrapper from "./ModalWrapper"
 import SignIn from "./SignIn"
 import SignUp from "./SignUp"
+import { toast } from "react-toastify";
 
 
 
@@ -22,7 +23,13 @@ const AuthModals = ({link, open, setOpen} : IProps) => {
 
     const handleClose = () => {
         setOpen(false)
-        window.open(link, '_blank');
+        if (link === null) {
+
+        } else if (link === "NA") {
+            toast.error("Game not avaialable")
+        } else {
+            window.open(link, "_blank")
+        }
     }
 
 

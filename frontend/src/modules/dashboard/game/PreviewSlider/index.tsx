@@ -4,14 +4,17 @@ import { PreviewSliderWrapper, VideoPlayBtn } from "./styles";
 import { sliderData } from "../data";
 import useGame from "../../../../hooks/useGame";
 import YouTube from 'react-youtube';
+import useResolution from "../../../../hooks/useResolution";
 
 
 export const PreviewSlider = ({video} : {video: string}) => {
 
+  const { height } = useResolution()
+
   const game = useGame()
 
   const opts = {
-    height: '280',
+    height: height * 0.6,
     width: '100%',
     playerVars: {
       // https://developers.google.com/youtube/player_parameters

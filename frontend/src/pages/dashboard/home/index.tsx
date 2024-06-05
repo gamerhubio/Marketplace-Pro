@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { DashboardLayout } from "../../../layout";
 import {
   ConnectWalletButton,
@@ -10,13 +10,14 @@ import {
 import { GameListGrid } from "../../../components";
 import { gameList } from "../data";
 import { ConnectButton } from "@particle-network/connect-react-ui";
-import { useNavigate } from "react-router-dom";
+import AuthModals from "../../../components/AuthModals";
 
 export const DashboardHomePage: React.FC = () => {
 
-  const router =  useNavigate();
+  const [open, setOpen] = useState(false)
 
   return (
+    <>
     <ConnectButton.Custom>
       {({
         account,
@@ -27,33 +28,35 @@ export const DashboardHomePage: React.FC = () => {
         accountLoading,
       }) => {
         return (
-          <DashboardLayout>
-            <WelcomeContainer>
-              <WelcomeImageWrapper>
-                <div>
-                  <h1>Welcome to GamerHub</h1>
-                  <p>
-                    Experience the future of gaming across multiple chains, all
-                    in one place.
-                  </p>
-                  {!account && (
-                    <ConnectWalletButton onClick={() => router("/app/signin")}>Sign In</ConnectWalletButton>
-                  )}
-                  
-                </div>
-              </WelcomeImageWrapper>
-              <WelcomeRecentAddedWrapper>
-                <h1>Recently added</h1>
-              </WelcomeRecentAddedWrapper>
-            </WelcomeContainer>
-            <GridGroupWraper>
-              <GameListGrid title="All games" list={gameList} />
-              {/* <GameListGrid title="Metaverse" list={metaverseList} />
-              <GameListGrid title="NFT Marketplace" list={nftList} /> */}
-            </GridGroupWraper>
-          </DashboardLayout>
-        );
-      }}
-    </ConnectButton.Custom>
+            <DashboardLayout>
+              <WelcomeContainer>
+                <WelcomeImageWrapper>
+                  <div>
+                    <h1>Welcome to GamerHub</h1>
+                    <p>
+                      Experience the future of gaming across multiple chains, all
+                      in one place.
+                    </p>
+                    {!account && (
+                      <ConnectWalletButton onClick={() => setOpen(true)}>Sign In</ConnectWalletButton>
+                    )}
+                    
+                  </div>
+                </WelcomeImageWrapper>
+                <WelcomeRecentAddedWrapper>
+                  <h1>Recently added</h1>
+                </WelcomeRecentAddedWrapper>
+              </WelcomeContainer>
+              <GridGroupWraper>
+                <GameListGrid title="All games" list={gameList} />
+                {/* <GameListGrid title="Metaverse" list={metaverseList} />
+                <GameListGrid title="NFT Marketplace" list={nftList} /> */}
+              </GridGroupWraper>
+            </DashboardLayout>
+          );
+        }}
+      </ConnectButton.Custom>
+      <AuthModals link={null} open={open} setOpen={setOpen} />
+    </>
   );
 };

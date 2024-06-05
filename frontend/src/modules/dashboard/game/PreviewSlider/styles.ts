@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const PreviewSliderWrapper = styled.div`
-  min-width: 50%;
+  max-width: 1000px;
   width: calc(100% - 449px);
   video,
   img {
