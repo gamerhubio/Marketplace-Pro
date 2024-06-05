@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { useState } from "react";
 import {
   DetailsDivider,
   PlayButton,
@@ -8,11 +8,13 @@ import {
   RecommendButton,
   SocialWrapper,
 } from "./styles";
-import { detailsData1, detailsData2, socialData } from "../data";
-import { IconFavourite, IconDiscord, IconTelegram, IconTwitter, IconWebsite } from "../../../../components";
+import { IconFavourite, IconDiscord, IconTelegram, IconTwitter } from "../../../../components";
 import useGame from "../../../../hooks/useGame";
+import AuthModals from "../../../../components/AuthModals";
 
 export const PreviewDetails: React.FC = () => {
+
+  const [open, setOpen] = useState(false)
 
   const game = useGame()
 
@@ -42,6 +44,11 @@ export const PreviewDetails: React.FC = () => {
     }
  
     return socials
+  }
+
+
+  const playGame = () => {
+    setOpen(true)
   }
   
   return (
@@ -92,11 +99,12 @@ export const PreviewDetails: React.FC = () => {
         </SocialWrapper>
       </PreviewDetailsItem>
       <PreviewActionGroup>
-        <PlayButton>Play Game</PlayButton>
+        <PlayButton onClick={playGame}>Play Game</PlayButton>
         <RecommendButton>
           <IconFavourite />
         </RecommendButton>
       </PreviewActionGroup>
+      <AuthModals open={open} setOpen={setOpen} link={game.demoLive} />
     </PreviewDetailsContainer>
   );
 };

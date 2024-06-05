@@ -56,5 +56,6 @@ export const CheckboxWrapper = styled.label`
     border-radius: 2px;
     margin-right: 6px;
     accent-color: #d7007b;
+    outline: none;
   }
 `;

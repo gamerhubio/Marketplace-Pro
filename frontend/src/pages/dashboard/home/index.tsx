@@ -8,7 +8,7 @@ import {
   WelcomeRecentAddedWrapper,
 } from "./styles";
 import { GameListGrid } from "../../../components";
-import { gameList, metaverseList, nftList } from "../data";
+import { gameList } from "../data";
 import { ConnectButton } from "@particle-network/connect-react-ui";
 import { useNavigate } from "react-router-dom";
 
@@ -48,8 +48,8 @@ export const DashboardHomePage: React.FC = () => {
             </WelcomeContainer>
             <GridGroupWraper>
               <GameListGrid title="All games" list={gameList} />
-              <GameListGrid title="Metaverse" list={metaverseList} />
-              <GameListGrid title="NFT Marketplace" list={nftList} />
+              {/* <GameListGrid title="Metaverse" list={metaverseList} />
+              <GameListGrid title="NFT Marketplace" list={nftList} /> */}
             </GridGroupWraper>
           </DashboardLayout>
         );
