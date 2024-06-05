@@ -16,7 +16,7 @@ interface IProps {
 }
 
 const SignIn = ({ action, close } : IProps) => {
-  const router = useNavigate();
+
   const [username, setUsername] = useState<string>("");
   const [pwd, setPwd] = useState<string>("");
   const [loading, setLoading] = useState(false)

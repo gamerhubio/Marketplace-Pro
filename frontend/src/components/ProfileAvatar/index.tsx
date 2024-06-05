@@ -36,7 +36,7 @@ export const ProfileAvatar: React.FC = () => {
     setGlobalState("currentUser", {});
     localStorage.removeItem("user");
     localStorage.removeItem("accessToken");
-    router("/app/signin");
+    //router("/app/signin");
   };
 
   if (!username) return

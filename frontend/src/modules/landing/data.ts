@@ -147,41 +147,55 @@ export const teamData = [
     img: "/images/landing/team/victor.png",
     name: "Victor Kaycee",
     role: "Co-founder / CEO",
+    linkedin: "https://www.linkedin.com/in/victor-kaycee"
   },
   {
     img: "/images/landing/team/glory.png",
     name: "Glory Lucas",
     role: "Co-founder / CMO",
+    linkedin: "https://linkedin.com/in/GloryLucas"
   },
 
   {
     img: "/images/landing/team/caleb.png",
     name: "Caleb Lucas",
     role: "Engineering Manager",
+    linkedin: "https://www.linkedin.com/in/cmdlucas"
   },
-  {
-    img: "/images/landing/team/ken.png",
-    name: "Ken Suzuki",
-    role: "Core Contributor",
-  },
+  // {
+  //   img: "/images/landing/team/ken.png",
+  //   name: "Ken Suzuki",
+  //   role: "Core Contributor",
+  //   
+  // },
   {
     img: "/images/landing/team/jeffery.png",
     name: "Jeffery Pan",
     role: "Institutional Advisor from SoftBank",
+    linkedin: "https://www.linkedin.com/in/nasa-b64b53215/"
   },
   {
     img: "/images/landing/team/pekka.png",
     name: "Pekka Kelkka",
     role: "Institutional Advisor",
+    linkedin: "https://www.linkedin.com/in/pekkakelkka/"
   },
   {
     img: "/images/landing/team/sam.png",
     name: "Sam Vukmirica",
     role: "Gaming Advisor",
+    linkedin: "https://www.linkedin.com/in/simo-vukmirica-001/"
   },
   {
     img: "/images/landing/team/robbie.png",
     name: "Robbie Joe",
     role: "Polygon Advisor / CEO Kommunitas",
+    linkedin: "https://www.linkedin.com/in/robby678/",
+  },
+  {
+    img: "/images/landing/team/anita.png",
+    name: "Anita Kalergis",
+    role: "Institutional Advisor",
+    linkedin: "https://www.linkedin.com/in/anitakalergis/",
   },
 ];

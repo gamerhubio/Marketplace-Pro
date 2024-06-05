@@ -11,14 +11,19 @@ import {
 import { IconFavourite, IconDiscord, IconTelegram, IconTwitter } from "../../../../components";
 import useGame from "../../../../hooks/useGame";
 import AuthModals from "../../../../components/AuthModals";
+import { useGlobalState } from "../../../../store";
+import { toast } from "react-toastify";
 
 export const PreviewDetails: React.FC = () => {
 
   const [open, setOpen] = useState(false)
 
+  const [currentUser] = useGlobalState("currentUser");
+
   const game = useGame()
 
   const getSocials = () => {
+    
     const accounts = game.socials
     const socials = []
 
@@ -46,9 +51,16 @@ export const PreviewDetails: React.FC = () => {
     return socials
   }
 
-
   const playGame = () => {
-    setOpen(true)
+    if (!(currentUser as any)?.username) setOpen(true)
+    else {
+      if (game.demoLive === "NA") {
+        toast.error("Game not avaialable")
+      } else {
+        window.open(game.demoLive, "_blank")
+      }
+     
+    }
   }
   
   return (
