@@ -4,7 +4,7 @@ import { sendConfirmationEmail } from "../libs/mailer";
 import Users from "../models/UserModel";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-const CustomError = require("../errors");
+import * as CustomError from "../errors";
 
 type IUserList = {
   _id: string;
@@ -112,8 +112,9 @@ export const loginUser = async (
   // authenticate user
   // try {
   // get user
+
   const user: IUserList | any = await Users.findOne({
-    username: req.body.username,
+    $or: [{ username: req.body.username }, { email: req.body.username }],
   });
 
   if (user) {

@@ -2,6 +2,7 @@ import express from "express";
 import { StatusCodes } from "http-status-codes";
 import Subscriptions from "../models/SubscriptionModel";
 import Users from "../models/UserModel";
+import * as CustomError from "../errors";
 
 type IUserList = {
   _id: string;
@@ -18,7 +19,9 @@ type IUser = {
   username: string;
   wallets: string[];
   verified: boolean;
+  credit: number;
   save: () => void;
+  last_unique_login: Date;
 };
 
 // get users
@@ -91,5 +94,50 @@ export const updateUser = async (
   } catch (error) {
     // throw error
     res.status(StatusCodes.BAD_REQUEST).send(error);
+  }
+};
+
+// reward user
+export const rewardUser = async (
+  req: express.Request,
+  res: express.Response
+): Promise<void> => {
+  const { id } = req.params;
+
+  // @ts-ignore
+  const user: IUser | null = await Users.findOne({ _id: id });
+
+  if (user) {
+    const lastUpdate = user.last_unique_login;
+
+    const isDifferenceGreaterThan24Hours = (
+      date1: Date,
+      date2: Date
+    ): boolean => {
+      //also reward already existing users
+      if (!date1) return true;
+      const millisecondsInAnHour = 1000 * 60 * 60;
+      const diffInMilliseconds = Math.abs(date1.getTime() - date2.getTime());
+      const diffInHours = diffInMilliseconds / millisecondsInAnHour;
+      return diffInHours >= 24;
+    };
+
+    const now = new Date();
+    //also reward already existing users
+    if (isDifferenceGreaterThan24Hours(lastUpdate, now)) {
+      // Reward the user
+      const reward = user.credit + 10;
+      user.credit = reward;
+      user.last_unique_login = now; // Update the last_unique_login to current time
+      await user.save(); // Save the updated user document
+
+      res
+        .status(StatusCodes.OK)
+        .json({ msg: "User rewarded", lastUpdate, credit: reward });
+    } else {
+      throw new CustomError.BadRequestError("User already rewarded");
+    }
+  } else {
+    throw new CustomError.UnauthenticatedError("Invalid request");
   }
 };

@@ -4,6 +4,7 @@ import {
   getUser,
   getUserDetail,
   getUsers,
+  rewardUser,
   updateUser,
 } from "../controllers/UsersController";
 
@@ -11,4 +12,5 @@ import {
 router.route("/").get(getUsers);
 router.route("/:address").get(getUser).patch(updateUser);
 router.route("/detail/:id").get(getUserDetail);
+router.route("/reward/:id").patch(rewardUser);
 export default router;
