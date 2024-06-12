@@ -125,8 +125,8 @@ const decode = (token: string) => {
   // setUser(user);
   // setIsAuthenticated(true);
 
-  localStorage.setItem("user", JSON.stringify(user));
-  localStorage.setItem("accessToken", token);
+  // localStorage.setItem("user", JSON.stringify(user));
+  // localStorage.setItem("accessToken", token);
 
   return true;
 };

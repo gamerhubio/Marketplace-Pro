@@ -16,36 +16,33 @@ import {
   DashboardGamePage,
   DashboardProfilePage,
 } from "./pages";
-
 import "swiper/css/pagination";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "./assets/css/custom-swiper.css";
-
 import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
-import { usePrevious } from "./hooks";
-import { getUser, login } from "./scripts";
-import { persistor, store } from './store'
 import ProtectedRoute from "./ProtectedRoute";
-import {
-  checkSubscription,
-  checkUser,
-  updateUserWalletList,
-} from "./scripts/user";
 import { DashboardGameOnlyPage } from "./pages/dashboard/home/game";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ModalWrapper from "./components/AuthModals/ModalWrapper";
 import Reward from "./components/AuthModals/Reward"
-import { claimTokens } from "./utils";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
+import { BASE_URL } from "./utils";
+import useAuthState from "./hooks/useAuthState";
+import { useDispatch, useSelector } from "react-redux";
+import { getNewAcct, setLastRewardTime, setNewAcct } from "./store/slices/authSlice";
 
 
 
 const App: React.FC = () => {
+
+  const newAuth = useSelector(getNewAcct)
+
+  const { userData, lastRewardTime, authRequest } = useAuthState()
+
+  const dispatch = useDispatch()
 
 
   const address = useAccount();
@@ -54,81 +51,95 @@ const App: React.FC = () => {
 
 
 
-  // useEffect(() => {
-  //   async function claim() {
-  //     const id = (currentUser as any)?.id
-  //     if (id) {
-  //       const res = await claimTokens(id)
-  //       console.log({res})
-  //       if (res) setShowModal(true)
-  //     }
-  //   }
-  //   claim()
-  // }, [currentUser])
+  useEffect(() => {
+    const claimTokens = async() =>  {
+      const DAY = 24 * 3600 * 1000
+      const currentTime = Date.now()
+      if (lastRewardTime + DAY <= currentTime && userData) {
+        try {
+          await authRequest().patch(BASE_URL + "/users/reward/" + userData?.id)
+          setShowModal(true)
+          dispatch(setLastRewardTime())
+        } catch (e) {
+
+        }
+      } else {
+        
+      }
+    }
+    claimTokens()
+  }, [userData])
+
+
+  useEffect(() => {
+    if (newAuth) {
+      setShowModal(true)
+      dispatch(setLastRewardTime())
+      dispatch(setNewAcct(false))
+    }
+  }, [newAuth])
 
 
 
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+    <>
 
-        <div style={{ display: "none" }}>
-          <ConnectButton />
-        </div>
-        <Router>
-          <Routes>
-            {/* Landing */}
-            <Route path="/" element={<LandingPage />} />
-            {/* App */}
-            <Route path="/app/home" element={<AppHomePage />} />
-            <Route path="/app/signin" element={<AppSignInPage />} />
-            <Route path="/app/signup" element={<AppSignUpPage />} />
-            <Route path="/app/subscription" element={<AppSubScriptionPage />} />
-            <Route
-              path="/app/wallet-connect"
-              element={<AppWalletConnectPage />}
-            />
-            {/* Dashboard */}
-            <Route
-              path="/dashboard/home"
-              element={
-                // <ProtectedRoute>
-                  <DashboardHomePage />
-                // </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/dashboard/game"
-              element={
-                // <ProtectedRoute>
-                  <DashboardGameOnlyPage />
-                // </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/dashboard/game/:id"
-              element={
-                // <ProtectedRoute>
-                  <DashboardGamePage />
-                // </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/dashboard/profile"
-              element={
-                <ProtectedRoute>
-                  <DashboardProfilePage />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </Router>
-        <ToastContainer />
-        <ModalWrapper open={showModal} setOpen={setShowModal}>
-          <Reward close={() => setShowModal(false)} />
-        </ModalWrapper>
-    </PersistGate>
-  </Provider>
+      <div style={{ display: "none" }}>
+        <ConnectButton />
+      </div>
+      <Router>
+        <Routes>
+          {/* Landing */}
+          <Route path="/" element={<LandingPage />} />
+          {/* App */}
+          <Route path="/app/home" element={<AppHomePage />} />
+          <Route path="/app/signin" element={<AppSignInPage />} />
+          <Route path="/app/signup" element={<AppSignUpPage />} />
+          <Route path="/app/subscription" element={<AppSubScriptionPage />} />
+          <Route
+            path="/app/wallet-connect"
+            element={<AppWalletConnectPage />}
+          />
+          {/* Dashboard */}
+          <Route
+            path="/dashboard/home"
+            element={
+              // <ProtectedRoute>
+                <DashboardHomePage />
+              // </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/game"
+            element={
+              // <ProtectedRoute>
+                <DashboardGameOnlyPage />
+              // </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/game/:id"
+            element={
+              // <ProtectedRoute>
+                <DashboardGamePage />
+              // </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/profile"
+            element={
+              <ProtectedRoute>
+                <DashboardProfilePage />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Router>
+      <ToastContainer />
+      <ModalWrapper open={showModal} setOpen={setShowModal}>
+        <Reward close={() => setShowModal(false)} />
+      </ModalWrapper>
+  </>
   );
 };
 

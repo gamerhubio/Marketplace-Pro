@@ -1,6 +1,8 @@
 import axios from "axios";
 
-export const BASE_URL =  process.env.NODE_ENV === "development" ? process.env.REACT_APP_BASE_URL_DEV : process.env.REACT_APP_BASE_URL_PROD
+const process = (import.meta as any).env 
+
+export const BASE_URL = process.VITE_ENV === "development" ? process.VITE_APP_BASE_URL_DEV : process.VITE_APP_BASE_URL_PROD
 
 export const getFormatWalletAddress = (address: string) => {
   return (
@@ -24,19 +26,19 @@ export const authRequest = () => {
 }
 
 
-export const claimTokens = async(id: string) =>  {
-  const DAY = 24 * 3600 * 1000
-  const currentTime = Date.now()
-  const getLastClaim = Number(localStorage.getItem("last-claim") || 0)
-  if (getLastClaim + DAY <= currentTime) {
-    try {
-      await authRequest().patch(BASE_URL + "/users/reward/" + id)
-      localStorage.setItem("last-claim", currentTime.toString())
-      return true
-    } catch (e) {
-      return false
-    }
-  } else {
-    return false
-  }
-}
+// export const claimTokens = async(id: string) =>  {
+//   const DAY = 24 * 3600 * 1000
+//   const currentTime = Date.now()
+//   const getLastClaim = Number(localStorage.getItem("last-claim") || 0)
+//   if (getLastClaim + DAY <= currentTime) {
+//     try {
+//       await authRequest().patch(BASE_URL + "/users/reward/" + id)
+//       localStorage.setItem("last-claim", currentTime.toString())
+//       return true
+//     } catch (e) {
+//       return false
+//     }
+//   } else {
+//     return false
+//   }
+// }

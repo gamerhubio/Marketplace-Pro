@@ -48,7 +48,7 @@ export const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
     //get user info
     if (userData) return;
     //@ts-ignore
-    getUserData(currentUser?.id)
+    getUserData(userData?.id)
       .then((data) => {
         //@ts-ignore
         if (typeof data == "object" && data.error) {

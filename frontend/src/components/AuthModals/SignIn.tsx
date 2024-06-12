@@ -34,10 +34,10 @@ const SignIn = ({ action, close } : IProps) => {
 
     try {
       const res = await authRequest().post(BASE_URL + "/auth/login", data)
-      console.log(res.data.data)
-      dispatch(setAuthToken(res?.data?.data))
+      dispatch(setAuthToken(res?.data?.accessToken))
+      close()
     } catch (e) {
-
+      toast.error(e.response.data.msg)
     } finally {
       setLoading(false)
     }
