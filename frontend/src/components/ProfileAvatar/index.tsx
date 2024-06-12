@@ -8,38 +8,26 @@ import {
 } from "./styles";
 import { IconDropdown } from "../SVGs";
 import { useNavigate } from "react-router-dom";
-import {
-  setGlobalState,
-  setIsAuthenticated,
-  useGlobalState,
-} from "../../store";
 import { ConnectButton } from "@particle-network/connect-react-ui";
+import useAuthState from "../../hooks/useAuthState";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/slices/authSlice";
 
 export const ProfileAvatar: React.FC = () => {
+
   const router = useNavigate();
+  const dispatch = useDispatch()
   const [visible, setVisible] = useState(false);
 
-  const [currentUser] = useGlobalState("currentUser");
 
-  const [email, setEmail] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
+  const { userData } = useAuthState()
 
-  useEffect(() => {
-    //@ts-ignore
-    setEmail(currentUser.email);
-    //@ts-ignore
-    setUsername(currentUser.username);
-  }, [currentUser]);
-
-  const logout = () => {
-    setIsAuthenticated(false);
-    setGlobalState("currentUser", {});
-    localStorage.removeItem("user");
-    localStorage.removeItem("accessToken");
+  const logoutAction = () => {
+    dispatch(logout())
     //router("/app/signin");
   };
 
-  if (!username) return
+  if (!userData) return
 
   return (
     // <ConnectButton.Custom>
@@ -58,7 +46,7 @@ export const ProfileAvatar: React.FC = () => {
         <img src="/images/userdashboard/GamerAvatar.png" alt="" />
         <ProfileInfoWrapper>
           <ProfileInfo>
-            <h2>{username}</h2>
+            <h2>{userData?.username}</h2>
             <p>
               Top Gamer <img src="/images/userdashboard/stargroup.png" alt="" />
             </p>
@@ -78,7 +66,7 @@ export const ProfileAvatar: React.FC = () => {
         >
           Profile
         </span>
-        <span onClick={() => logout()}>Logout</span>
+        <span onClick={logoutAction}>Logout</span>
       </DropdownWrapper>
     </ProfileWrapper>
   );

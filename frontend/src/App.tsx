@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Route,
   Routes,
@@ -16,132 +16,74 @@ import {
   DashboardGamePage,
   DashboardProfilePage,
 } from "./pages";
-
 import "swiper/css/pagination";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "./assets/css/custom-swiper.css";
-
 import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
-import { usePrevious } from "./hooks";
-import { getUser, login } from "./scripts";
-import { setGlobalState, useGlobalState } from "./store";
 import ProtectedRoute from "./ProtectedRoute";
-import {
-  checkSubscription,
-  checkUser,
-  updateUserWalletList,
-} from "./scripts/user";
 import { DashboardGameOnlyPage } from "./pages/dashboard/home/game";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ModalWrapper from "./components/AuthModals/ModalWrapper";
+import Reward from "./components/AuthModals/Reward"
+import { BASE_URL } from "./utils";
+import useAuthState from "./hooks/useAuthState";
+import { useDispatch, useSelector } from "react-redux";
+import { getNewAcct, setLastRewardTime, setNewAcct } from "./store/slices/authSlice";
+
 
 
 const App: React.FC = () => {
+
+  const newAuth = useSelector(getNewAcct)
+
+  const { userData, lastRewardTime, authRequest } = useAuthState()
+
+  const dispatch = useDispatch()
+
+
   const address = useAccount();
-  const [currentUser] = useGlobalState("currentUser");
+  const [showModal, setShowModal] = useState(false)
   //const router = useNavigate();
 
+
+
   useEffect(() => {
-    if (localStorage.getItem("accessToken") && localStorage.getItem("user")) {
-      setGlobalState("isAuthenticated", true);
-      //set user object
-      const user = {
-        id: JSON.parse(window.localStorage.getItem("user")).id,
+    const claimTokens = async() =>  {
+      const DAY = 24 * 3600 * 1000
+      const currentTime = Date.now()
+      if (lastRewardTime + DAY <= currentTime && userData) {
+        try {
+          await authRequest().patch(BASE_URL + "/users/reward/" + userData?.id)
+          setShowModal(true)
+          dispatch(setLastRewardTime())
+        } catch (e) {
 
-        email: JSON.parse(window.localStorage.getItem("user")).email,
-
-        username: JSON.parse(window.localStorage.getItem("user")).username,
-
-        wallets: JSON.parse(window.localStorage.getItem("user")).wallets,
-      };
-      setGlobalState("currentUser", user);
-    }
-  }, []);
-
-  const updateWalletList = () => {
-    const walletList =
-      //@ts-ignore
-      currentUser.wallets ||
-      //@ts-ignore
-      JSON.parse(window.localStorage.getItem("user")).wallets;
-
-    updateUserWalletList({
-      email:
-        //@ts-ignore
-        currentUser.email ||
-        //@ts-ignore
-        JSON.parse(window.localStorage.getItem("user")).email,
-
-      username:
-        //@ts-ignore
-        currentUser.username ||
-        //@ts-ignore
-        JSON.parse(window.localStorage.getItem("user")).username,
-      //@ts-ignore
-      wallets: [...walletList, address],
-    })
-      .then((data) => {
-        console.log(data);
-        //@ts-ignore
-        if (typeof data == "object" && data.error) {
-          //@ts-ignore
-          console.log(data.error);
-        } else {
-          console.log("new wallet address added for user");
         }
-        //if true is returned
-        //@ts-ignore
-        // if (data.msg) {
-        //   //check if user is subscribed
-        //   checkSubscriptionState();
-        // }
-      })
-      .catch((err) => console.log(err));
-  };
-
-  //watch for wallet address switches
-  useEffect(() => {
-    if (address) {
-      checkUser(address)
-        .then((data) => {
-          console.log(data);
-          //@ts-ignore
-          if (typeof data == "object" && data.error) {
-            //@ts-ignore
-            console.log(data.error);
-          } else {
-            //if no server error and no account exists
-            if (data.msg === false) {
-              console.log("called");
-              if (
-                // authenticated
-                //@ts-ignore
-                window.localStorage.getItem("accessToken")
-              ) {
-                //update user wallet list
-                updateWalletList();
-              }
-            }
-          }
-          //if true is returned
-        })
-        .catch((err) => console.log(err));
+      } else {
+        
+      }
     }
-    //else {
-    //   //clear user details
-    //   localStorage.removeItem("user");
-    //   localStorage.removeItem("accessToken");
-    //   //@ts-expect-error
-    //   setUser({});
-    //   setIsAuthenticated(false);
-    // }
-  }, [address]); 
+    claimTokens()
+  }, [userData])
+
+
+  useEffect(() => {
+    if (newAuth) {
+      setShowModal(true)
+      dispatch(setLastRewardTime())
+      dispatch(setNewAcct(false))
+    }
+  }, [newAuth])
+
+
 
   return (
     <>
+
       <div style={{ display: "none" }}>
         <ConnectButton />
       </div>
@@ -194,7 +136,10 @@ const App: React.FC = () => {
         </Routes>
       </Router>
       <ToastContainer />
-    </>
+      <ModalWrapper open={showModal} setOpen={setShowModal}>
+        <Reward close={() => setShowModal(false)} />
+      </ModalWrapper>
+  </>
   );
 };
 

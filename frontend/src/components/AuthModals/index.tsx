@@ -5,7 +5,6 @@ import SignUp from "./SignUp"
 import { toast } from "react-toastify";
 
 
-
 interface IProps {
     link: string;
     open: boolean;
@@ -15,7 +14,6 @@ interface IProps {
 const AuthModals = ({link, open, setOpen} : IProps) => {
 
     const [hasAccount, setHasAccount] = useState(false)
-
 
     const switchForm = () => {
         setHasAccount(!hasAccount)

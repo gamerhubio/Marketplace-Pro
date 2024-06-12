@@ -24,8 +24,8 @@ import {
   useAccount,
   useParticleProvider,
 } from "@particle-network/connect-react-ui";
-import { useGlobalState } from "../../../store";
 import { subscribe } from "../../../scripts/blockchainServices";
+import useAuthState from "../../../hooks/useAuthState";
 
 interface IUser {
   id: string;
@@ -37,7 +37,7 @@ export const AppSubScriptionPage: React.FC = () => {
   const router = useNavigate();
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const address = useAccount();
-  const [currentUser] = useGlobalState("currentUser");
+  const { userData } = useAuthState()
   //hooks
   const provider = useParticleProvider();
 
@@ -49,11 +49,8 @@ export const AppSubScriptionPage: React.FC = () => {
         plan,
         amt,
         provider,
-        //@ts-expect-error
-        currentUser.email || JSON.parse(localStorage.getItem("user")).email,
-        //@ts-expect-error
-        currentUser.username ||
-          JSON.parse(localStorage.getItem("user")).username
+        userData?.email,
+        userData?.username
       );
     }
   };

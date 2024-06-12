@@ -10,7 +10,6 @@ import { AppButton, Button, Input } from "../../../components";
 import { useNavigate } from "react-router-dom";
 import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
 import { createUser } from "../../../scripts";
-import { setGlobalState } from "../../../store";
 import { toast } from "react-toastify";
 
 export const AppSignUpPage: React.FC = () => {
@@ -40,7 +39,7 @@ export const AppSignUpPage: React.FC = () => {
         //@ts-ignore
         setLoading(false)
         if (data && !(data as any).error) {
-          setGlobalState("isAuthenticated", true);
+          
           router("/dashboard/home");
         }
       })

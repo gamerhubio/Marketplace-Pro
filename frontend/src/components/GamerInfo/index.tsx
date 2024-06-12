@@ -9,24 +9,15 @@ import {
   GamerMainInfo,
   InfoSection,
 } from "./styles";
-import { useGlobalState } from "../../store";
+import useAuthState from "../../hooks/useAuthState";
 
-interface IUser {
+export interface IUser {
   email: string;
   username: string;
 }
 export const GamerInfo: React.FC = () => {
-  const [currentUser] = useGlobalState("currentUser");
 
-  const [email, setEmail] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
-
-  useEffect(() => {
-    //@ts-ignore
-    setEmail(currentUser.email);
-    //@ts-ignore
-    setUsername(currentUser.username);
-  }, [currentUser]);
+  const { userData } = useAuthState()
 
   return (
     <GamerInfoWrapper>
@@ -38,8 +29,8 @@ export const GamerInfo: React.FC = () => {
       </GamerAvatar>
       <InfoSection>
         <GamerMainInfo>
-          <h1>{username}</h1>
-          <p>{email}</p>
+          <h1>{userData?.username}</h1>
+          <p>{userData?.email}</p>
         </GamerMainInfo>
         <FollowSection>
           <Followers>

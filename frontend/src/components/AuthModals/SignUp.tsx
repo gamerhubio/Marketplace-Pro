@@ -6,8 +6,10 @@ import {
   SignUpFormWrapper,
 } from "../../pages/app/signup/styles";
 import { createUser } from "../../scripts";
-import { setGlobalState } from "../../store";
 import { toast } from "react-toastify";
+import { authRequest, BASE_URL } from "../../utils";
+import { setAuthToken, setNewAcct } from "../../store/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 interface IProps {
   action: () => void;
@@ -18,6 +20,8 @@ interface IProps {
 
 
 const SignUp = ({ action, close } : IProps) => {
+
+  const dispatch = useDispatch()
 
   const [email, setEmail] = useState<string>("");
   const [username, setUsername] = useState<string>("");
@@ -38,22 +42,18 @@ const SignUp = ({ action, close } : IProps) => {
     console.log(agreement);
     setLoading(true)
 
-    createUser(data)
-      .then((data) => {
-        //@ts-ignore
-        setLoading(false)
-        if (data && !(data as any).error) {
-          setGlobalState("isAuthenticated", true);
-          close()
-        }
-      })
-      .catch((err) => {
-        setLoading(false)
-        toast.error(err.response.data.msg)
-      });
-    // } else {
-    //   router("/app/wallet-connect");
-    // }
+    try {
+      const res = await authRequest().post(BASE_URL + "/auth/register", data)
+      console.log(res.data.accessToken)
+      dispatch(setAuthToken(res?.data?.accessToken))
+      dispatch(setNewAcct(true))
+      close()
+    } catch (e) {
+      toast.error(e.response.data.msg)
+    } finally {
+      setLoading(false)
+    }
+  
   };
 
   function handleChecked(e: React.ChangeEvent<HTMLInputElement>): void {

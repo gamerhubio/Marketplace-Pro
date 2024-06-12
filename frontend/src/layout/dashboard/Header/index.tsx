@@ -21,9 +21,9 @@ import {
 } from "../../../components";
 import { getFormatWalletAddress } from "../../../utils";
 import { DailyTaskModal } from "../DailyTaskModal";
-import { useGlobalState } from "../../../store";
 import { getUserData } from "../../../scripts/user";
 import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
+import useAuthState from "../../../hooks/useAuthState";
 
 type HeaderProps = {
   onSidebar: () => void;
@@ -36,7 +36,7 @@ export const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
   const [visible, setVisible] = useState(false);
   const address = useAccount();
 
-  const [currentUser] = useGlobalState("currentUser");
+  const { userData } = useAuthState()
 
   const [data, setData] = useState<any>({});
 
@@ -46,9 +46,9 @@ export const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
 
   useEffect(() => {
     //get user info
-    if (Object.keys(currentUser).length === 0) return;
+    if (userData) return;
     //@ts-ignore
-    getUserData(currentUser.id)
+    getUserData(userData?.id)
       .then((data) => {
         //@ts-ignore
         if (typeof data == "object" && data.error) {
@@ -59,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
         setData(data);
       })
       .catch((err) => console.log(err));
-  }, [currentUser]);
+  }, [userData]);
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);

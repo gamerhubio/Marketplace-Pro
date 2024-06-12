@@ -19,19 +19,18 @@ import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
 import "@particle-network/connect-react-ui/dist/index.css";
 import { usePrevious } from "../../../hooks";
 import { login } from "../../../scripts";
-import { setIsAuthenticated, setUser, useGlobalState } from "../../../store";
 import {
   checkSubscription,
   checkUser,
   updateUserWalletList,
 } from "../../../scripts/user";
+import useAuthState from "../../../hooks/useAuthState";
 
 export const AppWalletConnectPage: React.FC = () => {
   const [modalShow, setModalShow] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
-  const [isAuthenticated] = useGlobalState("isAuthenticated");
-  const [currentUser] = useGlobalState("currentUser");
+  const { userData } = useAuthState()
   const address = useAccount();
 
   //set custom hook
@@ -50,10 +49,7 @@ export const AppWalletConnectPage: React.FC = () => {
   };
 
   const checkSubscriptionState = () => {
-    checkSubscription(
-      //@ts-expect-error
-      currentUser.id || JSON.parse(window.localStorage.getItem("user")).id
-    )
+    checkSubscription(userData?.id)
       .then((data) => {
         //@ts-ignore
         if (typeof data == "object" && data.error) {

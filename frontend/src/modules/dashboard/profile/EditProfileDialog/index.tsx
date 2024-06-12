@@ -12,8 +12,8 @@ import {
   SaveBtn,
 } from "./styles";
 import { Input } from "../../../../components";
-import { useGlobalState } from "../../../../store";
 import { updateUser } from "../../../../scripts/user";
+import useAuthState from "../../../../hooks/useAuthState";
 
 interface iEditModal {
   visible?: boolean;
@@ -24,17 +24,11 @@ export const EditProfileDialog: React.FC<iEditModal> = ({
   visible,
   handleModalVisible,
 }) => {
-  const [currentUser] = useGlobalState("currentUser");
 
-  const [email, setEmail] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
+  const { userData } = useAuthState() 
 
-  useEffect(() => {
-    //@ts-ignore
-    setEmail(currentUser.email);
-    //@ts-ignore
-    setUsername(currentUser.username);
-  }, [currentUser]);
+  const [email, setEmail] = useState<string>(userData?.email);
+  const [username, setUsername] = useState<string>(userData?.username);
 
   useEffect(() => {
     document.documentElement.style.overflow = visible ? "hidden" : "auto";

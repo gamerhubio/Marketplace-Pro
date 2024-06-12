@@ -1,5 +1,4 @@
 import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button, Input } from "../../components";
 import {
   CheckboxWrapper,
@@ -7,8 +6,11 @@ import {
   SignUpFormWrapper,
 } from "../../pages/app/signup/styles";
 import { login } from "../../scripts";
-import { setGlobalState } from "../../store";
 import { toast } from "react-toastify";
+import useAuthState from "../../hooks/useAuthState";
+import { useDispatch } from "react-redux";
+import { setAuthToken, setUserData } from "../../store/slices/authSlice";
+import { authRequest, BASE_URL } from "../../utils";
 
 interface IProps {
   action: () => void;
@@ -16,6 +18,8 @@ interface IProps {
 }
 
 const SignIn = ({ action, close } : IProps) => {
+
+  const dispatch = useDispatch()
 
   const [username, setUsername] = useState<string>("");
   const [pwd, setPwd] = useState<string>("");
@@ -26,31 +30,18 @@ const SignIn = ({ action, close } : IProps) => {
 
     setLoading(true)
 
-    const data = {
-      username,
-      password: pwd,
-    };
-    login(data)
-      .then((data) => {
-        //@ts-ignore
-        if (!data.error && data) {
-          console.log("🚀 ~ .then ~ data:", data);
-          setGlobalState("isAuthenticated", true);
-          // if (!address) {
-          //   router("/app/wallet-connect");
-          // } else {
-          //   //check if user is subscribed
-          //   checkSubscriptionState();
-          // }
-          setLoading(false)
-          close()
-        }
-      })
-      .catch((err) => {
-        setLoading(false)
-        toast.error(err.response.data.msg)
-        console.error(err);
-      });
+    const data = { username, password: pwd, };
+
+    try {
+      const res = await authRequest().post(BASE_URL + "/auth/login", data)
+      dispatch(setAuthToken(res?.data?.accessToken))
+      close()
+    } catch (e) {
+      toast.error(e.response.data.msg)
+    } finally {
+      setLoading(false)
+    }
+
   };
 
   return (
