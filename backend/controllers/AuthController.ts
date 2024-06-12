@@ -78,7 +78,7 @@ export const createUser = async (
     { expiresIn: "24h" }
   );
   // return response
-  res.status(StatusCodes.OK).json({ accessToken });
+  res.status(StatusCodes.OK).json({ accessToken, ...user });
   // } catch (error) {
   //   // Log error
   //   // console.error("Error creating user:", error);
@@ -132,7 +132,7 @@ export const loginUser = async (
         `${process.env.ACCESS_TOKEN_SECRET}`,
         { expiresIn: "24h" }
       );
-      res.status(StatusCodes.OK).json({ accessToken });
+      res.status(StatusCodes.OK).json({ accessToken, ...user });
     } else {
       // res
       //   .status(StatusCodes.UNAUTHORIZED)
