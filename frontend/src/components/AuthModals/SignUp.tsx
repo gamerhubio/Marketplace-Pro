@@ -8,7 +8,7 @@ import {
 import { createUser } from "../../scripts";
 import { toast } from "react-toastify";
 import { authRequest, BASE_URL } from "../../utils";
-import { setAuthToken, setNewAcct } from "../../store/slices/authSlice";
+import { setAuthToken, setCredit, setNewAcct } from "../../store/slices/authSlice";
 import { useDispatch } from "react-redux";
 
 interface IProps {
@@ -47,6 +47,7 @@ const SignUp = ({ action, close } : IProps) => {
       console.log(res.data.accessToken)
       dispatch(setAuthToken(res?.data?.accessToken))
       dispatch(setNewAcct(true))
+      dispatch(setCredit(res?.data?._doc?.credit))
       close()
     } catch (e) {
       toast.error(e.response.data.msg)

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
-import { getAuthToken, getLastRewardTime, getUserData, IUser, setUserData } from "../store/slices/authSlice"
+import { getAuthToken, getCredit, getLastRewardTime, getUserData, IUser, setUserData } from "../store/slices/authSlice"
 import { useEffect } from "react"
 import { BASE_URL } from "../utils"
 
@@ -39,19 +39,20 @@ const useAuthState = () => {
     const authToken = useSelector(getAuthToken)
     const userData = useSelector(getUserData)
     const lastRewardTime = useSelector(getLastRewardTime)
+    const credit = useSelector(getCredit)
 
     const authRequest = () => {
-        return axios.create({
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
+      return axios.create({
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
     }
 
     useEffect(() => {
-        if (!userData && authToken) {
-            dispatch(setUserData(decode(authToken)))
-        }
+      if (!userData && authToken) {
+        dispatch(setUserData(decode(authToken)))
+      }
     }, [userData, authToken])
 
     const claimTokens = async(id: string) =>  {
@@ -71,7 +72,7 @@ const useAuthState = () => {
         // }
     }
 
-    return { userData, authToken, lastRewardTime, authRequest }
+    return { userData, authToken, lastRewardTime, credit, authRequest }
 }
 
 export default useAuthState

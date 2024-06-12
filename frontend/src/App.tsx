@@ -32,7 +32,7 @@ import Reward from "./components/AuthModals/Reward"
 import { BASE_URL } from "./utils";
 import useAuthState from "./hooks/useAuthState";
 import { useDispatch, useSelector } from "react-redux";
-import { getNewAcct, setLastRewardTime, setNewAcct } from "./store/slices/authSlice";
+import { getNewAcct, setCredit, setLastRewardTime, setNewAcct } from "./store/slices/authSlice";
 
 
 
@@ -40,7 +40,7 @@ const App: React.FC = () => {
 
   const newAuth = useSelector(getNewAcct)
 
-  const { userData, lastRewardTime, authRequest } = useAuthState()
+  const { userData, lastRewardTime, credit, authRequest } = useAuthState()
 
   const dispatch = useDispatch()
 
@@ -60,6 +60,7 @@ const App: React.FC = () => {
           await authRequest().patch(BASE_URL + "/users/reward/" + userData?.id)
           setShowModal(true)
           dispatch(setLastRewardTime())
+          dispatch(setCredit(credit + 10))
         } catch (e) {
 
         }
