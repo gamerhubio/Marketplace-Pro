@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   AlarmWrapper,
+  CreditWrapper,
   DashboardHeaderWrapper,
   HeaderActionsWrapper,
   HeaderRightSection,
@@ -36,7 +37,7 @@ export const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
   const [visible, setVisible] = useState(false);
   const address = useAccount();
 
-  const { userData } = useAuthState()
+  const { userData, credit } = useAuthState()
 
   const [data, setData] = useState<any>({});
 
@@ -96,12 +97,19 @@ export const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
           <SearchInputWrapper
             onMouseEnter={() => setSearchShow(true)}
             onMouseLeave={() => setSearchShow(false)}
-            show={searchShow}
-          >
+            show={searchShow}>
             <input type="text" placeholder="Search.." />
             <img src="/images/userdashboard/btn_search.png" alt="" />
           </SearchInputWrapper>
+
           <HeaderActionsWrapper>
+
+          <CreditWrapper>
+            <img src="/images/games/credit.png" width={24} height={24} />
+            <p>{credit}</p>
+            {/* <button>+</button> */}
+          </CreditWrapper>
+  
           {/* <TaskWrapper onClick={() => setVisible(true)}>
               <img src="/images/userdashboard/credit.png" alt="" />
               <span>{data.credit}</span>

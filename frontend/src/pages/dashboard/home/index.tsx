@@ -11,10 +11,13 @@ import { GameListGrid } from "../../../components";
 import { gameList } from "../data";
 import { ConnectButton } from "@particle-network/connect-react-ui";
 import AuthModals from "../../../components/AuthModals";
+import useAuthState from "../../../hooks/useAuthState";
 
 export const DashboardHomePage: React.FC = () => {
 
   const [open, setOpen] = useState(false)
+
+  const { userData } = useAuthState()
 
   return (
     <>
@@ -37,7 +40,7 @@ export const DashboardHomePage: React.FC = () => {
                       Experience the future of gaming across multiple chains, all
                       in one place.
                     </p>
-                    {!account && (
+                    {!userData && (
                       <ConnectWalletButton onClick={() => setOpen(true)}>Sign In</ConnectWalletButton>
                     )}
                     

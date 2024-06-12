@@ -188,3 +188,21 @@ export const TaskWrapper = styled.div`
     }
   }
 `;
+
+
+export const CreditWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 20px;
+  width: 180px;
+  gap: 10px;
+
+  button {
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+    border: none;
+  }
+  
+`

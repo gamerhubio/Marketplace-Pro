@@ -9,7 +9,7 @@ import { login } from "../../scripts";
 import { toast } from "react-toastify";
 import useAuthState from "../../hooks/useAuthState";
 import { useDispatch } from "react-redux";
-import { setAuthToken, setUserData } from "../../store/slices/authSlice";
+import { setAuthToken, setCredit, setUserData } from "../../store/slices/authSlice";
 import { authRequest, BASE_URL } from "../../utils";
 
 interface IProps {
@@ -35,6 +35,7 @@ const SignIn = ({ action, close } : IProps) => {
     try {
       const res = await authRequest().post(BASE_URL + "/auth/login", data)
       dispatch(setAuthToken(res?.data?.accessToken))
+      dispatch(setCredit(res?.data?._doc?.credit))
       close()
     } catch (e) {
       toast.error(e.response.data.msg)
