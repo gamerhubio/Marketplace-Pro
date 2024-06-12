@@ -12,9 +12,21 @@ module.exports = {
     port: 3000,
     hot: true,
   },
+  resolve: {
+    alias: {
+      "react/jsx-dev-runtime.js": "react/jsx-dev-runtime",
+      "react/jsx-runtime.js": "react/jsx-runtime",
+    },
+  },
   // Rules of how webpack will take our files, complie & bundle them for the browser
   module: {
     rules: [
+      {
+        test: /\.m?js$/,
+        resolve: {
+          fullySpecified: false
+        },
+      },
       {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /nodeModules/,

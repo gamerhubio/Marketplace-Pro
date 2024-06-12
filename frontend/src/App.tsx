@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Route,
   Routes,
@@ -27,7 +27,7 @@ import "./assets/css/custom-swiper.css";
 import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
 import { usePrevious } from "./hooks";
 import { getUser, login } from "./scripts";
-import { setGlobalState, useGlobalState } from "./store";
+import { persistor, store } from './store'
 import ProtectedRoute from "./ProtectedRoute";
 import {
   checkSubscription,
@@ -37,164 +37,98 @@ import {
 import { DashboardGameOnlyPage } from "./pages/dashboard/home/game";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ModalWrapper from "./components/AuthModals/ModalWrapper";
+import Reward from "./components/AuthModals/Reward"
+import { claimTokens } from "./utils";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+
 
 
 const App: React.FC = () => {
+
+
   const address = useAccount();
-  const [currentUser] = useGlobalState("currentUser");
+  const [showModal, setShowModal] = useState(false)
   //const router = useNavigate();
 
-  useEffect(() => {
-    if (localStorage.getItem("accessToken") && localStorage.getItem("user")) {
-      setGlobalState("isAuthenticated", true);
-      //set user object
-      const user = {
-        id: JSON.parse(window.localStorage.getItem("user")).id,
 
-        email: JSON.parse(window.localStorage.getItem("user")).email,
 
-        username: JSON.parse(window.localStorage.getItem("user")).username,
+  // useEffect(() => {
+  //   async function claim() {
+  //     const id = (currentUser as any)?.id
+  //     if (id) {
+  //       const res = await claimTokens(id)
+  //       console.log({res})
+  //       if (res) setShowModal(true)
+  //     }
+  //   }
+  //   claim()
+  // }, [currentUser])
 
-        wallets: JSON.parse(window.localStorage.getItem("user")).wallets,
-      };
-      setGlobalState("currentUser", user);
-    }
-  }, []);
 
-  const updateWalletList = () => {
-    const walletList =
-      //@ts-ignore
-      currentUser.wallets ||
-      //@ts-ignore
-      JSON.parse(window.localStorage.getItem("user")).wallets;
-
-    updateUserWalletList({
-      email:
-        //@ts-ignore
-        currentUser.email ||
-        //@ts-ignore
-        JSON.parse(window.localStorage.getItem("user")).email,
-
-      username:
-        //@ts-ignore
-        currentUser.username ||
-        //@ts-ignore
-        JSON.parse(window.localStorage.getItem("user")).username,
-      //@ts-ignore
-      wallets: [...walletList, address],
-    })
-      .then((data) => {
-        console.log(data);
-        //@ts-ignore
-        if (typeof data == "object" && data.error) {
-          //@ts-ignore
-          console.log(data.error);
-        } else {
-          console.log("new wallet address added for user");
-        }
-        //if true is returned
-        //@ts-ignore
-        // if (data.msg) {
-        //   //check if user is subscribed
-        //   checkSubscriptionState();
-        // }
-      })
-      .catch((err) => console.log(err));
-  };
-
-  //watch for wallet address switches
-  useEffect(() => {
-    if (address) {
-      checkUser(address)
-        .then((data) => {
-          console.log(data);
-          //@ts-ignore
-          if (typeof data == "object" && data.error) {
-            //@ts-ignore
-            console.log(data.error);
-          } else {
-            //if no server error and no account exists
-            if (data.msg === false) {
-              console.log("called");
-              if (
-                // authenticated
-                //@ts-ignore
-                window.localStorage.getItem("accessToken")
-              ) {
-                //update user wallet list
-                updateWalletList();
-              }
-            }
-          }
-          //if true is returned
-        })
-        .catch((err) => console.log(err));
-    }
-    //else {
-    //   //clear user details
-    //   localStorage.removeItem("user");
-    //   localStorage.removeItem("accessToken");
-    //   //@ts-expect-error
-    //   setUser({});
-    //   setIsAuthenticated(false);
-    // }
-  }, [address]); 
 
   return (
-    <>
-      <div style={{ display: "none" }}>
-        <ConnectButton />
-      </div>
-      <Router>
-        <Routes>
-          {/* Landing */}
-          <Route path="/" element={<LandingPage />} />
-          {/* App */}
-          <Route path="/app/home" element={<AppHomePage />} />
-          <Route path="/app/signin" element={<AppSignInPage />} />
-          <Route path="/app/signup" element={<AppSignUpPage />} />
-          <Route path="/app/subscription" element={<AppSubScriptionPage />} />
-          <Route
-            path="/app/wallet-connect"
-            element={<AppWalletConnectPage />}
-          />
-          {/* Dashboard */}
-          <Route
-            path="/dashboard/home"
-            element={
-              // <ProtectedRoute>
-                <DashboardHomePage />
-              // </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/dashboard/game"
-            element={
-              // <ProtectedRoute>
-                <DashboardGameOnlyPage />
-              // </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/dashboard/game/:id"
-            element={
-              // <ProtectedRoute>
-                <DashboardGamePage />
-              // </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/dashboard/profile"
-            element={
-              <ProtectedRoute>
-                <DashboardProfilePage />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </Router>
-      <ToastContainer />
-    </>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+
+        <div style={{ display: "none" }}>
+          <ConnectButton />
+        </div>
+        <Router>
+          <Routes>
+            {/* Landing */}
+            <Route path="/" element={<LandingPage />} />
+            {/* App */}
+            <Route path="/app/home" element={<AppHomePage />} />
+            <Route path="/app/signin" element={<AppSignInPage />} />
+            <Route path="/app/signup" element={<AppSignUpPage />} />
+            <Route path="/app/subscription" element={<AppSubScriptionPage />} />
+            <Route
+              path="/app/wallet-connect"
+              element={<AppWalletConnectPage />}
+            />
+            {/* Dashboard */}
+            <Route
+              path="/dashboard/home"
+              element={
+                // <ProtectedRoute>
+                  <DashboardHomePage />
+                // </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/game"
+              element={
+                // <ProtectedRoute>
+                  <DashboardGameOnlyPage />
+                // </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/game/:id"
+              element={
+                // <ProtectedRoute>
+                  <DashboardGamePage />
+                // </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/profile"
+              element={
+                <ProtectedRoute>
+                  <DashboardProfilePage />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </Router>
+        <ToastContainer />
+        <ModalWrapper open={showModal} setOpen={setShowModal}>
+          <Reward close={() => setShowModal(false)} />
+        </ModalWrapper>
+    </PersistGate>
+  </Provider>
   );
 };
 

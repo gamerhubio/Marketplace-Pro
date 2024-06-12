@@ -1,46 +1,25 @@
-//All global states enter here
-import { createGlobalState } from "react-hooks-global-state";
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { authSlice } from './slices/authSlice';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist'
 
-const { setGlobalState, useGlobalState, getGlobalState } = createGlobalState({
-  isAuthenticated: false,
-  currentUser: {},
+
+
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const rootReducer = combineReducers({ 
+  [authSlice.name]: authSlice.reducer,
+})
+  
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
-type IUser = {
-  id: string;
-  email: string;
-  username: string;
-};
-
-const setUser = (user: IUser) => {
-  setGlobalState("currentUser", user);
-};
-const setIsAuthenticated = (auth: boolean) => {
-  setGlobalState("isAuthenticated", auth);
-};
-
-const truncate = (
-  text: string,
-  startChars: number,
-  endChars: number,
-  maxLength: number
-) => {
-  if (text.length > maxLength) {
-    var start = text.substring(0, startChars);
-    var end = text.substring(text.length - endChars, text.length);
-    while (start.length + end.length < maxLength) {
-      start = start + ".";
-    }
-    return start + end;
-  }
-  return text;
-};
-
-export {
-  useGlobalState,
-  setGlobalState,
-  getGlobalState,
-  truncate,
-  setUser,
-  setIsAuthenticated,
-};
+export const persistor = persistStore(store)

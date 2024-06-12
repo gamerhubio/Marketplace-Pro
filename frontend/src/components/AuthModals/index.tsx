@@ -5,7 +5,6 @@ import SignUp from "./SignUp"
 import { toast } from "react-toastify";
 
 
-
 interface IProps {
     link: string;
     open: boolean;

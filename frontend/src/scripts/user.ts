@@ -1,5 +1,4 @@
 import axios from "axios";
-import { setIsAuthenticated, setUser } from "../store";
 
 type User = {
   _id: string;
@@ -123,8 +122,8 @@ const decode = (token: string) => {
     wallets: data.wallets,
   };
 
-  setUser(user);
-  setIsAuthenticated(true);
+  // setUser(user);
+  // setIsAuthenticated(true);
 
   localStorage.setItem("user", JSON.stringify(user));
   localStorage.setItem("accessToken", token);
@@ -215,7 +214,7 @@ export async function updateUser(formData: UpdateFormData) {
     localStorage.removeItem("accessToken");
     //@ts-ignore
     setUser({});
-    setIsAuthenticated(false);
+    //setIsAuthenticated(false);
     //redirect to login
     window.location.replace(
       `${
@@ -266,7 +265,7 @@ export async function updateUserWalletList(formData: FormData) {
     };
 
     localStorage.setItem("user", JSON.stringify(user));
-    setUser(user);
+    //setUser(user);
 
     // return user;
     return { msg: true };

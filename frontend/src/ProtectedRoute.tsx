@@ -1,19 +1,18 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { useGlobalState } from "./store";
 import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
+import { useSelector } from "react-redux";
+import { getUserData } from "./scripts/user";
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
-  const [isAuthenticated] = useGlobalState("isAuthenticated");
-  const address = useAccount();
-  let location = useLocation();
+
+  const userData = useSelector(getUserData)
+
+  //const address = useAccount();
+  const location = useLocation();
 
   //if not authenticated or no address connected
-  if (
-    //@ts-ignore
-    !isAuthenticated &&
-    !JSON.parse(window.localStorage.getItem("user"))
-  ) {
+  if (!userData) {
     return <Navigate to="/app/signin" state={{ from: location }} replace />;
   }
   return (

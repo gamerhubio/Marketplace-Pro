@@ -6,7 +6,6 @@ import {
   SignUpFormWrapper,
 } from "../../pages/app/signup/styles";
 import { createUser } from "../../scripts";
-import { setGlobalState } from "../../store";
 import { toast } from "react-toastify";
 
 interface IProps {
@@ -43,7 +42,7 @@ const SignUp = ({ action, close } : IProps) => {
         //@ts-ignore
         setLoading(false)
         if (data && !(data as any).error) {
-          setGlobalState("isAuthenticated", true);
+          //setGlobalState("isAuthenticated", true);
           close()
         }
       })
