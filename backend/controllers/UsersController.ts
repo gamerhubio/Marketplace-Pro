@@ -97,46 +97,48 @@ export const updateUser = async (
   }
 };
 
-// reward user
+// Reward user
 export const rewardUser = async (
   req: express.Request,
   res: express.Response
 ): Promise<void> => {
   const { id } = req.params;
 
-  // @ts-ignore
+  //@ts-ignore
   const user: IUser | null = await Users.findOne({ _id: id });
 
-  if (user) {
-    const lastUpdate = user.last_unique_login;
+  if (!user) {
+    res.status(StatusCodes.UNAUTHORIZED).json({ msg: "Invalid request" });
+    return;
+  }
 
-    const isDifferenceGreaterThan24Hours = (
-      date1: Date,
-      date2: Date
-    ): boolean => {
-      //also reward already existing users
-      if (!date1) return true;
-      const millisecondsInAnHour = 1000 * 60 * 60;
-      const diffInMilliseconds = Math.abs(date1.getTime() - date2.getTime());
-      const diffInHours = diffInMilliseconds / millisecondsInAnHour;
-      return diffInHours >= 24;
-    };
+  const lastUpdate: Date | null = user.last_unique_login;
 
-    const now = new Date();
-    //also reward already existing users
-    if (isDifferenceGreaterThan24Hours(lastUpdate, now)) {
-      // Reward the user
-      const reward = user.credit + 10;
-      user.credit = reward;
-      user.last_unique_login = now; // Update the last_unique_login to current time
-      await user.save(); // Save the updated user document
+  const isDifferenceGreaterThan24Hours = (
+    date1: Date | null,
+    date2: Date
+  ): boolean => {
+    // Also reward already existing users
+    if (!date1) return true;
+    const millisecondsInAnHour = 1000 * 60 * 60;
+    const diffInMilliseconds = Math.abs(date1.getTime() - date2.getTime());
+    const diffInHours = diffInMilliseconds / millisecondsInAnHour;
+    return diffInHours >= 24;
+  };
 
-      res
-        .status(StatusCodes.OK)
-        .json({ msg: "User rewarded", lastUpdate, credit: reward });
-    } else {
-      throw new CustomError.BadRequestError("User already rewarded");
-    }
+  const now = new Date();
+  // Also reward already existing users
+  if (isDifferenceGreaterThan24Hours(lastUpdate, now)) {
+    // Reward the user
+    user.credit += 10;
+    user.last_unique_login = now; // Update the last_unique_login to current time
+    await user.save(); // Save the updated user document
+
+    res.status(StatusCodes.OK).json({
+      msg: "User rewarded",
+      lastUpdate,
+      credit: user.credit,
+    });
   } else {
     throw new CustomError.UnauthenticatedError("Invalid request");
   }
