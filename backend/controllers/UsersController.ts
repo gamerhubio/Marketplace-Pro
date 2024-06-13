@@ -140,6 +140,6 @@ export const rewardUser = async (
       credit: user.credit,
     });
   } else {
-    throw new CustomError.UnauthenticatedError("Invalid request");
+    throw new CustomError.UnauthenticatedError("User already rewarded");
   }
 };
