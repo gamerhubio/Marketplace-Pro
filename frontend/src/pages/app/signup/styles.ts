@@ -26,6 +26,7 @@ export const SignUpFormWrapper = styled.div`
   & > :not(:first-child) {
     margin-top: 32px;
   }
+
 `;
 
 export const FormInputWrapper = styled.div`
@@ -36,6 +37,7 @@ export const FormInputWrapper = styled.div`
   & > :not(:first-child) {
     margin-top: 24px;
   }
+  
 `;
 
 export const CheckboxWrapper = styled.label`
@@ -57,5 +59,8 @@ export const CheckboxWrapper = styled.label`
     margin-right: 6px;
     accent-color: #d7007b;
     outline: none;
+  }
+  @media screen and (max-width: 768px) {
+    margin-top: 8px !important;
   }
 `;

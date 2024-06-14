@@ -11,6 +11,10 @@ import {
 import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
 import { login } from "../../../scripts";
 import { toast } from "react-toastify";
+import { BASE_URL } from "../../../utils";
+import { setAuthToken, setCredit } from "../../../store/slices/authSlice";
+import useAuthState from "../../../hooks/useAuthState";
+import { useDispatch } from "react-redux";
 
 export const AppSignInPage: React.FC = () => {
   const router = useNavigate();
@@ -20,37 +24,28 @@ export const AppSignInPage: React.FC = () => {
 
   const address = useAccount();
 
+  const { authRequest } = useAuthState()
+  const dispatch = useDispatch()
+
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     setLoading(true)
+ 
+    const data = { username, password: pwd, };
 
-    const data = {
-      username,
-      password: pwd,
-    };
-    login(data)
-      .then((data) => {
-        //@ts-ignore
-        if (!data.error && data) {
-          console.log("🚀 ~ .then ~ data:", data);
-          //setGlobalState("isAuthenticated", true);
-          // if (!address) {
-          //   router("/app/wallet-connect");
-          // } else {
-          //   //check if user is subscribed
-          //   checkSubscriptionState();
-          // }
-          setLoading(false)
-          router("/dashboard/home");
-        }
-      })
-      .catch((err) => {
-        setLoading(false)
-        toast.error(err.response.data.msg)
-        console.error(err);
-      });
+    try {
+      const res = await authRequest().post(BASE_URL + "/auth/login", data)
+      dispatch(setAuthToken(res?.data?.accessToken))
+      dispatch(setCredit(res?.data?._doc?.credit))
+      router("/dashboard/home")
+    } catch (e) {
+      toast.error(e.response.data.msg)
+    } finally {
+      setLoading(false)
+    }
+
   };
 
   return (

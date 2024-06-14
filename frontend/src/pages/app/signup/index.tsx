@@ -11,8 +11,17 @@ import { useNavigate } from "react-router-dom";
 import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
 import { createUser } from "../../../scripts";
 import { toast } from "react-toastify";
+import { BASE_URL } from "../../../utils";
+import useAuthState from "../../../hooks/useAuthState";
+import { setAuthToken, setCredit, setNewAcct } from "../../../store/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 export const AppSignUpPage: React.FC = () => {
+
+  const { authRequest } = useAuthState()
+
+  const dispatch = useDispatch()
+
   const address = useAccount();
   const router = useNavigate();
   const [email, setEmail] = useState<string>("");
@@ -34,22 +43,18 @@ export const AppSignUpPage: React.FC = () => {
     console.log(agreement);
     setLoading(true)
 
-    createUser(data)
-      .then((data) => {
-        //@ts-ignore
-        setLoading(false)
-        if (data && !(data as any).error) {
-          
-          router("/dashboard/home");
-        }
-      })
-      .catch((err) => {
-        setLoading(false)
-        toast.error(err.response.data.msg)
-      });
-    // } else {
-    //   router("/app/wallet-connect");
-    // }
+    try {
+      const res = await authRequest().post(BASE_URL + "/auth/register", data)
+      console.log(res.data.accessToken)
+      dispatch(setAuthToken(res?.data?.accessToken))
+      dispatch(setNewAcct(true))
+      dispatch(setCredit(res?.data?._doc?.credit))
+      router("/dashboard/home");
+    } catch (e) {
+      toast.error(e.response.data.msg)
+    } finally {
+      setLoading(false)
+    }
   };
 
   function handleChecked(e: React.ChangeEvent<HTMLInputElement>): void {
