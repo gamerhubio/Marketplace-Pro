@@ -13,7 +13,8 @@ export const ProfileWrapper = styled.div`
   width: 100%;
   @media screen and (max-width: 768px) {
     min-width: auto;
-    display: none;
+    max-width: 273px;
+    min-width: 30px;
   }
 `;
 
@@ -65,6 +66,9 @@ export const ProfileInfo = styled.div`
   &::after {
     width: 56%;
     background-color: #d7007b;
+  }
+  @media screen and (max-width: 768px) {
+    display: none;
   }
 `;
 

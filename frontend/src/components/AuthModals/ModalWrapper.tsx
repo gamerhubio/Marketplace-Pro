@@ -20,7 +20,8 @@ const customStyles = {
     padding: 0,
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    border: "none"
+    border: "none",
+    background: "transparent"
   },
 };
 

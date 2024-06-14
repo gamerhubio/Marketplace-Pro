@@ -54,6 +54,7 @@ const SignIn = ({ action, close } : IProps) => {
             <Input
               placeholder="Username"
               value={username}
+              type="email"
               //@ts-expect-error
               onChange={(e) => setUsername(e.target.value)}
             />

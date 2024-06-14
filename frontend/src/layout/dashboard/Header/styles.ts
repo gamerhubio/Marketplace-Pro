@@ -197,12 +197,14 @@ export const CreditWrapper = styled.div`
   padding: 20px;
   width: 180px;
   gap: 10px;
-
   button {
     background-color: transparent;
     color: white;
     font-size: 24px;
     border: none;
   }
-  
+  @media screen and (max-width: 700px) {
+    width: 20px;
+    padding: 2px;
+  } 
 `

@@ -34,7 +34,7 @@ const AuthModals = ({link, open, setOpen} : IProps) => {
     return (
         <ModalWrapper open={open} setOpen={setOpen}>
 
-            { hasAccount ? <SignIn action={switchForm} close={handleClose} /> : <SignUp action={switchForm} close={handleClose} /> }
+                { hasAccount ? <SignIn action={switchForm} close={handleClose} /> : <SignUp action={switchForm} close={handleClose} /> }
 
         </ModalWrapper>
     )
