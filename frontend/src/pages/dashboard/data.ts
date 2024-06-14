@@ -1,5 +1,5 @@
 type NA = "NA"
-type Chain = "Polygon" | "BNB Chain" | "Mainnet" |NA
+type Chain = "Polygon" | "BNB Chain" | "Mainnet" | "Caduceus" | NA
 
 const imgPath = "/images/games/"
 
@@ -26,7 +26,7 @@ export interface IGameData {
   name: string | NA | NA;
   title: string | NA;
   description: string | NA;
-  status: "Live" | NA;
+  status: "Live" | "Demo" | NA;
   demoVideo: string | NA;
   youtubeId: string | NA;
   inGamePictures: string[];
@@ -299,6 +299,31 @@ export const gameList : IGameData[] = [
     image: generateImage("ilv.png"),
     banner: generateBanner("ilv.png")
   },
+  {
+    name: "Seven Seas",
+    title: "A Web3 treasure hunt Game-Fi adventure",
+    description: "Seven Seas is a Web3 treasure hunt Game-Fi adventure involving Move-and-Earn mechanics. Players buy pirates NFTs to build their crew and go hunting for treasures of Pirate Gold tokens (PGLD) located all arround them.",
+    status: "Live",
+    demoVideo: "NA",
+    youtubeId: "NA",
+    inGamePictures: [],
+    demoLive: "NA",
+    developers: "NA",
+    language: "English",
+    gameToken: "PGLD Token",
+    tokenTicker: "PGLD",
+    blockchains: ["NA"],
+    contractAddress: "NA",
+    tokenPrice: 0.17,
+    website: "https://www.yieldguild.io/",
+    socials: {
+      twitter: "https://twitter.com/7seasquest",
+      telegram: "https://t.me/+2GqpD95xA_k2NmM0",
+      discord: "https://discord.gg/2Hz62BVA6J"
+    },
+    image: generateImage("seven.png"),
+    banner: generateBanner("seven.png")
+  },
 
   {
     name: "Yield Guild Games",
@@ -321,8 +346,8 @@ export const gameList : IGameData[] = [
       twitter: "https://twitter.com/yieldguild",
       discord: "https://discord.gg/ygg"
     },
-    image: generateImage(null),
-    banner: generateBanner(null)
+    image: generateImage("yield.png"),
+    banner: generateBanner("yield.png")
   },
   {
     name: "Pixels",
@@ -346,6 +371,145 @@ export const gameList : IGameData[] = [
     },
     image: generateImage("pixel.png"),
     banner: generateBanner("pixel.png")
+  },
+  {
+    name: "NetBorn official",
+    title: "The Revolutionary New AI Game That’s Set to Change Gaming Forever",
+    description: "Seven Seas is a Web3 treasure hunt Game-Fi adventure involving Move-and-Earn mechanics. Players buy pirates NFTs to build their crew and go hunting for treasures of Pirate Gold tokens (PGLD) located all arround them.",
+    status: "Demo",
+    demoVideo: "https://www.youtube.com/watch?v=OHrhGrwGCeg&t=1s&ab_channel=NetBorn",
+    youtubeId: "OHrhGrwGCeg",
+    inGamePictures: [
+      generateSC("netborn", "IMG_6168.jpeg"),
+      generateSC("netborn", "IMG_6169.jpeg"),
+      generateSC("netborn", "IMG_6171.jpeg"),
+      generateSC("netborn", "IMG_6172.jpeg"),
+      generateSC("netborn", "IMG_6173.jpeg"),
+    ],
+    demoLive: "https://www.netborn.city/update/NETBORN_Installer.exe?2",
+    developers: "Konstantinos...",
+    language: "English",
+    gameToken: "BORN, NET",
+    tokenTicker: "NET",
+    blockchains: ["Mainnet"],
+    contractAddress: "0xCe660459085E83Df4ba75C3E32a73344473343D9",
+    tokenPrice: 0.17,
+    website: "https://netborn.city/",
+    socials: {
+      twitter: "https://twitter.com/NetBornGaming",
+      telegram: "https://t.me/netbornofficialTG",
+      discord: "https://discord.com/invite/NZFsSjh8Tp",
+    },
+    image: generateImage("netborn.png"),
+    banner: generateBanner("netborn.png")
+  },
+  {
+    name: "Haunted Space",
+    title: " BRIDGING WEB2 AND WEB3 IN A GLOBAL GAMING ECOSYSTEM",
+    description: "HAUNTED SPACE IS A TOP-TIER AAA GAME, BUILT ON UNREAL ENGINE 5 FOR UNMATCHED SINGLE-PLAYER AND MULTIPLAYER EXPERIENCES. ",
+    status: "Demo",
+    demoVideo: "https://youtu.be/uSUWRsU0ixE",
+    youtubeId: "uSUWRsU0ixE",
+    inGamePictures: [
+      generateSC("haunted", "1.jpeg"),
+      generateSC("haunted", "2.jpeg"),
+      generateSC("haunted", "3.jpeg"),
+      generateSC("haunted", "4.jpeg"),
+    ],
+    demoLive: "https://hauntedspace.io/",
+    developers: "Haunted Space",
+    language: "English",
+    gameToken: "",
+    tokenTicker: "HG",
+    blockchains: ["NA"],
+    contractAddress: "NA",
+    tokenPrice: 0.17,
+    website: "https://hauntedspace.io/",
+    socials: {
+      twitter: "https://twitter.com/HauntedSpace_",
+      telegram: "https://t.me/hauntedspace",
+      discord: "https://discord.gg/hauntedspace",
+    },
+    image: generateImage("haunted.png"),
+    banner: generateBanner("hauted.png")
+  },
+  {
+    name: "BattleWorld",
+    title: "Play. Watch. Fight",
+    description: "Introducing Battleworld, the premier digital collectible fighting game poised to revolutionize the metaverse. Battleworld offers an immersive social platform where players can dive into free-to-play action and compete in live events for prizes. Have complete ownership of valuable in-game assets so you can buy, sell, trade",
+    status: "Live",
+    demoVideo: "NA",
+    youtubeId: "NA",
+    inGamePictures: [],
+    demoLive: "https://www.playtaunt.io/",
+    developers: "Industry Veterans from Amazon, EA and Unity.",
+    language: "English",
+    gameToken: "NA",
+    tokenTicker: "NA",
+    blockchains: ["Caduceus"],
+    contractAddress: "NA",
+    tokenPrice: 0.17,
+    website: "http://www.playtaunt.io/",
+    socials: {
+      twitter: "https://twitter.com/playtaunt",
+      telegram: "https://t.me/TauntBattleworld",
+    },
+    image: generateImage("battleworld.png"),
+    banner: generateBanner("battleworld.png")
+  },
+  {
+    name: "Nunu Spirits",
+    title: "THE GREENEST NFT - PLANT TREES IN THE REAL WORLD BY PLAYING A GAME",
+    description: "Nunu Spirits merges the joy of casual gaming with the earning capacity of blockchain and turns it into an ecological action. Collect super cute nature spirits, each completely unique and play with them in a brand new world filled with party games, like parkour racing, capture the flag and floor is lava. Every NFT is linked to the planting of a real tree in the real world.",
+    status: "Demo",
+    demoVideo: "https://www.youtube.com/watch?v=k-OxVB90tCM",
+    youtubeId: "k-OxVB90tCM",
+    inGamePictures: [
+      generateSC("nunu", "1.png"),
+      generateSC("nunu", "2.png"),
+      generateSC("nunu", "3.png"),
+      generateSC("nunu", "4.png"),
+      generateSC("nunu", "5.png"),
+    ],
+    demoLive: "https://nunuspirits.io/game/",
+    developers: "Tater Games S.R.O",
+    language: "English",
+    gameToken: "NuNu Token",
+    tokenTicker: "NNT",
+    blockchains: ["BNB Chain"],
+    contractAddress: "0x3a2927e68749dd6ad0a568d7c05b587863c0bc1",
+    tokenPrice: 0.17,
+    website: "https://nunuspirits.io/",
+    socials: {
+      telegram: "https://t.me/joinchat/Go1jazDeVH8wN2Fk/",
+      discord: "https://discord.gg/Qm7hUV9FXB",
+      twitter: "https://twitter.com/nunuspiritsnft"
+    },
+    image: generateImage("nunu.png"),
+    banner: generateBanner("nunu.png")
+  },
+  {
+    name: "MetaRace",
+    title: "MetaRace is a play-to-earn game combining real-world horse racing with the power of the blockchain. Players buy, breed & race NFT horses to compete for rewards.",
+    description: "MetaRace is a play-to-earn game combining real-world horse racing with the power of the blockchain. Players buy, breed and race NFT horses to compete for rewards in multiple tournament formats. MetaRace Horse Racing is built on Caduceus Metaverse Protocol - the world’s first blockchain dedicated to metaverse development - with decentralized edge rendering technology for powerful performance, higher capacity, improved efficiency and greater computing capability.",
+    status: "NA",
+    demoVideo: "https://youtu.be/gQXZvkECmUU",
+    youtubeId: "gQXZvkECmUU",
+    inGamePictures: [],
+    demoLive: "NA",
+    developers: "MetaRacer",
+    language: "English",
+    gameToken: "META",
+    tokenTicker: "META",
+    blockchains: ["Caduceus"],
+    contractAddress: "0xb7d2ea9b4dbeb599ffa2dcbb0093ccd8512fcc0d",
+    tokenPrice: 0.17,
+    website: "https://metarace.io/",
+    socials: {
+      twitter: "https://twitter.com/metarace_io",
+    },
+    image: generateImage("metarace.png"),
+    banner: generateBanner("metarace.jpg")
   },
   {
     name: "Twilight",
