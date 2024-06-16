@@ -36,7 +36,8 @@ export const authSlice = createSlice({
     setAuthToken: (state, action) => {
       state.user = null
       state.lastRewardTime = 0
-      state.token =  action.payload;
+      state.token =  action.payload
+      state.new = false
     },
     setUserData: (state, action) => {
       state.user = action.payload;
@@ -56,6 +57,7 @@ export const authSlice = createSlice({
     logout: (state) => {
       state.token = null
       state.user = null
+      state.new = false
       state.lastRewardTime = 0
       state.lastLogin = 0
     },

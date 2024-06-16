@@ -29,8 +29,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ModalWrapper from "./components/AuthModals/ModalWrapper";
 import Reward from "./components/AuthModals/Reward"
-import { BASE_URL } from "./utils";
-import useAuthState from "./hooks/useAuthState";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewAcct, setCredit, setLastRewardTime, setNewAcct } from "./store/slices/authSlice";
 
@@ -38,9 +36,7 @@ import { getNewAcct, setCredit, setLastRewardTime, setNewAcct } from "./store/sl
 
 const App: React.FC = () => {
 
-  const newAuth = useSelector(getNewAcct)
-
-  const { userData, lastRewardTime, credit, authRequest } = useAuthState()
+  const isNewAcct = useSelector(getNewAcct)
 
   const dispatch = useDispatch()
 
@@ -51,34 +47,39 @@ const App: React.FC = () => {
 
 
 
-  useEffect(() => {
-    const claimTokens = async() =>  {
-      const DAY = 24 * 3600 * 1000
-      const currentTime = Date.now()
-      if (lastRewardTime + DAY <= currentTime && userData) {
-        try {
-          await authRequest().patch(BASE_URL + "/users/reward/" + userData?.id)
-          setShowModal(true)
-          dispatch(setLastRewardTime())
-          dispatch(setCredit(credit + 10))
-        } catch (e) {
+  // useEffect(() => {
+  //   const claimTokens = async() =>  {
+  //     const DAY = 24 * 3600 * 1000
+  //     const currentTime = Date.now()
+  //     if (lastRewardTime + DAY <= currentTime && userData) {
+  //       try {
+  //         await authRequest().patch(BASE_URL + "/users/reward/" + userData?.id)
+  //         setShowModal(true)
+  //         dispatch(setLastRewardTime())
+  //         if (isNewAcct) {
+  //           dispatch(setCredit(credit + 20))
+  //         } else {
+  //           dispatch(setCredit(credit + 10))
+  //         }
+       
+  //       } catch (e) {
 
-        }
-      } else {
+  //       }
+  //     } else {
         
-      }
-    }
-    claimTokens()
-  }, [userData])
+  //     }
+  //   }
+  //   claimTokens()
+  // }, [userData])
 
 
   useEffect(() => {
-    if (newAuth) {
+    if (isNewAcct) {
       setShowModal(true)
       dispatch(setLastRewardTime())
       dispatch(setNewAcct(false))
     }
-  }, [newAuth])
+  }, [isNewAcct])
 
 
 
@@ -138,7 +139,7 @@ const App: React.FC = () => {
       </Router>
       <ToastContainer />
       <ModalWrapper open={showModal} setOpen={setShowModal}>
-        <Reward close={() => setShowModal(false)} />
+        <Reward tokens={20} close={() => setShowModal(false)} />
       </ModalWrapper>
   </>
   );

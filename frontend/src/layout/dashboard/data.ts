@@ -66,35 +66,50 @@ export const taskmodalTab = [
   },
 ];
 
+// export const taskDailyData = [
+//   {
+//     title: "PLAY 5 GAMES",
+//     amount: "0/5",
+//     credit: 5,
+//   },
+//   {
+//     title: "PURCHASE 1 NFT",
+//     amount: "1/1",
+//     credit: 0,
+//   },
+//   {
+//     title: "WATCH ADS",
+//     amount: "0/5",
+//     credit: 0,
+//   },
+//   {
+//     title: "STREAM 3 VIDEOS",
+//     amount: "3/3",
+//     credit: 1,
+//   },
+//   {
+//     title: "PURCHASE IN-GAME ASSETS",
+//     amount: "0/1",
+//     credit: 4,
+//   },
+//   {
+//     title: "PLAY TOURNAMENTS",
+//     amount: "1/1",
+//     credit: 5,
+//   },
+// ];
+
+
+
 export const taskDailyData = [
   {
-    title: "PLAY 5 GAMES",
-    amount: "0/5",
-    credit: 5,
-  },
-  {
-    title: "PURCHASE 1 NFT",
+    title: "Sign Up",
     amount: "1/1",
-    credit: 0,
+    credit: 20,
   },
   {
-    title: "WATCH ADS",
-    amount: "0/5",
-    credit: 0,
-  },
-  {
-    title: "STREAM 3 VIDEOS",
-    amount: "3/3",
-    credit: 1,
-  },
-  {
-    title: "PURCHASE IN-GAME ASSETS",
-    amount: "0/1",
-    credit: 4,
-  },
-  {
-    title: "PLAY TOURNAMENTS",
-    amount: "1/1",
-    credit: 5,
+    title: "Login Daily",
+    amount: "infinite",
+    credit: 10,
   },
 ];
