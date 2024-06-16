@@ -20,11 +20,13 @@ import {
   IconWalletConnect,
   ProfileAvatar,
 } from "../../../components";
-import { getFormatWalletAddress } from "../../../utils";
+import { BASE_URL, getFormatWalletAddress } from "../../../utils";
 import { DailyTaskModal } from "../DailyTaskModal";
 import { getUserData } from "../../../scripts/user";
 import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
 import useAuthState from "../../../hooks/useAuthState";
+import { useDispatch, useSelector } from "react-redux";
+import { getNewAcct, setCredit, setLastRewardTime } from "../../../store/slices/authSlice";
 
 type HeaderProps = {
   onSidebar: () => void;
@@ -36,31 +38,14 @@ export const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
   const [searchShow, setSearchShow] = useState(false);
   const [visible, setVisible] = useState(false);
   const address = useAccount();
-
-  const { userData, credit } = useAuthState()
-
-  const [data, setData] = useState<any>({});
+  const [showModal, setShowModal] = useState(false)
+  const { userData, lastRewardTime, credit, authRequest } = useAuthState()
+  const isNewAcct = useSelector(getNewAcct)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (address) setWalletAddress(address);
   }, [address]);
-
-  useEffect(() => {
-    //get user info
-    if (userData) return;
-    //@ts-ignore
-    getUserData(userData?.id)
-      .then((data) => {
-        //@ts-ignore
-        if (typeof data == "object" && data.error) {
-          console.log(data);
-          return;
-        }
-
-        setData(data);
-      })
-      .catch((err) => console.log(err));
-  }, [userData]);
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -78,6 +63,7 @@ export const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
   const handleResize = () => {
     setScreenWidth(window.innerWidth);
   };
+
 
   return (
     <React.Fragment>
@@ -104,11 +90,15 @@ export const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
 
           <HeaderActionsWrapper>
 
-          <CreditWrapper>
-            <img src="/images/games/credit.png" width={24} height={24} />
-            <p>{credit}</p>
-            {/* <button>+</button> */}
-          </CreditWrapper>
+          { userData &&
+            <CreditWrapper>
+              <img src="/images/games/credit.png" width={24} height={24} />
+              <p>{credit}GC</p>
+              <button onClick={() => setVisible(true)}>
+              <img src="/images/games/add.png" width={24} height={24} />
+              </button>
+            </CreditWrapper>
+          }
   
           {/* <TaskWrapper onClick={() => setVisible(true)}>
               <img src="/images/userdashboard/credit.png" alt="" />

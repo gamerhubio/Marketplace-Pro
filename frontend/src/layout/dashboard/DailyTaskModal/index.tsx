@@ -10,6 +10,13 @@ import {
 } from "./styles";
 import { DailyTaskCard, IconScrollTop } from "../../../components";
 import { taskDailyData, taskmodalTab } from "../data";
+import { setCredit, setLastRewardTime } from "../../../store/slices/authSlice";
+import { BASE_URL } from "../../../utils";
+import useAuthState from "../../../hooks/useAuthState";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import ModalWrapper from "../../../components/AuthModals/ModalWrapper";
+import Reward from "../../../components/AuthModals/Reward";
 
 type ModalProps = {
   visible: boolean;
@@ -17,8 +24,16 @@ type ModalProps = {
 };
 
 export const DailyTaskModal: React.FC<ModalProps> = ({ visible, onClose }) => {
+
   const [tab, setTab] = useState("daily");
   const [screenWidth, setScreenWidth] = useState(0);
+  const [showModal, setShowModal] = useState(false)
+  const { credit, lastRewardTime, userData, authRequest } = useAuthState()
+  const  [loading, setLoading] = useState(false)
+
+
+  const dispatch = useDispatch()
+
   useEffect(() => {
     window.addEventListener("resize", handleResize);
     handleResize();
@@ -29,6 +44,36 @@ export const DailyTaskModal: React.FC<ModalProps> = ({ visible, onClose }) => {
   const handleResize = () => {
     setScreenWidth(window.innerWidth);
   };
+
+
+  const canClaimLogin = () => {
+    const DAY = 24 * 3600 * 1000
+    const currentTime = Date.now()
+    if (lastRewardTime + DAY <= currentTime && userData) return true
+    return false
+  }
+
+  const claimTokens = async() =>  {
+    const DAY = 24 * 3600 * 1000
+    const currentTime = Date.now()
+    if (lastRewardTime + DAY <= currentTime && userData) {
+      try {
+        setLoading(true)
+        await authRequest().patch(BASE_URL + "/users/reward/" + userData?.id)
+        setShowModal(true)
+        dispatch(setLastRewardTime())
+        dispatch(setCredit(credit + 10))
+      } catch (e) {
+        toast.error(e.response.data.msg)
+        if (e.response.data.msg === "User already rewarded") {
+          dispatch(setLastRewardTime())
+        }
+      }
+      setLoading(false)
+    } else {
+      
+    }
+  }
   return (
     <React.Fragment>
       <DailyTaskModalBG
@@ -62,11 +107,15 @@ export const DailyTaskModal: React.FC<ModalProps> = ({ visible, onClose }) => {
           </ModalTabList>
         </DailyTaskModalHeader>
         <DailyTaskModalContent>
-          {taskDailyData.map((item, key) => (
-            <DailyTaskCard key={key} {...item} isOdd={key % 2 === 0} />
-          ))}
+
+          <DailyTaskCard claimed={true} title="Sign Up" amount = "1/1" credit={20} isOdd={true} handleClick={() => console.log("nothing")} />
+          <DailyTaskCard claimed={!canClaimLogin()} loading={loading} title="Login Daily" amount = "1/inifinity" credit={10} isOdd={true} handleClick={claimTokens} />
+
         </DailyTaskModalContent>
       </DailyTaskModalWrapper>
+      <ModalWrapper open={showModal} setOpen={setShowModal}>
+        <Reward tokens={10} close={() => setShowModal(false)} />
+      </ModalWrapper>
     </React.Fragment>
   );
 };

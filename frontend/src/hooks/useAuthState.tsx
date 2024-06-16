@@ -34,45 +34,29 @@ const decode = (token: string) => {
 
 const useAuthState = () => {
 
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-    const authToken = useSelector(getAuthToken)
-    const userData = useSelector(getUserData)
-    const lastRewardTime = useSelector(getLastRewardTime)
-    const credit = useSelector(getCredit)
+  const authToken = useSelector(getAuthToken)
+  const userData = useSelector(getUserData)
+  const lastRewardTime = useSelector(getLastRewardTime)
+  const credit = useSelector(getCredit)
 
-    const authRequest = () => {
-      return axios.create({
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
+  const authRequest = () => {
+    return axios.create({
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+  }
+
+  useEffect(() => {
+    if (!userData && authToken) {
+      dispatch(setUserData(decode(authToken)))
     }
+  }, [userData, authToken])
 
-    useEffect(() => {
-      if (!userData && authToken) {
-        dispatch(setUserData(decode(authToken)))
-      }
-    }, [userData, authToken])
 
-    const claimTokens = async(id: string) =>  {
-        const DAY = 24 * 3600 * 1000
-        const currentTime = Date.now()
-        const getLastClaim = Number(localStorage.getItem("last-claim") || 0)
-        // if (getLastClaim + DAY <= currentTime) {
-        //   try {
-        //     await authRequest().patch(BASE_URL + "/users/reward/" + id)
-        //     localStorage.setItem("last-claim", currentTime.toString())
-        //     return true
-        //   } catch (e) {
-        //     return false
-        //   }
-        // } else {
-        //   return false
-        // }
-    }
-
-    return { userData, authToken, lastRewardTime, credit, authRequest }
+  return { userData, authToken, lastRewardTime, credit, authRequest }
 }
 
 export default useAuthState

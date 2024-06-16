@@ -18,6 +18,9 @@ type CardProps = {
   amount: string;
   credit: number;
   isOdd: boolean;
+  loading?: boolean;
+  claimed?: boolean;
+  handleClick: () => void
 };
 
 export const DailyTaskCard: React.FC<CardProps> = ({
@@ -25,15 +28,10 @@ export const DailyTaskCard: React.FC<CardProps> = ({
   amount,
   credit,
   isOdd,
+  loading,
+  claimed,
+  handleClick
 }) => {
-  const address = useAccount();
-  const provider = useParticleProvider();
-
-  const proceedToPayment = (credit: number) => {
-    if (address && provider) {
-      requestPayment(address, provider, credit);
-    }
-  };
 
   return (
     <ConnectButton.Custom>
@@ -58,14 +56,13 @@ export const DailyTaskCard: React.FC<CardProps> = ({
                 <p>{credit}</p>
               </TaskReward>
               {/* @ts-ignore */}
+       
               <StatusBtn
                 isOdd={isOdd}
-                onClick={() => {
-                  proceedToPayment(credit);
-                }}
-              >
-                {!isOdd ? "GO" : "CLAIM"}
+                onClick={handleClick}>
+                {loading ? "Loading..." : claimed ? "CLAIMED" : "ClAIM"}
               </StatusBtn>
+            
             </DailyTaskStatus>
           </DailyTaskCardContainer>
         );
