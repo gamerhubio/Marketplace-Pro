@@ -27,7 +27,7 @@ export const EcosystemSection: React.FC = () => {
 
           <EcosystemCard
             title={"AI anti-Cheat System"}
-            description={"Meet GameGPT, your AI-powered in-game companion! From offering helpful hints and tips to engaging in meaningful conversations, GameGPT brings virtual worlds to life with its adaptive and responsive capabilities."}>
+            description={"Leveraging advanced AI detection mechanisms, our anti-cheat system actively monitors gameplay for suspicious behavior and swiftly identifies and addresses cheating attempts."}>
               <img className="img-margin" src={ai} alt="warzone"  width={"360px"} height={"auto"}/>
           </EcosystemCard>
         </div>
@@ -36,7 +36,7 @@ export const EcosystemSection: React.FC = () => {
 
           <EcosystemCard 
             title={"Gamer Credits"}
-            description={"Meet GameGPT, your AI-powered in-game companion! From offering helpful hints and tips to engaging in meaningful conversations, GameGPT brings virtual worlds to life with its adaptive and responsive capabilities."}>
+            description={"Our inbuilt reward system designed to ensure Gamers do not just play games, but they get rewarded by playing these games. You can earn rewards by completing various tasks and various levels."}>
               <img className="img-margin" src={credit} alt="warzone" width={"560px"} height={"auto"} />
           </EcosystemCard>
 
