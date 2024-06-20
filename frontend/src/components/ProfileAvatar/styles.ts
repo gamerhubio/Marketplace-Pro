@@ -15,6 +15,7 @@ export const ProfileWrapper = styled.div`
     min-width: auto;
     max-width: 273px;
     min-width: 30px;
+    padding: 0px;
   }
 `;
 

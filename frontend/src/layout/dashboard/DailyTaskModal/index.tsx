@@ -92,7 +92,7 @@ export const DailyTaskModal: React.FC<ModalProps> = ({ visible, onClose }) => {
             <div>
               <IconScrollTop />
             </div>
-            <span>EARN GAMERHUB COINS</span>
+            <span>EARN GAMERHUB CREDITS</span>
           </ModalTitle>
           <ModalTabList>
             {taskmodalTab.map((item, key) => (

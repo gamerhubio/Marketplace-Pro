@@ -208,5 +208,14 @@ export const CreditWrapper = styled.div`
   @media screen and (max-width: 700px) {
     width: 20px;
     padding: 2px;
+    gap: 2px;
+    button {
+      width: 18px;
+      height: 18px;
+      img {
+        width: 18px;
+        height: 18px;
+      }
+    }
   } 
 `
