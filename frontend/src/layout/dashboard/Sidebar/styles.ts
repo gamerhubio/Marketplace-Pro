@@ -2,13 +2,14 @@ import styled from "styled-components";
 import { SidebarProps } from "./";
 
 export const SidebarWrapper = styled.div<SidebarProps>`
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
   background: #060d33;
   width: 264px;
   min-height: 100vh;
   transition: all 0.3s;
+  overlow: none;
   &::after {
     content: "";
     position: absolute;
