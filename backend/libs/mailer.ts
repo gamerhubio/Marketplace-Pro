@@ -57,6 +57,57 @@ export const sendConfirmationEmail = ({ toUser, hash }: IMailer) => {
   });
 };
 
+export const sendPasswordEmail = ({
+  to,
+  username,
+  link,
+}: {
+  to: string;
+  username: string;
+  link: string;
+}) => {
+  // @ts-ignore
+  return new Promise((res, rej) => {
+    const transporter = nodemailer.createTransport({
+      host: "mail.privateemail.com",
+      secure: true,
+
+      port: 465,
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PWD,
+      },
+    });
+
+    const message = {
+      from: `"GamerHub " <${process.env.MAIL_USER}>`,
+      to,
+      subject: "Password Reset",
+      html: `
+                <h3>Hello ${username}</h3>
+               
+                <p>Here is a password reset token to change your password.</p>
+                <p><strong>Note: </strong> Password expires in 15 minutes.</p>
+                <a href="${link}">${link}</a>
+                <br></br>
+                <br></br>
+                <a href="${link}"><button style="background-color:blue; color:white; padding: 6px; width: 100px; font-size: 15px;  border:none ; border-radius: 10px; ">Verify</button></a>
+                <p>Thank you.</p>
+            `,
+    };
+
+    transporter.sendMail(message, (err, info) => {
+      if (err) {
+        console.log("🚀 ~ transporter.sendMail ~ err:", err);
+
+        rej(err);
+      } else {
+        res(info);
+      }
+    });
+  });
+};
+
 export const sendSubscriptionMail = ({ toUser }: ISubscription) => {
   // @ts-ignore
   return new Promise((res, rej) => {
