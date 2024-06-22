@@ -13,6 +13,7 @@ import subscriptionRouter from "./routes/subscriptionRoute";
 import favoriteRouter from "./routes/favoriteRoute";
 import confirmationRouter from "./routes/confirmationRoute";
 import blockchainRouter from "./routes/blockchainRoute";
+import passwordRoute from "./routes/passwordRoute";
 
 import notFoundMiddleware from "./middleware/not-found";
 import errorHandlerMiddleware from "./middleware/error-handler";
@@ -39,6 +40,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/games", gameRouter);
 app.use("/api/v1/confirm", confirmationRouter);
 app.use("/api/v1/blockchainroute", blockchainRouter);
+app.use("/api/v1/forgot-password", passwordRoute);
 
 //restricted routes
 app.use("/api/v1/users", authMiddleware, userRouter);
