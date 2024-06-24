@@ -50,6 +50,7 @@ export const createUser = async (
     username: req.body.username,
     password: await bcrypt.hash(req.body.password, 10),
     wallets: req.body.wallets,
+    last_unique_login: new Date(),
   });
 
   // email info

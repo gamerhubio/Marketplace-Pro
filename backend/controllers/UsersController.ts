@@ -108,8 +108,7 @@ export const rewardUser = async (
   const user: IUser | null = await Users.findOne({ _id: id });
 
   if (!user) {
-    res.status(StatusCodes.UNAUTHORIZED).json({ msg: "Invalid request" });
-    return;
+    throw new CustomError.UnauthenticatedError("Invalid user");
   }
 
   const lastUpdate: Date | null = user.last_unique_login;
