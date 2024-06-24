@@ -105,14 +105,14 @@ export const rewardUser = async (
   const { id } = req.params;
 
   //@ts-ignore
-  const user: IUser | null = await Users.findOne({ _id: id });
+  const user: IUser | null = await Users.findOne({ email: id });
 
   if (!user) {
-    res.status(StatusCodes.UNAUTHORIZED).json({ msg: "Invalid request" });
-    return;
+    throw new CustomError.UnauthenticatedError("Invalid user");
   }
 
   const lastUpdate: Date | null = user.last_unique_login;
+  console.log("🚀 ~ lastUpdate:", lastUpdate);
 
   const isDifferenceGreaterThan24Hours = (
     date1: Date | null,
@@ -123,7 +123,8 @@ export const rewardUser = async (
     const millisecondsInAnHour = 1000 * 60 * 60;
     const diffInMilliseconds = Math.abs(date1.getTime() - date2.getTime());
     const diffInHours = diffInMilliseconds / millisecondsInAnHour;
-    return diffInHours >= 24;
+    // return diffInHours >= 24;
+    return false;
   };
 
   const now = new Date();
