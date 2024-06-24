@@ -38,6 +38,7 @@ export const authSlice = createSlice({
       state.lastRewardTime = 0
       state.token =  action.payload
       state.new = false
+      state.lastLogin = Date.now()
     },
     setUserData: (state, action) => {
       state.user = action.payload;

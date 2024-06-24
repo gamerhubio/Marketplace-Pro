@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { Button, Input } from "../../components";
+import { Button, Input } from "..";
 import {
   CheckboxWrapper,
   FormInputWrapper,
@@ -15,15 +15,13 @@ import { authRequest, BASE_URL } from "../../utils";
 interface IProps {
   action: () => void;
   close: () => void;
-  forgot: () => void;
 }
 
-const SignIn = ({ action, close, forgot } : IProps) => {
+const Forgot = ({ action, close } : IProps) => {
 
   const dispatch = useDispatch()
 
-  const [username, setUsername] = useState<string>("");
-  const [pwd, setPwd] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e: FormEvent) => {
@@ -31,7 +29,7 @@ const SignIn = ({ action, close, forgot } : IProps) => {
 
     setLoading(true)
 
-    const data = { username, password: pwd, };
+    const data = { email };
 
     try {
       const res = await authRequest().post(BASE_URL + "/auth/login", data)
@@ -48,34 +46,24 @@ const SignIn = ({ action, close, forgot } : IProps) => {
 
   return (
     <>
-      <h2>Sign In to Gamerhub</h2>
+      <h2>Forgot Password</h2>
       <div className="container">
         <SignUpFormWrapper>
           <FormInputWrapper>
             <Input
-              placeholder="Username"
-              value={username}
-              type="text"
+              placeholder="Email"
+              value={email}
+              type="email"
               //@ts-expect-error
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <Input
-              placeholder="Password"
-              type="password"
-              value={pwd}
-              //@ts-expect-error
-              onChange={(e) => setPwd(e.target.value)}
-            />
-
-            <p onClick={forgot} style={{textAlign: "left", width: "100%", cursor: "pointer"}}>Forgot Password?</p>
 
           </FormInputWrapper>
-          <Button loading={loading} onClick={handleSubmit}>Sign In</Button>
+          <Button loading={loading} onClick={handleSubmit}>Send Reset Link</Button>
           <CheckboxWrapper>
             <p>
-              {"Don't have an account "}
               <span onClick={action}>
-                Create an Account
+                Login
               </span>
             </p>
           </CheckboxWrapper>
@@ -86,4 +74,4 @@ const SignIn = ({ action, close, forgot } : IProps) => {
 };
 
 
-export default SignIn
+export default Forgot

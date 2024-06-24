@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ModalWrapper from "./ModalWrapper"
 import SignIn from "./SignIn"
 import SignUp from "./SignUp"
+import Forgot from "./Forgot"
 import { toast } from "react-toastify";
 
 
@@ -13,11 +14,7 @@ interface IProps {
 
 const AuthModals = ({link, open, setOpen} : IProps) => {
 
-    const [hasAccount, setHasAccount] = useState(false)
-
-    const switchForm = () => {
-        setHasAccount(!hasAccount)
-    }
+    const [index, setIndex] = useState(0)
 
     const handleClose = () => {
         setOpen(false)
@@ -34,8 +31,12 @@ const AuthModals = ({link, open, setOpen} : IProps) => {
     return (
         <ModalWrapper open={open} setOpen={setOpen}>
 
-                { hasAccount ? <SignIn action={switchForm} close={handleClose} /> : <SignUp action={switchForm} close={handleClose} /> }
+            { index === 0 && <SignUp action={() => setIndex(1)} close={handleClose} /> }
 
+            { index === 1 && <SignIn action={() => setIndex(0)} forgot={() => setIndex(2)} close={handleClose} /> }
+
+            { index === 2 && <Forgot action={() => setIndex(1)} close={handleClose} /> }
+ 
         </ModalWrapper>
     )
 }
