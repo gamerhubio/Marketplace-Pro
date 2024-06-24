@@ -112,7 +112,6 @@ export const rewardUser = async (
   }
 
   const lastUpdate: Date | null = user.last_unique_login;
-  console.log("🚀 ~ lastUpdate:", lastUpdate);
 
   const isDifferenceGreaterThan24Hours = (
     date1: Date | null,
