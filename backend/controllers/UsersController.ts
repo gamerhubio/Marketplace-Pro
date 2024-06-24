@@ -105,7 +105,7 @@ export const rewardUser = async (
   const { id } = req.params;
 
   //@ts-ignore
-  const user: IUser | null = await Users.findOne({ email: id });
+  const user: IUser | null = await Users.findOne({ _id: id });
 
   if (!user) {
     throw new CustomError.UnauthenticatedError("Invalid user");
