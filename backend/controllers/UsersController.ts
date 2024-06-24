@@ -122,8 +122,7 @@ export const rewardUser = async (
     const millisecondsInAnHour = 1000 * 60 * 60;
     const diffInMilliseconds = Math.abs(date1.getTime() - date2.getTime());
     const diffInHours = diffInMilliseconds / millisecondsInAnHour;
-    // return diffInHours >= 24;
-    return false;
+    return diffInHours >= 24;
   };
 
   const now = new Date();
