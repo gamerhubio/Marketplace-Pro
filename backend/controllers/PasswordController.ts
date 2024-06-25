@@ -83,20 +83,39 @@ export const resetPassword = async (
   res: express.Response
 ) => {
   const { password, token } = req.body;
+
   try {
-    jwt.verify(
-      token,
-      process.env.ACCESS_TOKEN_SECRET,
-      async (err: unknown, data: { id: string }) => {
-        const user: IUser | any = await Users.findOne({ _id: data.id });
-        user.password = await bcrypt.hash(password, 10);
-        await user.save();
-        res.status(StatusCodes.OK).json({
-          msg: "Password successfully changed",
-        });
-      }
-    );
+    // Verify the token
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET) as {
+      id: string;
+    };
+
+    // Fetch the user from the database
+    const user: IUser | any = await Users.findOne({ _id: decoded.id });
+    if (!user) {
+      throw new CustomError.NotFoundError("User not found");
+    }
+
+    // Hash the new password and save it
+    user.password = await bcrypt.hash(password, 10);
+    await user.save();
+
+    // Send a success response
+    res.status(StatusCodes.OK).json({ msg: "Password successfully changed" });
   } catch (error) {
-    throw new CustomError.UnauthenticatedError("Invalid token");
+    // Handle errors
+    if (error instanceof jwt.JsonWebTokenError) {
+      return res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ msg: "Invalid or expired token" });
+    }
+    if (error instanceof CustomError.NotFoundError) {
+      return res.status(StatusCodes.NOT_FOUND).json({ msg: error.message });
+    }
+
+    console.error("Error resetting password:", error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ msg: "Internal Server Error" });
   }
 };
