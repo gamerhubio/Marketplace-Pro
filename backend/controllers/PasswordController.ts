@@ -55,25 +55,26 @@ export const verifyLink = async (
 
   if (!user) {
     throw new CustomError.BadRequestError("Invalid credentials");
-  } else {
-    const secret = process.env.ACCESS_TOKEN_SECRET + user.password;
+  }
+  const secret = process.env.ACCESS_TOKEN_SECRET + user.password;
 
-    //validate jwt
-    try {
-      jwt.verify(token, secret);
-      //redirect to front end
-      const newToken = jwt.sign(
-        {
-          id: user._id,
-        },
-        secret,
-        { expiresIn: "15m" }
-      );
-      res.cookie("token", newToken, { httpOnly: true, secure: true });
-      res.redirect(`https://www.gamer-hub.io/reset-password`);
-    } catch (error) {
-      throw new CustomError.BadRequestError("Invalid credentials");
-    }
+  //validate jwt
+  try {
+    jwt.verify(token, secret);
+    const newToken = jwt.sign(
+      {
+        id: user._id,
+      },
+      secret,
+      { expiresIn: "15m" }
+    );
+    //redirect to front end
+    res.cookie("token", newToken, { httpOnly: true, secure: true });
+    res.redirect(`https://www.gamer-hub.io/reset-password`);
+  } catch (error) {
+    //redirect to frontend with error message
+    res.cookie("error", error.message, { httpOnly: true, secure: true });
+    res.redirect(`https://www.gamer-hub.io/reset-password`);
   }
 };
 
@@ -81,17 +82,22 @@ export const resetPassword = async (
   req: express.Request,
   res: express.Response
 ) => {
-  const { id, password } = req.body;
+  const { id, password, token } = req.body;
   const user: IUser | any = await Users.findOne({
     _id: id,
   });
   if (!user) {
     throw new CustomError.BadRequestError("User does not exist");
-  } else {
+  }
+  const secret = process.env.ACCESS_TOKEN_SECRET + user.password;
+  try {
+    jwt.verify(token, secret);
     user.password = await bcrypt.hash(password, 10);
     await user.save();
     res.status(StatusCodes.OK).json({
       msg: "Password successfully changed",
     });
+  } catch (error) {
+    throw new CustomError.UnauthenticatedError("Invalid credentials");
   }
 };
