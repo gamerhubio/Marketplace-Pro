@@ -65,7 +65,7 @@ export const verifyLink = async (
       {
         id: user._id,
       },
-      secret,
+      process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "15m" }
     );
     //redirect to front end
@@ -82,22 +82,21 @@ export const resetPassword = async (
   req: express.Request,
   res: express.Response
 ) => {
-  const { id, password, token } = req.body;
-  const user: IUser | any = await Users.findOne({
-    _id: id,
-  });
-  if (!user) {
-    throw new CustomError.BadRequestError("User does not exist");
-  }
-  const secret = process.env.ACCESS_TOKEN_SECRET + user.password;
+  const { password, token } = req.body;
   try {
-    jwt.verify(token, secret);
-    user.password = await bcrypt.hash(password, 10);
-    await user.save();
-    res.status(StatusCodes.OK).json({
-      msg: "Password successfully changed",
-    });
+    jwt.verify(
+      token,
+      process.env.ACCESS_TOKEN_SECRET,
+      async (err: unknown, data: { id: string }) => {
+        const user: IUser | any = await Users.findOne({ _id: data.id });
+        user.password = await bcrypt.hash(password, 10);
+        await user.save();
+        res.status(StatusCodes.OK).json({
+          msg: "Password successfully changed",
+        });
+      }
+    );
   } catch (error) {
-    throw new CustomError.UnauthenticatedError("Invalid credentials");
+    throw new CustomError.UnauthenticatedError("Invalid token");
   }
 };
