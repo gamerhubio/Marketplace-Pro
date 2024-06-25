@@ -32,10 +32,11 @@ const Forgot = ({ action, close } : IProps) => {
     const data = { email };
 
     try {
-      const res = await authRequest().post(BASE_URL + "/auth/login", data)
+      const res = await authRequest().post(BASE_URL + "/forgot-password", data)
       dispatch(setAuthToken(res?.data?.accessToken))
       dispatch(setCredit(res?.data?._doc?.credit))
-      close()
+      toast.success("A password reset link has been sent to your mail")
+      //close()
     } catch (e) {
       toast.error(e.response.data.msg)
     } finally {

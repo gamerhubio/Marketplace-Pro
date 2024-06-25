@@ -3,7 +3,6 @@ import {
   Route,
   Routes,
   BrowserRouter as Router,
-  useNavigate,
 } from "react-router-dom";
 import {
   LandingPage,
@@ -30,7 +29,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import ModalWrapper from "./components/AuthModals/ModalWrapper";
 import Reward from "./components/AuthModals/Reward"
 import { useDispatch, useSelector } from "react-redux";
-import { getNewAcct, setCredit, setLastRewardTime, setNewAcct } from "./store/slices/authSlice";
+import { getNewAcct, setLastRewardTime, setNewAcct } from "./store/slices/authSlice";
+import { AppResetPage } from "./pages/app/reset";
 
 
 
@@ -85,7 +85,6 @@ const App: React.FC = () => {
 
   return (
     <>
-
       <div style={{ display: "none" }}>
         <ConnectButton />
       </div>
@@ -98,6 +97,9 @@ const App: React.FC = () => {
           <Route path="/app/signin" element={<AppSignInPage />} />
           <Route path="/app/signup" element={<AppSignUpPage />} />
           <Route path="/app/subscription" element={<AppSubScriptionPage />} />
+
+          <Route path="/reset-password" element={<AppResetPage />} />
+
           <Route
             path="/app/wallet-connect"
             element={<AppWalletConnectPage />}
