@@ -87,7 +87,7 @@ export const sendPasswordEmail = ({
                 <h3>Hello ${username}</h3>
                
                 <p>Here is a password reset token to change your password.</p>
-                <p><strong>Note: </strong> Password expires in 15 minutes.</p>
+                <p><strong>Note: </strong> Link expires in 15 minutes.</p>
                 <a href="${link}">${link}</a>
                 <br></br>
                 <br></br>
