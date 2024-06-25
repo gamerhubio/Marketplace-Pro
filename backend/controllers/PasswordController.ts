@@ -26,14 +26,14 @@ export const requestLink = async (
   });
 
   if (user) {
-    const secret = process.env.ACCESS_TOKEN_SECRET + user.password;
     const payload = {
-      email,
       id: user._id,
     };
-    //create one time link valid for 15 minutes (backend link)
-    const token = jwt.sign(payload, secret, { expiresIn: "15m" });
-    const link = `${process.env.BASE_URL_PROD}/forgot-password/${user._id}/${token}`;
+    //create one time link valid for 15 minutes
+    const token = jwt.sign(payload, process.env.PASSWORD_TOKEN_SECRET, {
+      expiresIn: "15m",
+    });
+    const link = `${process.env.DOMAIN}/reset-password?token=${token}`;
 
     //send link to user
     await sendPasswordEmail({ to: email, username: user.username, link });
@@ -86,7 +86,7 @@ export const resetPassword = async (
 
   try {
     // Verify the token
-    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET) as {
+    const decoded = jwt.verify(token, process.env.PASSWORD_TOKEN_SECRET) as {
       id: string;
     };
 
