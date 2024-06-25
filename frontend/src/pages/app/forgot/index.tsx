@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AppLayout } from "../../../layout";
 import { AppButton, Button, Input } from "../../../components";
 import {
@@ -8,38 +8,35 @@ import {
   FormInputWrapper,
   SignUpFormWrapper,
 } from "../signup/styles";
-import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
-import { login } from "../../../scripts";
+import { ConnectButton } from "@particle-network/connect-react-ui";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../../../utils";
 import { setAuthToken, setCredit } from "../../../store/slices/authSlice";
-import useAuthState from "../../../hooks/useAuthState";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
-export const AppSignInPage: React.FC = () => {
+export const AppForgotPage: React.FC = () => {
+
   const router = useNavigate();
-  const [username, setUsername] = useState<string>("");
-  const [pwd, setPwd] = useState<string>("");
-  const [loading, setLoading] = useState(false)
-
-  const address = useAccount();
-
-  const { authRequest } = useAuthState()
+  
   const dispatch = useDispatch()
 
+  const [email, setEmail] = useState<string>("");
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     setLoading(true)
- 
-    const data = { username, password: pwd, };
+
+    const data = { email };
 
     try {
-      const res = await authRequest().post(BASE_URL + "/auth/login", data)
+      const res = await axios.post(BASE_URL + "/forgot-password", data)
       dispatch(setAuthToken(res?.data?.accessToken))
       dispatch(setCredit(res?.data?._doc?.credit))
-      router("/dashboard/home")
+      toast.success("A password reset link has been sent to your mail")
+      //close()
     } catch (e) {
       toast.error(e.response.data.msg)
     } finally {
@@ -60,32 +57,22 @@ export const AppSignInPage: React.FC = () => {
         <ConnectButton />
       </div>
       <AppSignUpPageWrapper>
-        <h1>Sign In to Gamerhub</h1>
+        <h1>Forgot Password</h1>
         <SignUpFormWrapper>
           <FormInputWrapper>
             <Input
-              placeholder="Username"
-              value={username}
+              placeholder="Enter your email"
+              value={email}
+              type="email"
               //@ts-expect-error
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <Input
-              placeholder="Password"
-              type="password"
-              value={pwd}
-              //@ts-expect-error
-              onChange={(e) => setPwd(e.target.value)}
-            />
-
-            <Link to={"/app/forgot"}  style={{textAlign: "left", width: "100%", cursor: "pointer"}}>Forgot Password? </Link>
-
           </FormInputWrapper>
-          <Button loading={loading} onClick={handleSubmit}>Sign In</Button>
+          <Button loading={loading} onClick={handleSubmit}>Send Reset Link</Button>
           <CheckboxWrapper>
             <p>
-              {"Don't have an account "}
-              <span onClick={() => router("/app/signup")}>
-                Create an Account
+              <span onClick={() => router("/app/signin")}>
+                Sign In
               </span>
             </p>
           </CheckboxWrapper>

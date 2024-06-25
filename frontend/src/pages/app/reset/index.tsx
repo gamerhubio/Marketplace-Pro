@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { AppLayout } from "../../../layout";
 import { AppButton, Button, Input } from "../../../components";
 import {
@@ -15,17 +15,22 @@ import { BASE_URL } from "../../../utils";
 import { setAuthToken, setCredit } from "../../../store/slices/authSlice";
 import useAuthState from "../../../hooks/useAuthState";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 export const AppResetPage: React.FC = () => {
+
   const router = useNavigate();
   const [password, setPassword] = useState<string>("");
   const [confirm, setConfirm] = useState<string>("");
   const [loading, setLoading] = useState(false)
+  const [searchParams] = useSearchParams()
 
-  const address = useAccount();
+  //alert()
 
-  const { authRequest } = useAuthState()
+
   const dispatch = useDispatch()
+
+  console.log(searchParams.get("token"))
 
 
   const handleSubmit = async (e: FormEvent) => {
@@ -33,7 +38,7 @@ export const AppResetPage: React.FC = () => {
 
     setLoading(true)
  
-    const data = { password };
+    const data = { password, token: searchParams.get("token")};
 
     if (password.length < 6) {
       toast.error("Passwords too short, atleast 6 characters")
@@ -43,10 +48,13 @@ export const AppResetPage: React.FC = () => {
     }
 
     try {
-      const res = await authRequest().post(BASE_URL + "/auth/login", data)
+      const res = await axios.post(BASE_URL + "/forgot-password/reset", data)
       dispatch(setAuthToken(res?.data?.accessToken))
       dispatch(setCredit(res?.data?._doc?.credit))
-      router("/dashboard/home")
+      toast.success('Password reset was successfully')
+      setTimeout(() => {
+        router("/app/signin")
+      }, 2000)
     } catch (e) {
       toast.error(e.response.data.msg)
     } finally {
