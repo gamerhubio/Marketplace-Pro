@@ -44,40 +44,6 @@ export const requestLink = async (
   }
 };
 
-export const verifyLink = async (
-  req: express.Request,
-  res: express.Response
-) => {
-  const { id, token } = req.params;
-  const user: IUser | any = await Users.findOne({
-    _id: id,
-  });
-
-  if (!user) {
-    throw new CustomError.BadRequestError("Invalid credentials");
-  }
-  const secret = process.env.ACCESS_TOKEN_SECRET + user.password;
-
-  //validate jwt
-  try {
-    jwt.verify(token, secret);
-    const newToken = jwt.sign(
-      {
-        id: user._id,
-      },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "15m" }
-    );
-    //redirect to front end
-    res.cookie("token", newToken, { httpOnly: true, secure: true });
-    res.redirect(`https://www.gamer-hub.io/reset-password`);
-  } catch (error) {
-    //redirect to frontend with error message
-    res.cookie("error", error.message, { httpOnly: true, secure: true });
-    res.redirect(`https://www.gamer-hub.io/reset-password`);
-  }
-};
-
 export const resetPassword = async (
   req: express.Request,
   res: express.Response
