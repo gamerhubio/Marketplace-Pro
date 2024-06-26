@@ -31,6 +31,7 @@ import Reward from "./components/AuthModals/Reward"
 import { useDispatch, useSelector } from "react-redux";
 import { getNewAcct, setLastRewardTime, setNewAcct } from "./store/slices/authSlice";
 import { AppResetPage } from "./pages/app/reset";
+import { AppForgotPage } from "./pages/app/forgot";
 
 
 
@@ -96,6 +97,8 @@ const App: React.FC = () => {
           <Route path="/app/home" element={<AppHomePage />} />
           <Route path="/app/signin" element={<AppSignInPage />} />
           <Route path="/app/signup" element={<AppSignUpPage />} />
+          <Route path="/app/forgot" element={<AppForgotPage />} />
+
           <Route path="/app/subscription" element={<AppSubScriptionPage />} />
 
           <Route path="/reset-password" element={<AppResetPage />} />
