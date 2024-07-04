@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import {
   AppSignUpPageWrapper,
   CheckboxWrapper,
@@ -8,58 +8,47 @@ import {
 import { AppLayout } from "../../../layout";
 import { AppButton, Button, Input } from "../../../components";
 import { useNavigate } from "react-router-dom";
-import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
-import { createUser } from "../../../scripts";
+import { ConnectButton } from "@particle-network/connect-react-ui";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../../../utils";
-import useAuthState from "../../../hooks/useAuthState";
 import { setAuthToken, setCredit, setNewAcct } from "../../../store/slices/authSlice";
 import { useDispatch } from "react-redux";
+import { useFormik } from "formik";
+import { registerSchema } from "../../../components/AuthModals/schemas";
+import axios from "axios";
 
 export const AppSignUpPage: React.FC = () => {
 
-  const { authRequest } = useAuthState()
-
+  const router = useNavigate();  
   const dispatch = useDispatch()
-
-  const address = useAccount();
-  const router = useNavigate();
-  const [email, setEmail] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
-  const [pwd, setPwd] = useState<string>("");
-  const [agreement, setAgreement] = useState(false);
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
 
-    //if (address) {
-    const data = {
-      email,
-      username,
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit }  = useFormik({
+    initialValues: {
+      email: "",
+      username: "",
       wallets: [""],
-      password: pwd,
-    };
-    console.log(agreement);
-    setLoading(true)
-
-    try {
-      const res = await authRequest().post(BASE_URL + "/auth/register", data)
-      console.log(res.data.accessToken)
-      dispatch(setAuthToken(res?.data?.accessToken))
-      dispatch(setNewAcct(true))
-      dispatch(setCredit(res?.data?._doc?.credit))
-      router("/dashboard/home");
-    } catch (e) {
-      toast.error(e.response.data.msg)
-    } finally {
+      password: "",
+      agreement: false
+    },
+    validationSchema: registerSchema,
+    onSubmit: async(values) => {
+      setLoading(true)
+      try {
+        const res = await axios.post(BASE_URL + "/auth/register", values)
+        dispatch(setAuthToken(res?.data?.accessToken))
+        dispatch(setNewAcct(true))
+        dispatch(setCredit(res?.data?._doc?.credit))
+        router("/dashboard/home")
+      } catch (e) {
+        toast.error(e.response.data.msg)
+      } 
       setLoading(false)
-    }
-  };
+    },
+  })
 
-  function handleChecked(e: React.ChangeEvent<HTMLInputElement>): void {
-    setAgreement(e.target.checked);
-  }
+  const hasError = Boolean(errors.email || errors.username || errors.password || !values.agreement)
 
   return (
     <AppLayout
@@ -76,42 +65,54 @@ export const AppSignUpPage: React.FC = () => {
           <FormInputWrapper>
             <Input
               placeholder="Username"
-              value={username}
-              //@ts-expect-error
-              onChange={(e) => setUsername(e.target.value)}
-            />
+              name="username"
+              value={values.username}
+              type="text"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.username}
+              showError={errors.username && touched.username} />
+
             <Input
+              name="email"
               placeholder="Email"
-              value={email}
+              value={values.email}
               type="email"
-              //@ts-expect-error
-              onChange={(e) => setEmail(e.target.value)}
-            />
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.email}
+              showError={errors.email && touched.email} />
+
             <Input
+              name="password"
               placeholder="Password"
               type="password"
-              value={pwd}
-              //@ts-expect-error
-              onChange={(e) => setPwd(e.target.value)}
-            />
-          </FormInputWrapper>
-          {(!email || !username || !agreement || !pwd) && (
-            <Button disabled>Create Account</Button>
-          )}
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.password}
+              showError={errors.password && touched.password}/>
 
-          {email && username && agreement && pwd && (
-            <Button loading={loading} onClick={handleSubmit}>Create Account</Button>
-          )}
+          </FormInputWrapper>
+
+          <Button disabled={hasError} loading={loading} onClick={() => handleSubmit()}>Create Account</Button>
+      
+          <CheckboxWrapper>
+              <p>
+              {"Already have an account "}
+                <span onClick={() => router("/app/signin")}> Sign In </span>
+              </p>
+          </CheckboxWrapper>
 
           <CheckboxWrapper htmlFor="checkbox">
             <input
+              name="agreement"
               type="checkbox"
               id="checkbox"
-              onChange={(e) => handleChecked(e)}
-            />
+              onChange={handleChange}/>
             <p>
-              {"I agree to Gamerhub’s "}
-              <span>Terms and Conditions</span> & <span>Privacy Policy</span>
+            {"I agree to Gamerhub’s "}
+            <span>Terms and Conditions</span> & <span>Privacy Policy</span>
             </p>
           </CheckboxWrapper>
         </SignUpFormWrapper>

@@ -84,7 +84,6 @@ export const EditProfileDialog: React.FC<iEditModal> = ({
             <Input
               placeholder="Gamer 1"
               value={username}
-              //@ts-expect-error
               onChange={(e) => setUsername(e.target.value)}
             />
           </ProfileName>
@@ -93,7 +92,6 @@ export const EditProfileDialog: React.FC<iEditModal> = ({
             <Input
               placeholder="Femi@gamer-hub.io"
               value={email}
-              //@ts-expect-error
               onChange={(e) => setEmail(e.target.value)}
             />
           </ProfileEmail>

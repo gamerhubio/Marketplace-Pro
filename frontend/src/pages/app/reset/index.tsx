@@ -1,67 +1,43 @@
-import React, { FormEvent, useState } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { AppLayout } from "../../../layout";
 import { AppButton, Button, Input } from "../../../components";
-import {
-  AppSignUpPageWrapper,
-  CheckboxWrapper,
-  FormInputWrapper,
-  SignUpFormWrapper,
-} from "../signup/styles";
-import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
-import { login } from "../../../scripts";
+import {  AppSignUpPageWrapper, FormInputWrapper, SignUpFormWrapper } from "../signup/styles";
+import { ConnectButton } from "@particle-network/connect-react-ui";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../../../utils";
-import { setAuthToken, setCredit } from "../../../store/slices/authSlice";
-import useAuthState from "../../../hooks/useAuthState";
-import { useDispatch } from "react-redux";
 import axios from "axios";
+import { useFormik } from "formik";
+import { resetPasswordSchema } from "../../../components/AuthModals/schemas";
 
 export const AppResetPage: React.FC = () => {
 
   const router = useNavigate();
-  const [password, setPassword] = useState<string>("");
-  const [confirm, setConfirm] = useState<string>("");
   const [loading, setLoading] = useState(false)
   const [searchParams] = useSearchParams()
 
-  //alert()
-
-
-  const dispatch = useDispatch()
-
-  console.log(searchParams.get("token"))
-
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    setLoading(true)
- 
-    const data = { password, token: searchParams.get("token")};
-
-    if (password.length < 6) {
-      toast.error("Passwords too short, atleast 6 characters")
-    }
-    else if (password != confirm) {
-      toast.error("Passwords donnot match")
-    }
-
-    try {
-      const res = await axios.post(BASE_URL + "/forgot-password/reset", data)
-      dispatch(setAuthToken(res?.data?.accessToken))
-      dispatch(setCredit(res?.data?._doc?.credit))
-      toast.success('Password reset was successfully')
-      setTimeout(() => {
-        router("/app/signin")
-      }, 2000)
-    } catch (e) {
-      toast.error(e.response.data.msg)
-    } finally {
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit }  = useFormik({
+    initialValues: {
+      password: "",
+      confirmPassword: ""
+    },
+    validationSchema: resetPasswordSchema,
+    onSubmit: async(values) => {
+      setLoading(true)
+      try {
+        const res = await axios.post(BASE_URL + "/forgot-password/reset", { password: values.password, token: searchParams.get("token")})
+        toast.success('Password reset was successfully')
+        setTimeout(() => {
+          router("/app/signin")
+        }, 2000)
+      } catch (e) {
+        toast.error(e.response.data.msg)
+      } 
       setLoading(false)
-    }
+    },
+  })
 
-  };
+  const hasError = Boolean(errors.password || errors.confirmPassword)
 
   return (
     <AppLayout
@@ -69,8 +45,8 @@ export const AppResetPage: React.FC = () => {
         <AppButton onClick={() => router("/app/signup")}>
           Create account
         </AppButton>
-      }
-    >
+      }>
+
       <div style={{ display: "none" }}>
         <ConnectButton />
       </div>
@@ -78,23 +54,28 @@ export const AppResetPage: React.FC = () => {
         <h1>Reset Password</h1>
         <SignUpFormWrapper>
           <FormInputWrapper>
+            
             <Input
+              name="password"
+              placeholder="Password *"
               type="password"
-              placeholder="Password"
-              value={password}
-              //@ts-expect-error
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <Input
-              placeholder="Confirm Password*"
-              type="password"
-              value={confirm}
-              //@ts-expect-error
-              onChange={(e) => setConfirm(e.target.value)}
-            />
-          </FormInputWrapper>
-          <Button loading={loading} onClick={handleSubmit}>Reset</Button>
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.password}
+              showError={errors.password && touched.password} />
 
+            <Input
+              name="confirmPassword"
+              placeholder="Confirm Password *"
+              type="password"
+              value={values.confirmPassword}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.confirmPassword}
+              showError={errors.confirmPassword && touched.confirmPassword} />
+          </FormInputWrapper>
+          <Button disabled={hasError} loading={loading} onClick={() => handleSubmit()}>Reset</Button>
         </SignUpFormWrapper>
       </AppSignUpPageWrapper>
     </AppLayout>
