@@ -7,7 +7,7 @@ import { AppButton, Button } from "../../../components";
 import { HomeContainer, HomeWrapper, SliderImg, SliderItem } from "./styles";
 import { appSliderData } from "../data";
 
-export const AppHomePage: React.FC = () => {
+const AppHomePage: React.FC = () => {
   const router = useNavigate();
   const [activeIndex, setActiveIndex] = useState(false);
   return (
@@ -62,3 +62,6 @@ export const AppHomePage: React.FC = () => {
     </AppLayout>
   );
 };
+
+
+export default AppHomePage

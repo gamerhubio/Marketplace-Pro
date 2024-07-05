@@ -5,7 +5,7 @@ import { GameListGrid } from "../../../components";
 import { gameList, metaverseList, nftList } from "../data";
 import { ConnectButton } from "@particle-network/connect-react-ui";
 
-export const DashboardGameOnlyPage: React.FC = () => {
+const DashboardGameOnlyPage: React.FC = () => {
   return (
     <ConnectButton.Custom>
       {({
@@ -27,3 +27,6 @@ export const DashboardGameOnlyPage: React.FC = () => {
     </ConnectButton.Custom>
   );
 };
+
+
+export default DashboardGameOnlyPage

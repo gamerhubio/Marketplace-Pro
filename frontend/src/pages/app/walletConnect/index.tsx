@@ -26,7 +26,7 @@ import {
 } from "../../../scripts/user";
 import useAuthState from "../../../hooks/useAuthState";
 
-export const AppWalletConnectPage: React.FC = () => {
+const AppWalletConnectPage: React.FC = () => {
   const [modalShow, setModalShow] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
@@ -215,3 +215,6 @@ export const AppWalletConnectPage: React.FC = () => {
     </ConnectButton.Custom>
   );
 };
+
+
+export default AppWalletConnectPage

@@ -17,7 +17,7 @@ import { authSchema } from "../../../components/AuthModals/schemas";
 import axios from "axios";
 import { useFormik } from "formik";
 
-export const AppSignInPage: React.FC = () => {
+const AppSignInPage: React.FC = () => {
   const router = useNavigate();
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
@@ -95,3 +95,4 @@ export const AppSignInPage: React.FC = () => {
 };
 
 
+export default AppSignInPage

@@ -10,7 +10,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { resetPasswordSchema } from "../../../components/AuthModals/schemas";
 
-export const AppResetPage: React.FC = () => {
+const AppResetPage: React.FC = () => {
 
   const router = useNavigate();
   const [loading, setLoading] = useState(false)
@@ -83,3 +83,4 @@ export const AppResetPage: React.FC = () => {
 };
 
 
+export default AppResetPage

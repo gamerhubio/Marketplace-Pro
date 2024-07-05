@@ -2,12 +2,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import "./assets/css/index.css";
+import "./assets/css/animation.css";
 import App from './App';
 import { ModalProvider} from '@particle-network/connect-react-ui';
 import { WalletEntryPosition } from '@particle-network/auth';
 import { evmWallets } from "@particle-network/connect";
-
-
 import "swiper/css/pagination";
 import "swiper/css";
 import "swiper/css/free-mode";

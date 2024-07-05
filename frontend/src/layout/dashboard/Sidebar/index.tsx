@@ -7,7 +7,7 @@ import {
   SidebarWrapper,
 } from "./styles";
 import { sidebarList } from "../data";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CloseButton } from "../../landing/styles";
 
 export type SidebarProps = {
@@ -24,7 +24,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onCancel }) => {
         <div>
           <CloseButton onClick={onCancel}>&times;</CloseButton>
           <SidebarLogo>
-            <img src="/images/app-logo.png" alt="" />
+            <Link to="/"> <img src="/images/app-logo.png" alt="" /> </Link>
           </SidebarLogo>
           <SidebarMenu>
             {sidebarList.map((item, key) => (

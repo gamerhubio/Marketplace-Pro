@@ -17,7 +17,7 @@ import { useFormik } from "formik";
 import { registerSchema } from "../../../components/AuthModals/schemas";
 import axios from "axios";
 
-export const AppSignUpPage: React.FC = () => {
+const AppSignUpPage: React.FC = () => {
 
   const router = useNavigate();  
   const dispatch = useDispatch()
@@ -120,3 +120,6 @@ export const AppSignUpPage: React.FC = () => {
     </AppLayout>
   );
 };
+
+
+export default AppSignUpPage

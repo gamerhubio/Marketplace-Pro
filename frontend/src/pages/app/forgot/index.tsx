@@ -17,7 +17,7 @@ import axios from "axios";
 import { emailSchema } from "../../../components/AuthModals/schemas";
 import { useFormik } from "formik";
 
-export const AppForgotPage: React.FC = () => {
+const AppForgotPage: React.FC = () => {
 
   const router = useNavigate();
   
@@ -80,3 +80,4 @@ export const AppForgotPage: React.FC = () => {
 };
 
 
+export default AppForgotPage
