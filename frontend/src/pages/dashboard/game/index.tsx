@@ -15,7 +15,7 @@ import {
 } from "../../../modules/dashboard";
 import useGame from "../../../hooks/useGame";
 
-export const DashboardGamePage: React.FC = () => {
+const DashboardGamePage: React.FC = () => {
   
   const router = useNavigate();
   
@@ -28,7 +28,7 @@ export const DashboardGamePage: React.FC = () => {
           <IconBack /> <span>Back</span>
         </BackWrapper>
         <PreviewImageWrapper>
-          <img src={game.banner} alt="" />
+          <img src={game?.banner} alt="" />
         </PreviewImageWrapper>
         <PreviewDetailsWrapper>
           <PreviewSlider video={game.demoVideo} />
@@ -39,3 +39,6 @@ export const DashboardGamePage: React.FC = () => {
     </DashboardLayout>
   );
 };
+
+
+export default DashboardGamePage

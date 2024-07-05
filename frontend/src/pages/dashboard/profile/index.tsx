@@ -18,7 +18,7 @@ import {
 import { GamerInfo } from "../../../components";
 import { ConnectButton } from "@particle-network/connect-react-ui";
 
-export const DashboardProfilePage: React.FC = () => {
+const DashboardProfilePage: React.FC = () => {
   const [showEditProfile, setShowEditProfile] = useState<boolean>(false);
 
   const handleModalVisible = () => {
@@ -76,3 +76,6 @@ export const DashboardProfilePage: React.FC = () => {
     </ConnectButton.Custom>
   );
 };
+
+
+export default DashboardProfilePage

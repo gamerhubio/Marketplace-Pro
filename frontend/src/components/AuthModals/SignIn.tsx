@@ -1,16 +1,17 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { Button, Input } from "../../components";
 import {
   CheckboxWrapper,
   FormInputWrapper,
   SignUpFormWrapper,
 } from "../../pages/app/signup/styles";
-import { login } from "../../scripts";
 import { toast } from "react-toastify";
-import useAuthState from "../../hooks/useAuthState";
 import { useDispatch } from "react-redux";
 import { setAuthToken, setCredit, setUserData } from "../../store/slices/authSlice";
-import { authRequest, BASE_URL } from "../../utils";
+import { BASE_URL } from "../../utils";
+import { authSchema } from "./schemas"
+import axios from "axios";
+import { useFormik } from 'formik';
 
 interface IProps {
   action: () => void;
@@ -21,30 +22,27 @@ interface IProps {
 const SignIn = ({ action, close, forgot } : IProps) => {
 
   const dispatch = useDispatch()
-
-  const [username, setUsername] = useState<string>("");
-  const [pwd, setPwd] = useState<string>("");
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    setLoading(true)
-
-    const data = { username, password: pwd, };
-
-    try {
-      const res = await authRequest().post(BASE_URL + "/auth/login", data)
-      dispatch(setAuthToken(res?.data?.accessToken))
-      dispatch(setCredit(res?.data?._doc?.credit))
-      close()
-    } catch (e) {
-      toast.error(e.response.data.msg)
-    } finally {
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit }  = useFormik({
+    initialValues: {
+      username: '',
+      password: ''
+    },
+    validationSchema: authSchema,
+    onSubmit: async(values) => {
+      setLoading(true)
+      try {
+        const res = await axios.post(BASE_URL + "/auth/login", values)
+        dispatch(setAuthToken(res?.data?.accessToken))
+        dispatch(setCredit(res?.data?._doc?.credit))
+        close()
+      } catch (e) {
+        toast.error(e.response.data.msg)
+      } 
       setLoading(false)
-    }
-
-  };
+    },
+  })
 
   return (
     <>
@@ -53,24 +51,28 @@ const SignIn = ({ action, close, forgot } : IProps) => {
         <SignUpFormWrapper>
           <FormInputWrapper>
             <Input
+              name="username"
               placeholder="Username"
-              value={username}
+              value={values.username}
               type="text"
-              //@ts-expect-error
-              onChange={(e) => setUsername(e.target.value)}
-            />
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.username}
+              showError={errors.username && touched.username} />
+
             <Input
+              name="password"
               placeholder="Password"
               type="password"
-              value={pwd}
-              //@ts-expect-error
-              onChange={(e) => setPwd(e.target.value)}
-            />
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.password}
+              showError={errors.password && touched.password}/>
 
             <p onClick={forgot} style={{textAlign: "left", width: "100%", cursor: "pointer"}}>Forgot Password?</p>
 
           </FormInputWrapper>
-          <Button loading={loading} onClick={handleSubmit}>Sign In</Button>
+          <Button loading={loading} onClick={() => handleSubmit()}>Sign In</Button>
           <CheckboxWrapper>
             <p>
               {"Don't have an account "}

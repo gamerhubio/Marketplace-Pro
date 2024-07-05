@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "../../../layout";
 import { AppButton, Button, Input } from "../../../components";
@@ -14,36 +14,31 @@ import { BASE_URL } from "../../../utils";
 import { setAuthToken, setCredit } from "../../../store/slices/authSlice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { emailSchema } from "../../../components/AuthModals/schemas";
+import { useFormik } from "formik";
 
-export const AppForgotPage: React.FC = () => {
+const AppForgotPage: React.FC = () => {
 
   const router = useNavigate();
   
-  const dispatch = useDispatch()
-
-  const [email, setEmail] = useState<string>("");
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    setLoading(true)
-
-    const data = { email };
-
-    try {
-      const res = await axios.post(BASE_URL + "/forgot-password", data)
-      dispatch(setAuthToken(res?.data?.accessToken))
-      dispatch(setCredit(res?.data?._doc?.credit))
-      toast.success("A password reset link has been sent to your mail")
-      //close()
-    } catch (e) {
-      toast.error(e.response.data.msg)
-    } finally {
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit }  = useFormik({
+    initialValues: {
+      email: '',
+    },
+    validationSchema: emailSchema,
+    onSubmit: async(values) => {
+      setLoading(true)
+      try {
+        const res = await axios.post(BASE_URL + "/forgot-password", values)
+        toast.success("A password reset link has been sent to your mail")
+      } catch (e) {
+        toast.error(e.response.data.msg)
+      } 
       setLoading(false)
-    }
-
-  };
+    },
+  })
 
   return (
     <AppLayout
@@ -51,8 +46,7 @@ export const AppForgotPage: React.FC = () => {
         <AppButton onClick={() => router("/app/signup")}>
           Create account
         </AppButton>
-      }
-    >
+      }>
       <div style={{ display: "none" }}>
         <ConnectButton />
       </div>
@@ -61,18 +55,21 @@ export const AppForgotPage: React.FC = () => {
         <SignUpFormWrapper>
           <FormInputWrapper>
             <Input
-              placeholder="Enter your email"
-              value={email}
+              name="email"
+              placeholder="Email"
+              value={values.email}
               type="email"
-              //@ts-expect-error
-              onChange={(e) => setEmail(e.target.value)}
-            />
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.email}
+              showError={errors.email && touched.email} />
+ 
           </FormInputWrapper>
-          <Button loading={loading} onClick={handleSubmit}>Send Reset Link</Button>
+          <Button disabled={Boolean(errors.email || values.email == "")} loading={loading} onClick={() => handleSubmit()}>Send Reset Link</Button>
           <CheckboxWrapper>
             <p>
               <span onClick={() => router("/app/signin")}>
-                Sign In
+                Login
               </span>
             </p>
           </CheckboxWrapper>
@@ -83,3 +80,4 @@ export const AppForgotPage: React.FC = () => {
 };
 
 
+export default AppForgotPage

@@ -1,5 +1,5 @@
-import React, { FormEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AppLayout } from "../../../layout";
 import { AppButton, Button, Input } from "../../../components";
 import {
@@ -8,45 +8,39 @@ import {
   FormInputWrapper,
   SignUpFormWrapper,
 } from "../signup/styles";
-import { ConnectButton, useAccount } from "@particle-network/connect-react-ui";
-import { login } from "../../../scripts";
+import { ConnectButton } from "@particle-network/connect-react-ui";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../../../utils";
 import { setAuthToken, setCredit } from "../../../store/slices/authSlice";
-import useAuthState from "../../../hooks/useAuthState";
 import { useDispatch } from "react-redux";
+import { authSchema } from "../../../components/AuthModals/schemas";
+import axios from "axios";
+import { useFormik } from "formik";
 
-export const AppSignInPage: React.FC = () => {
+const AppSignInPage: React.FC = () => {
   const router = useNavigate();
-  const [username, setUsername] = useState<string>("");
-  const [pwd, setPwd] = useState<string>("");
+  const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
 
-  const address = useAccount();
-
-  const { authRequest } = useAuthState()
-  const dispatch = useDispatch()
-
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    setLoading(true)
- 
-    const data = { username, password: pwd, };
-
-    try {
-      const res = await authRequest().post(BASE_URL + "/auth/login", data)
-      dispatch(setAuthToken(res?.data?.accessToken))
-      dispatch(setCredit(res?.data?._doc?.credit))
-      router("/dashboard/home")
-    } catch (e) {
-      toast.error(e.response.data.msg)
-    } finally {
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit }  = useFormik({
+    initialValues: {
+      username: '',
+      password: ''
+    },
+    validationSchema: authSchema,
+    onSubmit: async(values) => {
+      setLoading(true)
+      try {
+        const res = await axios.post(BASE_URL + "/auth/login", values)
+        dispatch(setAuthToken(res?.data?.accessToken))
+        dispatch(setCredit(res?.data?._doc?.credit))
+        router("/dashboard/home")
+      } catch (e) {
+        toast.error(e.response.data.msg)
+      } 
       setLoading(false)
-    }
-
-  };
+    },
+  })
 
   return (
     <AppLayout
@@ -64,23 +58,28 @@ export const AppSignInPage: React.FC = () => {
         <SignUpFormWrapper>
           <FormInputWrapper>
             <Input
+              name="username"
               placeholder="Username"
-              value={username}
-              //@ts-expect-error
-              onChange={(e) => setUsername(e.target.value)}
-            />
+              value={values.username}
+              type="text"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.username}
+              showError={errors.username && touched.username} />
+
             <Input
+              name="password"
               placeholder="Password"
               type="password"
-              value={pwd}
-              //@ts-expect-error
-              onChange={(e) => setPwd(e.target.value)}
-            />
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.password}
+              showError={errors.password && touched.password}/>
 
-            <Link to={"/app/forgot"}  style={{textAlign: "left", width: "100%", cursor: "pointer"}}>Forgot Password? </Link>
+            <p onClick={() => router("/app/forgot")} style={{textAlign: "left", width: "100%", cursor: "pointer"}}>Forgot Password?</p> 
 
           </FormInputWrapper>
-          <Button loading={loading} onClick={handleSubmit}>Sign In</Button>
+          <Button loading={loading} onClick={() => handleSubmit()}>Sign In</Button>
           <CheckboxWrapper>
             <p>
               {"Don't have an account "}
@@ -96,3 +95,4 @@ export const AppSignInPage: React.FC = () => {
 };
 
 
+export default AppSignInPage

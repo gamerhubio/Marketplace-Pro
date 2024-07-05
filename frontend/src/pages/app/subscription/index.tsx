@@ -33,7 +33,7 @@ interface IUser {
   username: string;
 }
 
-export const AppSubScriptionPage: React.FC = () => {
+const AppSubScriptionPage: React.FC = () => {
   const router = useNavigate();
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const address = useAccount();
@@ -127,3 +127,6 @@ export const AppSubScriptionPage: React.FC = () => {
     </AppLayout>
   );
 };
+
+
+export default AppSubScriptionPage

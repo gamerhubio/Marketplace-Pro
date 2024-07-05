@@ -14,7 +14,7 @@ import { FeatureSection } from "../../modules/landing/feature";
 import { EcosystemSection } from "../../modules/landing/ecosystem";
 import { PartnersSection } from "../../modules/landing/partners";
 
-export const LandingPage: React.FC = () => {
+const LandingPage: React.FC = () => {
   return (
     <LandingLayout>
       <HomeSection />
@@ -33,3 +33,6 @@ export const LandingPage: React.FC = () => {
     </LandingLayout>
   );
 };
+
+
+export default LandingPage
