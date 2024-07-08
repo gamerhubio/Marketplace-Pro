@@ -42,6 +42,7 @@ export interface IGameData {
   image: string | NA;
   banner: string | NA;
   socials: ISocials;
+  blurHash: string;
 }
 
 
@@ -77,7 +78,8 @@ export const gameList : IGameData[] = [
       youtube: "https://www.youtube.com/channel/UC82FpbcY_C05XqQYaJobFyQ"
     },
     image: generateImage("metashooter.png"),
-    banner: generateBanner("metashooterbanner.png")
+    banner: generateBanner("metashooterbanner.png"),
+    blurHash: "LvI=e$t7t8t6~pt6s;a#n-Rkoda#"
   },
   {
     name: "Axie Infinity",
@@ -101,7 +103,8 @@ export const gameList : IGameData[] = [
       twitter: "https://twitter.com/AxieInfinity"
     },
     image: generateImage("axieinfinity.png"),
-    banner: generateBanner("axieinfinity.png")
+    banner: generateBanner("axieinfinity.png"),
+    blurHash: "L5C?AFrE00PS01WC}utP00O=?qz="
   },
   {
     name: "The Sandbox",
@@ -126,7 +129,8 @@ export const gameList : IGameData[] = [
       discord: "https://discord.gg/thesandboxgame"
     },
     image: generateImage("sand.png"),
-    banner: generateBanner("sand.png")
+    banner: generateBanner("sand.png"),
+    blurHash: "L12i99j[00ayayfQj[fQ00ay~qj["
   },
   {
     name: "Decentraland",
@@ -150,7 +154,8 @@ export const gameList : IGameData[] = [
       discord: "https://dcl.gg/discord"
     },
     image: generateImage("decentraland.png"),
-    banner: generateBanner("decentraland.png")
+    banner: generateBanner("decentraland.png"),
+    blurHash: "L39Pg7}H531r=%$ntPOR00Fz.8^7"
   },
   {
     name: "Meta Apes",
@@ -174,7 +179,8 @@ export const gameList : IGameData[] = [
       discord: "https://discord.com/invite/metaapesgame"
     },
     image: generateImage("metaapes.png"),
-    banner: generateBanner("metaapes.png")
+    banner: generateBanner("metaapes.png"),
+    blurHash: "L9DI%6nn4=Io050V-,^|8|~MWX4_"
   },
   {
     name: "Prospector",
@@ -199,7 +205,8 @@ export const gameList : IGameData[] = [
       discord: "https://discordapp.com/invite/3HdcTRA"
     },
     image: generateImage("prospectors.png"),
-    banner: generateBanner("prospectors.png")
+    banner: generateBanner("prospectors.png"),
+    blurHash: "L86Q*Caz0Poet5fQRljt0Pj@~8WC"
   },
   {
     name: "Arc8",
@@ -223,7 +230,8 @@ export const gameList : IGameData[] = [
       discord: "https://arc8game.com/discord"
     },
     image: generateImage("arc.png"),
-    banner: generateBanner("arc.png")
+    banner: generateBanner("arc.png"),
+    blurHash: "LHE3cW*p02-X=%wQt8w~00pb~oNM"
   },
   {
     name: "Alien Worlds",
@@ -248,7 +256,8 @@ export const gameList : IGameData[] = [
       telegram: "https://t.me/AlienWorldsOffical"
     },
     image: generateImage("alien.png"),
-    banner: generateBanner(null)
+    banner: generateBanner(null),
+    blurHash: "LCB4X#00pfj{t0p1j4W9G1Md-?j{"
   },
   {
     name: "Tap Fantasy",
@@ -273,7 +282,8 @@ export const gameList : IGameData[] = [
       discord: "https://discord.gg/tapfantasy"
     },
     image: generateImage("tap.png"),
-    banner: generateBanner(null)
+    banner: generateBanner(null),
+    blurHash: "LBL:7%9c00Ri{.%35$M{00ozT?-o"
   },
 
   {
@@ -297,7 +307,8 @@ export const gameList : IGameData[] = [
 
     },
     image: generateImage("ilv.png"),
-    banner: generateBanner("ilv.png")
+    banner: generateBanner("ilv.png"),
+    blurHash: "L47A-{rz0hkptBoNWAWU00S[};rY"
   },
   {
     name: "Seven Seas",
@@ -322,7 +333,8 @@ export const gameList : IGameData[] = [
       discord: "https://discord.gg/2Hz62BVA6J"
     },
     image: generateImage("seven.png"),
-    banner: generateBanner("seven.png")
+    banner: generateBanner("seven.png"),
+    blurHash: "L38hdy%U00Izu7+[R0Fy?_a915R}"
   },
 
   {
@@ -347,7 +359,8 @@ export const gameList : IGameData[] = [
       discord: "https://discord.gg/ygg"
     },
     image: generateImage("yield.png"),
-    banner: generateBanner("yield.png")
+    banner: generateBanner("yield.png"),
+    blurHash: "L58EVbt700M{~Xoz00M{Tfs:DiNG"
   },
   {
     name: "Pixels",
@@ -370,7 +383,8 @@ export const gameList : IGameData[] = [
       discord: "https://discord.com/invite/pixels",
     },
     image: generateImage("pixel.png"),
-    banner: generateBanner("pixel.png")
+    banner: generateBanner("pixel.png"),
+    blurHash: "L77BJ}bJIhJ.xga$aSj[00jF%Awb"
   },
   {
     name: "NetBorn official",
@@ -401,7 +415,8 @@ export const gameList : IGameData[] = [
       discord: "https://discord.com/invite/NZFsSjh8Tp",
     },
     image: generateImage("netborn.png"),
-    banner: generateBanner("netborn.png")
+    banner: generateBanner("netborn.png"),
+    blurHash: "LB7^[eX700nlxEaeNGkC0Jn,?dW-"
   },
   {
     name: "Haunted Space",
@@ -431,7 +446,8 @@ export const gameList : IGameData[] = [
       discord: "https://discord.gg/hauntedspace",
     },
     image: generateImage("haunted.png"),
-    banner: generateBanner("hauted.png")
+    banner: generateBanner("hauted.png"),
+    blurHash: "L3A0UT5;0KF{_%9axuO?00xCwJoy"
   },
   {
     name: "BattleWorld",
@@ -455,7 +471,8 @@ export const gameList : IGameData[] = [
       telegram: "https://t.me/TauntBattleworld",
     },
     image: generateImage("battleworld.png"),
-    banner: generateBanner("battleworld.png")
+    banner: generateBanner("battleworld.png"),
+    blurHash: "L58EVbt700M{~Xoz00M{Tfs:DiNG",
   },
   {
     name: "Nunu Spirits",
@@ -486,7 +503,8 @@ export const gameList : IGameData[] = [
       twitter: "https://twitter.com/nunuspiritsnft"
     },
     image: generateImage("nunu.png"),
-    banner: generateBanner("nunu.png")
+    banner: generateBanner("nunu.png"),
+    blurHash: "L36au5Mc00.T$+aKR*bv00yE_NDO"
   },
   {
     name: "MetaRace",
@@ -509,7 +527,8 @@ export const gameList : IGameData[] = [
       twitter: "https://twitter.com/metarace_io",
     },
     image: generateImage("metarace.png"),
-    banner: generateBanner("metarace.jpg")
+    banner: generateBanner("metarace.jpg"),
+    blurHash: "LUG6vajq#eak:{bWsrsF$;X4Npnn"
   },
   {
     name: "Twilight",
@@ -537,7 +556,8 @@ export const gameList : IGameData[] = [
 
     },
     image: generateImage("twilight.png"),
-    banner: generateBanner("twilightbanner.png")
+    banner: generateBanner("twilightbanner.png"),
+    blurHash: "LE8hCHyFOFtRO_x_xto}4:bbx[oh"
   },
   {
     name: "Abeats",
@@ -566,7 +586,8 @@ export const gameList : IGameData[] = [
 
     },
     image: generateImage("abeats.png"),
-    banner: generateBanner("abeatbanner.png")
+    banner: generateBanner("abeatbanner.png"),
+    blurHash: "L6C$gD5g00w0*P9qKk^+vuNCxvn#"
   }
 ]
 

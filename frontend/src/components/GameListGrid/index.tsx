@@ -7,6 +7,7 @@ import {
 } from "./styles";
 import { useNavigate } from "react-router-dom";
 import OptimizedImage from "../../components/OptimizedImage"
+import { trackWindowScroll  } from 'react-lazy-load-image-component';
 
 export type GameListGridProps = {
   title?: string;
@@ -15,9 +16,10 @@ export type GameListGridProps = {
 
 export type GameListProps = {
   image: string;
+  blurHash: string;
 };
 
-export const GameListGrid: React.FC<GameListGridProps> = ({ title, list }) => {
+const GameListGrid: React.FC<GameListGridProps> = ({ title, list }) => {
   const router = useNavigate();
   return (
     <GameListGridWrapper>
@@ -37,3 +39,6 @@ export const GameListGrid: React.FC<GameListGridProps> = ({ title, list }) => {
     </GameListGridWrapper>
   );
 };
+
+
+export default trackWindowScroll(GameListGrid)
