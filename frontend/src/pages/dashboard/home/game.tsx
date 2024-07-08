@@ -1,7 +1,7 @@
 import React from "react";
 import { DashboardLayout } from "../../../layout";
 import { GridGroupWraper } from "./styles";
-import { GameListGrid } from "../../../components";
+import GameListGrid from "../../../components/GameListGrid";
 import { gameList } from "../data";
 import { ConnectButton } from "@particle-network/connect-react-ui";
 
