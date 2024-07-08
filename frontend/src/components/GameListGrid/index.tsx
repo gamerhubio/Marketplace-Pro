@@ -6,6 +6,7 @@ import {
   ImageGrid,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
+import OptimizedImage from "../../components/OptimizedImage"
 
 export type GameListGridProps = {
   title?: string;
@@ -28,12 +29,9 @@ export const GameListGrid: React.FC<GameListGridProps> = ({ title, list }) => {
       </GridHeaderWraper>
       <ImageGrid>
         {list?.map((item, key) => (
-          <img
-            src={item.image}
-            alt=""
-            key={key}
-            onClick={() => router("/dashboard/game/" + (Number(key) + 1))}
-          />
+          <div key={key} onClick={() => router("/dashboard/game/" + (Number(key) + 1))}>
+            <OptimizedImage src={item?.image} width={200} height={200} alt={""} blurHash={""}/>
+          </div>
         ))}
       </ImageGrid>
     </GameListGridWrapper>
