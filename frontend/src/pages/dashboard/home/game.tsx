@@ -2,7 +2,7 @@ import React from "react";
 import { DashboardLayout } from "../../../layout";
 import { GridGroupWraper } from "./styles";
 import { GameListGrid } from "../../../components";
-import { gameList, metaverseList, nftList } from "../data";
+import { gameList } from "../data";
 import { ConnectButton } from "@particle-network/connect-react-ui";
 
 const DashboardGameOnlyPage: React.FC = () => {

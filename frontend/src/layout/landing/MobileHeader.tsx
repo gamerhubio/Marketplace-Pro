@@ -7,7 +7,7 @@ import {
   MobileHeaderNavbar,
   MobileHeaderOverLay,
   MobileHeaderWrapper,
-  SignInBtn,
+  // SignInBtn,
 } from "./styles";
 import { navLinkData } from "./data";
 
@@ -34,9 +34,9 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
                 {item.label}
               </MobileHeaderNavItem>
             ))}
-            <SignInBtn className="mobile" href="#">
+            {/* <SignInBtn className="mobile" href="#">
               Sign in
-            </SignInBtn>
+            </SignInBtn> */}
           </MobileHeaderNavbar>
         </MobileHeaderContainer>
       </MobileHeaderWrapper>
