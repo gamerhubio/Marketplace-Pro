@@ -14,6 +14,7 @@ import {
   PreviewSlider,
 } from "../../../modules/dashboard";
 import useGame from "../../../hooks/useGame";
+import OptimizedImage from "../../../components/OptimizedImage";
 
 const DashboardGamePage: React.FC = () => {
   
@@ -28,7 +29,7 @@ const DashboardGamePage: React.FC = () => {
           <IconBack /> <span>Back</span>
         </BackWrapper>
         <PreviewImageWrapper>
-          <img src={game?.banner} alt="" />
+          <OptimizedImage blurHash={""} alt={"banner"} src={game?.banner} width={"100%"} height={"auto"} />
         </PreviewImageWrapper>
         <PreviewDetailsWrapper>
           <PreviewSlider video={game.demoVideo} />
