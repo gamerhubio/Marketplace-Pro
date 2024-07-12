@@ -13,6 +13,10 @@ import "./styles.css"
 import { FeatureSection } from "../../modules/landing/feature";
 import { EcosystemSection } from "../../modules/landing/ecosystem";
 import { PartnersSection } from "../../modules/landing/partners";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
+
+AOS.init({duration: 800});
 
 const LandingPage: React.FC = () => {
   return (

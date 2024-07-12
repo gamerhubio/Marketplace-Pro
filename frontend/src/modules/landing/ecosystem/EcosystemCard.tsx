@@ -9,7 +9,7 @@ interface IProps {
 
 const EcosystemCard = ({ title,  description, children } : IProps) => {
   return (
-    <EcosystemCardWrapper>
+    <EcosystemCardWrapper  data-aos="fade-up">
       <h2>{title}</h2>
       <p>{description}</p>
       <div> {children} </div>

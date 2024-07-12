@@ -18,7 +18,7 @@ export const TokenomicsCard: React.FC<CardProps> = ({
   description,
 }) => {
   return (
-    <TokenomicsCardWrapper>
+    <TokenomicsCardWrapper data-aos="flip-left">
       <CardContainer>
         <img src={img} alt="" />
         <CardTitle>{title}</CardTitle>
