@@ -11,7 +11,7 @@ export const ReinventingSection: React.FC = () => {
   return (
     <ReinventingWrapper>
       <ReinventingContainer>
-        <ReinventingTextWrapper>
+        <ReinventingTextWrapper data-aos="fade-right">
           <h1>
             <strong> Empowering </strong> games with AI technology</h1>
           <p>
@@ -22,7 +22,7 @@ export const ReinventingSection: React.FC = () => {
           </p>
           <Button width={231}>Open Marketplace</Button>
         </ReinventingTextWrapper>
-        <ReinventingImg>
+        <ReinventingImg data-aos="fade-left">
           <img src="/images/landing/reinventing.png" alt="" />
         </ReinventingImg>
       </ReinventingContainer>

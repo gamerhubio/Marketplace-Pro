@@ -24,9 +24,9 @@ export const PartnersSection: React.FC = () => {
   return (
     <PartnerSectionWrapper>
       <PartnersWrapper>
-        <h1> <strong>Partners</strong> and Backers </h1>
+        <h1 data-aos="fade-up"> <strong>Partners</strong> and Backers </h1>
 
-        <div>
+        <div data-aos="zoom-in-up">
           <img src={kangeroo} alt="Kangaro DAO" />
           <img src={bnb} alt="BNBChain" />
           <img src={venidium} alt="Venidium" />
@@ -35,7 +35,7 @@ export const PartnersSection: React.FC = () => {
           <img src={hash} alt="hash up" />
         </div>
 
-        <div>
+        <div data-aos="zoom-in-up">
           <img src={mindspace} alt="Mindspace" />
           <img src={hauted} alt="Hauted Space" />
           <img src={blackwater} alt="Castle of Blackwater" />
@@ -43,7 +43,7 @@ export const PartnersSection: React.FC = () => {
           <img src={drive} alt="Drive" />
         </div>
 
-        <div>
+        <div data-aos="zoom-in-up">
           <img src={ikon} alt="Ikon" />
           <img src={pirate} alt="Pirate" />
           <img src={talent} alt="Talent" />

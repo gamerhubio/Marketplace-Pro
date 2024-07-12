@@ -11,7 +11,7 @@ type CardProps = {
 
 export const TeamMemberCard: React.FC<CardProps> = ({ img, name, role, linkedin }) => {
   return (
-    <MemberCardWrapper>
+    <MemberCardWrapper data-aos="zoom-in-up">
       <ImgWrapper>
         <img src={img} alt="" />
       </ImgWrapper>

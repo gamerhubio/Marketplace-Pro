@@ -11,7 +11,7 @@ export const EcosystemSection: React.FC = () => {
   return (
     <EcosystemSectionWrapper>
       <EcosystemWrapper>
-        <h1> <strong>The</strong> GamerHub Ecosystem </h1>
+        <h1 data-aos="fade-up"> <strong>The</strong> GamerHub Ecosystem </h1>
         <div>
           <EcosystemCard 
             title={"GamerHub Marketplace"}

@@ -43,13 +43,14 @@ interface IProps {
     keynote: string;
     title: string;
     description: string;
+    dataAos: string;
     end?: boolean;
 }
 
-const FeatureCard = ({ keynote, title, description, end } : IProps) => {
+const FeatureCard = ({ keynote, title, description, end, dataAos } : IProps) => {
 
     return (
-        <div style={{display: "flex", justifyContent: end ? "end" : "start"}}>
+        <div data-aos={dataAos} style={{display: "flex", justifyContent: end ? "end" : "start"}}>
             <FeatureCardStyle>
 
                 <div>

@@ -21,15 +21,15 @@ export const HomeSection: React.FC = () => {
       <HomeSectionContainer>
         <div className="right">
 
-          <h1>
+          <h1 data-aos="fade-up">
             <strong>AI</strong> Infrastructure for Metaverses and Games
           </h1>
     
-          <HomeBtn onClick={() => router("/dashboard/home")}>
+          <HomeBtn data-aos="fade-up" onClick={() => router("/dashboard/home")}>
             Explore marketplace
           </HomeBtn>
     
-          <HomeSocialLinks>
+          <HomeSocialLinks data-aos="fade-up">
             {socialLinks.map((item, key) => (
               <SocialItem key={key} href={item.link} target="_blank">
                 {item.icon}
@@ -40,17 +40,17 @@ export const HomeSection: React.FC = () => {
 
         <HeroLeftSection>
 
-          <HeroCard>
+          <HeroCard data-aos="fade-up">
             <img src={hammer} height={"40px"} width={"40px"} alt="" />
             <p><strong>Publish </strong>AI-powered games with a few clicks</p>
           </HeroCard>
 
-          <HeroCard style={{alignSelf: "end"}}>
+          <HeroCard data-aos="fade-up" style={{alignSelf: "end"}}>
             <img src={asset} height={"40px"} width={"40px"} alt="" />
             <p><strong>Access </strong>a curated marketplace for AI games</p>
           </HeroCard>
 
-          <HeroCard>
+          <HeroCard data-aos="fade-up">
             <img src={controller} height={"40px"} width={"40px"} alt="" />
             <p><strong>Enable</strong>in-game companions to improve experience and rewards.</p>
           </HeroCard>
