@@ -389,7 +389,7 @@ export const gameList : IGameData[] = [
   {
     name: "NetBorn official",
     title: "The Revolutionary New AI Game That’s Set to Change Gaming Forever",
-    description: "Seven Seas is a Web3 treasure hunt Game-Fi adventure involving Move-and-Earn mechanics. Players buy pirates NFTs to build their crew and go hunting for treasures of Pirate Gold tokens (PGLD) located all arround them.",
+    description: "NetBorn is an artificial intelligence game that uses machine learning to create a constantly evolving gaming environment. The game is set in a virtual world where players can create and customise their own characters, interact with other players, and explore a vast, immersive game world.",
     status: "Demo",
     demoVideo: "https://www.youtube.com/watch?v=OHrhGrwGCeg&t=1s&ab_channel=NetBorn",
     youtubeId: "OHrhGrwGCeg",
