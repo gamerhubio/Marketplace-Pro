@@ -29,7 +29,7 @@ app.use(
       "http://127.0.0.1:3000",
       "https://www.gamer-hub.io",
     ],
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
