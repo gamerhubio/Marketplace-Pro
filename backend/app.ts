@@ -30,7 +30,7 @@ app.use(
       "https://www.gamer-hub.io",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    allowedHeaders: ["Content-Type", "Authorization"], // Add any other headers you need
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
