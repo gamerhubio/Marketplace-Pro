@@ -26,8 +26,6 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://127.0.0.1:3000",
   "https://www.gamer-hub.io",
-  "https://gamer-hub.io",
-  "https://bnb-hackathon-pro-1.onrender.com",
 ];
 
 const corsOptions = {
