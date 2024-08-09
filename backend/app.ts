@@ -24,16 +24,17 @@ import cors from "cors";
 // middleware
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "http://127.0.0.1:3000",
-      "https://www.gamer-hub.io",
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
+    origin: "*", // Allow all origins
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], // Allow all methods
+    allowedHeaders: "*", // Allow all headers
+    credentials: true, // If you need to send cookies or other credentials
+    optionsSuccessStatus: 204, // For legacy browser support
   })
 );
+
+// Handle preflight requests (OPTIONS)
+app.options("*", cors()); // Allow all preflight requests
+
 app.use(express.static("./public"));
 app.use(express.json());
 
