@@ -26,7 +26,7 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://127.0.0.1:3000",
   "https://www.gamer-hub.io",
-  "https://gamerhub-frontend.onrender.com",
+  "https://gamer-hub.io",
 ];
 
 const corsOptions = {
