@@ -22,17 +22,12 @@ import authMiddleware from "./middleware/authMiddleware";
 import cors from "cors";
 
 // middleware
-const allowedOrigins = [
-  "http://localhost:3000",
-  "http://127.0.0.1:3000",
-  "https://www.gamer-hub.io",
-];
+const allowedOrigins = "*";
 
 const corsOptions = {
   origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   credentials: true,
-  preflightContinue: true,
 };
 
 app.use(cors(corsOptions));
