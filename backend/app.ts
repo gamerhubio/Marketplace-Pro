@@ -22,20 +22,35 @@ import authMiddleware from "./middleware/authMiddleware";
 import cors from "cors";
 
 // middleware
-const allowedOrigins = [
+const whitelist = [
   "http://localhost:3000",
   "http://127.0.0.1:3000",
   "https://www.gamer-hub.io",
+  "https://gamer-hub.io",
 ];
 
-const corsOptions = {
-  origin: allowedOrigins,
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  credentials: true,
-  preflightContinue: true,
+const corsHandler = function (req: any, callback: any) {
+  var corsOptions;
+  if (whitelist.indexOf(req.header("Origin")) !== -1) {
+    corsOptions = {
+      origin: true,
+      //origin: true,
+      methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      credentials: true,
+      preflightContinue: false,
+    }; // reflect (enable) the requested origin in the CORS response
+  } else {
+    corsOptions = {
+      origin: false,
+      preflightContinue: false,
+    }; // disable CORS for this request
+  }
+  callback(null, corsOptions); // callback expects two parameters: error and options
 };
 
-app.use(cors(corsOptions));
+app.use(cors(corsHandler));
+
+// app.use(cors(corsOptions));
 
 app.use(express.static("./public"));
 app.use(express.json());
