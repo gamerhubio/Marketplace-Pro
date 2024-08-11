@@ -37,7 +37,12 @@ const SignIn = ({ action, close, forgot }: IProps) => {
       onSubmit: async (values) => {
         setLoading(true);
         try {
-          const res = await axios.post(BASE_URL + "/auth/login", values);
+          const res = await axios.post(BASE_URL + "/auth/login", values, {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          });
           dispatch(setAuthToken(res?.data?.accessToken));
           dispatch(setCredit(res?.data?._doc?.credit));
           close();
