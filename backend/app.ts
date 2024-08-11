@@ -27,6 +27,7 @@ const whitelist = [
   "http://127.0.0.1:3000/",
   "https://www.gamer-hub.io/",
   "https://gamer-hub.io/",
+  "https://bnb-hackathon-pro-git-main-gamerhub.vercel.app/",
 ];
 
 const corsHandler = function (req: any, callback: any) {
