@@ -23,8 +23,8 @@ import authMiddleware from "./middleware/authMiddleware";
 app.use((req, res, next) => {
   console.log("Request Origin:", req.headers.origin);
   const allowedOrigins = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    // "http://localhost:3000",
+    // "http://127.0.0.1:3000",
     "https://www.gamer-hub.io",
     "https://gamer-hub.io",
   ];
