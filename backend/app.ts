@@ -22,26 +22,21 @@ import authMiddleware from "./middleware/authMiddleware";
 import cors from "cors";
 
 // middleware
-const allowedOrigins = [
-  "http://localhost:3000",
-  "http://127.0.0.1:3000",
-  "https://www.gamer-hub.io",
-];
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET,POST,PUT,DELETE,PATCH,OPTIONS"
+  );
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
 
-const corsOptions = {
-  //@ts-ignore
-  origin: (origin, callback) => {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, origin); // Reflect the origin back
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  credentials: true,
-};
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
 
-app.use(cors(corsOptions));
+  next();
+});
 
 app.use(express.static("./public"));
 app.use(express.json());
