@@ -23,10 +23,10 @@ import cors from "cors";
 
 // middleware
 const whitelist = [
-  "http://localhost:3000",
-  "http://127.0.0.1:3000",
-  "https://www.gamer-hub.io",
-  "https://gamer-hub.io",
+  "http://localhost:3000/",
+  "http://127.0.0.1:3000/",
+  "https://www.gamer-hub.io/",
+  "https://gamer-hub.io/",
 ];
 
 const corsHandler = function (req: any, callback: any) {
@@ -35,9 +35,12 @@ const corsHandler = function (req: any, callback: any) {
     corsOptions = {
       origin: true,
       //origin: true,
-      methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      allowedHeaders: ["content-type", "authorization", "Accept-Version"],
+      exposedHeaders: ["*"],
+      methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE", "PATCH", "HEAD"],
       credentials: true,
       preflightContinue: false,
+      optionsSuccessStatus: 200,
     }; // reflect (enable) the requested origin in the CORS response
   } else {
     corsOptions = {
