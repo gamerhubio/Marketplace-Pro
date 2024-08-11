@@ -22,39 +22,20 @@ import authMiddleware from "./middleware/authMiddleware";
 import cors from "cors";
 
 // middleware
-const whitelist = [
-  "http://localhost:3000/",
-  "http://127.0.0.1:3000/",
-  "https://www.gamer-hub.io/",
-  "https://gamer-hub.io/",
-  "https://bnb-hackathon-pro-git-main-gamerhub.vercel.app/",
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+  "https://www.gamer-hub.io",
 ];
 
-const corsHandler = function (req: any, callback: any) {
-  var corsOptions;
-  if (whitelist.indexOf(req.header("Origin")) !== -1) {
-    corsOptions = {
-      origin: true,
-      //origin: true,
-      allowedHeaders: ["content-type", "authorization", "Accept-Version"],
-      exposedHeaders: ["*"],
-      methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE", "PATCH", "HEAD"],
-      credentials: true,
-      preflightContinue: false,
-      optionsSuccessStatus: 200,
-    }; // reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = {
-      origin: false,
-      preflightContinue: false,
-    }; // disable CORS for this request
-  }
-  callback(null, corsOptions); // callback expects two parameters: error and options
+const corsOptions = {
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  credentials: true,
+  preflightContinue: true,
 };
 
-app.use(cors(corsHandler));
-
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 app.use(express.static("./public"));
 app.use(express.json());
