@@ -32,6 +32,7 @@ const corsOptions = {
   origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   credentials: true,
+  preflightContinue: true,
 };
 
 app.use(cors(corsOptions));
