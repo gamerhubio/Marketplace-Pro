@@ -21,14 +21,12 @@ import authMiddleware from "./middleware/authMiddleware";
 
 import cors from "cors";
 
-const allowedOrigins = [
-  // "http://localhost:3000",
-  // "http://127.0.0.1:3000",
-  "https://www.gamer-hub.io",
-];
+// CORS configuration
+const allowedOrigins = ["https://www.gamer-hub.io"];
 
 const corsOptions = {
-  origin: function (origin: any, callback: any) {
+  //@ts-ignore
+  origin: function (origin, callback) {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
     } else {
@@ -36,41 +34,39 @@ const corsOptions = {
     }
   },
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  credentials: true,
+  credentials: true, // Allows cookies to be sent/received
 };
 
+// Apply CORS middleware
 app.use(cors(corsOptions));
 
-// Handling OPTIONS preflight requests
-app.options("*", cors(corsOptions));
-
+// Middleware
 app.use(express.static("./public"));
 app.use(express.json());
 
-//public routes
+// Public routes
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/games", gameRouter);
 app.use("/api/v1/confirm", confirmationRouter);
 app.use("/api/v1/blockchainroute", blockchainRouter);
 app.use("/api/v1/forgot-password", passwordRoute);
 
-//restricted routes
+// Restricted routes
 app.use("/api/v1/users", authMiddleware, userRouter);
 app.use("/api/v1/favorites", authMiddleware, favoriteRouter);
 app.use("/api/v1/subscription", authMiddleware, subscriptionRouter);
 
-//error middlewares
+// Error middlewares
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 10000;
 
-//start server
+// Start server
 const start = async () => {
   try {
     await connectDB(`${process.env.MONGO_URI}`);
     app.listen(port, () =>
-      // tslint:disable-next-line:no-console
       console.log(`Server is listening on port ${port}...`)
     );
   } catch (error) {
