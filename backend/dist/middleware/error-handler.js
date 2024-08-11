@@ -1,14 +1,28 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const custom_error_1 = __importDefault(require("../errors/custom-error"));
+const http_status_codes_1 = require("http-status-codes");
 const errorHandlerMiddleware = (err, req, res, next) => {
-    if (err instanceof custom_error_1.default) {
-        return res.status(err.statusCode).json({ msg: err.message });
+    console.error(err); // Log the error for debugging
+    let customError = {
+        // set default
+        statusCode: err.statusCode || http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR,
+        msg: err.message || "Something went wrong, try again later",
+    };
+    if (err.name === "ValidationError") {
+        customError.msg = Object.values(err.errors)
+            .map((item) => item.message)
+            .join(",");
+        customError.statusCode = 400;
     }
-    return res.status(500).send('Something went wrong try again later');
+    if (err.code && err.code === 11000) {
+        customError.msg = `Duplicate value entered for ${Object.keys(err.keyValue)} field, please choose another value`;
+        customError.statusCode = 400;
+    }
+    if (err.name === "CastError") {
+        customError.msg = `No item found with id : ${err.value}`;
+        customError.statusCode = 404;
+    }
+    return res.status(customError.statusCode).json({ msg: customError.msg });
 };
 exports.default = errorHandlerMiddleware;
 //# sourceMappingURL=error-handler.js.map

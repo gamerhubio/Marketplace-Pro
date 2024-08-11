@@ -25,42 +25,49 @@ const subscriptionRoute_1 = __importDefault(require("./routes/subscriptionRoute"
 const favoriteRoute_1 = __importDefault(require("./routes/favoriteRoute"));
 const confirmationRoute_1 = __importDefault(require("./routes/confirmationRoute"));
 const blockchainRoute_1 = __importDefault(require("./routes/blockchainRoute"));
+const passwordRoute_1 = __importDefault(require("./routes/passwordRoute"));
 const not_found_1 = __importDefault(require("./middleware/not-found"));
 const error_handler_1 = __importDefault(require("./middleware/error-handler"));
 const authMiddleware_1 = __importDefault(require("./middleware/authMiddleware"));
-const cors_1 = __importDefault(require("cors"));
-// middleware
-app.use((0, cors_1.default)({
-    origin: [
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "https://mygamerhub.netlify.app",
-        "https://bnb-hackathon-pro.vercel.app",
-    ],
-    credentials: true,
-}));
+// import cors from "cors";
+// // CORS configuration
+// const allowedOrigins = ["https://www.gamer-hub.io"];
+// const corsOptions = {
+//   //@ts-ignore
+//   origin: function (origin, callback) {
+//     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+//   credentials: true, // Allows cookies to be sent/received
+// };
+// // Apply CORS middleware
+// app.use(cors(corsOptions));
+// Middleware
 app.use(express_1.default.static("./public"));
 app.use(express_1.default.json());
-//public routes
+// Public routes
 app.use("/api/v1/auth", authRoute_1.default);
 app.use("/api/v1/games", gamesRoute_1.default);
 app.use("/api/v1/confirm", confirmationRoute_1.default);
 app.use("/api/v1/blockchainroute", blockchainRoute_1.default);
-//restricted routes
+app.use("/api/v1/forgot-password", passwordRoute_1.default);
+// Restricted routes
 app.use("/api/v1/users", authMiddleware_1.default, userRoute_1.default);
 app.use("/api/v1/favorites", authMiddleware_1.default, favoriteRoute_1.default);
 app.use("/api/v1/subscription", authMiddleware_1.default, subscriptionRoute_1.default);
-//error middlewares
+// Error middlewares
 app.use(not_found_1.default);
 app.use(error_handler_1.default);
 const port = process.env.PORT || 10000;
-//start server
+// Start server
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield (0, connect_1.default)(`${process.env.MONGO_URI}`);
-        app.listen(port, () => 
-        // tslint:disable-next-line:no-console
-        console.log(`Server is listening on port ${port}...`));
+        app.listen(port, () => console.log(`Server is listening on port ${port}...`));
     }
     catch (error) {
         console.log(error);
