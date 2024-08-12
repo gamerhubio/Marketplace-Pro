@@ -19,33 +19,32 @@ import notFoundMiddleware from "./middleware/not-found";
 import errorHandlerMiddleware from "./middleware/error-handler";
 import authMiddleware from "./middleware/authMiddleware";
 
-// Define allowed origins
+import cors from "cors";
+
+// CORS configuration
 const allowedOrigins = [
   "http://localhost:3000",
   "http://127.0.0.1:3000",
   "https://www.gamer-hub.io",
 ];
 
-// CORS middleware
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin) || !origin) {
-    res.header("Access-Control-Allow-Origin", origin || "*");
-  }
-  res.header(
-    "Access-Control-Allow-Methods",
-    "GET,POST,PUT,DELETE,PATCH,OPTIONS"
-  );
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.header("Access-Control-Allow-Credentials", "true");
+const corsOptions = {
+  //@ts-ignore
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  credentials: true, // Allows cookies to be sent/received
+};
 
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
+// Apply CORS middleware
+app.use(cors(corsOptions));
 
-  next();
-});
-
+// Middleware
 app.use(express.static("./public"));
 app.use(express.json());
 
