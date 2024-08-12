@@ -1,12 +1,12 @@
-import  mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-const dbConnector = (url:string) => {
+const dbConnector = (url: string) => {
   return mongoose.connect(url, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-  })
-}
+    // useNewUrlParser: true,
+    // useCreateIndex: true,
+    // useFindAndModify: false,
+    // useUnifiedTopology: true,
+  });
+};
 
-export default dbConnector
+export default dbConnector;
