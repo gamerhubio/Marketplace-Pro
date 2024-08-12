@@ -19,26 +19,26 @@ import notFoundMiddleware from "./middleware/not-found";
 import errorHandlerMiddleware from "./middleware/error-handler";
 import authMiddleware from "./middleware/authMiddleware";
 
-// import cors from "cors";
+import cors from "cors";
 
-// // CORS configuration
-// const allowedOrigins = ["https://www.gamer-hub.io"];
+// CORS configuration
+const allowedOrigins = ["https://www.gamer-hub.io"];
 
-// const corsOptions = {
-//   //@ts-ignore
-//   origin: function (origin, callback) {
-//     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Not allowed by CORS"));
-//     }
-//   },
-//   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-//   credentials: true, // Allows cookies to be sent/received
-// };
+const corsOptions = {
+  //@ts-ignore
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  credentials: true, // Allows cookies to be sent/received
+};
 
-// // Apply CORS middleware
-// app.use(cors(corsOptions));
+// Apply CORS middleware
+app.use(cors(corsOptions));
 
 // Middleware
 app.use(express.static("./public"));
