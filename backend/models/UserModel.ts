@@ -65,7 +65,7 @@ const userSchema = new mongoose.Schema<IUser>(
     },
     last_unique_login: {
       type: Date,
-      default: Date.now,
+      // default: Date.now,
     },
     verified: {
       type: Boolean,

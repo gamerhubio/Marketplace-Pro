@@ -1,8 +1,11 @@
 import axios from "axios";
 
-const process = (import.meta as any).env 
+const process = (import.meta as any).env;
 
-export const BASE_URL = process.VITE_ENV === "development" ? process.VITE_APP_BASE_URL_DEV : process.VITE_APP_BASE_URL_PROD
+export const BASE_URL =
+  process.MODE === "development"
+    ? process.VITE_APP_BASE_URL_DEV
+    : process.VITE_APP_BASE_URL_PROD;
 
 export const getFormatWalletAddress = (address: string) => {
   return (
@@ -11,8 +14,6 @@ export const getFormatWalletAddress = (address: string) => {
     address.substring(address.length - 4, address.length)
   );
 };
-
-
 
 export const authRequest = () => {
   const token = localStorage.getItem("accessToken");
@@ -23,8 +24,7 @@ export const authRequest = () => {
       Authorization: `Bearer ${token}`,
     },
   });
-}
-
+};
 
 // export const claimTokens = async(id: string) =>  {
 //   const DAY = 24 * 3600 * 1000

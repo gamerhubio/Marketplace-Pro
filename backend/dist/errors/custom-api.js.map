@@ -1,1 +1,0 @@
-{"version":3,"file":"custom-api.js","sourceRoot":"","sources":["../../errors/custom-api.ts"],"names":[],"mappings":";;AAAA,MAAM,cAAe,SAAQ,KAAK;IAChC,YAAY,OAAe;QACzB,KAAK,CAAC,OAAO,CAAC,CAAC;QACf,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC,WAAW,CAAC,IAAI,CAAC,CAAC,oDAAoD;QACvF,KAAK,CAAC,iBAAiB,CAAC,IAAI,EAAE,IAAI,CAAC,WAAW,CAAC,CAAC;IAClD,CAAC;CACF;AAED,kBAAe,cAAc,CAAC"}
