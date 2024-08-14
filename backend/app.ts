@@ -45,7 +45,7 @@ const corsOptions = {
 };
 
 // Apply CORS middleware
-app.use(cors(corsOptions));
+app.use(cors({ origin: "*" }));
 
 // Middleware
 app.use(express.static("./public"));
