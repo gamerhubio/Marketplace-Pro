@@ -31,9 +31,12 @@ const allowedOrigins = [
 const corsOptions = {
   //@ts-ignore
   origin: function (origin, callback) {
+    console.log(origin);
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
+      console.log("success");
+      callback(null, { origin: true });
     } else {
+      console.log("error");
       callback(new Error("Not allowed by CORS"));
     }
   },
