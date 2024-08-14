@@ -30,15 +30,17 @@ const error_handler_1 = __importDefault(require("./middleware/error-handler"));
 const authMiddleware_1 = __importDefault(require("./middleware/authMiddleware"));
 const cors_1 = __importDefault(require("cors"));
 // middleware
-app.use((0, cors_1.default)({
-    origin: [
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "https://mygamerhub.netlify.app",
-        "https://bnb-hackathon-pro.vercel.app",
-    ],
-    credentials: true,
-}));
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:3000",
+//       "http://127.0.0.1:3000",
+//       "https://www.gamer-hub.io",
+//     ],
+//     credentials: true,
+//   })
+// );
+app.use((0, cors_1.default)());
 app.use(express_1.default.static("./public"));
 app.use(express_1.default.json());
 //public routes

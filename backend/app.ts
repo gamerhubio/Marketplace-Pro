@@ -21,16 +21,19 @@ import authMiddleware from "./middleware/authMiddleware";
 import cors from "cors";
 
 // middleware
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "http://127.0.0.1:3000",
-      "https://www.gamer-hub.io",
-    ],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:3000",
+//       "http://127.0.0.1:3000",
+//       "https://www.gamer-hub.io",
+//     ],
+//     credentials: true,
+//   })
+// );
+
+app.use(cors());
+
 app.use(express.static("./public"));
 app.use(express.json());
 

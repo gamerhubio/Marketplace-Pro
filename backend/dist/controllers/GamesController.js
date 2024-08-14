@@ -15,17 +15,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createGame = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const GamesModel_1 = __importDefault(require("../models/GamesModel"));
-// create user
+// create game
 const createGame = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // create user
+        // create game
         const game = yield GamesModel_1.default.create(Object.assign({}, req.body));
         const data = {
             _id: game._id,
             name: game.name,
             chain: game.chain,
             image: game.image,
-            categories: game.categories
+            categories: game.categories,
         };
         // tslint:disable-next-line:no-console
         console.log(data);

@@ -30,7 +30,7 @@ const userSchema = new mongoose_1.default.Schema({
     },
     credit: {
         type: Number,
-        default: 15,
+        default: 20,
     },
     challenges: {
         type: Map,
@@ -44,11 +44,15 @@ const userSchema = new mongoose_1.default.Schema({
             TournamentPlay: 0,
         },
     },
+    last_unique_login: {
+        type: Date,
+        default: Date.now,
+    },
     verified: {
         type: Boolean,
         default: false,
     },
-});
+}, { timestamps: true });
 // const User = mongoose.model("User", userSchema);
 exports.default = mongoose_1.default.model("Users", userSchema);
 //# sourceMappingURL=UserModel.js.map
