@@ -57,15 +57,15 @@ export const merchSlider = [
 export const tokenomicsData = [
     {
         title: "Seed Sale Price",
-        value: "1 GHTAI = $0.005",
+        value: "1 GHT = $0.005",
     },
     {
         title: "Private Sale Price",
-        value: "1 GHTAI = $0.01",
+        value: "1 GHT = $0.01",
     },
     {
         title: "Public Sale Price",
-        value: "1 GHTAI = $0.015",
+        value: "1 GHT = $0.015",
     },
     {
         title: "Total Supply",
@@ -78,31 +78,31 @@ export const tokenomicsCardData = [
         img: "/images/landing/tokenomics/token1.png",
         title: "Ecosystem Currency",
         description:
-            "GHTAI will be the major gaming and trading currency on GameHub as well as the NFT & In-game asset marketplaces.",
+            "GHT will be the major gaming and trading currency on GameHub as well as the NFT & In-game asset marketplaces.",
     },
     {
         img: "/images/landing/tokenomics/token2.png",
         title: "GameFi and MetaFi",
         description:
-            "GHTAI will be used for game token mining and other GameFi services.",
+            "GHT will be used for game token mining and other GameFi services.",
     },
     {
         img: "/images/landing/tokenomics/token3.png",
         title: "Ecosystem Governance",
         description:
-            "GHTAI serves as the governance token for the GamerHub ecosystem.",
+            "GHT serves as the governance token for the GamerHub ecosystem.",
     },
     {
         img: "/images/landing/tokenomics/token4.png",
         title: "Exclusive Access",
         description:
-            "GHTAI holders are granted access to exclusive games and streaming content, events and demos",
+            "GHT holders are granted access to exclusive games and streaming content, events and demos",
     },
     {
         img: "/images/landing/tokenomics/token5.png",
         title: "Merchandise",
         description:
-            "GHTAI is the main currency for branding and trade of merchandise",
+            "GHT is the main currency for branding and trade of merchandise",
     },
 ];
 
