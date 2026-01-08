@@ -27,7 +27,7 @@ export const TokenSection: React.FC = () => {
     width={231}
     onClick={() =>
       window.open(
-        "https://etherscan.io/address/0xYOUR_CONTRACT_ADDRESS",
+        "https://everscan.io/accounts/0:1d5dce78bf1f4fadd3d75b57e3a1437504111fb6003e81f2edc6827f80b65e5e",
         "_blank",
         "noopener,noreferrer"
       )
