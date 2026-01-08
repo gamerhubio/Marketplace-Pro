@@ -23,7 +23,12 @@ export const TokenSection: React.FC = () => {
                 ecosystem an easy access to participate in the gaming revolution
             </p>
             <TokenButtonGroup data-aos="fade-up">
-                <Button width={231}>View Contract Address</Button>
+                <a href="https://etherscan.io/address/0xYOUR_CONTRACT_ADDRESS"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Button width={231}>View Contract Address</Button>
+</a>
                 {/ <TokenButton>
           <span>Copy Contract Address</span>
         </TokenButton> }
