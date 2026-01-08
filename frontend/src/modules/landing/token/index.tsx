@@ -24,9 +24,9 @@ export const TokenSection: React.FC = () => {
             </p>
             <TokenButtonGroup data-aos="fade-up">
                 <Button width={231}>View Contract Address</Button>
-                {/* <TokenButton>
+                {/ <TokenButton>
           <span>Copy Contract Address</span>
-        </TokenButton> */}
+        </TokenButton> }
             </TokenButtonGroup>
             <h3 data-aos="fade-up">TOKENOMICS</h3>
             <TokenomicsWrapper>
