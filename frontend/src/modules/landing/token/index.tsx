@@ -14,11 +14,11 @@ export const TokenSection: React.FC = () => {
     return (
         <TokenSectionWrapper id="tokenomics">
             <h1 data-aos="fade-up">
-                <strong> GHTAI </strong> TOKEN{" "}
+                <strong> GHT </strong> TOKEN{" "}
                 <img src="/images/landing/ght-token.png" alt="" />
             </h1>
             <p data-aos="fade-up">
-                The GHTAI token is a Multichain token that will be created on
+                The GHT token is a Multichain token that will be created on
                 blockchains like Solana, BSC, Ethereum, to give the whole gaming
                 ecosystem an easy access to participate in the gaming revolution
             </p>
