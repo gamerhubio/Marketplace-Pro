@@ -18,8 +18,8 @@ export const TokenSection: React.FC = () => {
                 <img src="/images/landing/ght-token.png" alt="" />
             </h1>
             <p data-aos="fade-up">
-                The GHTtoken is a Multichain token that will be created on
-                blockchains like Solana, BSC, Ethereum, to give the whole gaming
+                The GHTtoken is a Multichain token that has been created on the everscale blockchain 
+                and can be bridged on bsc and other evms, to give the whole gaming
                 ecosystem an easy access to participate in the gaming revolution
             </p>
             <TokenButtonGroup data-aos="fade-up">
