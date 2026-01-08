@@ -23,16 +23,25 @@ export const TokenSection: React.FC = () => {
                 ecosystem an easy access to participate in the gaming revolution
             </p>
             <TokenButtonGroup data-aos="fade-up">
-                <a href="https://etherscan.io/address/0xYOUR_CONTRACT_ADDRESS"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <Button width={231}>View Contract Address</Button>
-</a>
-                {/ <TokenButton>
-          <span>Copy Contract Address</span>
-        </TokenButton> }
-            </TokenButtonGroup>
+  <Button
+    width={231}
+    onClick={() =>
+      window.open(
+        "https://etherscan.io/address/0xYOUR_CONTRACT_ADDRESS",
+        "_blank",
+        "noopener,noreferrer"
+      )
+    }
+  >
+    View Contract Address
+  </Button>
+
+  {/*
+  <TokenButton>
+    <span>Copy Contract Address</span>
+  </TokenButton>
+  */}
+</TokenButtonGroup>
             <h3 data-aos="fade-up">TOKENOMICS</h3>
             <TokenomicsWrapper>
                 {tokenomicsData.map((item, key) => (
